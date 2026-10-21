@@ -56,7 +56,7 @@ jobs:
 
     - name: Create AutoBuild Release
       run: |
-        LATEST_REL=$(gh release view --json tagName -q .tagName)
+        LATEST_REL=$(gh release view --json tagName -q .tagName || echo "autobuild")
         GIT_DESCRIBE=$(git rev-parse --short HEAD)
         cd app/build/outputs/apk/release/
         mv app-release.apk KawinNext-${GIT_DESCRIBE}.apk
