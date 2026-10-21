@@ -19,3 +19,14 @@ local.properties
 *.jks
 *.keystore
 signing.properties
+
+# Understand-Anything analysis data
+.ua/
+
+# Gradle build outputs (top-level)
+build/
+
+# Hermes/local scratch
+*.pyc
+__pycache__/
+key.jks
