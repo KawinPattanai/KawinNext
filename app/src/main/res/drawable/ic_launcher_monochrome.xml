@@ -1,0 +1,17 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- KawinNext monochrome layer (themed icons / Material You) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M36,30 L43,30 L43,53 L36,53 Z M36,55 L43,55 L43,78 L36,78 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M47,54 L66,30 L75,30 L54.5,54.5 L75,78 L66,78 L47,55.6 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M51.5,31 L40.5,52 L47,52 L42.5,62 L56,44.5 L49,44.5 L56,31 Z
+            M55.5,64 L44.5,78 L51,78 L58,68 Z" />
+</vector>
