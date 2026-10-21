@@ -1,0 +1,68 @@
+{
+  "nodes": [
+    {
+      "id": "document:.agents/skills/merge-upstream-patches/references/fingerprint-results.md",
+      "type": "document",
+      "name": "fingerprint-results.md",
+      "filePath": ".agents/skills/merge-upstream-patches/references/fingerprint-results.md",
+      "summary": "คู่มืออ่านผลรัน fingerprint test: FingerprintsKtTest เขียนรายงาน JSON ลง app/build/reports/fingerprints/ และอธิบายการใช้สคริปต์ summarize_fingerprints.py ร่วมกับเกณฑ์สถานะ match/skip/unvalidated/failed/unobserved และกฎ isolated failure",
+      "tags": [
+        "documentation",
+        "fingerprint",
+        "test",
+        "skill-reference",
+        "dexkit"
+      ],
+      "complexity": "simple",
+      "languageNotes": "สรุปผลรันตามสถานะ on-execute ของสมาชิกที่ DexKit ค้นพบ: matched นับเมื่อรันจริงและได้ผล non-null, skipped ตามเหตุผล skip_test/target_app/version, และ helper จะเติม unobserved เมื่อ fingerprint บันทึกไว้ใน APK หนึ่งแต่หายไปใน APK อื่นของแอปเดียวกัน — exit code 0 ระดับ helper ยังไม่พิสูจน์ coverage ต้องดู skip และ unobserved ประกอบเสมอ"
+    },
+    {
+      "id": "document:.agents/skills/merge-upstream-patches/references/submodule-integration.md",
+      "type": "document",
+      "name": "submodule-integration.md",
+      "filePath": ".agents/skills/merge-upstream-patches/references/submodule-integration.md",
+      "summary": "คู่มือ merge submodule morphe-patches และ morphe-patches-library เข้ากับ NexAlloy: เลือก diff ชุดที่ต้องรีวิวรอบ merge parent และไล่รักษาการเชื่อมต่อระหว่าง extension ของ submodule กับ runtime hooks, proxies, resources และ Preference ของแอปหลัก",
+      "tags": [
+        "documentation",
+        "skill-reference",
+        "merging",
+        "submodule",
+        "integration"
+      ],
+      "complexity": "simple",
+      "languageNotes": "ประเด็นเฉพาะของโปรเจกต์ให้ระวังตอน merge: placeholder ใน extension ที่ตั้งใจให้ฝังขณะ patch จะทำงานได้ด้วย offline APK modification จึงต้องเชื่อมกับ callback/hook/adapter ฝั่งแอป, ต้องเก็บ ResourceUtils.fallbackPackageName, BuildConfig.PATCH_VERSION/DEBUG และการสร้าง Preference ขณะรันไทม์เอาไว้ และ upstream ที่เพิ่ม host method/interface ให้ใช้ createProxy/bindProxy/reflection แทน"
+    },
+    {
+      "id": "document:.agents/skills/merge-upstream-patches/references/youtube-porting.md",
+      "type": "document",
+      "name": "youtube-porting.md",
+      "filePath": ".agents/skills/merge-upstream-patches/references/youtube-porting.md",
+      "summary": "กฎการ port bytecode patch ของ YouTube จาก upstream Morphe มาเป็น runtime hooks ของ NexAlloy 11 หมวด ครอบคลุมการแปล execute เป็น patch body, การเลือก before/after จาก register, scopedHook, การอนุรักษ์ semantics ของ fingerprint, literal override, version branching, Preference, dependency และการซิงก์ feature",
+      "tags": [
+        "documentation",
+        "skill-reference",
+        "porting",
+        "youtube",
+        "fingerprint"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "จุดเชื่อมสำคัญระหว่าง upstream กับ runtime ที่เอกสารระบุ: bytecodePatch{execute{}} → io.github.nexalloy.patch{}, สมาชิก hook ผ่าน it.args[n]/it.thisObject/it.result, shared method ใช้ scopedHook + outerFingerprint.hookMethod, literal override ใช้ youtube.insertLiteralOverride, version path ผูกกับ @RequireAppVersion/@SkipTest และ Preference ต้อง sync ตามพฤติกรรมพร้อม TODO จุดที่ยังไม่ implement"
+    }
+  ],
+  "edges": [
+    {
+      "source": "document:.agents/skills/merge-upstream-patches/references/fingerprint-results.md",
+      "target": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.agents/skills/merge-upstream-patches/references/fingerprint-results.md",
+      "target": "file:app/build.gradle.kts",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    }
+  ]
+}

@@ -1,0 +1,281 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shorts/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/originaltitles/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 130,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 27,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/playlistautoplay/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/seekbar/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 129,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/shortsnoresume/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sponsorblock/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 87,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/startpage/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 50,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 135,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 91,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 265,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 38,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 75,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 103,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 132,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 117,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 88,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/recyclerviewtree/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 58,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/verticalscroll/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/shared/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 225,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/audio/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 293,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 214,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/custom/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 126,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/revanced/strava/subscription/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/revanced/strava/upselling/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shorts/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/originaltitles/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/playlistautoplay/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/seekbar/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/shortsnoresume/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/StringComparisonType.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sponsorblock/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/startpage/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/InstructionFilter.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/StringComparisonType.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/StringComparisonType.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/recyclerviewtree/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/verticalscroll/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/shared/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/video/audio/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/StringComparisonType.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/custom/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/revanced/strava/subscription/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/revanced/strava/upselling/Fingerprints.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt"
+    ]
+  }
+}

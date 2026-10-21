@@ -1,0 +1,8 @@
+[submodule "morphe-patches"]
+	path = morphe-patches
+	url = https://github.com/KawinNext/morphe-patches
+	branch = kawinnext
+[submodule "morphe-patches-library"]
+	path = morphe-patches-library
+	url = https://github.com/KawinNext/morphe-patches-library
+	branch = kawinnext

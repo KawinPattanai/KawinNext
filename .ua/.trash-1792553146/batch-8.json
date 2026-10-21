@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    {
+      "id": "pipeline:.github/workflows/android.yml",
+      "type": "pipeline",
+      "name": "android.yml",
+      "filePath": ".github/workflows/android.yml",
+      "summary": "GitHub Actions workflow \"Android CI\" ที่ทำงานเมื่อมีการ push เข้า branch main: ตั้งค่า JDK 17 (Temurin), ถอดรหัส keystore จาก GitHub secrets เพื่อเซ็น APK, สั่ง build ทั้ง assembleDebug และ assembleRelease ผ่าน Gradle, อัปโหลด artifact ของ APK debug/release พร้อมไฟล์ mapping.txt และสร้าง GitHub prerelease \"autobuild\" สำหรับ nightly build โดยใช้ gh CLI",
+      "tags": ["ci-cd", "deployment", "build-system", "android", "nightly-build"],
+      "complexity": "moderate",
+      "languageNotes": "ใช้ gha หลาย action ร่วมกัน (checkout พร้อม submodules, setup-java, upload-artifact) และเขียน signing.properties + key.jks จาก secrets แบบ base64 decode ก่อน build เพื่อให้ Gradle เซ็น release APK ได้; workflow นี้สร้าง prerelease ชื่อ autobuild ใหม่แทนของเดิมทุกครั้ง"
+    },
+    {
+      "id": "pipeline:.github/workflows/release.yml",
+      "type": "pipeline",
+      "name": "release.yml",
+      "filePath": ".github/workflows/release.yml",
+      "summary": "GitHub Actions workflow \"Android Release CI\" ที่ทำงานเมื่อมีการ push git tag ในรูปแบบ semver (*.*.*): setup JDK 17, ถอดรหัส keystore จาก secrets, build assembleRelease แล้วเปลี่ยนชื่อ APK ตาม tag ก่อนสร้าง GitHub prerelease อัตโนมัติ",
+      "tags": ["ci-cd", "deployment", "release", "android", "tagging"],
+      "complexity": "moderate"
+    }
+  ],
+  "edges": []
+}

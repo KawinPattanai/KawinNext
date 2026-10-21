@@ -1,0 +1,990 @@
+{
+  "nodes": [
+    {
+      "id": "document:.agents/skills/merge-upstream-patches/SKILL.md",
+      "type": "document",
+      "name": "SKILL.md",
+      "filePath": ".agents/skills/merge-upstream-patches/SKILL.md",
+      "summary": "เอกสาร skill แนะนำขั้นตอน merge upstream patches เข้า submodule morphe-patches แล้ว port การเปลี่ยนแปลง fingerprints มายังโค้ด runtime ของ NexAlloy ครอบคลุมการตั้ง baseline การ merge การหา diff เพื่อ port และการ verify ด้วย FingerprintsKtTest กับ dexsql",
+      "tags": [
+        "documentation",
+        "skill-workflow",
+        "fingerprint",
+        "merge-upstream"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "type": "file",
+      "name": "summarize_fingerprints.py",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "summary": "สคริปต์ Python CLI ที่อ่านไฟล์ report JSON จาก FingerprintsKtTest จัดกลุ่มและจัดสถานะ fingerprint (matched/failed/skipped/unvalidated) แล้วสรุปผลเป็น text หรือ JSON พร้อมรองรับการกรองด้วย glob และกฎ isolated failure",
+      "tags": [
+        "utility",
+        "cli-tool",
+        "fingerprint",
+        "data-pipeline"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ใช้ dataclass Result เก็บแถวผลลัพธ์ และ defaultdict สำหรับจัดกลุ่มตาม app/package/fingerprint"
+    },
+    {
+      "id": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:read_report",
+      "type": "function",
+      "name": "read_report",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "summary": "อ่านและ validate ไฟล์ report JSON ของผลรัน fingerprint ตรวจ schema_version/complete และความซ้ำ/ความครบถ้วนของแต่ละกลุ่ม ก่อนแปลงเป็นลิสต์ Result",
+      "tags": [
+        "validation",
+        "parsing",
+        "fingerprint"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        32,
+        66
+      ]
+    },
+    {
+      "id": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:classify",
+      "type": "function",
+      "name": "classify",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "summary": "จัดสถานะผลแต่ละ fingerprint ข้ามหลาย APK เพื่อตัดสิน isolated failure (failed ที่มี pass จริงใน APK อื่นอย่าง non-skipped) รวมกรณี group error และ unobserved",
+      "tags": [
+        "fingerprint",
+        "classification",
+        "test-analysis"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        69,
+        97
+      ]
+    },
+    {
+      "id": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:main",
+      "type": "function",
+      "name": "main",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "summary": "entry-point ของ CLI ที่ parse argument (--group/--fingerprint/--apk/--details/--format), กรองแถวตาม glob แล้วพิมพ์สรุป text/JSON พร้อม exit code บอกความล้มเหลว",
+      "tags": [
+        "entry-point",
+        "cli-tool",
+        "filtering"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        104,
+        142
+      ]
+    },
+    {
+      "id": "class:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:ReportError",
+      "type": "class",
+      "name": "ReportError",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "summary": "คลาส exception ที่โยนเมื่อ report JSON ไม่ตรง schema พบข้อมูลซ้ำหรือไม่สมบูรณ์ เพื่อบังคับให้ผู้วิเคราะห์กลับไปตรวจ Gradle run จริง",
+      "tags": [
+        "error-handling",
+        "validation",
+        "fingerprint"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        13,
+        14
+      ]
+    },
+    {
+      "id": "class:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:Result",
+      "type": "class",
+      "name": "Result",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "summary": "dataclass เก็บข้อมูลผลรันหนึ่งแถวต่อ fingerprint ได้แก่ app, apk, version, group, status, matches, duration_ms, reason และ error",
+      "tags": [
+        "data-model",
+        "serialization",
+        "fingerprint"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        18,
+        29
+      ]
+    },
+    {
+      "id": "file:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "type": "file",
+      "name": "test_summarize_fingerprints.py",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "summary": "ชุด unit test (unittest) สำหรับ summarize_fingerprints.py ที่สร้าง report จำลองใน temp directory เพื่อทดสอบกฎ isolated failure, skip/missing observation และการกรอง โดยไม่ต้องใช้ Gradle หรือ APK จริง",
+      "tags": [
+        "test",
+        "fingerprint",
+        "verification"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py:ReportTests",
+      "type": "class",
+      "name": "ReportTests",
+      "filePath": ".agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "summary": "คลาส test case หลักที่มี helper add/write/results พร้อม 9 ตัวทดสอบครอบคลุมเงื่อนไขการ suppress failure การแยก group ตาม package เต็ม และการ filter หลัง classify",
+      "tags": [
+        "test",
+        "unit-test",
+        "fingerprint"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        13,
+        93
+      ]
+    },
+    {
+      "id": "config:.github/ISSUE_TEMPLATE/bug_report.yaml",
+      "type": "config",
+      "name": "bug_report.yaml",
+      "filePath": ".github/ISSUE_TEMPLATE/bug_report.yaml",
+      "summary": "GitHub issue template แบบ YAML form สำหรับรายงานบั๊ก บังคับติ๊กยืนยันไม่ซ้ำ/อ่าน FAQ และเก็บข้อมูลสภาพแวดล้อม (Android version, root manager, LSPosed version)",
+      "tags": [
+        "configuration",
+        "issue-template",
+        "github"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/ISSUE_TEMPLATE/feature_request.yaml",
+      "type": "config",
+      "name": "feature_request.yaml",
+      "filePath": ".github/ISSUE_TEMPLATE/feature_request.yaml",
+      "summary": "GitHub issue template สำหรับคำขอฟีเจอร์ พร้อมหมายเหตุว่าโปรเจกต์เป็น Xposed port ของ Morphe จึงรับเฉพาะฟีเจอร์ที่มีอยู่ในโปรเจกต์ต้นทาง",
+      "tags": [
+        "configuration",
+        "issue-template",
+        "github"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:.github/dependabot.yml",
+      "type": "config",
+      "name": "dependabot.yml",
+      "filePath": ".github/dependabot.yml",
+      "summary": "การตั้งค่า Dependabot ที่ตรวจอัปเดต GitHub Actions dependencies ของ repository ด้วย weekly schedule",
+      "tags": [
+        "configuration",
+        "dependency-management",
+        "ci-cd"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:.gitmodules",
+      "type": "file",
+      "name": ".gitmodules",
+      "filePath": ".gitmodules",
+      "summary": "ประกาศ git submodule สองตัวสำหรับซอร์ส Morphe patches (morphe-patches และ morphe-patches-library) บน branch nexalloy ของ fork ของ NexAlloy ซึ่งเป็นแหล่งโค้ดที่ถูก port มาแปะตอน build",
+      "tags": [
+        "configuration",
+        "submodule",
+        "build-system"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "app/build.gradle.kts",
+      "summary": "Gradle build script หลักของ Android app module ที่กำหนด namespace/signing/buildConfig, รวม source directory จาก submodule morphe-patches, ตั้งค่า protobuf-lite, ควบคุม packaging และลงทะเบียน custom task สำหรับ generate/copy resource",
+      "tags": [
+        "build-system",
+        "configuration",
+        "gradle",
+        "android"
+      ],
+      "complexity": "complex",
+      "languageNotes": "กำหนด custom Gradle task (GenerateStringsTask, CopyResourcesTask) แบบ Groovy XmlSlurper เพื่อ merge resources จากโครงสร้าง addresources ของ Morphe และใช้ DexKit AAR แบบ local flat"
+    },
+    {
+      "id": "class:app/build.gradle.kts:GenerateStringsTask",
+      "type": "class",
+      "name": "GenerateStringsTask",
+      "filePath": "app/build.gradle.kts",
+      "summary": "Gradle task ที่แปลง strings.xml/arrays.xml จากทุก subdirectory (shared, shared-youtube, youtube, music, reddit, sponsorblock) ใน addresources ของ Morphe ให้รวมเป็นไฟล์เดียวต่อ variant โดยรวม key ที่ไม่ซ้ำก่อน",
+      "tags": [
+        "build-system",
+        "resource-management",
+        "code-generation"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        188,
+        273
+      ]
+    },
+    {
+      "id": "class:app/build.gradle.kts:CopyResourcesTask",
+      "type": "class",
+      "name": "CopyResourcesTask",
+      "filePath": "app/build.gradle.kts",
+      "summary": "Gradle task ที่คัดลอก drawable/menu/layout ที่จำเป็นจากแพตช์มอร์เฟ (เช่น settings, sponsorblock, swipecontrols) มาที่ res directory ที่สร้างขึ้น พร้อมรายการ excludes ที่ระบุไว้",
+      "tags": [
+        "build-system",
+        "resource-management",
+        "resource-copy"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        275,
+        316
+      ]
+    },
+    {
+      "id": "function:app/build.gradle.kts:writeNode",
+      "type": "function",
+      "name": "writeNode",
+      "filePath": "app/build.gradle.kts",
+      "summary": "ฟังก์ชัน recursive ภายใน GenerateStringsTask ที่เขียน XML node จาก NodeChild ที่ถูก slurp คืนเป็น MarkupBuilder output ตาม attribute และข้อความเดิม",
+      "tags": [
+        "utility",
+        "xml-generation",
+        "xml"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        197,
+        211
+      ]
+    },
+    {
+      "id": "function:app/build.gradle.kts:mergeResources",
+      "type": "function",
+      "name": "mergeResources",
+      "filePath": "app/build.gradle.kts",
+      "summary": "รวมไฟล์ XML resource หลายไฟล์เป็นไฟล์เดียวโดยเก็บ key ชื่อแรกที่พบก่อน (first-wins dedup) แล้วเขียนผ่าน MarkupBuilder",
+      "tags": [
+        "utility",
+        "resource-management",
+        "parsing"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        220,
+        243
+      ]
+    },
+    {
+      "id": "function:app/build.gradle.kts:GenerateStringsTask.action",
+      "type": "function",
+      "name": "action",
+      "filePath": "app/build.gradle.kts",
+      "summary": "@TaskAction ที่ไล่แต่ละ variant directory (values, values-xx-rYY) แล้ว merge strings.xml และ arrays.xml จากทุก subdirectory เข้า output directory",
+      "tags": [
+        "build-system",
+        "task-action",
+        "resource-management"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        248,
+        272
+      ]
+    },
+    {
+      "id": "function:app/build.gradle.kts:CopyResourcesTask.action",
+      "type": "function",
+      "name": "action",
+      "filePath": "app/build.gradle.kts",
+      "summary": "@TaskAction ที่ลบ output directory แล้ว copy ไฟล์ resource ตาม resourcePaths ที่กำหนด โดยข้ามไฟล์ใน exclusion แบบรายไฟล์",
+      "tags": [
+        "build-system",
+        "task-action",
+        "resource-management"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        283,
+        315
+      ]
+    },
+    {
+      "id": "file:app/proguard-rules.pro",
+      "type": "file",
+      "name": "proguard-rules.pro",
+      "filePath": "app/proguard-rules.pro",
+      "summary": "กฎ ProGuard/R8 สำหรับ release build เช่น keep protobuf GeneratedMessageLite, keep ชื่อคลาส Fingerprint, ปิด warning ของ libxposed annotation และ adapt ไฟล์ java_init.list ของ Xposed",
+      "tags": [
+        "configuration",
+        "proguard",
+        "security",
+        "build-system"
+      ],
+      "complexity": "simple",
+      "languageNotes": "ใช้ -assumenosideeffects ตัด code เชิง log และ -adaptresourcefilecontents ปรับ path ของ entrypoint ที่ R8 obfuscate"
+    },
+    {
+      "id": "config:app/src/main/AndroidManifest.xml",
+      "type": "config",
+      "name": "AndroidManifest.xml",
+      "filePath": "app/src/main/AndroidManifest.xml",
+      "summary": "Manifest ที่ประกาศ permission พื้นฐาน, queries ไปยังแอปเป้าหมาย (YouTube/Music/Reddit/Google Photos/Photomath/Instagram/Threads/Strava/AllTrails), activity ชุด Settings และ activity-alias สำหรับ launcher",
+      "tags": [
+        "configuration",
+        "android-manifest",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "type": "file",
+      "name": "Helper.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "คอลเลกชัน DSL สำหรับจัดการ Xposed hook ได้แก่ hookMethod/scopedHook, คลาส ScopedHook ที่ติดตามความลึกของ nested call ด้วย ThreadLocal, การฉีด module asset และการแตะ classloader ของ host/module เพื่อให้แต่ละฝ่ายหาคลาสของอีกฝ่ายเจอ",
+      "tags": [
+        "xposed",
+        "hook",
+        "utility",
+        "classloader"
+      ],
+      "complexity": "complex",
+      "languageNotes": "ใช้ WeakHashMap เก็บ proxy ป้องกัน memory leak และใช้ ThreadLocal เก็บ outerParam/depth ของ ScopedHook"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/Helper.kt:HookDsl",
+      "type": "class",
+      "name": "HookDsl",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "สร้าง DSL ตัวกลางที่เก็บ before/after callback และ priority ให้ hookMethod ใช้ตอน build XC_MethodHook",
+      "tags": [
+        "xposed",
+        "hook",
+        "dsl"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        55,
+        67
+      ]
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/Helper.kt:ScopedHook",
+      "type": "class",
+      "name": "ScopedHook",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "XC_MethodHook ที่ประเมิน before/after เฉพาะ call ที่อยู่ใน outer hook โดยใช้ ThreadLocal เก็บ outerParam และ innerDepth เหมาะกับการ hook เมธอดที่เรียกซ้อน",
+      "tags": [
+        "xposed",
+        "hook",
+        "thread-safety"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        117,
+        157
+      ]
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/Helper.kt:hookMethodInternal",
+      "type": "function",
+      "name": "hookMethodInternal",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "ฟังก์ชัน internal ที่แปลง before/after callback เป็น XC_MethodHook แบบ anonymous แล้วเรียก XposedBridge.hookMethod จริง",
+      "tags": [
+        "xposed",
+        "hook",
+        "factory"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        80,
+        92
+      ]
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/Helper.kt:hookInnerMethod",
+      "type": "function",
+      "name": "hookInnerMethod",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "ลง hook กับ inner method ที่จะรันเฉพาะภายใน call ของ outer hook เพื่อร่วมพฤติกรรมกับ scopedHook โดยระบุ depth ของคู่ call",
+      "tags": [
+        "xposed",
+        "hook",
+        "callback"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        118,
+        143
+      ]
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/Helper.kt:addModuleAssets",
+      "type": "function",
+      "name": "addModuleAssets",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "โหลด module APK เป็น resource provider เพิ่มเข้า host app เพื่อให้ host ใช้ layout/asset ของ module ได้ และแจ้ง/restart เมื่อ module อัปเดตแล้ว",
+      "tags": [
+        "xposed",
+        "resource-injection",
+        "compatibility"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        171,
+        184
+      ]
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/Helper.kt:injectSelfClassLoaderToHost",
+      "type": "function",
+      "name": "injectSelfClassLoaderToHost",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "แทน parent classloader ของ host ด้วย proxy ที่ delegate คลาส app.morphe.* ไปที่ module classloader เพื่อให้ layout ของ module ที่ host inflate หาคลาสได้",
+      "tags": [
+        "xposed",
+        "classloader",
+        "compatibility"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        192,
+        208
+      ]
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/Helper.kt:injectHostClassLoaderToSelf",
+      "type": "function",
+      "name": "injectHostClassLoaderToSelf",
+      "filePath": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "summary": "แทน parent classloader ของ module ด้วย intermediary ที่หาคลาสจาก self ก่อนเสมอแล้ว fallback ไป host เพื่อกัน infinite recursion ระหว่าง framework Xposed ต่างชนิด",
+      "tags": [
+        "xposed",
+        "classloader",
+        "compatibility"
+      ],
+      "complexity": "moderate",
+      "lineRange": [
+        210,
+        253
+      ]
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/KotlinXposedHelper.kt",
+      "type": "file",
+      "name": "KotlinXposedHelper.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/KotlinXposedHelper.kt",
+      "summary": "ชุด extension function ภาษา Kotlin สำหรับ XposedHelpers ที่ครอบการอ่าน/เขียน field, เรียก method/static method ทั้งแบบธรรมดาและ OrNull/As เพื่อความปลอดภัยจาก null พร้อม helper ค้นหาคลาส, สร้าง object และไล่หา BaseDexClassLoader เพื่อดึงรายชื่อคลาสทั้งหมด",
+      "tags": [
+        "utility",
+        "xposed",
+        "reflection",
+        "kotlinx"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "อิง XposedHelpers และเรียก refactor เป็น infix/extension รวมถึง inline function กับ reified type parameter เพื่อ call แบบ null-safe"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "type": "file",
+      "name": "UnitTestAnnotations.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "summary": "ประกาศ annotation และ class สำหรับกรอง fingerprint ตอนรัน FingerprintsKtTest เช่น SkipTest, TargetApp, RequireAppVersion และ AppVersion class ที่เทียบ version string แบบ numeric",
+      "tags": [
+        "test",
+        "annotation",
+        "validation",
+        "data-model"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:AppVersion",
+      "type": "class",
+      "name": "AppVersion",
+      "filePath": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "summary": "คลาสเปรียบเทียบเวอร์ชันแบบ numeric โดยแปลง version string เป็นลิสต์ int และรองรับจำนวนตัวเลขที่ไม่เท่ากันด้วย awaitElement (pad 0) ก่อนยกเว้นให้ throw ถ้าไม่เท่ากัน",
+      "tags": [
+        "data-model",
+        "versioning",
+        "test"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        11,
+        39
+      ]
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:TargetApp",
+      "type": "class",
+      "name": "TargetApp",
+      "filePath": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "summary": "annotation ที่ระบุชื่อแอปเป้าหมายสำหรับ test/annotation อื่น ใช้เลือก test ที่เกี่ยวข้อง",
+      "tags": [
+        "annotation",
+        "test",
+        "metadata"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        8,
+        9
+      ]
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:RequireAppVersion",
+      "type": "class",
+      "name": "RequireAppVersion",
+      "filePath": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "summary": "annotation ที่ประกาศ min/max version เพื่อกรอง fingerprint ที่ควรข้าม/รัน ตอน test ของ fingerprint ที่รองรับเวอร์ชันอย่างจำกัด",
+      "tags": [
+        "annotation",
+        "test",
+        "versioning"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        42,
+        46
+      ]
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:VersionConstraintFailedException",
+      "type": "class",
+      "name": "VersionConstraintFailedException",
+      "filePath": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "summary": "Exception ที่ match() โยนเมื่อ app version หลุดเงื่อนไข RequireAppVersion",
+      "tags": [
+        "error-handling",
+        "versioning",
+        "test"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        48,
+        48
+      ]
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:compareTo",
+      "type": "function",
+      "name": "compareTo",
+      "filePath": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "summary": "เปรียบเทียบ metadata แบบ Comparable ตามตำแหน่งส่วนที่มาจาก AppVersion โดย throw ถ้าจำนวนส่วนไม่เท่ากัน",
+      "tags": [
+        "data-model",
+        "comparison",
+        "test"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        22,
+        36
+      ]
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:match",
+      "type": "function",
+      "name": "match",
+      "filePath": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "summary": "ตรวจว่า app version ผ่าน RequireAppVersion ได้ด้วยการเทียบ เจาะ throw VersionConstraintFailedException ถ้าไม่ผ่านเงื่อนไข min/max",
+      "tags": [
+        "validation",
+        "versioning",
+        "test"
+      ],
+      "complexity": "simple",
+      "lineRange": [
+        50,
+        61
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:read_report",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:classify",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:main",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "class:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:ReportError",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "class:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:Result",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "target": "class:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py:ReportTests",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "class:app/build.gradle.kts:GenerateStringsTask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "class:app/build.gradle.kts:CopyResourcesTask",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "function:app/build.gradle.kts:writeNode",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "function:app/build.gradle.kts:mergeResources",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "function:app/build.gradle.kts:GenerateStringsTask.action",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "function:app/build.gradle.kts:CopyResourcesTask.action",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/Helper.kt:HookDsl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/Helper.kt:ScopedHook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:hookMethodInternal",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:hookInnerMethod",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:addModuleAssets",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:injectSelfClassLoaderToHost",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:injectHostClassLoaderToSelf",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:AppVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:TargetApp",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:RequireAppVersion",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:VersionConstraintFailedException",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:compareTo",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:match",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:read_report",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:classify",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "function:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:main",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "class:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:ReportError",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "class:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py:Result",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "target": "class:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py:ReportTests",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "class:app/build.gradle.kts:GenerateStringsTask",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "class:app/build.gradle.kts:CopyResourcesTask",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/Helper.kt:HookDsl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:hookMethodInternal",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:hookInnerMethod",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/Helper.kt:ScopedHook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:addModuleAssets",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:injectSelfClassLoaderToHost",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/Helper.kt:injectHostClassLoaderToSelf",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:AppVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:TargetApp",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:RequireAppVersion",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:VersionConstraintFailedException",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:compareTo",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt:match",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "target": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "target": "file:.agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "type": "tested_by",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.agents/skills/merge-upstream-patches/SKILL.md",
+      "target": "file:.agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "document:.agents/skills/merge-upstream-patches/SKILL.md",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/FingerprintCompat.kt",
+      "type": "documents",
+      "direction": "forward",
+      "weight": 0.5
+    },
+    {
+      "source": "config:app/src/main/AndroidManifest.xml",
+      "target": "file:app/src/main/java/io/github/nexalloy/activity/SettingApplication.kt",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:app/src/main/AndroidManifest.xml",
+      "target": "file:app/src/main/java/io/github/nexalloy/activity/AppPatchSettingsActivity.kt",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "file:app/proguard-rules.pro",
+      "type": "depends_on",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "file:app/build.gradle.kts",
+      "target": "file:app/src/main/java/io/github/nexalloy/Helper.kt",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

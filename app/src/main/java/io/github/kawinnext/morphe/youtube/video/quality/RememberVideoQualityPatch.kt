@@ -1,0 +1,113 @@
+package io.github.kawinnext.morphe.youtube.video.quality
+
+import app.morphe.extension.youtube.patches.playback.quality.RememberVideoQualityPatch
+import io.github.kawinnext.morphe.shared.misc.settings.preference.ListPreference
+import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
+import io.github.kawinnext.morphe.youtube.insertLiteralOverride
+import io.github.kawinnext.morphe.youtube.misc.playertype.PlayerTypeHook
+import io.github.kawinnext.morphe.youtube.shared.VideoQualityReceiver
+import io.github.kawinnext.morphe.youtube.shared.VideoQualityChangedFingerprint
+import io.github.kawinnext.morphe.youtube.video.information.VideoInformationPatch
+import io.github.kawinnext.morphe.youtube.video.information.VideoQualityProxy
+import io.github.kawinnext.patch
+import io.github.kawinnext.scopedHook
+import `j$`.util.Optional
+
+val RememberVideoQuality = patch {
+    dependsOn(
+        VideoInformationPatch,
+        PlayerTypeHook,
+    )
+
+    settingsMenuVideoQualityGroup.addAll(
+        listOf(
+            ListPreference(
+                key = "morphe_video_quality_default_mobile",
+                entriesKey = "morphe_video_quality_default_entries",
+                entryValuesKey = "morphe_video_quality_default_entry_values"
+            ),
+            ListPreference(
+                key = "morphe_video_quality_default_wifi",
+                entriesKey = "morphe_video_quality_default_entries",
+                entryValuesKey = "morphe_video_quality_default_entry_values"
+            ),
+            SwitchPreference("morphe_remember_video_quality_last_selected", summary = true),
+
+            ListPreference(
+                key = "morphe_shorts_quality_default_mobile",
+                entriesKey = "morphe_shorts_quality_default_entries",
+                entryValuesKey = "morphe_shorts_quality_default_entry_values",
+            ),
+            ListPreference(
+                key = "morphe_shorts_quality_default_wifi",
+                entriesKey = "morphe_shorts_quality_default_entries",
+                entryValuesKey = "morphe_shorts_quality_default_entry_values"
+            ),
+            SwitchPreference("morphe_remember_shorts_quality_last_selected", summary = true),
+            SwitchPreference("morphe_remember_video_quality_last_selected_toast", summary = true)
+        )
+    )
+
+    // Inject a call to override initial video quality.
+    ::PlaybackStartParametersInit.hookMethod {
+        val initialResolutionField = ::InitialResolutionField.field
+        after {
+            val oldValue = initialResolutionField.get(it.thisObject)
+            val newValue = RememberVideoQualityPatch.getInitialVideoQuality(oldValue as Optional<*>?)
+            initialResolutionField.set(it.thisObject, newValue)
+        }
+    }
+
+    // Turn off the YouTube automatic quality selection when the video starts,
+    // so the initial video quality is used as a fixed quality.
+    insertLiteralOverride(45408049L, RememberVideoQualityPatch::useInitialVideoQuality)
+
+    // Send the minimum and maximum quality with the SABR requests,
+    // so the server cannot choose a quality outside the quality of the player.
+    insertLiteralOverride(45738253L, RememberVideoQualityPatch::sendQualityConstraintToServer)
+
+    // Use the 'Advanced' video quality setting instead of the 'Video quality preferences'
+    // (Auto, Higher picture quality, Data saver), both on the device and with the SABR requests.
+    val advancedMenu = ::advancedVideoQualitySettingField.field.get(null)
+    ::getVideoQualitySettingMethod.hookMethod {
+        before {
+            if (RememberVideoQualityPatch.useAdvancedVideoQualitySetting()) {
+                it.result = advancedMenu
+            }
+        }
+    }
+
+    // The initial video quality is only used when the video starts. YouTube chooses the quality
+    // again while the video plays, and without a quality selected in the quality menu it is
+    // then chosen automatically, such as 720p for the size of the player.
+    // The default quality is used as a fixed quality for these choices too.
+    ::getVideoQualityConstraintMethod.hookMethod {
+        val fixedConstraint = ::fixedVideoQualityConstraintMethod.method
+        after {
+            val quality = RememberVideoQualityPatch.getFixedVideoQuality()
+            if (quality >= 0 && it.result != null) {
+                it.result = fixedConstraint(it.result, quality)
+            }
+        }
+    }
+
+    // Inject a call to remember the selected quality for Shorts.
+    VideoQualityItemOnClickFingerprint.hookMethod {
+        before { param ->
+            RememberVideoQualityPatch.userChangedShortsQuality(param.args[2] as Int)
+        }
+    }
+
+    // Inject a call to remember the user selected quality for regular videos.
+    // The quality object is used, as its name is needed to get the fixed resolution.
+    VideoQualityChangedFingerprint.hookMethod(scopedHook(::VideoQualityReceiver.member) {
+        before { param ->
+            RememberVideoQualityPatch.userChangedQuality(VideoQualityProxy(param.args[0]))
+        }
+    })
+
+    // If this flag is enabled, Shorts restart whenever the quality changes.
+    // The restart uses the initial quality of the Short, so the quality selected by the user is lost.
+    insertLiteralOverride(45387052)
+    insertLiteralOverride(45399743)
+}

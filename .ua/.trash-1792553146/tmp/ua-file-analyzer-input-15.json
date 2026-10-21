@@ -1,0 +1,182 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/privacy/SanitizeSharingLinksPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/settings/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/shared/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/RedditHook.kt",
+      "language": "kotlin",
+      "sizeLines": 10,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/ad/HideAdsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 81,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/guest/StartAsGuestPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/privacy/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/privacy/SanitizeSharingLinksPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/version/VersionCheckPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 33,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/layout/theme/LithoColorHookPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/audio/tracks/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 30,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/debugging/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 144,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/fix/bitmap/FixRecycledBitmapPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/context/ConversionContextPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/context/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/relayout/LithoRelayoutPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 57,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/proto/ElementProtoParserHookPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 32,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/request/BuildRequestPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 25,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/IntentPreference.kt",
+      "language": "kotlin",
+      "sizeLines": 36,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/spans/InclusiveSpanPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 35,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/textcomponent/TextComponentPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 96,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copytext/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 17,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/downloads/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/SeekbarPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 24,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shelves/HideHorizontalShelvesPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "app/src/main/java/io/github/nexalloy/morphe/music/misc/privacy/SanitizeSharingLinksPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/music/misc/settings/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/music/shared/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/reddit/RedditHook.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/reddit/ad/HideAdsPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/guest/StartAsGuestPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/privacy/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/privacy/SanitizeSharingLinksPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/version/VersionCheckPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/layout/theme/LithoColorHookPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/audio/tracks/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/debugging/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/fix/bitmap/FixRecycledBitmapPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/context/ConversionContextPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/context/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/relayout/LithoRelayoutPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/proto/ElementProtoParserHookPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/request/BuildRequestPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/IntentPreference.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/spans/InclusiveSpanPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/textcomponent/TextComponentPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copytext/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/downloads/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/SeekbarPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shelves/HideHorizontalShelvesPatch.kt": []
+  }
+}

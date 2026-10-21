@@ -1,0 +1,1513 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 26,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 26,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 26,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/settings/SettingsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 137,
+      "nonEmptyLines": 123,
+      "functions": [
+        {
+          "name": "commit",
+          "startLine": 134,
+          "endLine": 136,
+          "params": [
+            "screen"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "PreferenceScreen",
+          "startLine": 104,
+          "endLine": 137,
+          "methods": [
+            "commit"
+          ],
+          "properties": [
+            "ADS",
+            "GENERAL",
+            "PLAYER",
+            "MISC"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ADS",
+          "line": 105,
+          "isDefault": false
+        },
+        {
+          "name": "GENERAL",
+          "line": 112,
+          "isDefault": false
+        },
+        {
+          "name": "PLAYER",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "MISC",
+          "line": 126,
+          "isDefault": false
+        },
+        {
+          "name": "commit",
+          "line": 134,
+          "isDefault": false
+        },
+        {
+          "name": "PreferenceScreen",
+          "line": 104,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 6,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/debugging/EnableDebuggingPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 116,
+      "nonEmptyLines": 105,
+      "functions": [
+        {
+          "name": "enableDebuggingPatch",
+          "startLine": 15,
+          "endLine": 116,
+          "params": [
+            "hookIndexedBooleanFeatureFlag",
+            "hookStringFeatureFlag",
+            "hookLongFeatureFlag",
+            "hookDoubleFeatureFlag",
+            "preferenceScreen",
+            "additionalDebugPreferences"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "enableDebuggingPatch",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "emptyList",
+          "lineNumber": 21
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "patch",
+          "lineNumber": 22
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "mutableSetOf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "SwitchPreference",
+          "lineNumber": 27
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "addAll",
+          "lineNumber": 30
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "addAll",
+          "lineNumber": 32
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "listOf",
+          "lineNumber": 33
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "SwitchPreference",
+          "lineNumber": 34
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "SwitchPreference",
+          "lineNumber": 35
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "NonInteractivePreference",
+          "lineNumber": 36
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "NonInteractivePreference",
+          "lineNumber": 41
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookMethod",
+          "lineNumber": 49
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "addPreferences",
+          "lineNumber": 49
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "PreferenceScreenPreference",
+          "lineNumber": 50
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "after",
+          "lineNumber": 59
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "isBooleanFeatureFlagEnabled",
+          "lineNumber": 60
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 62
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookIndexedBooleanFeatureFlag",
+          "lineNumber": 67
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookMethod",
+          "lineNumber": 68
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "after",
+          "lineNumber": 69
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "isBooleanFeatureFlagEnabled",
+          "lineNumber": 70
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 72
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookDoubleFeatureFlag",
+          "lineNumber": 78
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookMethod",
+          "lineNumber": 79
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "after",
+          "lineNumber": 80
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "isDoubleFeatureFlagEnabled",
+          "lineNumber": 81
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 83
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 84
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookLongFeatureFlag",
+          "lineNumber": 90
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookMethod",
+          "lineNumber": 91
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "after",
+          "lineNumber": 92
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "isLongFeatureFlagEnabled",
+          "lineNumber": 93
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 95
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 96
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookStringFeatureFlag",
+          "lineNumber": 102
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "hookMethod",
+          "lineNumber": 103
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "after",
+          "lineNumber": 104
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "isStringFeatureFlagEnabled",
+          "lineNumber": 105
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 107
+        },
+        {
+          "caller": "enableDebuggingPatch",
+          "callee": "atLast",
+          "lineNumber": 108
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/initialization/initializationPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 11,
+      "functions": [
+        {
+          "name": "initializationPatch",
+          "startLine": 8,
+          "endLine": 14,
+          "params": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "initializationPatch",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "initializationPatch",
+          "callee": "patch",
+          "lineNumber": 8
+        },
+        {
+          "caller": "initializationPatch",
+          "callee": "hookMethod",
+          "lineNumber": 11
+        },
+        {
+          "caller": "initializationPatch",
+          "callee": "scopedHook",
+          "lineNumber": 11
+        },
+        {
+          "caller": "initializationPatch",
+          "callee": "onGlobalConfigUpdated",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 79,
+      "nonEmptyLines": 70,
+      "functions": [
+        {
+          "name": "trySetString",
+          "startLine": 27,
+          "endLine": 32,
+          "params": [
+            "key",
+            "resources",
+            "pkg",
+            "setString"
+          ]
+        },
+        {
+          "name": "trySetRes",
+          "startLine": 34,
+          "endLine": 46,
+          "params": [
+            "key",
+            "type",
+            "resources",
+            "pkg",
+            "setRes"
+          ]
+        },
+        {
+          "name": "applyBaseAttrs",
+          "startLine": 48,
+          "endLine": 64,
+          "params": [
+            "preference"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 66,
+          "endLine": 74,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        },
+        {
+          "name": "onAttachedToHierarchy",
+          "startLine": 76,
+          "endLine": 78,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "BasePreference",
+          "startLine": 17,
+          "endLine": 79,
+          "methods": [
+            "trySetString",
+            "trySetRes",
+            "applyBaseAttrs",
+            "build",
+            "onAttachedToHierarchy"
+          ],
+          "properties": [
+            "key",
+            "titleKey",
+            "summaryKey",
+            "icon",
+            "iconBold",
+            "layout",
+            "tag"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "trySetString",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "trySetRes",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "applyBaseAttrs",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "onAttachedToHierarchy",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "BasePreference",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "trySetString",
+          "callee": "getContext",
+          "lineNumber": 29
+        },
+        {
+          "caller": "trySetString",
+          "callee": "trySetRes",
+          "lineNumber": 32
+        },
+        {
+          "caller": "trySetString",
+          "callee": "setString",
+          "lineNumber": 32
+        },
+        {
+          "caller": "trySetString",
+          "callee": "getString",
+          "lineNumber": 32
+        },
+        {
+          "caller": "trySetRes",
+          "callee": "getContext",
+          "lineNumber": 37
+        },
+        {
+          "caller": "trySetRes",
+          "callee": "getIdentifier",
+          "lineNumber": 42
+        },
+        {
+          "caller": "trySetRes",
+          "callee": "printDebug",
+          "lineNumber": 43
+        },
+        {
+          "caller": "trySetRes",
+          "callee": "setRes",
+          "lineNumber": 44
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "also",
+          "lineNumber": 49
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "let",
+          "lineNumber": 50
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "trySetString",
+          "lineNumber": 51
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "trySetString",
+          "lineNumber": 52
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "appIsUsingBoldIcons",
+          "lineNumber": 54
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "trySetRes",
+          "lineNumber": 55
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "getDrawable",
+          "lineNumber": 56
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "apply",
+          "lineNumber": 56
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "newTheme",
+          "lineNumber": 56
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "applyStyle",
+          "lineNumber": 57
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "let",
+          "lineNumber": 60
+        },
+        {
+          "caller": "applyBaseAttrs",
+          "callee": "getLayoutIdentifier",
+          "lineNumber": 61
+        },
+        {
+          "caller": "build",
+          "callee": "printDebug",
+          "lineNumber": 67
+        },
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 68
+        },
+        {
+          "caller": "build",
+          "callee": "new",
+          "lineNumber": 68
+        },
+        {
+          "caller": "build",
+          "callee": "arrayOf",
+          "lineNumber": 69
+        },
+        {
+          "caller": "build",
+          "callee": "applyBaseAttrs",
+          "lineNumber": 72
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 10,
+      "nonEmptyLines": 9,
+      "classes": [
+        {
+          "name": "InputType",
+          "startLine": 3,
+          "endLine": 10,
+          "methods": [],
+          "properties": [
+            "type"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "InputType",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 35,
+          "endLine": 40,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "NonInteractivePreference",
+          "startLine": 22,
+          "endLine": 41,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "selectable",
+            "dependency"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "NonInteractivePreference",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "build",
+          "lineNumber": 36
+        },
+        {
+          "caller": "build",
+          "callee": "let",
+          "lineNumber": 38
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 69,
+      "nonEmptyLines": 61,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 26,
+          "endLine": 31,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        },
+        {
+          "name": "onAttachedToHierarchy",
+          "startLine": 33,
+          "endLine": 38,
+          "params": []
+        },
+        {
+          "name": "noTitleUnsortedPreferenceCategory",
+          "startLine": 41,
+          "endLine": 43,
+          "params": [
+            "preferences"
+          ]
+        },
+        {
+          "name": "noTitleUnsortedPreferenceCategory",
+          "startLine": 45,
+          "endLine": 53,
+          "params": [
+            "preferences"
+          ]
+        },
+        {
+          "name": "screenInfoPreferenceCategory",
+          "startLine": 60,
+          "endLine": 69,
+          "params": [
+            "key",
+            "preferences"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "PreferenceCategory",
+          "startLine": 14,
+          "endLine": 39,
+          "methods": [
+            "build",
+            "onAttachedToHierarchy"
+          ],
+          "properties": [
+            "preferences",
+            "children",
+            "preferenceGroup"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "children",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "preferenceGroup",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "onAttachedToHierarchy",
+          "line": 33,
+          "isDefault": false
+        },
+        {
+          "name": "PreferenceCategory",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "noTitleUnsortedPreferenceCategory",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "noTitleUnsortedPreferenceCategory",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "screenInfoPreferenceCategory",
+          "line": 60,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 27
+        },
+        {
+          "caller": "build",
+          "callee": "build",
+          "lineNumber": 27
+        },
+        {
+          "caller": "build",
+          "callee": "map",
+          "lineNumber": 29
+        },
+        {
+          "caller": "build",
+          "callee": "build",
+          "lineNumber": 29
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "apply",
+          "lineNumber": 34
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "forEach",
+          "lineNumber": 35
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "addPreference",
+          "lineNumber": 35
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "forEach",
+          "lineNumber": 36
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "onAttachedToHierarchy",
+          "lineNumber": 36
+        },
+        {
+          "caller": "noTitleUnsortedPreferenceCategory",
+          "callee": "noTitleUnsortedPreferenceCategory",
+          "lineNumber": 43
+        },
+        {
+          "caller": "noTitleUnsortedPreferenceCategory",
+          "callee": "toSet",
+          "lineNumber": 43
+        },
+        {
+          "caller": "noTitleUnsortedPreferenceCategory",
+          "callee": "PreferenceCategory",
+          "lineNumber": 47
+        },
+        {
+          "caller": "screenInfoPreferenceCategory",
+          "callee": "PreferenceCategory",
+          "lineNumber": 63
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 77,
+      "nonEmptyLines": 68,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 32,
+          "endLine": 39,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        },
+        {
+          "name": "onAttachedToHierarchy",
+          "startLine": 41,
+          "endLine": 46,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "PreferenceScreenPreference",
+          "startLine": 11,
+          "endLine": 77,
+          "methods": [
+            "build",
+            "onAttachedToHierarchy"
+          ],
+          "properties": [
+            "preferences",
+            "children",
+            "preferenceScreen"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "children",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "preferenceScreen",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "onAttachedToHierarchy",
+          "line": 41,
+          "isDefault": false
+        },
+        {
+          "name": "PreferenceScreenPreference",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "printDebug",
+          "lineNumber": 33
+        },
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 34
+        },
+        {
+          "caller": "build",
+          "callee": "createPreferenceScreen",
+          "lineNumber": 34
+        },
+        {
+          "caller": "build",
+          "callee": "applyBaseAttrs",
+          "lineNumber": 35
+        },
+        {
+          "caller": "build",
+          "callee": "map",
+          "lineNumber": 37
+        },
+        {
+          "caller": "build",
+          "callee": "build",
+          "lineNumber": 37
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "apply",
+          "lineNumber": 42
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "forEach",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "addPreference",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "forEach",
+          "lineNumber": 44
+        },
+        {
+          "caller": "onAttachedToHierarchy",
+          "callee": "onAttachedToHierarchy",
+          "lineNumber": 44
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 36,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 22,
+          "endLine": 38,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TextPreference",
+          "startLine": 12,
+          "endLine": 39,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "inputType"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "TextPreference",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 23
+        },
+        {
+          "caller": "build",
+          "callee": "build",
+          "lineNumber": 23
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/settings/Preferences.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 5,
+      "nonEmptyLines": 3,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/downloads/DownloadsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 55,
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/swipecontrols/SwipeControlsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 136,
+      "nonEmptyLines": 129,
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/action/HideVideoActionButtonsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 96,
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/overlay/PlayerOverlayButtonsSettingsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "addPlayerOverlayPreferences",
+          "startLine": 11,
+          "endLine": 13,
+          "params": [
+            "preference"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "addPlayerOverlayPreferences",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addPlayerOverlayPreferences",
+          "callee": "addAll",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/dearrow/DeArrowPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 102,
+      "nonEmptyLines": 98,
+      "callGraph": [
+        {
+          "caller": "thumbnailPreference",
+          "callee": "ListPreference",
+          "lineNumber": 37
+        }
+      ],
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/general/HideLayoutComponentsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 645,
+      "nonEmptyLines": 565,
+      "metrics": {
+        "importCount": 8,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shorts/HideShortsComponentsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 150,
+      "nonEmptyLines": 129,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/returnyoutubedislike/ReturnYouTubeDislikePatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 110,
+      "nonEmptyLines": 98,
+      "metrics": {
+        "importCount": 5,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sponsorblock/SponsorBlockPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 271,
+      "nonEmptyLines": 258,
+      "functions": [
+        {
+          "name": "categoryPreference",
+          "startLine": 52,
+          "endLine": 53,
+          "params": [
+            "settingKey"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "categoryPreference",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 9,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/aislist/AiSListPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 107,
+      "nonEmptyLines": 101,
+      "metrics": {
+        "importCount": 6,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/node/TreeNodeElementHook.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/observer/LayoutReloadObserverPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 13,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/settings/SettingsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 228,
+      "nonEmptyLines": 209,
+      "functions": [
+        {
+          "name": "addShortsPlayerPreferences",
+          "startLine": 124,
+          "endLine": 131,
+          "params": [
+            "preferences"
+          ]
+        },
+        {
+          "name": "commit",
+          "startLine": 225,
+          "endLine": 227,
+          "params": [
+            "screen"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "PreferenceScreen",
+          "startLine": 113,
+          "endLine": 228,
+          "methods": [
+            "addShortsPlayerPreferences",
+            "commit"
+          ],
+          "properties": [
+            "shortsPlayerPreferences",
+            "SHORTS_PLAYER",
+            "shortsPlayerScreenAdded",
+            "ADS",
+            "DEARROW",
+            "FEED",
+            "GENERAL",
+            "PLAYER",
+            "SHORTS",
+            "SEEKBAR",
+            "SWIPE_CONTROLS",
+            "RETURN_YOUTUBE_DISLIKE",
+            "SPONSORBLOCK",
+            "MISC",
+            "VIDEO"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SHORTS_PLAYER",
+          "line": 116,
+          "isDefault": false
+        },
+        {
+          "name": "addShortsPlayerPreferences",
+          "line": 124,
+          "isDefault": false
+        },
+        {
+          "name": "ADS",
+          "line": 135,
+          "isDefault": false
+        },
+        {
+          "name": "DEARROW",
+          "line": 142,
+          "isDefault": false
+        },
+        {
+          "name": "FEED",
+          "line": 150,
+          "isDefault": false
+        },
+        {
+          "name": "GENERAL",
+          "line": 157,
+          "isDefault": false
+        },
+        {
+          "name": "PLAYER",
+          "line": 164,
+          "isDefault": false
+        },
+        {
+          "name": "SHORTS",
+          "line": 171,
+          "isDefault": false
+        },
+        {
+          "name": "SEEKBAR",
+          "line": 178,
+          "isDefault": false
+        },
+        {
+          "name": "SWIPE_CONTROLS",
+          "line": 185,
+          "isDefault": false
+        },
+        {
+          "name": "RETURN_YOUTUBE_DISLIKE",
+          "line": 193,
+          "isDefault": false
+        },
+        {
+          "name": "SPONSORBLOCK",
+          "line": 201,
+          "isDefault": false
+        },
+        {
+          "name": "MISC",
+          "line": 209,
+          "isDefault": false
+        },
+        {
+          "name": "VIDEO",
+          "line": 216,
+          "isDefault": false
+        },
+        {
+          "name": "commit",
+          "line": 225,
+          "isDefault": false
+        },
+        {
+          "name": "PreferenceScreen",
+          "line": 113,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "replaceHookedMethod",
+          "callee": "initialize",
+          "lineNumber": 54
+        },
+        {
+          "caller": "replaceHookedMethod",
+          "callee": "applyStyle",
+          "lineNumber": 55
+        },
+        {
+          "caller": "replaceHookedMethod",
+          "callee": "invokeSpecial",
+          "lineNumber": 56
+        },
+        {
+          "caller": "addShortsPlayerPreferences",
+          "callee": "addAll",
+          "lineNumber": 125
+        },
+        {
+          "caller": "addShortsPlayerPreferences",
+          "callee": "addPreferences",
+          "lineNumber": 128
+        }
+      ],
+      "metrics": {
+        "importCount": 7,
+        "exportCount": 16,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/VideoQualityPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 36,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/PlaybackSpeedPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 38,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/custom/CustomPlaybackSpeedPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 112,
+      "nonEmptyLines": 94,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

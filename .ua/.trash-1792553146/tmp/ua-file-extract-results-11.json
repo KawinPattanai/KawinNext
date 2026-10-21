@@ -1,0 +1,29 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 0,
+  "filesSkipped": [
+    "app/src/main/res/layout/activity_app_patch_settings.xml",
+    "app/src/main/res/layout/activity_settings.xml",
+    "app/src/main/res/layout/morphe_copy_video_url_button.xml",
+    "app/src/main/res/layout/morphe_external_download_button.xml",
+    "app/src/main/res/layout/morphe_playback_speed_dialog_button.xml",
+    "app/src/main/res/layout/morphe_sb_button.xml",
+    "app/src/main/res/layout/morphe_sb_skip_sponsor_button.xml",
+    "app/src/main/res/layout/morphe_settings_with_toolbar.xml",
+    "app/src/main/res/layout/morphe_video_quality_dialog_button_container.xml",
+    "app/src/main/res/layout/preference_header_buttons.xml"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 0,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": []
+}

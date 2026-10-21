@@ -1,0 +1,28 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": ".agents/skills/merge-upstream-patches/references/fingerprint-results.md",
+      "language": "markdown",
+      "sizeLines": 46,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/merge-upstream-patches/references/submodule-integration.md",
+      "language": "markdown",
+      "sizeLines": 41,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/merge-upstream-patches/references/youtube-porting.md",
+      "language": "markdown",
+      "sizeLines": 131,
+      "fileCategory": "docs"
+    }
+  ],
+  "batchImportData": {
+    ".agents/skills/merge-upstream-patches/references/fingerprint-results.md": [],
+    ".agents/skills/merge-upstream-patches/references/submodule-integration.md": [],
+    ".agents/skills/merge-upstream-patches/references/youtube-porting.md": []
+  }
+}

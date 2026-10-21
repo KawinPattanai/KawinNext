@@ -1,0 +1,184 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": ".agents/skills/merge-upstream-patches/SKILL.md",
+      "language": "markdown",
+      "sizeLines": 63,
+      "fileCategory": "docs"
+    },
+    {
+      "path": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "language": "python",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "language": "python",
+      "sizeLines": 97,
+      "fileCategory": "code"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yaml",
+      "language": "yaml",
+      "sizeLines": 55,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yaml",
+      "language": "yaml",
+      "sizeLines": 11,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "language": "yaml",
+      "sizeLines": 6,
+      "fileCategory": "config"
+    },
+    {
+      "path": ".gitmodules",
+      "language": "unknown",
+      "sizeLines": 8,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "language": "kotlin",
+      "sizeLines": 339,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/proguard-rules.pro",
+      "language": "pro",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/AndroidManifest.xml",
+      "language": "xml",
+      "sizeLines": 58,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "language": "kotlin",
+      "sizeLines": 262,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/KotlinXposedHelper.kt",
+      "language": "kotlin",
+      "sizeLines": 265,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "language": "kotlin",
+      "sizeLines": 61,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/activity/AppPatchSettingsActivity.kt",
+      "language": "kotlin",
+      "sizeLines": 178,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/activity/SettingApplication.kt",
+      "language": "kotlin",
+      "sizeLines": 65,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/AllTrailsHook.kt",
+      "language": "kotlin",
+      "sizeLines": 7,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/pro/EnablePeakMembershipPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 12,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/pro/Fingerprints.kt",
+      "language": "kotlin",
+      "sizeLines": 13,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/FingerprintCompat.kt",
+      "language": "kotlin",
+      "sizeLines": 579,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/ResourceMappingPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 114,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/Utils.kt",
+      "language": "kotlin",
+      "sizeLines": 538,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/layout/upgradebutton/HideUpgradeButtonPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/audio/EnableExclusiveAudioPlayback.kt",
+      "language": "kotlin",
+      "sizeLines": 21,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/playservice/VersionCheckPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    ".agents/skills/merge-upstream-patches/SKILL.md": [],
+    ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py": [],
+    ".agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py": [
+      ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py"
+    ],
+    ".github/ISSUE_TEMPLATE/bug_report.yaml": [],
+    ".github/ISSUE_TEMPLATE/feature_request.yaml": [],
+    ".github/dependabot.yml": [],
+    ".gitmodules": [],
+    "app/build.gradle.kts": [],
+    "app/proguard-rules.pro": [],
+    "app/src/main/AndroidManifest.xml": [],
+    "app/src/main/java/io/github/nexalloy/Helper.kt": [],
+    "app/src/main/java/io/github/nexalloy/KotlinXposedHelper.kt": [],
+    "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt": [],
+    "app/src/main/java/io/github/nexalloy/activity/AppPatchSettingsActivity.kt": [],
+    "app/src/main/java/io/github/nexalloy/activity/SettingApplication.kt": [],
+    "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/AllTrailsHook.kt": [],
+    "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/pro/EnablePeakMembershipPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/pro/Fingerprints.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/FingerprintCompat.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/ResourceMappingPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/Utils.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/music/layout/upgradebutton/HideUpgradeButtonPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/music/misc/audio/EnableExclusiveAudioPlayback.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/music/misc/backgroundplayback/BackgroundPlaybackPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/music/misc/playservice/VersionCheckPatch.kt": []
+  }
+}

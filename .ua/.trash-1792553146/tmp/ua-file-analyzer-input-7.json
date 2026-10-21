@@ -1,0 +1,40 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/AppPatchInfo.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/MainHook.kt",
+      "language": "kotlin",
+      "sizeLines": 85,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/activity/SettingsActivity.kt",
+      "language": "kotlin",
+      "sizeLines": 265,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/common/UpdateChecker.kt",
+      "language": "kotlin",
+      "sizeLines": 188,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "app/src/main/java/io/github/nexalloy/AppPatchInfo.kt": [],
+    "app/src/main/java/io/github/nexalloy/MainHook.kt": [
+      "app/src/main/java/io/github/nexalloy/common/UpdateChecker.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/activity/SettingsActivity.kt": [
+      "app/src/main/java/io/github/nexalloy/AppPatchInfo.kt",
+      "app/src/main/java/io/github/nexalloy/common/UpdateChecker.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/common/UpdateChecker.kt": []
+  }
+}

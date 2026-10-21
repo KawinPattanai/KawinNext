@@ -1,0 +1,5443 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 22,
+  "filesSkipped": [
+    ".gitmodules",
+    "app/proguard-rules.pro",
+    "app/src/main/AndroidManifest.xml"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 22,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 18,
+      "failed": 0,
+      "skipped": 4
+    }
+  },
+  "results": [
+    {
+      "path": ".agents/skills/merge-upstream-patches/SKILL.md",
+      "language": "markdown",
+      "fileCategory": "docs",
+      "totalLines": 63,
+      "nonEmptyLines": 42,
+      "sections": [
+        {
+          "heading": "Merge upstream patches",
+          "level": 1,
+          "line": 6
+        },
+        {
+          "heading": "Required inputs before starting",
+          "level": 2,
+          "line": 13
+        },
+        {
+          "heading": "1. Establish the version and baseline",
+          "level": 2,
+          "line": 23
+        },
+        {
+          "heading": "2. Merge upstream in the submodule",
+          "level": 2,
+          "line": 30
+        },
+        {
+          "heading": "3. Find patch changes to port",
+          "level": 2,
+          "line": 41
+        },
+        {
+          "heading": "4. Verify",
+          "level": 2,
+          "line": 55
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 6
+      }
+    },
+    {
+      "path": ".agents/skills/merge-upstream-patches/scripts/summarize_fingerprints.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 146,
+      "nonEmptyLines": 127,
+      "functions": [
+        {
+          "name": "read_report",
+          "startLine": 32,
+          "endLine": 66,
+          "params": [
+            "path"
+          ]
+        },
+        {
+          "name": "classify",
+          "startLine": 69,
+          "endLine": 97,
+          "params": [
+            "rows",
+            "groups"
+          ]
+        },
+        {
+          "name": "selected",
+          "startLine": 100,
+          "endLine": 101,
+          "params": [
+            "value",
+            "patterns"
+          ]
+        },
+        {
+          "name": "main",
+          "startLine": 104,
+          "endLine": 142,
+          "params": [
+            "argv"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReportError",
+          "startLine": 13,
+          "endLine": 14,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "Result",
+          "startLine": 18,
+          "endLine": 29,
+          "methods": [],
+          "properties": [
+            "app",
+            "apk",
+            "version",
+            "group",
+            "group_id",
+            "fingerprint",
+            "status",
+            "matches",
+            "duration_ms",
+            "reason",
+            "error"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReportError",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "Result",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "read_report",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "classify",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "selected",
+          "line": 100,
+          "isDefault": false
+        },
+        {
+          "name": "main",
+          "line": 104,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "read_report",
+          "callee": "json.loads",
+          "lineNumber": 33
+        },
+        {
+          "caller": "read_report",
+          "callee": "path.read_text",
+          "lineNumber": 33
+        },
+        {
+          "caller": "read_report",
+          "callee": "report.get",
+          "lineNumber": 34
+        },
+        {
+          "caller": "read_report",
+          "callee": "report.get",
+          "lineNumber": 34
+        },
+        {
+          "caller": "read_report",
+          "callee": "ReportError",
+          "lineNumber": 35
+        },
+        {
+          "caller": "read_report",
+          "callee": "defaultdict",
+          "lineNumber": 37
+        },
+        {
+          "caller": "read_report",
+          "callee": "set",
+          "lineNumber": 38
+        },
+        {
+          "caller": "read_report",
+          "callee": "ReportError",
+          "lineNumber": 44
+        },
+        {
+          "caller": "read_report",
+          "callee": "seen.add",
+          "lineNumber": 45
+        },
+        {
+          "caller": "read_report",
+          "callee": "groups[(apk[\"app\"], package)].add",
+          "lineNumber": 46
+        },
+        {
+          "caller": "read_report",
+          "callee": "dict",
+          "lineNumber": 47
+        },
+        {
+          "caller": "read_report",
+          "callee": "\".\".join",
+          "lineNumber": 48
+        },
+        {
+          "caller": "read_report",
+          "callee": "package.split",
+          "lineNumber": 48
+        },
+        {
+          "caller": "read_report",
+          "callee": "item.get",
+          "lineNumber": 51
+        },
+        {
+          "caller": "read_report",
+          "callee": "ReportError",
+          "lineNumber": 53
+        },
+        {
+          "caller": "read_report",
+          "callee": "isinstance",
+          "lineNumber": 54
+        },
+        {
+          "caller": "read_report",
+          "callee": "ReportError",
+          "lineNumber": 55
+        },
+        {
+          "caller": "read_report",
+          "callee": "rows.append",
+          "lineNumber": 56
+        },
+        {
+          "caller": "read_report",
+          "callee": "Result",
+          "lineNumber": 56
+        },
+        {
+          "caller": "read_report",
+          "callee": "item.get",
+          "lineNumber": 57
+        },
+        {
+          "caller": "read_report",
+          "callee": "item.get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "read_report",
+          "callee": "item.get",
+          "lineNumber": 58
+        },
+        {
+          "caller": "read_report",
+          "callee": "group.get",
+          "lineNumber": 59
+        },
+        {
+          "caller": "read_report",
+          "callee": "rows.append",
+          "lineNumber": 60
+        },
+        {
+          "caller": "read_report",
+          "callee": "Result",
+          "lineNumber": 60
+        },
+        {
+          "caller": "read_report",
+          "callee": "rows.append",
+          "lineNumber": 63
+        },
+        {
+          "caller": "read_report",
+          "callee": "Result",
+          "lineNumber": 63
+        },
+        {
+          "caller": "read_report",
+          "callee": "ReportError",
+          "lineNumber": 65
+        },
+        {
+          "caller": "classify",
+          "callee": "defaultdict",
+          "lineNumber": 70
+        },
+        {
+          "caller": "classify",
+          "callee": "defaultdict",
+          "lineNumber": 71
+        },
+        {
+          "caller": "classify",
+          "callee": "ReportError",
+          "lineNumber": 76
+        },
+        {
+          "caller": "classify",
+          "callee": "groups.items",
+          "lineNumber": 78
+        },
+        {
+          "caller": "classify",
+          "callee": "apks[app].update",
+          "lineNumber": 79
+        },
+        {
+          "caller": "classify",
+          "callee": "sorted",
+          "lineNumber": 82
+        },
+        {
+          "caller": "classify",
+          "callee": "by_fingerprint.items",
+          "lineNumber": 82
+        },
+        {
+          "caller": "classify",
+          "callee": "next",
+          "lineNumber": 83
+        },
+        {
+          "caller": "classify",
+          "callee": "iter",
+          "lineNumber": 83
+        },
+        {
+          "caller": "classify",
+          "callee": "executions.values",
+          "lineNumber": 83
+        },
+        {
+          "caller": "classify",
+          "callee": "executions.keys",
+          "lineNumber": 85
+        },
+        {
+          "caller": "classify",
+          "callee": "Result",
+          "lineNumber": 86
+        },
+        {
+          "caller": "classify",
+          "callee": "executions.values",
+          "lineNumber": 88
+        },
+        {
+          "caller": "classify",
+          "callee": "len",
+          "lineNumber": 90
+        },
+        {
+          "caller": "classify",
+          "callee": "any",
+          "lineNumber": 91
+        },
+        {
+          "caller": "classify",
+          "callee": "executions.values",
+          "lineNumber": 91
+        },
+        {
+          "caller": "classify",
+          "callee": "all",
+          "lineNumber": 92
+        },
+        {
+          "caller": "classify",
+          "callee": "executions.values",
+          "lineNumber": 94
+        },
+        {
+          "caller": "classify",
+          "callee": "output.extend",
+          "lineNumber": 96
+        },
+        {
+          "caller": "classify",
+          "callee": "executions.values",
+          "lineNumber": 96
+        },
+        {
+          "caller": "classify",
+          "callee": "sorted",
+          "lineNumber": 97
+        },
+        {
+          "caller": "selected",
+          "callee": "any",
+          "lineNumber": 101
+        },
+        {
+          "caller": "selected",
+          "callee": "fnmatchcase",
+          "lineNumber": 101
+        },
+        {
+          "caller": "main",
+          "callee": "argparse.ArgumentParser",
+          "lineNumber": 105
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 106
+        },
+        {
+          "caller": "main",
+          "callee": "Path(__file__).resolve",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "Path",
+          "lineNumber": 107
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 109
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 110
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 111
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 112
+        },
+        {
+          "caller": "main",
+          "callee": "parser.add_argument",
+          "lineNumber": 113
+        },
+        {
+          "caller": "main",
+          "callee": "parser.parse_args",
+          "lineNumber": 114
+        },
+        {
+          "caller": "included",
+          "callee": "selected",
+          "lineNumber": 117
+        },
+        {
+          "caller": "included",
+          "callee": "selected",
+          "lineNumber": 117
+        },
+        {
+          "caller": "included",
+          "callee": "selected",
+          "lineNumber": 118
+        },
+        {
+          "caller": "included",
+          "callee": "selected",
+          "lineNumber": 119
+        },
+        {
+          "caller": "included",
+          "callee": "selected",
+          "lineNumber": 119
+        },
+        {
+          "caller": "included",
+          "callee": "Path",
+          "lineNumber": 119
+        },
+        {
+          "caller": "main",
+          "callee": "read_report",
+          "lineNumber": 122
+        },
+        {
+          "caller": "main",
+          "callee": "classify",
+          "lineNumber": 123
+        },
+        {
+          "caller": "main",
+          "callee": "any",
+          "lineNumber": 124
+        },
+        {
+          "caller": "main",
+          "callee": "included",
+          "lineNumber": 124
+        },
+        {
+          "caller": "main",
+          "callee": "ReportError",
+          "lineNumber": 125
+        },
+        {
+          "caller": "main",
+          "callee": "included",
+          "lineNumber": 126
+        },
+        {
+          "caller": "main",
+          "callee": "parser.exit",
+          "lineNumber": 128
+        },
+        {
+          "caller": "main",
+          "callee": "dict",
+          "lineNumber": 130
+        },
+        {
+          "caller": "main",
+          "callee": "sorted",
+          "lineNumber": 130
+        },
+        {
+          "caller": "main",
+          "callee": "Counter(row.status for row in rows).items",
+          "lineNumber": 130
+        },
+        {
+          "caller": "main",
+          "callee": "Counter",
+          "lineNumber": 130
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 132
+        },
+        {
+          "caller": "main",
+          "callee": "json.dumps",
+          "lineNumber": 132
+        },
+        {
+          "caller": "main",
+          "callee": "asdict",
+          "lineNumber": 132
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 134
+        },
+        {
+          "caller": "main",
+          "callee": "\", \".join",
+          "lineNumber": 134
+        },
+        {
+          "caller": "main",
+          "callee": "counts.items",
+          "lineNumber": 134
+        },
+        {
+          "caller": "main",
+          "callee": "', '.join",
+          "lineNumber": 138
+        },
+        {
+          "caller": "main",
+          "callee": "print",
+          "lineNumber": 141
+        },
+        {
+          "caller": "main",
+          "callee": "Path",
+          "lineNumber": 141
+        },
+        {
+          "caller": "main",
+          "callee": "int",
+          "lineNumber": 142
+        },
+        {
+          "caller": "main",
+          "callee": "any",
+          "lineNumber": 142
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 4,
+        "classCount": 2
+      }
+    },
+    {
+      "path": ".agents/skills/merge-upstream-patches/scripts/test_summarize_fingerprints.py",
+      "language": "python",
+      "fileCategory": "code",
+      "totalLines": 97,
+      "nonEmptyLines": 79,
+      "classes": [
+        {
+          "name": "ReportTests",
+          "startLine": 13,
+          "endLine": 93,
+          "methods": [
+            "setUp",
+            "add",
+            "write",
+            "results",
+            "test_single_failure_requires_an_actual_pass",
+            "test_skip_test_is_not_evidence_for_suppression",
+            "test_second_failure_is_retained",
+            "test_missing_observation_prevents_suppression",
+            "test_null_result_prevents_suppression",
+            "test_full_package_names_separate_shared_groups",
+            "test_unidentified_group_failure_is_retained",
+            "test_incomplete_run_is_rejected",
+            "test_filtering_happens_after_classification"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReportTests",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setUp",
+          "callee": "TemporaryDirectory",
+          "lineNumber": 15
+        },
+        {
+          "caller": "setUp",
+          "callee": "self.addCleanup",
+          "lineNumber": 16
+        },
+        {
+          "caller": "setUp",
+          "callee": "Path",
+          "lineNumber": 17
+        },
+        {
+          "caller": "add",
+          "callee": "self.apks.append",
+          "lineNumber": 22
+        },
+        {
+          "caller": "add",
+          "callee": "dict",
+          "lineNumber": 22
+        },
+        {
+          "caller": "add",
+          "callee": "str",
+          "lineNumber": 23
+        },
+        {
+          "caller": "add",
+          "callee": "dict",
+          "lineNumber": 24
+        },
+        {
+          "caller": "add",
+          "callee": "dict",
+          "lineNumber": 24
+        },
+        {
+          "caller": "write",
+          "callee": "self.path.write_text",
+          "lineNumber": 29
+        },
+        {
+          "caller": "write",
+          "callee": "json.dumps",
+          "lineNumber": 29
+        },
+        {
+          "caller": "write",
+          "callee": "dict",
+          "lineNumber": 29
+        },
+        {
+          "caller": "results",
+          "callee": "self.write",
+          "lineNumber": 32
+        },
+        {
+          "caller": "results",
+          "callee": "reader.classify",
+          "lineNumber": 33
+        },
+        {
+          "caller": "results",
+          "callee": "reader.read_report",
+          "lineNumber": 33
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "self.add",
+          "lineNumber": 36
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "self.add",
+          "lineNumber": 37
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "self.assertEqual",
+          "lineNumber": 38
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "sum",
+          "lineNumber": 38
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "self.results",
+          "lineNumber": 38
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "self.add",
+          "lineNumber": 39
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "self.assertEqual",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_single_failure_requires_an_actual_pass",
+          "callee": "self.results",
+          "lineNumber": 40
+        },
+        {
+          "caller": "test_skip_test_is_not_evidence_for_suppression",
+          "callee": "self.add",
+          "lineNumber": 43
+        },
+        {
+          "caller": "test_skip_test_is_not_evidence_for_suppression",
+          "callee": "self.add",
+          "lineNumber": 44
+        },
+        {
+          "caller": "test_skip_test_is_not_evidence_for_suppression",
+          "callee": "self.add",
+          "lineNumber": 45
+        },
+        {
+          "caller": "test_skip_test_is_not_evidence_for_suppression",
+          "callee": "self.assertTrue",
+          "lineNumber": 46
+        },
+        {
+          "caller": "test_skip_test_is_not_evidence_for_suppression",
+          "callee": "any",
+          "lineNumber": 46
+        },
+        {
+          "caller": "test_skip_test_is_not_evidence_for_suppression",
+          "callee": "self.results",
+          "lineNumber": 46
+        },
+        {
+          "caller": "test_second_failure_is_retained",
+          "callee": "self.add",
+          "lineNumber": 49
+        },
+        {
+          "caller": "test_second_failure_is_retained",
+          "callee": "self.add",
+          "lineNumber": 50
+        },
+        {
+          "caller": "test_second_failure_is_retained",
+          "callee": "self.add",
+          "lineNumber": 51
+        },
+        {
+          "caller": "test_second_failure_is_retained",
+          "callee": "self.assertEqual",
+          "lineNumber": 52
+        },
+        {
+          "caller": "test_second_failure_is_retained",
+          "callee": "sum",
+          "lineNumber": 52
+        },
+        {
+          "caller": "test_second_failure_is_retained",
+          "callee": "self.results",
+          "lineNumber": 52
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "self.add",
+          "lineNumber": 55
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "self.add",
+          "lineNumber": 56
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "self.add",
+          "lineNumber": 57
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "self.results",
+          "lineNumber": 58
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "self.assertTrue",
+          "lineNumber": 59
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "any",
+          "lineNumber": 59
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "self.assertTrue",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_missing_observation_prevents_suppression",
+          "callee": "any",
+          "lineNumber": 60
+        },
+        {
+          "caller": "test_null_result_prevents_suppression",
+          "callee": "self.add",
+          "lineNumber": 63
+        },
+        {
+          "caller": "test_null_result_prevents_suppression",
+          "callee": "self.add",
+          "lineNumber": 64
+        },
+        {
+          "caller": "test_null_result_prevents_suppression",
+          "callee": "self.add",
+          "lineNumber": 65
+        },
+        {
+          "caller": "test_null_result_prevents_suppression",
+          "callee": "self.assertTrue",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_null_result_prevents_suppression",
+          "callee": "any",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_null_result_prevents_suppression",
+          "callee": "self.results",
+          "lineNumber": 66
+        },
+        {
+          "caller": "test_full_package_names_separate_shared_groups",
+          "callee": "self.add",
+          "lineNumber": 69
+        },
+        {
+          "caller": "test_full_package_names_separate_shared_groups",
+          "callee": "self.add",
+          "lineNumber": 70
+        },
+        {
+          "caller": "test_full_package_names_separate_shared_groups",
+          "callee": "self.assertEqual",
+          "lineNumber": 71
+        },
+        {
+          "caller": "test_full_package_names_separate_shared_groups",
+          "callee": "len",
+          "lineNumber": 71
+        },
+        {
+          "caller": "test_full_package_names_separate_shared_groups",
+          "callee": "self.results",
+          "lineNumber": 71
+        },
+        {
+          "caller": "test_unidentified_group_failure_is_retained",
+          "callee": "self.add",
+          "lineNumber": 74
+        },
+        {
+          "caller": "test_unidentified_group_failure_is_retained",
+          "callee": "self.add",
+          "lineNumber": 75
+        },
+        {
+          "caller": "test_unidentified_group_failure_is_retained",
+          "callee": "self.assertTrue",
+          "lineNumber": 76
+        },
+        {
+          "caller": "test_unidentified_group_failure_is_retained",
+          "callee": "any",
+          "lineNumber": 76
+        },
+        {
+          "caller": "test_unidentified_group_failure_is_retained",
+          "callee": "self.results",
+          "lineNumber": 77
+        },
+        {
+          "caller": "test_incomplete_run_is_rejected",
+          "callee": "self.add",
+          "lineNumber": 80
+        },
+        {
+          "caller": "test_incomplete_run_is_rejected",
+          "callee": "self.write",
+          "lineNumber": 81
+        },
+        {
+          "caller": "test_incomplete_run_is_rejected",
+          "callee": "self.assertRaises",
+          "lineNumber": 82
+        },
+        {
+          "caller": "test_incomplete_run_is_rejected",
+          "callee": "reader.read_report",
+          "lineNumber": 83
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "self.add",
+          "lineNumber": 86
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "self.add",
+          "lineNumber": 87
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "self.write",
+          "lineNumber": 88
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "io.StringIO",
+          "lineNumber": 89
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "redirect_stdout",
+          "lineNumber": 90
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "reader.main",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "str",
+          "lineNumber": 91
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "self.assertEqual",
+          "lineNumber": 92
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "self.assertEqual",
+          "lineNumber": 93
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "json.loads",
+          "lineNumber": 93
+        },
+        {
+          "caller": "test_filtering_happens_after_classification",
+          "callee": "output.getvalue",
+          "lineNumber": 93
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/bug_report.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 56,
+      "nonEmptyLines": 55,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "title",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "body",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".github/ISSUE_TEMPLATE/feature_request.yaml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 12,
+      "nonEmptyLines": 12,
+      "sections": [
+        {
+          "heading": "name",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "description",
+          "level": 1,
+          "line": 2
+        },
+        {
+          "heading": "title",
+          "level": 1,
+          "line": 3
+        },
+        {
+          "heading": "body",
+          "level": 1,
+          "line": 4
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 4
+      }
+    },
+    {
+      "path": ".github/dependabot.yml",
+      "language": "yaml",
+      "fileCategory": "config",
+      "totalLines": 6,
+      "nonEmptyLines": 6,
+      "sections": [
+        {
+          "heading": "version",
+          "level": 1,
+          "line": 1
+        },
+        {
+          "heading": "updates",
+          "level": 1,
+          "line": 2
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0,
+        "sectionCount": 2
+      }
+    },
+    {
+      "path": "app/build.gradle.kts",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 339,
+      "nonEmptyLines": 309,
+      "functions": [
+        {
+          "name": "writeNode",
+          "startLine": 197,
+          "endLine": 211,
+          "params": [
+            "builder",
+            "node"
+          ]
+        },
+        {
+          "name": "mergeResources",
+          "startLine": 220,
+          "endLine": 243,
+          "params": [
+            "inputFiles",
+            "output"
+          ]
+        },
+        {
+          "name": "action",
+          "startLine": 248,
+          "endLine": 272,
+          "params": []
+        },
+        {
+          "name": "action",
+          "startLine": 283,
+          "endLine": 315,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "GenerateStringsTask",
+          "startLine": 188,
+          "endLine": 273,
+          "methods": [
+            "writeNode",
+            "mergeResources",
+            "action"
+          ],
+          "properties": [
+            "inputDirectory",
+            "outputDirectory",
+            "subDirs"
+          ]
+        },
+        {
+          "name": "CopyResourcesTask",
+          "startLine": 275,
+          "endLine": 316,
+          "methods": [
+            "action"
+          ],
+          "properties": [
+            "inputDirectory",
+            "outputDirectory"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "inputDirectory",
+          "line": 190,
+          "isDefault": false
+        },
+        {
+          "name": "outputDirectory",
+          "line": 194,
+          "isDefault": false
+        },
+        {
+          "name": "action",
+          "line": 248,
+          "isDefault": false
+        },
+        {
+          "name": "GenerateStringsTask",
+          "line": 188,
+          "isDefault": false
+        },
+        {
+          "name": "inputDirectory",
+          "line": 276,
+          "isDefault": false
+        },
+        {
+          "name": "outputDirectory",
+          "line": 280,
+          "isDefault": false
+        },
+        {
+          "name": "action",
+          "line": 283,
+          "isDefault": false
+        },
+        {
+          "name": "CopyResourcesTask",
+          "line": 275,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "writeNode",
+          "callee": "attributes",
+          "lineNumber": 199
+        },
+        {
+          "caller": "writeNode",
+          "callee": "withGroovyBuilder",
+          "lineNumber": 200
+        },
+        {
+          "caller": "writeNode",
+          "callee": "any",
+          "lineNumber": 201
+        },
+        {
+          "caller": "writeNode",
+          "callee": "children",
+          "lineNumber": 201
+        },
+        {
+          "caller": "writeNode",
+          "callee": "name",
+          "lineNumber": 202
+        },
+        {
+          "caller": "writeNode",
+          "callee": "forEach",
+          "lineNumber": 203
+        },
+        {
+          "caller": "writeNode",
+          "callee": "children",
+          "lineNumber": 203
+        },
+        {
+          "caller": "writeNode",
+          "callee": "writeNode",
+          "lineNumber": 204
+        },
+        {
+          "caller": "writeNode",
+          "callee": "name",
+          "lineNumber": 208
+        },
+        {
+          "caller": "writeNode",
+          "callee": "text",
+          "lineNumber": 208
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "mkdirs",
+          "lineNumber": 221
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "use",
+          "lineNumber": 222
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "writer",
+          "lineNumber": 222
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "MarkupBuilder",
+          "lineNumber": 223
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "withGroovyBuilder",
+          "lineNumber": 225
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "mutableSetOf",
+          "lineNumber": 226
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "exists",
+          "lineNumber": 229
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "parse",
+          "lineNumber": 230
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "XmlSlurper",
+          "lineNumber": 230
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "forEach",
+          "lineNumber": 232
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "children",
+          "lineNumber": 232
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "attributes",
+          "lineNumber": 234
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "contains",
+          "lineNumber": 235
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "writeNode",
+          "lineNumber": 236
+        },
+        {
+          "caller": "mergeResources",
+          "callee": "add",
+          "lineNumber": 237
+        },
+        {
+          "caller": "action",
+          "callee": "get",
+          "lineNumber": 250
+        },
+        {
+          "caller": "action",
+          "callee": "get",
+          "lineNumber": 251
+        },
+        {
+          "caller": "action",
+          "callee": "onFailure",
+          "lineNumber": 253
+        },
+        {
+          "caller": "action",
+          "callee": "runCatching",
+          "lineNumber": 253
+        },
+        {
+          "caller": "action",
+          "callee": "forEach",
+          "lineNumber": 255
+        },
+        {
+          "caller": "action",
+          "callee": "filter",
+          "lineNumber": 255
+        },
+        {
+          "caller": "action",
+          "callee": "listFiles",
+          "lineNumber": 255
+        },
+        {
+          "caller": "action",
+          "callee": "apply",
+          "lineNumber": 256
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 256
+        },
+        {
+          "caller": "action",
+          "callee": "mkdirs",
+          "lineNumber": 256
+        },
+        {
+          "caller": "action",
+          "callee": "map",
+          "lineNumber": 259
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 259
+        },
+        {
+          "caller": "action",
+          "callee": "mergeResources",
+          "lineNumber": 260
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 260
+        },
+        {
+          "caller": "action",
+          "callee": "map",
+          "lineNumber": 263
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 263
+        },
+        {
+          "caller": "action",
+          "callee": "any",
+          "lineNumber": 264
+        },
+        {
+          "caller": "action",
+          "callee": "exists",
+          "lineNumber": 264
+        },
+        {
+          "caller": "action",
+          "callee": "mergeResources",
+          "lineNumber": 265
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 265
+        },
+        {
+          "caller": "action",
+          "callee": "println",
+          "lineNumber": 269
+        },
+        {
+          "caller": "action",
+          "callee": "get",
+          "lineNumber": 285
+        },
+        {
+          "caller": "action",
+          "callee": "get",
+          "lineNumber": 286
+        },
+        {
+          "caller": "action",
+          "callee": "deleteRecursively",
+          "lineNumber": 287
+        },
+        {
+          "caller": "action",
+          "callee": "mapOf",
+          "lineNumber": 289
+        },
+        {
+          "caller": "action",
+          "callee": "listOf",
+          "lineNumber": 294
+        },
+        {
+          "caller": "action",
+          "callee": "listOf",
+          "lineNumber": 296
+        },
+        {
+          "caller": "action",
+          "callee": "substringAfter",
+          "lineNumber": 306
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 307
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 308
+        },
+        {
+          "caller": "action",
+          "callee": "forEach",
+          "lineNumber": 309
+        },
+        {
+          "caller": "action",
+          "callee": "listFiles",
+          "lineNumber": 309
+        },
+        {
+          "caller": "action",
+          "callee": "contains",
+          "lineNumber": 310
+        },
+        {
+          "caller": "action",
+          "callee": "copyTo",
+          "lineNumber": 311
+        },
+        {
+          "caller": "action",
+          "callee": "File",
+          "lineNumber": 311
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 4,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/Helper.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 262,
+      "nonEmptyLines": 229,
+      "functions": [
+        {
+          "name": "atLast",
+          "startLine": 24,
+          "endLine": 24,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "bindProxy",
+          "startLine": 37,
+          "endLine": 41,
+          "params": [
+            "proxy"
+          ]
+        },
+        {
+          "name": "createProxy",
+          "startLine": 48,
+          "endLine": 53,
+          "params": [
+            "createProxy"
+          ]
+        },
+        {
+          "name": "before",
+          "startLine": 60,
+          "endLine": 62,
+          "params": [
+            "f"
+          ]
+        },
+        {
+          "name": "after",
+          "startLine": 64,
+          "endLine": 66,
+          "params": [
+            "f"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 69,
+          "endLine": 71,
+          "params": [
+            "cb"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 73,
+          "endLine": 78,
+          "params": [
+            "block"
+          ]
+        },
+        {
+          "name": "hookMethodInternal",
+          "startLine": 80,
+          "endLine": 92,
+          "params": [
+            "before",
+            "after",
+            "priority"
+          ]
+        },
+        {
+          "name": "scopedHook",
+          "startLine": 99,
+          "endLine": 106,
+          "params": [
+            "pairs"
+          ]
+        },
+        {
+          "name": "scopedHook",
+          "startLine": 108,
+          "endLine": 115,
+          "params": [
+            "hookMethod",
+            "f"
+          ]
+        },
+        {
+          "name": "hookInnerMethod",
+          "startLine": 118,
+          "endLine": 143,
+          "params": [
+            "hookMethod",
+            "before",
+            "after"
+          ]
+        },
+        {
+          "name": "beforeHookedMethod",
+          "startLine": 148,
+          "endLine": 151,
+          "params": [
+            "param"
+          ]
+        },
+        {
+          "name": "afterHookedMethod",
+          "startLine": 153,
+          "endLine": 156,
+          "params": [
+            "param"
+          ]
+        },
+        {
+          "name": "addModuleAssets",
+          "startLine": 171,
+          "endLine": 184,
+          "params": []
+        },
+        {
+          "name": "injectSelfClassLoaderToHost",
+          "startLine": 192,
+          "endLine": 208,
+          "params": [
+            "self",
+            "host"
+          ]
+        },
+        {
+          "name": "injectHostClassLoaderToSelf",
+          "startLine": 210,
+          "endLine": 253,
+          "params": [
+            "self",
+            "host"
+          ]
+        },
+        {
+          "name": "enumValueOf",
+          "startLine": 255,
+          "endLine": 262,
+          "params": [
+            "name"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "HookDsl",
+          "startLine": 55,
+          "endLine": 67,
+          "methods": [
+            "before",
+            "after"
+          ],
+          "properties": [
+            "priority",
+            "before",
+            "after"
+          ]
+        },
+        {
+          "name": "ScopedHookParam",
+          "startLine": 94,
+          "endLine": 97,
+          "methods": [],
+          "properties": [
+            "outerParam",
+            "innerDepth"
+          ]
+        },
+        {
+          "name": "ScopedHook",
+          "startLine": 117,
+          "endLine": 157,
+          "methods": [
+            "hookInnerMethod",
+            "beforeHookedMethod",
+            "afterHookedMethod"
+          ],
+          "properties": [
+            "outerParam",
+            "innerDepth"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "atLast",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "bindProxy",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "createProxy",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "priority",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "before",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "after",
+          "line": 58,
+          "isDefault": false
+        },
+        {
+          "name": "before",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "after",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "HookDsl",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 69,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethodInternal",
+          "line": 80,
+          "isDefault": false
+        },
+        {
+          "name": "ScopedHookParam",
+          "line": 94,
+          "isDefault": false
+        },
+        {
+          "name": "scopedHook",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "scopedHook",
+          "line": 108,
+          "isDefault": false
+        },
+        {
+          "name": "hookInnerMethod",
+          "line": 118,
+          "isDefault": false
+        },
+        {
+          "name": "outerParam",
+          "line": 145,
+          "isDefault": false
+        },
+        {
+          "name": "innerDepth",
+          "line": 146,
+          "isDefault": false
+        },
+        {
+          "name": "beforeHookedMethod",
+          "line": 148,
+          "isDefault": false
+        },
+        {
+          "name": "afterHookedMethod",
+          "line": 153,
+          "isDefault": false
+        },
+        {
+          "name": "ScopedHook",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "addModuleAssets",
+          "line": 171,
+          "isDefault": false
+        },
+        {
+          "name": "injectSelfClassLoaderToHost",
+          "line": 192,
+          "isDefault": false
+        },
+        {
+          "name": "injectHostClassLoaderToSelf",
+          "line": 210,
+          "isDefault": false
+        },
+        {
+          "name": "enumValueOf",
+          "line": 255,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "bindProxy",
+          "callee": "synchronized",
+          "lineNumber": 38
+        },
+        {
+          "caller": "createProxy",
+          "callee": "WeakReference",
+          "lineNumber": 49
+        },
+        {
+          "caller": "createProxy",
+          "callee": "createProxy",
+          "lineNumber": 50
+        },
+        {
+          "caller": "createProxy",
+          "callee": "bindProxy",
+          "lineNumber": 51
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethod",
+          "lineNumber": 70
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "apply",
+          "lineNumber": 76
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "HookDsl",
+          "lineNumber": 76
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethodInternal",
+          "lineNumber": 77
+        },
+        {
+          "caller": "hookMethodInternal",
+          "callee": "hookMethod",
+          "lineNumber": 83
+        },
+        {
+          "caller": "beforeHookedMethod",
+          "callee": "before",
+          "lineNumber": 85
+        },
+        {
+          "caller": "afterHookedMethod",
+          "callee": "after",
+          "lineNumber": 89
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "ScopedHook",
+          "lineNumber": 100
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "forEach",
+          "lineNumber": 101
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "apply",
+          "lineNumber": 102
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "HookDsl",
+          "lineNumber": 102
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "hookInnerMethod",
+          "lineNumber": 103
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "ScopedHook",
+          "lineNumber": 111
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "apply",
+          "lineNumber": 112
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "HookDsl",
+          "lineNumber": 112
+        },
+        {
+          "caller": "scopedHook",
+          "callee": "hookInnerMethod",
+          "lineNumber": 113
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "hookMethod",
+          "lineNumber": 123
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "before",
+          "lineNumber": 124
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "get",
+          "lineNumber": 125
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "get",
+          "lineNumber": 126
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "set",
+          "lineNumber": 127
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "before",
+          "lineNumber": 128
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "ScopedHookParam",
+          "lineNumber": 128
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "after",
+          "lineNumber": 131
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "get",
+          "lineNumber": 132
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "coerceAtLeast",
+          "lineNumber": 133
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "get",
+          "lineNumber": 133
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "set",
+          "lineNumber": 134
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "after",
+          "lineNumber": 136
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "ScopedHookParam",
+          "lineNumber": 136
+        },
+        {
+          "caller": "hookInnerMethod",
+          "callee": "remove",
+          "lineNumber": 138
+        },
+        {
+          "caller": "beforeHookedMethod",
+          "callee": "set",
+          "lineNumber": 149
+        },
+        {
+          "caller": "beforeHookedMethod",
+          "callee": "set",
+          "lineNumber": 150
+        },
+        {
+          "caller": "afterHookedMethod",
+          "callee": "remove",
+          "lineNumber": 154
+        },
+        {
+          "caller": "afterHookedMethod",
+          "callee": "remove",
+          "lineNumber": 155
+        },
+        {
+          "caller": "addModuleAssets",
+          "callee": "File",
+          "lineNumber": 172
+        },
+        {
+          "caller": "addModuleAssets",
+          "callee": "exists",
+          "lineNumber": 173
+        },
+        {
+          "caller": "addModuleAssets",
+          "callee": "showToastLong",
+          "lineNumber": 174
+        },
+        {
+          "caller": "addModuleAssets",
+          "callee": "restartApp",
+          "lineNumber": 175
+        },
+        {
+          "caller": "addModuleAssets",
+          "callee": "addLoaders",
+          "lineNumber": 179
+        },
+        {
+          "caller": "addModuleAssets",
+          "callee": "callMethod",
+          "lineNumber": 183
+        },
+        {
+          "caller": "injectSelfClassLoaderToHost",
+          "callee": "findMethodExact",
+          "lineNumber": 194
+        },
+        {
+          "caller": "injectSelfClassLoaderToHost",
+          "callee": "setObjectField",
+          "lineNumber": 195
+        },
+        {
+          "caller": "findClass",
+          "callee": "startsWith",
+          "lineNumber": 198
+        },
+        {
+          "caller": "findClass",
+          "callee": "findClassMethod",
+          "lineNumber": 199
+        },
+        {
+          "caller": "findClass",
+          "callee": "printException",
+          "lineNumber": 202
+        },
+        {
+          "caller": "findClass",
+          "callee": "ClassNotFoundException",
+          "lineNumber": 205
+        },
+        {
+          "caller": "injectHostClassLoaderToSelf",
+          "callee": "findMethodExact",
+          "lineNumber": 212
+        },
+        {
+          "caller": "injectHostClassLoaderToSelf",
+          "callee": "setObjectField",
+          "lineNumber": 213
+        },
+        {
+          "caller": "findClass",
+          "callee": "findClassMethod",
+          "lineNumber": 241
+        },
+        {
+          "caller": "findClass",
+          "callee": "loadClass",
+          "lineNumber": 246
+        },
+        {
+          "caller": "findClass",
+          "callee": "ClassNotFoundException",
+          "lineNumber": 250
+        },
+        {
+          "caller": "enumValueOf",
+          "callee": "valueOf",
+          "lineNumber": 258
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 25,
+        "functionCount": 17,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/KotlinXposedHelper.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 266,
+      "nonEmptyLines": 207,
+      "functions": [
+        {
+          "name": "invokeOriginalMethod",
+          "startLine": 35,
+          "endLine": 35,
+          "params": []
+        },
+        {
+          "name": "invokeOriginalMethod",
+          "startLine": 37,
+          "endLine": 38,
+          "params": [
+            "args"
+          ]
+        },
+        {
+          "name": "runCatchingOrNull",
+          "startLine": 40,
+          "endLine": 44,
+          "params": [
+            "func"
+          ]
+        },
+        {
+          "name": "getObjectField",
+          "startLine": 46,
+          "endLine": 46,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getObjectFieldOrNull",
+          "startLine": 48,
+          "endLine": 50,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getObjectFieldAs",
+          "startLine": 53,
+          "endLine": 53,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getObjectFieldOrNullAs",
+          "startLine": 56,
+          "endLine": 58,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getIntField",
+          "startLine": 60,
+          "endLine": 60,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getIntFieldOrNull",
+          "startLine": 62,
+          "endLine": 64,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getLongField",
+          "startLine": 66,
+          "endLine": 66,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getLongFieldOrNull",
+          "startLine": 68,
+          "endLine": 70,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getBooleanFieldOrNull",
+          "startLine": 72,
+          "endLine": 74,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "callMethod",
+          "startLine": 76,
+          "endLine": 77,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "callMethodOrNull",
+          "startLine": 79,
+          "endLine": 81,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "callStaticMethod",
+          "startLine": 83,
+          "endLine": 84,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "callStaticMethodOrNull",
+          "startLine": 86,
+          "endLine": 89,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "callStaticMethodAs",
+          "startLine": 92,
+          "endLine": 93,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "callStaticMethodOrNullAs",
+          "startLine": 96,
+          "endLine": 99,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "getStaticObjectFieldAs",
+          "startLine": 102,
+          "endLine": 102,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getStaticObjectFieldOrNullAs",
+          "startLine": 105,
+          "endLine": 107,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getStaticObjectField",
+          "startLine": 109,
+          "endLine": 109,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "getStaticObjectFieldOrNull",
+          "startLine": 111,
+          "endLine": 113,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "setStaticObjectField",
+          "startLine": 115,
+          "endLine": 117,
+          "params": [
+            "field",
+            "obj"
+          ]
+        },
+        {
+          "name": "setStaticObjectFieldIfExist",
+          "startLine": 119,
+          "endLine": 124,
+          "params": [
+            "field",
+            "obj"
+          ]
+        },
+        {
+          "name": "findFieldByExactType",
+          "startLine": 126,
+          "endLine": 127,
+          "params": []
+        },
+        {
+          "name": "findFieldByExactType",
+          "startLine": 129,
+          "endLine": 130,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "callMethodAs",
+          "startLine": 133,
+          "endLine": 134,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "callMethodOrNullAs",
+          "startLine": 137,
+          "endLine": 139,
+          "params": [
+            "methodName",
+            "args"
+          ]
+        },
+        {
+          "name": "callMethod",
+          "startLine": 141,
+          "endLine": 142,
+          "params": [
+            "methodName",
+            "parameterTypes",
+            "args"
+          ]
+        },
+        {
+          "name": "callMethodOrNull",
+          "startLine": 144,
+          "endLine": 150,
+          "params": [
+            "methodName",
+            "parameterTypes",
+            "args"
+          ]
+        },
+        {
+          "name": "callStaticMethod",
+          "startLine": 152,
+          "endLine": 156,
+          "params": [
+            "methodName",
+            "parameterTypes",
+            "args"
+          ]
+        },
+        {
+          "name": "callStaticMethodOrNull",
+          "startLine": 158,
+          "endLine": 164,
+          "params": [
+            "methodName",
+            "parameterTypes",
+            "args"
+          ]
+        },
+        {
+          "name": "findClass",
+          "startLine": 166,
+          "endLine": 166,
+          "params": [
+            "classLoader"
+          ]
+        },
+        {
+          "name": "on",
+          "startLine": 168,
+          "endLine": 168,
+          "params": [
+            "classLoader"
+          ]
+        },
+        {
+          "name": "findClassOrNull",
+          "startLine": 170,
+          "endLine": 171,
+          "params": [
+            "classLoader"
+          ]
+        },
+        {
+          "name": "from",
+          "startLine": 173,
+          "endLine": 174,
+          "params": [
+            "classLoader"
+          ]
+        },
+        {
+          "name": "new",
+          "startLine": 176,
+          "endLine": 176,
+          "params": [
+            "args"
+          ]
+        },
+        {
+          "name": "new",
+          "startLine": 178,
+          "endLine": 179,
+          "params": [
+            "parameterTypes",
+            "args"
+          ]
+        },
+        {
+          "name": "findField",
+          "startLine": 181,
+          "endLine": 181,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "findFieldOrNull",
+          "startLine": 183,
+          "endLine": 183,
+          "params": [
+            "field"
+          ]
+        },
+        {
+          "name": "setIntField",
+          "startLine": 185,
+          "endLine": 187,
+          "params": [
+            "field",
+            "value"
+          ]
+        },
+        {
+          "name": "setLongField",
+          "startLine": 189,
+          "endLine": 191,
+          "params": [
+            "field",
+            "value"
+          ]
+        },
+        {
+          "name": "setObjectField",
+          "startLine": 193,
+          "endLine": 195,
+          "params": [
+            "field",
+            "value"
+          ]
+        },
+        {
+          "name": "setBooleanField",
+          "startLine": 197,
+          "endLine": 199,
+          "params": [
+            "field",
+            "value"
+          ]
+        },
+        {
+          "name": "setFloatField",
+          "startLine": 201,
+          "endLine": 203,
+          "params": [
+            "field",
+            "value"
+          ]
+        },
+        {
+          "name": "findFirstFieldByExactType",
+          "startLine": 205,
+          "endLine": 206,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "findFirstFieldByExactTypeOrNull",
+          "startLine": 208,
+          "endLine": 210,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "getFirstFieldByExactType",
+          "startLine": 212,
+          "endLine": 213,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "getFirstFieldByExactTypeAs",
+          "startLine": 216,
+          "endLine": 217,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "getFirstFieldByExactType",
+          "startLine": 219,
+          "endLine": 220,
+          "params": []
+        },
+        {
+          "name": "getFirstFieldByExactTypeOrNull",
+          "startLine": 222,
+          "endLine": 224,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "getFirstFieldByExactTypeOrNullAs",
+          "startLine": 227,
+          "endLine": 228,
+          "params": [
+            "type"
+          ]
+        },
+        {
+          "name": "getFirstFieldByExactTypeOrNull",
+          "startLine": 230,
+          "endLine": 231,
+          "params": []
+        },
+        {
+          "name": "findDexClassLoader",
+          "startLine": 233,
+          "endLine": 240,
+          "params": [
+            "delegator"
+          ]
+        },
+        {
+          "name": "allClassesList",
+          "startLine": 242,
+          "endLine": 249,
+          "params": [
+            "delegator"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "invokeOriginalMethod",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "invokeOriginalMethod",
+          "line": 37,
+          "isDefault": false
+        },
+        {
+          "name": "runCatchingOrNull",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "getObjectField",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "getObjectFieldOrNull",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "getObjectFieldAs",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "getObjectFieldOrNullAs",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "getIntField",
+          "line": 60,
+          "isDefault": false
+        },
+        {
+          "name": "getIntFieldOrNull",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "getLongField",
+          "line": 66,
+          "isDefault": false
+        },
+        {
+          "name": "getLongFieldOrNull",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "getBooleanFieldOrNull",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "callMethod",
+          "line": 76,
+          "isDefault": false
+        },
+        {
+          "name": "callMethodOrNull",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "callStaticMethod",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "callStaticMethodOrNull",
+          "line": 86,
+          "isDefault": false
+        },
+        {
+          "name": "callStaticMethodAs",
+          "line": 92,
+          "isDefault": false
+        },
+        {
+          "name": "callStaticMethodOrNullAs",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "getStaticObjectFieldAs",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "getStaticObjectFieldOrNullAs",
+          "line": 105,
+          "isDefault": false
+        },
+        {
+          "name": "getStaticObjectField",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "getStaticObjectFieldOrNull",
+          "line": 111,
+          "isDefault": false
+        },
+        {
+          "name": "setStaticObjectField",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "setStaticObjectFieldIfExist",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "findFieldByExactType",
+          "line": 126,
+          "isDefault": false
+        },
+        {
+          "name": "findFieldByExactType",
+          "line": 129,
+          "isDefault": false
+        },
+        {
+          "name": "callMethodAs",
+          "line": 133,
+          "isDefault": false
+        },
+        {
+          "name": "callMethodOrNullAs",
+          "line": 137,
+          "isDefault": false
+        },
+        {
+          "name": "callMethod",
+          "line": 141,
+          "isDefault": false
+        },
+        {
+          "name": "callMethodOrNull",
+          "line": 144,
+          "isDefault": false
+        },
+        {
+          "name": "callStaticMethod",
+          "line": 152,
+          "isDefault": false
+        },
+        {
+          "name": "callStaticMethodOrNull",
+          "line": 158,
+          "isDefault": false
+        },
+        {
+          "name": "findClass",
+          "line": 166,
+          "isDefault": false
+        },
+        {
+          "name": "on",
+          "line": 168,
+          "isDefault": false
+        },
+        {
+          "name": "findClassOrNull",
+          "line": 170,
+          "isDefault": false
+        },
+        {
+          "name": "from",
+          "line": 173,
+          "isDefault": false
+        },
+        {
+          "name": "new",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "new",
+          "line": 178,
+          "isDefault": false
+        },
+        {
+          "name": "findField",
+          "line": 181,
+          "isDefault": false
+        },
+        {
+          "name": "findFieldOrNull",
+          "line": 183,
+          "isDefault": false
+        },
+        {
+          "name": "setIntField",
+          "line": 185,
+          "isDefault": false
+        },
+        {
+          "name": "setLongField",
+          "line": 189,
+          "isDefault": false
+        },
+        {
+          "name": "setObjectField",
+          "line": 193,
+          "isDefault": false
+        },
+        {
+          "name": "setBooleanField",
+          "line": 197,
+          "isDefault": false
+        },
+        {
+          "name": "setFloatField",
+          "line": 201,
+          "isDefault": false
+        },
+        {
+          "name": "findFirstFieldByExactType",
+          "line": 205,
+          "isDefault": false
+        },
+        {
+          "name": "findFirstFieldByExactTypeOrNull",
+          "line": 208,
+          "isDefault": false
+        },
+        {
+          "name": "getFirstFieldByExactType",
+          "line": 212,
+          "isDefault": false
+        },
+        {
+          "name": "getFirstFieldByExactTypeAs",
+          "line": 216,
+          "isDefault": false
+        },
+        {
+          "name": "getFirstFieldByExactType",
+          "line": 219,
+          "isDefault": false
+        },
+        {
+          "name": "getFirstFieldByExactTypeOrNull",
+          "line": 222,
+          "isDefault": false
+        },
+        {
+          "name": "getFirstFieldByExactTypeOrNullAs",
+          "line": 227,
+          "isDefault": false
+        },
+        {
+          "name": "getFirstFieldByExactTypeOrNull",
+          "line": 230,
+          "isDefault": false
+        },
+        {
+          "name": "findDexClassLoader",
+          "line": 233,
+          "isDefault": false
+        },
+        {
+          "name": "allClassesList",
+          "line": 242,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "invokeOriginalMethod",
+          "callee": "invokeOriginalMethod",
+          "lineNumber": 35
+        },
+        {
+          "caller": "invokeOriginalMethod",
+          "callee": "invokeOriginalMethod",
+          "lineNumber": 38
+        },
+        {
+          "caller": "runCatchingOrNull",
+          "callee": "func",
+          "lineNumber": 41
+        },
+        {
+          "caller": "getObjectField",
+          "callee": "getObjectField",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getObjectFieldOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getObjectFieldOrNull",
+          "callee": "getObjectField",
+          "lineNumber": 49
+        },
+        {
+          "caller": "getObjectFieldAs",
+          "callee": "getObjectField",
+          "lineNumber": 53
+        },
+        {
+          "caller": "getObjectFieldOrNullAs",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 56
+        },
+        {
+          "caller": "getObjectFieldOrNullAs",
+          "callee": "getObjectField",
+          "lineNumber": 57
+        },
+        {
+          "caller": "getIntField",
+          "callee": "getIntField",
+          "lineNumber": 60
+        },
+        {
+          "caller": "getIntFieldOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 62
+        },
+        {
+          "caller": "getIntFieldOrNull",
+          "callee": "getIntField",
+          "lineNumber": 63
+        },
+        {
+          "caller": "getLongField",
+          "callee": "getLongField",
+          "lineNumber": 66
+        },
+        {
+          "caller": "getLongFieldOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 68
+        },
+        {
+          "caller": "getLongFieldOrNull",
+          "callee": "getLongField",
+          "lineNumber": 69
+        },
+        {
+          "caller": "getBooleanFieldOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 72
+        },
+        {
+          "caller": "getBooleanFieldOrNull",
+          "callee": "getBooleanField",
+          "lineNumber": 73
+        },
+        {
+          "caller": "callMethod",
+          "callee": "callMethod",
+          "lineNumber": 77
+        },
+        {
+          "caller": "callMethodOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 79
+        },
+        {
+          "caller": "callMethodOrNull",
+          "callee": "callMethod",
+          "lineNumber": 80
+        },
+        {
+          "caller": "callStaticMethod",
+          "callee": "callStaticMethod",
+          "lineNumber": 84
+        },
+        {
+          "caller": "callStaticMethodOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 87
+        },
+        {
+          "caller": "callStaticMethodOrNull",
+          "callee": "callStaticMethod",
+          "lineNumber": 88
+        },
+        {
+          "caller": "callStaticMethodAs",
+          "callee": "callStaticMethod",
+          "lineNumber": 93
+        },
+        {
+          "caller": "callStaticMethodOrNullAs",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 97
+        },
+        {
+          "caller": "callStaticMethodOrNullAs",
+          "callee": "callStaticMethod",
+          "lineNumber": 98
+        },
+        {
+          "caller": "getStaticObjectFieldAs",
+          "callee": "getStaticObjectField",
+          "lineNumber": 102
+        },
+        {
+          "caller": "getStaticObjectFieldOrNullAs",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 105
+        },
+        {
+          "caller": "getStaticObjectFieldOrNullAs",
+          "callee": "getStaticObjectField",
+          "lineNumber": 106
+        },
+        {
+          "caller": "getStaticObjectField",
+          "callee": "getStaticObjectField",
+          "lineNumber": 109
+        },
+        {
+          "caller": "getStaticObjectFieldOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 111
+        },
+        {
+          "caller": "getStaticObjectFieldOrNull",
+          "callee": "getStaticObjectField",
+          "lineNumber": 112
+        },
+        {
+          "caller": "setStaticObjectField",
+          "callee": "apply",
+          "lineNumber": 115
+        },
+        {
+          "caller": "setStaticObjectField",
+          "callee": "setStaticObjectField",
+          "lineNumber": 116
+        },
+        {
+          "caller": "setStaticObjectFieldIfExist",
+          "callee": "apply",
+          "lineNumber": 119
+        },
+        {
+          "caller": "setStaticObjectFieldIfExist",
+          "callee": "setStaticObjectField",
+          "lineNumber": 121
+        },
+        {
+          "caller": "findFieldByExactType",
+          "callee": "findFirstFieldByExactType",
+          "lineNumber": 127
+        },
+        {
+          "caller": "findFieldByExactType",
+          "callee": "findFirstFieldByExactType",
+          "lineNumber": 130
+        },
+        {
+          "caller": "callMethodAs",
+          "callee": "callMethod",
+          "lineNumber": 134
+        },
+        {
+          "caller": "callMethodOrNullAs",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 137
+        },
+        {
+          "caller": "callMethodOrNullAs",
+          "callee": "callMethod",
+          "lineNumber": 138
+        },
+        {
+          "caller": "callMethod",
+          "callee": "callMethod",
+          "lineNumber": 142
+        },
+        {
+          "caller": "callMethodOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 148
+        },
+        {
+          "caller": "callMethodOrNull",
+          "callee": "callMethod",
+          "lineNumber": 149
+        },
+        {
+          "caller": "callStaticMethod",
+          "callee": "callStaticMethod",
+          "lineNumber": 156
+        },
+        {
+          "caller": "callStaticMethodOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 162
+        },
+        {
+          "caller": "callStaticMethodOrNull",
+          "callee": "callStaticMethod",
+          "lineNumber": 163
+        },
+        {
+          "caller": "findClass",
+          "callee": "findClass",
+          "lineNumber": 166
+        },
+        {
+          "caller": "on",
+          "callee": "findClass",
+          "lineNumber": 168
+        },
+        {
+          "caller": "findClassOrNull",
+          "callee": "findClassIfExists",
+          "lineNumber": 171
+        },
+        {
+          "caller": "from",
+          "callee": "findClassIfExists",
+          "lineNumber": 174
+        },
+        {
+          "caller": "new",
+          "callee": "newInstance",
+          "lineNumber": 176
+        },
+        {
+          "caller": "new",
+          "callee": "newInstance",
+          "lineNumber": 179
+        },
+        {
+          "caller": "findField",
+          "callee": "findField",
+          "lineNumber": 181
+        },
+        {
+          "caller": "findFieldOrNull",
+          "callee": "findFieldIfExists",
+          "lineNumber": 183
+        },
+        {
+          "caller": "setIntField",
+          "callee": "apply",
+          "lineNumber": 185
+        },
+        {
+          "caller": "setIntField",
+          "callee": "setIntField",
+          "lineNumber": 186
+        },
+        {
+          "caller": "setLongField",
+          "callee": "apply",
+          "lineNumber": 189
+        },
+        {
+          "caller": "setLongField",
+          "callee": "setLongField",
+          "lineNumber": 190
+        },
+        {
+          "caller": "setObjectField",
+          "callee": "apply",
+          "lineNumber": 193
+        },
+        {
+          "caller": "setObjectField",
+          "callee": "setObjectField",
+          "lineNumber": 194
+        },
+        {
+          "caller": "setBooleanField",
+          "callee": "apply",
+          "lineNumber": 197
+        },
+        {
+          "caller": "setBooleanField",
+          "callee": "setBooleanField",
+          "lineNumber": 198
+        },
+        {
+          "caller": "setFloatField",
+          "callee": "apply",
+          "lineNumber": 201
+        },
+        {
+          "caller": "setFloatField",
+          "callee": "setFloatField",
+          "lineNumber": 202
+        },
+        {
+          "caller": "findFirstFieldByExactType",
+          "callee": "findFirstFieldByExactType",
+          "lineNumber": 206
+        },
+        {
+          "caller": "findFirstFieldByExactTypeOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 208
+        },
+        {
+          "caller": "findFirstFieldByExactTypeOrNull",
+          "callee": "findFirstFieldByExactType",
+          "lineNumber": 209
+        },
+        {
+          "caller": "getFirstFieldByExactType",
+          "callee": "get",
+          "lineNumber": 213
+        },
+        {
+          "caller": "getFirstFieldByExactType",
+          "callee": "findFirstFieldByExactType",
+          "lineNumber": 213
+        },
+        {
+          "caller": "getFirstFieldByExactTypeAs",
+          "callee": "get",
+          "lineNumber": 217
+        },
+        {
+          "caller": "getFirstFieldByExactTypeAs",
+          "callee": "findFirstFieldByExactType",
+          "lineNumber": 217
+        },
+        {
+          "caller": "getFirstFieldByExactType",
+          "callee": "get",
+          "lineNumber": 220
+        },
+        {
+          "caller": "getFirstFieldByExactType",
+          "callee": "findFirstFieldByExactType",
+          "lineNumber": 220
+        },
+        {
+          "caller": "getFirstFieldByExactTypeOrNull",
+          "callee": "runCatchingOrNull",
+          "lineNumber": 222
+        },
+        {
+          "caller": "getFirstFieldByExactTypeOrNull",
+          "callee": "get",
+          "lineNumber": 223
+        },
+        {
+          "caller": "getFirstFieldByExactTypeOrNull",
+          "callee": "findFirstFieldByExactTypeOrNull",
+          "lineNumber": 223
+        },
+        {
+          "caller": "getFirstFieldByExactTypeOrNullAs",
+          "callee": "getFirstFieldByExactTypeOrNull",
+          "lineNumber": 228
+        },
+        {
+          "caller": "getFirstFieldByExactTypeOrNull",
+          "callee": "getFirstFieldByExactTypeOrNull",
+          "lineNumber": 231
+        },
+        {
+          "caller": "findDexClassLoader",
+          "callee": "delegator",
+          "lineNumber": 239
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "orEmpty",
+          "lineNumber": 243
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "flatMap",
+          "lineNumber": 243
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "getObjectFieldAs",
+          "lineNumber": 243
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "getObjectField",
+          "lineNumber": 243
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "findDexClassLoader",
+          "lineNumber": 243
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "orEmpty",
+          "lineNumber": 246
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "toList",
+          "lineNumber": 246
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "callMethodAs",
+          "lineNumber": 246
+        },
+        {
+          "caller": "allClassesList",
+          "callee": "getObjectField",
+          "lineNumber": 246
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 55,
+        "functionCount": 55,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/UnitTestAnnotations.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 49,
+      "functions": [
+        {
+          "name": "getPart",
+          "startLine": 20,
+          "endLine": 20,
+          "params": [
+            "index"
+          ]
+        },
+        {
+          "name": "compareTo",
+          "startLine": 22,
+          "endLine": 36,
+          "params": [
+            "other"
+          ]
+        },
+        {
+          "name": "toString",
+          "startLine": 38,
+          "endLine": 38,
+          "params": []
+        },
+        {
+          "name": "match",
+          "startLine": 50,
+          "endLine": 61,
+          "params": [
+            "appVersion",
+            "minVersionStr",
+            "maxVersionStr"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "TargetApp",
+          "startLine": 8,
+          "endLine": 9,
+          "methods": [],
+          "properties": [
+            "app"
+          ]
+        },
+        {
+          "name": "AppVersion",
+          "startLine": 11,
+          "endLine": 39,
+          "methods": [
+            "getPart",
+            "compareTo",
+            "toString"
+          ],
+          "properties": [
+            "versionString",
+            "parts"
+          ]
+        },
+        {
+          "name": "RequireAppVersion",
+          "startLine": 42,
+          "endLine": 46,
+          "methods": [],
+          "properties": [
+            "minVersion",
+            "maxVersion"
+          ]
+        },
+        {
+          "name": "VersionConstraintFailedException",
+          "startLine": 48,
+          "endLine": 48,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TargetApp",
+          "line": 8,
+          "isDefault": false
+        },
+        {
+          "name": "getPart",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "compareTo",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "toString",
+          "line": 38,
+          "isDefault": false
+        },
+        {
+          "name": "AppVersion",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "RequireAppVersion",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "VersionConstraintFailedException",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "match",
+          "line": 50,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getPart",
+          "callee": "elementAtOrElse",
+          "lineNumber": 20
+        },
+        {
+          "caller": "compareTo",
+          "callee": "require",
+          "lineNumber": 23
+        },
+        {
+          "caller": "compareTo",
+          "callee": "getPart",
+          "lineNumber": 29
+        },
+        {
+          "caller": "compareTo",
+          "callee": "getPart",
+          "lineNumber": 30
+        },
+        {
+          "caller": "compareTo",
+          "callee": "compareTo",
+          "lineNumber": 32
+        },
+        {
+          "caller": "match",
+          "callee": "let",
+          "lineNumber": 51
+        },
+        {
+          "caller": "match",
+          "callee": "takeIf",
+          "lineNumber": 51
+        },
+        {
+          "caller": "match",
+          "callee": "isNotEmpty",
+          "lineNumber": 51
+        },
+        {
+          "caller": "match",
+          "callee": "AppVersion",
+          "lineNumber": 51
+        },
+        {
+          "caller": "match",
+          "callee": "let",
+          "lineNumber": 52
+        },
+        {
+          "caller": "match",
+          "callee": "takeIf",
+          "lineNumber": 52
+        },
+        {
+          "caller": "match",
+          "callee": "isNotEmpty",
+          "lineNumber": 52
+        },
+        {
+          "caller": "match",
+          "callee": "AppVersion",
+          "lineNumber": 52
+        },
+        {
+          "caller": "match",
+          "callee": "VersionConstraintFailedException",
+          "lineNumber": 56
+        },
+        {
+          "caller": "match",
+          "callee": "VersionConstraintFailedException",
+          "lineNumber": 59
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 8,
+        "functionCount": 4,
+        "classCount": 4
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/activity/AppPatchSettingsActivity.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 178,
+      "nonEmptyLines": 152,
+      "functions": [
+        {
+          "name": "onCreate",
+          "startLine": 28,
+          "endLine": 46,
+          "params": [
+            "savedInstanceState"
+          ]
+        },
+        {
+          "name": "onOptionsItemSelected",
+          "startLine": 48,
+          "endLine": 54,
+          "params": [
+            "item"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AppPatchSettingsActivity",
+          "startLine": 22,
+          "endLine": 178,
+          "methods": [
+            "onCreate",
+            "onOptionsItemSelected"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "onCreate",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "onOptionsItemSelected",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "AppPatchSettingsActivity",
+          "line": 22,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "onCreate",
+          "callee": "onCreate",
+          "lineNumber": 29
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setContentView",
+          "lineNumber": 30
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setDisplayHomeAsUpEnabled",
+          "lineNumber": 32
+        },
+        {
+          "caller": "onCreate",
+          "callee": "getStringExtra",
+          "lineNumber": 34
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 38
+        },
+        {
+          "caller": "onCreate",
+          "callee": "AppPatchSettingsFragment",
+          "lineNumber": 38
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 39
+        },
+        {
+          "caller": "onCreate",
+          "callee": "Bundle",
+          "lineNumber": 39
+        },
+        {
+          "caller": "onCreate",
+          "callee": "putString",
+          "lineNumber": 40
+        },
+        {
+          "caller": "onCreate",
+          "callee": "commit",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onCreate",
+          "callee": "replace",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onCreate",
+          "callee": "beginTransaction",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "onBackPressed",
+          "lineNumber": 50
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "onOptionsItemSelected",
+          "lineNumber": 53
+        },
+        {
+          "caller": "onCreate",
+          "callee": "onCreate",
+          "lineNumber": 61
+        },
+        {
+          "caller": "onStart",
+          "callee": "onStart",
+          "lineNumber": 67
+        },
+        {
+          "caller": "onStart",
+          "callee": "addServiceStateListener",
+          "lineNumber": 68
+        },
+        {
+          "caller": "onStop",
+          "callee": "removeServiceStateListener",
+          "lineNumber": 72
+        },
+        {
+          "caller": "onStop",
+          "callee": "onStop",
+          "lineNumber": 73
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "runOnUiThread",
+          "lineNumber": 83
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "getString",
+          "lineNumber": 85
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "find",
+          "lineNumber": 86
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "Exception",
+          "lineNumber": 87
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "associate",
+          "lineNumber": 88
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "createPreferenceScreen",
+          "lineNumber": 90
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "getRemotePreferences",
+          "lineNumber": 92
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "apply",
+          "lineNumber": 94
+        },
+        {
+          "caller": "onBindView",
+          "callee": "onBindView",
+          "lineNumber": 97
+        },
+        {
+          "caller": "onBindView",
+          "callee": "setOnClickListener",
+          "lineNumber": 98
+        },
+        {
+          "caller": "onBindView",
+          "callee": "findViewById",
+          "lineNumber": 98
+        },
+        {
+          "caller": "onBindView",
+          "callee": "restoreDefaultPreferences",
+          "lineNumber": 99
+        },
+        {
+          "caller": "onBindView",
+          "callee": "setOnClickListener",
+          "lineNumber": 101
+        },
+        {
+          "caller": "onBindView",
+          "callee": "findViewById",
+          "lineNumber": 101
+        },
+        {
+          "caller": "onBindView",
+          "callee": "setAllPreferences",
+          "lineNumber": 102
+        },
+        {
+          "caller": "onBindView",
+          "callee": "runCatching",
+          "lineNumber": 104
+        },
+        {
+          "caller": "onBindView",
+          "callee": "getPackageInfo",
+          "lineNumber": 105
+        },
+        {
+          "caller": "onBindView",
+          "callee": "apply",
+          "lineNumber": 108
+        },
+        {
+          "caller": "onBindView",
+          "callee": "findViewById",
+          "lineNumber": 108
+        },
+        {
+          "caller": "onBindView",
+          "callee": "setOnClickListener",
+          "lineNumber": 110
+        },
+        {
+          "caller": "onBindView",
+          "callee": "addFlags",
+          "lineNumber": 111
+        },
+        {
+          "caller": "onBindView",
+          "callee": "setData",
+          "lineNumber": 111
+        },
+        {
+          "caller": "onBindView",
+          "callee": "Intent",
+          "lineNumber": 111
+        },
+        {
+          "caller": "onBindView",
+          "callee": "parse",
+          "lineNumber": 112
+        },
+        {
+          "caller": "onBindView",
+          "callee": "startActivity",
+          "lineNumber": 114
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "addPreference",
+          "lineNumber": 120
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "sortedBy",
+          "lineNumber": 123
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "startsWith",
+          "lineNumber": 125
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "apply",
+          "lineNumber": 126
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "CheckBoxPreference",
+          "lineNumber": 126
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "getBoolean",
+          "lineNumber": 130
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "setOnPreferenceChangeListener",
+          "lineNumber": 132
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "apply",
+          "lineNumber": 134
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "putBoolean",
+          "lineNumber": 134
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "edit",
+          "lineNumber": 134
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "getSystemService",
+          "lineNumber": 137
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "hasVibrator",
+          "lineNumber": 138
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "vibrate",
+          "lineNumber": 139
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "addPreference",
+          "lineNumber": 143
+        },
+        {
+          "caller": "setAllPreferences",
+          "callee": "edit",
+          "lineNumber": 153
+        },
+        {
+          "caller": "setAllPreferences",
+          "callee": "getPreference",
+          "lineNumber": 155
+        },
+        {
+          "caller": "setAllPreferences",
+          "callee": "putBoolean",
+          "lineNumber": 158
+        },
+        {
+          "caller": "setAllPreferences",
+          "callee": "apply",
+          "lineNumber": 161
+        },
+        {
+          "caller": "restoreDefaultPreferences",
+          "callee": "edit",
+          "lineNumber": 166
+        },
+        {
+          "caller": "restoreDefaultPreferences",
+          "callee": "getPreference",
+          "lineNumber": 168
+        },
+        {
+          "caller": "restoreDefaultPreferences",
+          "callee": "putBoolean",
+          "lineNumber": 172
+        },
+        {
+          "caller": "restoreDefaultPreferences",
+          "callee": "apply",
+          "lineNumber": 175
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/activity/SettingApplication.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 66,
+      "nonEmptyLines": 55,
+      "functions": [
+        {
+          "name": "notifyServiceStateChanged",
+          "startLine": 42,
+          "endLine": 46,
+          "params": [
+            "service"
+          ]
+        },
+        {
+          "name": "onCreate",
+          "startLine": 48,
+          "endLine": 51,
+          "params": []
+        },
+        {
+          "name": "onServiceBind",
+          "startLine": 57,
+          "endLine": 60,
+          "params": [
+            "service"
+          ]
+        },
+        {
+          "name": "onServiceDied",
+          "startLine": 62,
+          "endLine": 65,
+          "params": [
+            "service"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SettingApplication",
+          "startLine": 9,
+          "endLine": 66,
+          "methods": [
+            "notifyServiceStateChanged",
+            "onCreate",
+            "onServiceBind",
+            "onServiceDied"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "onCreate",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "onServiceBind",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "onServiceDied",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "SettingApplication",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "dispatchServiceState",
+          "callee": "contains",
+          "lineNumber": 22
+        },
+        {
+          "caller": "dispatchServiceState",
+          "callee": "onServiceStateChanged",
+          "lineNumber": 23
+        },
+        {
+          "caller": "addServiceStateListener",
+          "callee": "add",
+          "lineNumber": 31
+        },
+        {
+          "caller": "addServiceStateListener",
+          "callee": "dispatchServiceState",
+          "lineNumber": 33
+        },
+        {
+          "caller": "removeServiceStateListener",
+          "callee": "remove",
+          "lineNumber": 38
+        },
+        {
+          "caller": "notifyServiceStateChanged",
+          "callee": "dispatchServiceState",
+          "lineNumber": 44
+        },
+        {
+          "caller": "onCreate",
+          "callee": "onCreate",
+          "lineNumber": 49
+        },
+        {
+          "caller": "onCreate",
+          "callee": "registerListener",
+          "lineNumber": 50
+        },
+        {
+          "caller": "onServiceBind",
+          "callee": "notifyServiceStateChanged",
+          "lineNumber": 59
+        },
+        {
+          "caller": "onServiceDied",
+          "callee": "notifyServiceStateChanged",
+          "lineNumber": 64
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/AllTrailsHook.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 7,
+      "nonEmptyLines": 5,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/pro/EnablePeakMembershipPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/hoodles/morphe/alltrails/pro/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 10,
+      "classes": [
+        {
+          "name": "IsProFingerprint",
+          "startLine": 5,
+          "endLine": 8,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "GetSubscriptionTierFingerprint",
+          "startLine": 10,
+          "endLine": 13,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "IsProFingerprint",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "GetSubscriptionTierFingerprint",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/FingerprintCompat.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 579,
+      "nonEmptyLines": 499,
+      "functions": [
+        {
+          "name": "getTypeNameCompat",
+          "startLine": 17,
+          "endLine": 23,
+          "params": [
+            "it"
+          ]
+        },
+        {
+          "name": "strings",
+          "startLine": 48,
+          "endLine": 48,
+          "params": [
+            "strings"
+          ]
+        },
+        {
+          "name": "opcodes",
+          "startLine": 50,
+          "endLine": 54,
+          "params": [
+            "opcodes"
+          ]
+        },
+        {
+          "name": "opcodes",
+          "startLine": 56,
+          "endLine": 60,
+          "params": [
+            "opcodes"
+          ]
+        },
+        {
+          "name": "accessFlags",
+          "startLine": 62,
+          "endLine": 69,
+          "params": [
+            "accessFlags"
+          ]
+        },
+        {
+          "name": "parameters",
+          "startLine": 71,
+          "endLine": 73,
+          "params": [
+            "parameters"
+          ]
+        },
+        {
+          "name": "parameters",
+          "startLine": 75,
+          "endLine": 77,
+          "params": [
+            "parameters"
+          ]
+        },
+        {
+          "name": "returns",
+          "startLine": 79,
+          "endLine": 81,
+          "params": [
+            "returnType"
+          ]
+        },
+        {
+          "name": "literal",
+          "startLine": 83,
+          "endLine": 85,
+          "params": [
+            "literalSupplier"
+          ]
+        },
+        {
+          "name": "findLongestOpcodeSequence",
+          "startLine": 88,
+          "endLine": 107,
+          "params": [
+            "filters"
+          ]
+        },
+        {
+          "name": "name",
+          "startLine": 124,
+          "endLine": 126,
+          "params": [
+            "name"
+          ]
+        },
+        {
+          "name": "definingClass",
+          "startLine": 128,
+          "endLine": 130,
+          "params": [
+            "descriptor"
+          ]
+        },
+        {
+          "name": "strings",
+          "startLine": 132,
+          "endLine": 134,
+          "params": [
+            "strings"
+          ]
+        },
+        {
+          "name": "opcodes",
+          "startLine": 136,
+          "endLine": 140,
+          "params": [
+            "opcodes"
+          ]
+        },
+        {
+          "name": "accessFlags",
+          "startLine": 142,
+          "endLine": 144,
+          "params": [
+            "accessFlags"
+          ]
+        },
+        {
+          "name": "parameters",
+          "startLine": 146,
+          "endLine": 148,
+          "params": [
+            "parameters"
+          ]
+        },
+        {
+          "name": "returns",
+          "startLine": 150,
+          "endLine": 152,
+          "params": [
+            "returnType"
+          ]
+        },
+        {
+          "name": "literal",
+          "startLine": 154,
+          "endLine": 156,
+          "params": [
+            "literalSupplier"
+          ]
+        },
+        {
+          "name": "classFingerprint",
+          "startLine": 158,
+          "endLine": 160,
+          "params": [
+            "findMethodFunc"
+          ]
+        },
+        {
+          "name": "methodMatcher",
+          "startLine": 165,
+          "endLine": 167,
+          "params": [
+            "block"
+          ]
+        },
+        {
+          "name": "classMatcher",
+          "startLine": 172,
+          "endLine": 174,
+          "params": [
+            "block"
+          ]
+        },
+        {
+          "name": "build",
+          "startLine": 176,
+          "endLine": 201,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "AccessFlags",
+          "startLine": 25,
+          "endLine": 46,
+          "methods": [],
+          "properties": [
+            "modifier"
+          ]
+        },
+        {
+          "name": "FingerprintDsl",
+          "startLine": 109,
+          "endLine": 202,
+          "methods": [
+            "name",
+            "definingClass",
+            "strings",
+            "opcodes",
+            "accessFlags",
+            "parameters",
+            "returns",
+            "literal",
+            "classFingerprint",
+            "methodMatcher",
+            "classMatcher",
+            "build"
+          ],
+          "properties": [
+            "name",
+            "definingClass",
+            "accessFlags",
+            "returnType",
+            "parameters",
+            "strings",
+            "classFinder",
+            "classMatcherBlock",
+            "methodMatcherBlocks"
+          ]
+        },
+        {
+          "name": "StrictQuery",
+          "startLine": 209,
+          "endLine": 209,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "getTypeNameCompat",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "AccessFlags",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "strings",
+          "line": 48,
+          "isDefault": false
+        },
+        {
+          "name": "opcodes",
+          "line": 50,
+          "isDefault": false
+        },
+        {
+          "name": "opcodes",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "accessFlags",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "parameters",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "parameters",
+          "line": 75,
+          "isDefault": false
+        },
+        {
+          "name": "returns",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "literal",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "name",
+          "line": 124,
+          "isDefault": false
+        },
+        {
+          "name": "definingClass",
+          "line": 128,
+          "isDefault": false
+        },
+        {
+          "name": "strings",
+          "line": 132,
+          "isDefault": false
+        },
+        {
+          "name": "opcodes",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "accessFlags",
+          "line": 142,
+          "isDefault": false
+        },
+        {
+          "name": "parameters",
+          "line": 146,
+          "isDefault": false
+        },
+        {
+          "name": "returns",
+          "line": 150,
+          "isDefault": false
+        },
+        {
+          "name": "literal",
+          "line": 154,
+          "isDefault": false
+        },
+        {
+          "name": "classFingerprint",
+          "line": 158,
+          "isDefault": false
+        },
+        {
+          "name": "methodMatcher",
+          "line": 165,
+          "isDefault": false
+        },
+        {
+          "name": "classMatcher",
+          "line": 172,
+          "isDefault": false
+        },
+        {
+          "name": "build",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "FingerprintDsl",
+          "line": 109,
+          "isDefault": false
+        },
+        {
+          "name": "StrictQuery",
+          "line": 209,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getTypeNameCompat",
+          "callee": "startsWith",
+          "lineNumber": 20
+        },
+        {
+          "caller": "getTypeNameCompat",
+          "callee": "trimStart",
+          "lineNumber": 20
+        },
+        {
+          "caller": "getTypeNameCompat",
+          "callee": "endsWith",
+          "lineNumber": 20
+        },
+        {
+          "caller": "getTypeNameCompat",
+          "callee": "getTypeName",
+          "lineNumber": 21
+        },
+        {
+          "caller": "strings",
+          "callee": "usingStrings",
+          "lineNumber": 48
+        },
+        {
+          "caller": "strings",
+          "callee": "toList",
+          "lineNumber": 48
+        },
+        {
+          "caller": "opcodes",
+          "callee": "also",
+          "lineNumber": 51
+        },
+        {
+          "caller": "opcodes",
+          "callee": "OpCodesMatcher",
+          "lineNumber": 51
+        },
+        {
+          "caller": "opcodes",
+          "callee": "map",
+          "lineNumber": 51
+        },
+        {
+          "caller": "opcodes",
+          "callee": "opCodes",
+          "lineNumber": 52
+        },
+        {
+          "caller": "opcodes",
+          "callee": "also",
+          "lineNumber": 57
+        },
+        {
+          "caller": "opcodes",
+          "callee": "OpCodesMatcher",
+          "lineNumber": 57
+        },
+        {
+          "caller": "opcodes",
+          "callee": "map",
+          "lineNumber": 57
+        },
+        {
+          "caller": "opcodes",
+          "callee": "opCodes",
+          "lineNumber": 58
+        },
+        {
+          "caller": "accessFlags",
+          "callee": "reduce",
+          "lineNumber": 63
+        },
+        {
+          "caller": "accessFlags",
+          "callee": "map",
+          "lineNumber": 63
+        },
+        {
+          "caller": "accessFlags",
+          "callee": "accessFlags",
+          "lineNumber": 64
+        },
+        {
+          "caller": "accessFlags",
+          "callee": "contains",
+          "lineNumber": 65
+        },
+        {
+          "caller": "accessFlags",
+          "callee": "contains",
+          "lineNumber": 66
+        },
+        {
+          "caller": "parameters",
+          "callee": "paramTypes",
+          "lineNumber": 72
+        },
+        {
+          "caller": "parameters",
+          "callee": "map",
+          "lineNumber": 72
+        },
+        {
+          "caller": "parameters",
+          "callee": "paramTypes",
+          "lineNumber": 76
+        },
+        {
+          "caller": "parameters",
+          "callee": "map",
+          "lineNumber": 76
+        },
+        {
+          "caller": "returns",
+          "callee": "let",
+          "lineNumber": 80
+        },
+        {
+          "caller": "returns",
+          "callee": "getTypeNameCompat",
+          "lineNumber": 80
+        },
+        {
+          "caller": "literal",
+          "callee": "usingNumbers",
+          "lineNumber": 84
+        },
+        {
+          "caller": "literal",
+          "callee": "literalSupplier",
+          "lineNumber": 84
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "isEmpty",
+          "lineNumber": 89
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "emptyList",
+          "lineNumber": 89
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "mutableListOf",
+          "lineNumber": 91
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "isNotEmpty",
+          "lineNumber": 95
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "add",
+          "lineNumber": 96
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "last",
+          "lineNumber": 96
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "add",
+          "lineNumber": 98
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "mutableListOf",
+          "lineNumber": 98
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "add",
+          "lineNumber": 101
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "mutableListOf",
+          "lineNumber": 101
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "maxByOrNull",
+          "lineNumber": 105
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "filter",
+          "lineNumber": 105
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "all",
+          "lineNumber": 105
+        },
+        {
+          "caller": "findLongestOpcodeSequence",
+          "callee": "emptyList",
+          "lineNumber": 106
+        },
+        {
+          "caller": "opcodes",
+          "callee": "OpCodesMatcher",
+          "lineNumber": 137
+        },
+        {
+          "caller": "opcodes",
+          "callee": "map",
+          "lineNumber": 137
+        },
+        {
+          "caller": "opcodes",
+          "callee": "opCodes",
+          "lineNumber": 138
+        },
+        {
+          "caller": "accessFlags",
+          "callee": "toList",
+          "lineNumber": 143
+        },
+        {
+          "caller": "parameters",
+          "callee": "toList",
+          "lineNumber": 147
+        },
+        {
+          "caller": "literal",
+          "callee": "literal",
+          "lineNumber": 155
+        },
+        {
+          "caller": "classFingerprint",
+          "callee": "findMethodFunc",
+          "lineNumber": 159
+        },
+        {
+          "caller": "build",
+          "callee": "let",
+          "lineNumber": 177
+        },
+        {
+          "caller": "build",
+          "callee": "strings",
+          "lineNumber": 177
+        },
+        {
+          "caller": "build",
+          "callee": "Fingerprint",
+          "lineNumber": 179
+        },
+        {
+          "caller": "build",
+          "callee": "isNotEmpty",
+          "lineNumber": 196
+        },
+        {
+          "caller": "build",
+          "callee": "toList",
+          "lineNumber": 197
+        },
+        {
+          "caller": "buildMethodMatcher",
+          "callee": "apply",
+          "lineNumber": 265
+        },
+        {
+          "caller": "buildMethodMatcher",
+          "callee": "MethodMatcher",
+          "lineNumber": 265
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 24,
+        "functionCount": 22,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/ResourceMappingPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 96,
+      "functions": [
+        {
+          "name": "get",
+          "startLine": 43,
+          "endLine": 43,
+          "params": [
+            "type",
+            "name"
+          ]
+        },
+        {
+          "name": "getResourceId",
+          "startLine": 52,
+          "endLine": 52,
+          "params": [
+            "type",
+            "name"
+          ]
+        },
+        {
+          "name": "hasResourceId",
+          "startLine": 58,
+          "endLine": 59,
+          "params": [
+            "type",
+            "name"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ResourceType",
+          "startLine": 7,
+          "endLine": 40,
+          "methods": [],
+          "properties": [
+            "value"
+          ]
+        },
+        {
+          "name": "ResourceFinder",
+          "startLine": 42,
+          "endLine": 44,
+          "methods": [
+            "get"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ResourceType",
+          "line": 7,
+          "isDefault": false
+        },
+        {
+          "name": "get",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "ResourceFinder",
+          "line": 42,
+          "isDefault": false
+        },
+        {
+          "name": "getResourceId",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "hasResourceId",
+          "line": 58,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fromValue",
+          "callee": "IllegalArgumentException",
+          "lineNumber": 38
+        },
+        {
+          "caller": "hasResourceId",
+          "callee": "runCatching",
+          "lineNumber": 59
+        },
+        {
+          "caller": "matches",
+          "callee": "matches",
+          "lineNumber": 81
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 5,
+        "functionCount": 3,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/Utils.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 538,
+      "nonEmptyLines": 499,
+      "functions": [
+        {
+          "name": "setExtensionIsPatchIncluded",
+          "startLine": 163,
+          "endLine": 166,
+          "params": [
+            "extension"
+          ]
+        },
+        {
+          "name": "getParamTypeSigns",
+          "startLine": 171,
+          "endLine": 192,
+          "params": [
+            "paramSigns"
+          ]
+        },
+        {
+          "name": "findInstructionIndexFromToString",
+          "startLine": 261,
+          "endLine": 349,
+          "params": [
+            "fieldName",
+            "isField"
+          ]
+        },
+        {
+          "name": "findFieldFromToString",
+          "startLine": 356,
+          "endLine": 359,
+          "params": [
+            "fieldName"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstruction",
+          "startLine": 368,
+          "endLine": 380,
+          "params": [
+            "startIndex",
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstruction",
+          "startLine": 388,
+          "endLine": 388,
+          "params": [
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstruction",
+          "startLine": 397,
+          "endLine": 400,
+          "params": [
+            "startIndex",
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "startLine": 407,
+          "endLine": 407,
+          "params": [
+            "targetOpcode"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "startLine": 414,
+          "endLine": 417,
+          "params": [
+            "startIndex",
+            "targetOpcode"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "startLine": 426,
+          "endLine": 433,
+          "params": [
+            "startIndex",
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "startLine": 442,
+          "endLine": 442,
+          "params": [
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "startLine": 451,
+          "endLine": 454,
+          "params": [
+            "startIndex",
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "startLine": 462,
+          "endLine": 464,
+          "params": [
+            "targetOpcode"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "startLine": 474,
+          "endLine": 482,
+          "params": [
+            "startIndex",
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "startLine": 492,
+          "endLine": 492,
+          "params": [
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "startLine": 502,
+          "endLine": 507,
+          "params": [
+            "startIndex",
+            "filter"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionReversed",
+          "startLine": 517,
+          "endLine": 520,
+          "params": [
+            "startIndex",
+            "targetOpcode"
+          ]
+        },
+        {
+          "name": "indexOfFirstInstructionReversed",
+          "startLine": 531,
+          "endLine": 538,
+          "params": [
+            "startIndex",
+            "filter"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "setExtensionIsPatchIncluded",
+          "line": 163,
+          "isDefault": false
+        },
+        {
+          "name": "findFieldFromToString",
+          "line": 356,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstruction",
+          "line": 368,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstruction",
+          "line": 388,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstruction",
+          "line": 397,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "line": 407,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "line": 414,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "line": 426,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "line": 442,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionOrThrow",
+          "line": 451,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "line": 462,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "line": 474,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "line": 492,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionReversedOrThrow",
+          "line": 502,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionReversed",
+          "line": 517,
+          "isDefault": false
+        },
+        {
+          "name": "indexOfFirstInstructionReversed",
+          "line": 531,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "setExtensionIsPatchIncluded",
+          "callee": "hookMethod",
+          "lineNumber": 165
+        },
+        {
+          "caller": "setExtensionIsPatchIncluded",
+          "callee": "getDeclaredMethod",
+          "lineNumber": 165
+        },
+        {
+          "caller": "setExtensionIsPatchIncluded",
+          "callee": "returnConstant",
+          "lineNumber": 165
+        },
+        {
+          "caller": "getParamTypeSigns",
+          "callee": "mutableListOf",
+          "lineNumber": 172
+        },
+        {
+          "caller": "getParamTypeSigns",
+          "callee": "indexOf",
+          "lineNumber": 181
+        },
+        {
+          "caller": "getParamTypeSigns",
+          "callee": "substring",
+          "lineNumber": 184
+        },
+        {
+          "caller": "getParamTypeSigns",
+          "callee": "add",
+          "lineNumber": 185
+        },
+        {
+          "caller": "getParamTypeSigns",
+          "callee": "IllegalStateException",
+          "lineNumber": 189
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "indexOfFirstInstruction",
+          "lineNumber": 262
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "contains",
+          "lineNumber": 262
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "IllegalArgumentException",
+          "lineNumber": 264
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "register",
+          "lineNumber": 266
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "indexOfFirstInstruction",
+          "lineNumber": 269
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "registerOrNull",
+          "lineNumber": 272
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "IllegalArgumentException",
+          "lineNumber": 275
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "indexOfFirstInstruction",
+          "lineNumber": 279
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "IllegalArgumentException",
+          "lineNumber": 285
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "registerOrNull",
+          "lineNumber": 288
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "register",
+          "lineNumber": 288
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "indexOfFirstInstructionReversedOrThrow",
+          "lineNumber": 291
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "fromInt",
+          "lineNumber": 317
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "register",
+          "lineNumber": 319
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "indexOfFirstInstructionReversedOrThrow",
+          "lineNumber": 320
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "register",
+          "lineNumber": 336
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "indexOfFirstInstructionReversedOrThrow",
+          "lineNumber": 339
+        },
+        {
+          "caller": "findInstructionIndexFromToString",
+          "callee": "IllegalArgumentException",
+          "lineNumber": 344
+        },
+        {
+          "caller": "findFieldFromToString",
+          "callee": "findInstructionIndexFromToString",
+          "lineNumber": 357
+        },
+        {
+          "caller": "indexOfFirstInstruction",
+          "callee": "drop",
+          "lineNumber": 371
+        },
+        {
+          "caller": "indexOfFirstInstruction",
+          "callee": "indexOfFirst",
+          "lineNumber": 373
+        },
+        {
+          "caller": "indexOfFirstInstruction",
+          "callee": "indexOfFirstInstruction",
+          "lineNumber": 388
+        },
+        {
+          "caller": "indexOfFirstInstruction",
+          "callee": "indexOfFirstInstruction",
+          "lineNumber": 399
+        },
+        {
+          "caller": "indexOfFirstInstruction",
+          "callee": "matches",
+          "lineNumber": 399
+        },
+        {
+          "caller": "indexOfFirstInstructionOrThrow",
+          "callee": "indexOfFirstInstructionOrThrow",
+          "lineNumber": 407
+        },
+        {
+          "caller": "indexOfFirstInstructionOrThrow",
+          "callee": "indexOfFirstInstructionOrThrow",
+          "lineNumber": 415
+        },
+        {
+          "caller": "indexOfFirstInstructionOrThrow",
+          "callee": "indexOfFirstInstruction",
+          "lineNumber": 427
+        },
+        {
+          "caller": "indexOfFirstInstructionOrThrow",
+          "callee": "Exception",
+          "lineNumber": 429
+        },
+        {
+          "caller": "indexOfFirstInstructionOrThrow",
+          "callee": "indexOfFirstInstructionOrThrow",
+          "lineNumber": 442
+        },
+        {
+          "caller": "indexOfFirstInstructionOrThrow",
+          "callee": "indexOfFirstInstructionOrThrow",
+          "lineNumber": 453
+        },
+        {
+          "caller": "indexOfFirstInstructionOrThrow",
+          "callee": "matches",
+          "lineNumber": 453
+        },
+        {
+          "caller": "indexOfFirstInstructionReversedOrThrow",
+          "callee": "indexOfFirstInstructionReversedOrThrow",
+          "lineNumber": 462
+        },
+        {
+          "caller": "indexOfFirstInstructionReversedOrThrow",
+          "callee": "indexOfFirstInstructionReversed",
+          "lineNumber": 475
+        },
+        {
+          "caller": "indexOfFirstInstructionReversedOrThrow",
+          "callee": "Exception",
+          "lineNumber": 478
+        },
+        {
+          "caller": "indexOfFirstInstructionReversedOrThrow",
+          "callee": "indexOfFirstInstructionReversedOrThrow",
+          "lineNumber": 492
+        },
+        {
+          "caller": "indexOfFirstInstructionReversedOrThrow",
+          "callee": "indexOfFirstInstructionReversedOrThrow",
+          "lineNumber": 504
+        },
+        {
+          "caller": "indexOfFirstInstructionReversedOrThrow",
+          "callee": "matches",
+          "lineNumber": 505
+        },
+        {
+          "caller": "indexOfFirstInstructionReversed",
+          "callee": "indexOfFirstInstructionReversed",
+          "lineNumber": 518
+        },
+        {
+          "caller": "indexOfFirstInstructionReversed",
+          "callee": "take",
+          "lineNumber": 534
+        },
+        {
+          "caller": "indexOfFirstInstructionReversed",
+          "callee": "indexOfLast",
+          "lineNumber": 537
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 16,
+        "functionCount": 18,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/layout/upgradebutton/HideUpgradeButtonPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 32,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/audio/EnableExclusiveAudioPlayback.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 19,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/playservice/VersionCheckPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 35,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

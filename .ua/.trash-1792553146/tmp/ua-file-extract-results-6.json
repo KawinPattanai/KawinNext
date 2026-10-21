@@ -1,0 +1,3024 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 14,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 14,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 14,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/PatchExecutor.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 443,
+      "nonEmptyLines": 364,
+      "functions": [
+        {
+          "name": "patch",
+          "startLine": 46,
+          "endLine": 52,
+          "params": [
+            "name",
+            "description",
+            "use",
+            "func"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 64,
+          "endLine": 66,
+          "params": [
+            "callback"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 68,
+          "endLine": 70,
+          "params": [
+            "block"
+          ]
+        },
+        {
+          "name": "toClass",
+          "startLine": 72,
+          "endLine": 72,
+          "params": []
+        },
+        {
+          "name": "toMethod",
+          "startLine": 73,
+          "endLine": 80,
+          "params": []
+        },
+        {
+          "name": "toConstructor",
+          "startLine": 82,
+          "endLine": 89,
+          "params": []
+        },
+        {
+          "name": "toMember",
+          "startLine": 91,
+          "endLine": 97,
+          "params": []
+        },
+        {
+          "name": "toField",
+          "startLine": 99,
+          "endLine": 99,
+          "params": []
+        },
+        {
+          "name": "getApiVersion",
+          "startLine": 101,
+          "endLine": 101,
+          "params": []
+        },
+        {
+          "name": "clearAll",
+          "startLine": 111,
+          "endLine": 113,
+          "params": []
+        },
+        {
+          "name": "getString",
+          "startLine": 115,
+          "endLine": 115,
+          "params": [
+            "key",
+            "default"
+          ]
+        },
+        {
+          "name": "getAllKeys",
+          "startLine": 117,
+          "endLine": 117,
+          "params": []
+        },
+        {
+          "name": "getStringList",
+          "startLine": 119,
+          "endLine": 122,
+          "params": [
+            "key",
+            "default"
+          ]
+        },
+        {
+          "name": "putString",
+          "startLine": 124,
+          "endLine": 126,
+          "params": [
+            "key",
+            "value"
+          ]
+        },
+        {
+          "name": "putStringList",
+          "startLine": 128,
+          "endLine": 130,
+          "params": [
+            "key",
+            "value"
+          ]
+        },
+        {
+          "name": "remove",
+          "startLine": 132,
+          "endLine": 134,
+          "params": [
+            "key"
+          ]
+        },
+        {
+          "name": "saveCache",
+          "startLine": 136,
+          "endLine": 143,
+          "params": []
+        },
+        {
+          "name": "applyPatches",
+          "startLine": 176,
+          "endLine": 196,
+          "params": [
+            "patches"
+          ]
+        },
+        {
+          "name": "loadCacheIfValid",
+          "startLine": 198,
+          "endLine": 217,
+          "params": []
+        },
+        {
+          "name": "executePatches",
+          "startLine": 219,
+          "endLine": 234,
+          "params": []
+        },
+        {
+          "name": "finalizePatching",
+          "startLine": 236,
+          "endLine": 243,
+          "params": []
+        },
+        {
+          "name": "logDebugInfo",
+          "startLine": 245,
+          "endLine": 252,
+          "params": []
+        },
+        {
+          "name": "getAppVersion",
+          "startLine": 254,
+          "endLine": 263,
+          "params": []
+        },
+        {
+          "name": "dependsOn",
+          "startLine": 265,
+          "endLine": 274,
+          "params": [
+            "patches"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 291,
+          "endLine": 293,
+          "params": [
+            "block"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 295,
+          "endLine": 297,
+          "params": [
+            "callback"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 329,
+          "endLine": 331,
+          "params": [
+            "block"
+          ]
+        },
+        {
+          "name": "hookMethod",
+          "startLine": 333,
+          "endLine": 335,
+          "params": [
+            "callback"
+          ]
+        },
+        {
+          "name": "wrapFind",
+          "startLine": 349,
+          "endLine": 362,
+          "params": [
+            "key",
+            "funcFunc",
+            "serializer"
+          ]
+        },
+        {
+          "name": "wrapFindList",
+          "startLine": 364,
+          "endLine": 379,
+          "params": [
+            "key",
+            "funcFunc",
+            "serializer"
+          ]
+        },
+        {
+          "name": "getDexClass",
+          "startLine": 381,
+          "endLine": 383,
+          "params": [
+            "key",
+            "findFunc"
+          ]
+        },
+        {
+          "name": "getDexMethod",
+          "startLine": 385,
+          "endLine": 387,
+          "params": [
+            "key",
+            "findFunc"
+          ]
+        },
+        {
+          "name": "getDexField",
+          "startLine": 389,
+          "endLine": 391,
+          "params": [
+            "key",
+            "findFunc"
+          ]
+        },
+        {
+          "name": "getDexMethods",
+          "startLine": 393,
+          "endLine": 396,
+          "params": [
+            "key",
+            "findFunc"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Patch",
+          "startLine": 54,
+          "endLine": 59,
+          "methods": [],
+          "properties": [
+            "name",
+            "description",
+            "use",
+            "run"
+          ]
+        },
+        {
+          "name": "IHook",
+          "startLine": 61,
+          "endLine": 102,
+          "methods": [
+            "hookMethod",
+            "hookMethod",
+            "toClass",
+            "toMethod",
+            "toConstructor",
+            "toMember",
+            "toField",
+            "getApiVersion"
+          ],
+          "properties": [
+            "xposed",
+            "classLoader"
+          ]
+        },
+        {
+          "name": "SharedPrefCache",
+          "startLine": 104,
+          "endLine": 144,
+          "methods": [
+            "clearAll",
+            "getString",
+            "getAllKeys",
+            "getStringList",
+            "putString",
+            "putStringList",
+            "remove",
+            "saveCache"
+          ],
+          "properties": [
+            "pref",
+            "map"
+          ]
+        },
+        {
+          "name": "DependedHookFailedException",
+          "startLine": 146,
+          "endLine": 148,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "PatchExecutor",
+          "startLine": 150,
+          "endLine": 397,
+          "methods": [
+            "applyPatches",
+            "loadCacheIfValid",
+            "executePatches",
+            "finalizePatching",
+            "logDebugInfo",
+            "getAppVersion",
+            "dependsOn",
+            "hookMethod",
+            "hookMethod",
+            "hookMethod",
+            "hookMethod",
+            "wrapFind",
+            "wrapFindList",
+            "getDexClass",
+            "getDexMethod",
+            "getDexField",
+            "getDexMethods"
+          ],
+          "properties": [
+            "appContext",
+            "lpparam",
+            "classLoader",
+            "patchPreferences",
+            "patches",
+            "appliedPatches",
+            "failedPatches",
+            "moduleRel",
+            "cache",
+            "dexkit",
+            "dexMethod",
+            "method",
+            "constructor",
+            "member",
+            "memberOrNull",
+            "dexMethodList",
+            "dexField",
+            "field",
+            "fieldList",
+            "declaredClass",
+            "type",
+            "dexClass",
+            "clazz",
+            "cacheKey",
+            "dexMethod",
+            "member",
+            "memberOrNull",
+            "method",
+            "declaredClass",
+            "constructor"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "patch",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "Patch",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "classLoader",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 68,
+          "isDefault": false
+        },
+        {
+          "name": "toClass",
+          "line": 72,
+          "isDefault": false
+        },
+        {
+          "name": "toMethod",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "toConstructor",
+          "line": 82,
+          "isDefault": false
+        },
+        {
+          "name": "toMember",
+          "line": 91,
+          "isDefault": false
+        },
+        {
+          "name": "toField",
+          "line": 99,
+          "isDefault": false
+        },
+        {
+          "name": "getApiVersion",
+          "line": 101,
+          "isDefault": false
+        },
+        {
+          "name": "IHook",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "pref",
+          "line": 106,
+          "isDefault": false
+        },
+        {
+          "name": "clearAll",
+          "line": 111,
+          "isDefault": false
+        },
+        {
+          "name": "getString",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "getAllKeys",
+          "line": 117,
+          "isDefault": false
+        },
+        {
+          "name": "getStringList",
+          "line": 119,
+          "isDefault": false
+        },
+        {
+          "name": "putString",
+          "line": 124,
+          "isDefault": false
+        },
+        {
+          "name": "putStringList",
+          "line": 128,
+          "isDefault": false
+        },
+        {
+          "name": "remove",
+          "line": 132,
+          "isDefault": false
+        },
+        {
+          "name": "saveCache",
+          "line": 136,
+          "isDefault": false
+        },
+        {
+          "name": "SharedPrefCache",
+          "line": 104,
+          "isDefault": false
+        },
+        {
+          "name": "DependedHookFailedException",
+          "line": 146,
+          "isDefault": false
+        },
+        {
+          "name": "classLoader",
+          "line": 156,
+          "isDefault": false
+        },
+        {
+          "name": "applyPatches",
+          "line": 176,
+          "isDefault": false
+        },
+        {
+          "name": "dependsOn",
+          "line": 265,
+          "isDefault": false
+        },
+        {
+          "name": "dexMethod",
+          "line": 276,
+          "isDefault": false
+        },
+        {
+          "name": "method",
+          "line": 279,
+          "isDefault": false
+        },
+        {
+          "name": "constructor",
+          "line": 282,
+          "isDefault": false
+        },
+        {
+          "name": "member",
+          "line": 285,
+          "isDefault": false
+        },
+        {
+          "name": "memberOrNull",
+          "line": 288,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 291,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 295,
+          "isDefault": false
+        },
+        {
+          "name": "dexMethodList",
+          "line": 299,
+          "isDefault": false
+        },
+        {
+          "name": "dexField",
+          "line": 302,
+          "isDefault": false
+        },
+        {
+          "name": "field",
+          "line": 305,
+          "isDefault": false
+        },
+        {
+          "name": "fieldList",
+          "line": 308,
+          "isDefault": false
+        },
+        {
+          "name": "declaredClass",
+          "line": 312,
+          "isDefault": false
+        },
+        {
+          "name": "type",
+          "line": 315,
+          "isDefault": false
+        },
+        {
+          "name": "dexClass",
+          "line": 318,
+          "isDefault": false
+        },
+        {
+          "name": "clazz",
+          "line": 321,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 329,
+          "isDefault": false
+        },
+        {
+          "name": "hookMethod",
+          "line": 333,
+          "isDefault": false
+        },
+        {
+          "name": "dexMethod",
+          "line": 337,
+          "isDefault": false
+        },
+        {
+          "name": "member",
+          "line": 339,
+          "isDefault": false
+        },
+        {
+          "name": "memberOrNull",
+          "line": 341,
+          "isDefault": false
+        },
+        {
+          "name": "method",
+          "line": 343,
+          "isDefault": false
+        },
+        {
+          "name": "declaredClass",
+          "line": 345,
+          "isDefault": false
+        },
+        {
+          "name": "constructor",
+          "line": 347,
+          "isDefault": false
+        },
+        {
+          "name": "PatchExecutor",
+          "line": 150,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "patch",
+          "callee": "Patch",
+          "lineNumber": 52
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethod",
+          "lineNumber": 65
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "toMember",
+          "lineNumber": 65
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethod",
+          "lineNumber": 69
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "toMember",
+          "lineNumber": 69
+        },
+        {
+          "caller": "toClass",
+          "callee": "getInstance",
+          "lineNumber": 72
+        },
+        {
+          "caller": "toMethod",
+          "callee": "loadClass",
+          "lineNumber": 74
+        },
+        {
+          "caller": "toMethod",
+          "callee": "findMethodExactIfExists",
+          "lineNumber": 76
+        },
+        {
+          "caller": "toMethod",
+          "callee": "toTypedArray",
+          "lineNumber": 76
+        },
+        {
+          "caller": "toMethod",
+          "callee": "also",
+          "lineNumber": 78
+        },
+        {
+          "caller": "toMethod",
+          "callee": "NoSuchMethodException",
+          "lineNumber": 79
+        },
+        {
+          "caller": "toConstructor",
+          "callee": "loadClass",
+          "lineNumber": 83
+        },
+        {
+          "caller": "toConstructor",
+          "callee": "findConstructorExactIfExists",
+          "lineNumber": 85
+        },
+        {
+          "caller": "toConstructor",
+          "callee": "toTypedArray",
+          "lineNumber": 85
+        },
+        {
+          "caller": "toConstructor",
+          "callee": "also",
+          "lineNumber": 87
+        },
+        {
+          "caller": "toConstructor",
+          "callee": "NoSuchMethodException",
+          "lineNumber": 88
+        },
+        {
+          "caller": "toMember",
+          "callee": "toMethod",
+          "lineNumber": 93
+        },
+        {
+          "caller": "toMember",
+          "callee": "toConstructor",
+          "lineNumber": 94
+        },
+        {
+          "caller": "toMember",
+          "callee": "NotImplementedError",
+          "lineNumber": 95
+        },
+        {
+          "caller": "toField",
+          "callee": "getFieldInstance",
+          "lineNumber": 99
+        },
+        {
+          "caller": "clearAll",
+          "callee": "clear",
+          "lineNumber": 112
+        },
+        {
+          "caller": "getString",
+          "callee": "getOrDefault",
+          "lineNumber": 115
+        },
+        {
+          "caller": "getStringList",
+          "callee": "split",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getStringList",
+          "callee": "takeIf",
+          "lineNumber": 122
+        },
+        {
+          "caller": "getStringList",
+          "callee": "getOrDefault",
+          "lineNumber": 122
+        },
+        {
+          "caller": "putString",
+          "callee": "put",
+          "lineNumber": 125
+        },
+        {
+          "caller": "putStringList",
+          "callee": "put",
+          "lineNumber": 129
+        },
+        {
+          "caller": "putStringList",
+          "callee": "joinToString",
+          "lineNumber": 129
+        },
+        {
+          "caller": "remove",
+          "callee": "remove",
+          "lineNumber": 133
+        },
+        {
+          "caller": "saveCache",
+          "callee": "edit",
+          "lineNumber": 137
+        },
+        {
+          "caller": "saveCache",
+          "callee": "clear",
+          "lineNumber": 138
+        },
+        {
+          "caller": "saveCache",
+          "callee": "forEach",
+          "lineNumber": 139
+        },
+        {
+          "caller": "saveCache",
+          "callee": "putString",
+          "lineNumber": 140
+        },
+        {
+          "caller": "saveCache",
+          "callee": "commit",
+          "lineNumber": 142
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "measureTimeMillis",
+          "lineNumber": 178
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "loadCacheIfValid",
+          "lineNumber": 179
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "log",
+          "lineNumber": 181
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "log",
+          "lineNumber": 182
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "getAppVersion",
+          "lineNumber": 182
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "executePatches",
+          "lineNumber": 184
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "finalizePatching",
+          "lineNumber": 185
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "logDebugInfo",
+          "lineNumber": 186
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "close",
+          "lineNumber": 189
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "clearClosedBridges",
+          "lineNumber": 191
+        },
+        {
+          "caller": "applyPatches",
+          "callee": "printDebug",
+          "lineNumber": 195
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "getPackageInfo",
+          "lineNumber": 202
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "getString",
+          "lineNumber": 205
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "equals",
+          "lineNumber": 206
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "printInfo",
+          "lineNumber": 208
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "printInfo",
+          "lineNumber": 209
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "printInfo",
+          "lineNumber": 210
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "clearAll",
+          "lineNumber": 213
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "putString",
+          "lineNumber": 214
+        },
+        {
+          "caller": "loadCacheIfValid",
+          "callee": "showToastLong",
+          "lineNumber": 215
+        },
+        {
+          "caller": "executePatches",
+          "callee": "forEach",
+          "lineNumber": 220
+        },
+        {
+          "caller": "executePatches",
+          "callee": "contains",
+          "lineNumber": 221
+        },
+        {
+          "caller": "executePatches",
+          "callee": "getBoolean",
+          "lineNumber": 225
+        },
+        {
+          "caller": "executePatches",
+          "callee": "onSuccess",
+          "lineNumber": 227
+        },
+        {
+          "caller": "executePatches",
+          "callee": "onFailure",
+          "lineNumber": 227
+        },
+        {
+          "caller": "executePatches",
+          "callee": "runCatching",
+          "lineNumber": 227
+        },
+        {
+          "caller": "executePatches",
+          "callee": "run",
+          "lineNumber": 227
+        },
+        {
+          "caller": "executePatches",
+          "callee": "log",
+          "lineNumber": 228
+        },
+        {
+          "caller": "executePatches",
+          "callee": "add",
+          "lineNumber": 229
+        },
+        {
+          "caller": "executePatches",
+          "callee": "add",
+          "lineNumber": 231
+        },
+        {
+          "caller": "finalizePatching",
+          "callee": "saveCache",
+          "lineNumber": 237
+        },
+        {
+          "caller": "finalizePatching",
+          "callee": "isEmpty",
+          "lineNumber": 238
+        },
+        {
+          "caller": "finalizePatching",
+          "callee": "log",
+          "lineNumber": 240
+        },
+        {
+          "caller": "finalizePatching",
+          "callee": "getAppVersion",
+          "lineNumber": 240
+        },
+        {
+          "caller": "finalizePatching",
+          "callee": "showToastLong",
+          "lineNumber": 241
+        },
+        {
+          "caller": "finalizePatching",
+          "callee": "joinToString",
+          "lineNumber": 241
+        },
+        {
+          "caller": "logDebugInfo",
+          "callee": "isEmpty",
+          "lineNumber": 246
+        },
+        {
+          "caller": "logDebugInfo",
+          "callee": "showToastLong",
+          "lineNumber": 249
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "getPackageInfo",
+          "lineNumber": 255
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "forEach",
+          "lineNumber": 266
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "contains",
+          "lineNumber": 267
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "onSuccess",
+          "lineNumber": 268
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "onFailure",
+          "lineNumber": 268
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "runCatching",
+          "lineNumber": 268
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "run",
+          "lineNumber": 268
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "DependedHookFailedException",
+          "lineNumber": 269
+        },
+        {
+          "caller": "dependsOn",
+          "callee": "add",
+          "lineNumber": 271
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethod",
+          "lineNumber": 292
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethod",
+          "lineNumber": 296
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethod",
+          "lineNumber": 330
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "getDexMethod",
+          "lineNumber": 330
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "run",
+          "lineNumber": 330
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "hookMethod",
+          "lineNumber": 334
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "getDexMethod",
+          "lineNumber": 334
+        },
+        {
+          "caller": "hookMethod",
+          "callee": "run",
+          "lineNumber": 334
+        },
+        {
+          "caller": "wrapFind",
+          "callee": "also",
+          "lineNumber": 356
+        },
+        {
+          "caller": "wrapFind",
+          "callee": "funcFunc",
+          "lineNumber": 356
+        },
+        {
+          "caller": "wrapFind",
+          "callee": "printInfo",
+          "lineNumber": 356
+        },
+        {
+          "caller": "wrapFind",
+          "callee": "serializer",
+          "lineNumber": 356
+        },
+        {
+          "caller": "wrapFind",
+          "callee": "printInfo",
+          "lineNumber": 358
+        },
+        {
+          "caller": "wrapFindList",
+          "callee": "also",
+          "lineNumber": 371
+        },
+        {
+          "caller": "wrapFindList",
+          "callee": "funcFunc",
+          "lineNumber": 371
+        },
+        {
+          "caller": "wrapFindList",
+          "callee": "printInfo",
+          "lineNumber": 372
+        },
+        {
+          "caller": "wrapFindList",
+          "callee": "joinToString",
+          "lineNumber": 372
+        },
+        {
+          "caller": "wrapFindList",
+          "callee": "serializer",
+          "lineNumber": 372
+        },
+        {
+          "caller": "wrapFindList",
+          "callee": "printInfo",
+          "lineNumber": 375
+        },
+        {
+          "caller": "wrapFindList",
+          "callee": "emptyList",
+          "lineNumber": 376
+        },
+        {
+          "caller": "getDexClass",
+          "callee": "getClassDirectOrNull",
+          "lineNumber": 383
+        },
+        {
+          "caller": "getDexClass",
+          "callee": "wrapFind",
+          "lineNumber": 383
+        },
+        {
+          "caller": "getDexMethod",
+          "callee": "getMethodDirectOrNull",
+          "lineNumber": 387
+        },
+        {
+          "caller": "getDexMethod",
+          "callee": "wrapFind",
+          "lineNumber": 387
+        },
+        {
+          "caller": "getDexField",
+          "callee": "getFieldDirectOrNull",
+          "lineNumber": 391
+        },
+        {
+          "caller": "getDexField",
+          "callee": "wrapFind",
+          "lineNumber": 391
+        },
+        {
+          "caller": "getDexMethods",
+          "callee": "getMethodsDirectOrEmpty",
+          "lineNumber": 395
+        },
+        {
+          "caller": "getDexMethods",
+          "callee": "wrapFindList",
+          "lineNumber": 396
+        },
+        {
+          "caller": "onActivityCreated",
+          "callee": "printDebug",
+          "lineNumber": 408
+        },
+        {
+          "caller": "onActivityCreated",
+          "callee": "destroy",
+          "lineNumber": 410
+        },
+        {
+          "caller": "onActivityCreated",
+          "callee": "WebView",
+          "lineNumber": 410
+        },
+        {
+          "caller": "onActivityCreated",
+          "callee": "addModuleAssets",
+          "lineNumber": 411
+        },
+        {
+          "caller": "onActivityCreated",
+          "callee": "addModuleAssets",
+          "lineNumber": 415
+        },
+        {
+          "caller": "onActivityDestroyed",
+          "callee": "printDebug",
+          "lineNumber": 419
+        },
+        {
+          "caller": "onActivityPaused",
+          "callee": "printDebug",
+          "lineNumber": 423
+        },
+        {
+          "caller": "onActivityResumed",
+          "callee": "printDebug",
+          "lineNumber": 427
+        },
+        {
+          "caller": "onActivityResumed",
+          "callee": "addModuleAssets",
+          "lineNumber": 428
+        },
+        {
+          "caller": "onActivitySaveInstanceState",
+          "callee": "printDebug",
+          "lineNumber": 432
+        },
+        {
+          "caller": "onActivityStarted",
+          "callee": "printDebug",
+          "lineNumber": 436
+        },
+        {
+          "caller": "onActivityStopped",
+          "callee": "printDebug",
+          "lineNumber": 440
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 50,
+        "functionCount": 34,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/FingerprintQueryCache.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 63,
+      "nonEmptyLines": 53,
+      "functions": [
+        {
+          "name": "getOrQuery",
+          "startLine": 30,
+          "endLine": 52,
+          "params": [
+            "bridge",
+            "fingerprint",
+            "query"
+          ]
+        },
+        {
+          "name": "clearClosedBridges",
+          "startLine": 54,
+          "endLine": 58,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "FingerprintQueryCache",
+          "startLine": 12,
+          "endLine": 63,
+          "methods": [
+            "getOrQuery",
+            "clearClosedBridges"
+          ],
+          "properties": [
+            "capacity",
+            "bridges"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "getOrQuery",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "clearClosedBridges",
+          "line": 54,
+          "isDefault": false
+        },
+        {
+          "name": "FingerprintQueryCache",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hashCode",
+          "callee": "identityHashCode",
+          "lineNumber": 19
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "query",
+          "lineNumber": 35
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "synchronized",
+          "lineNumber": 37
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "removeAll",
+          "lineNumber": 39
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "check",
+          "lineNumber": 40
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "getOrPut",
+          "lineNumber": 41
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "Queries",
+          "lineNumber": 41
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "synchronized",
+          "lineNumber": 45
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "check",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "Key",
+          "lineNumber": 47
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "also",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "unmodifiableList",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "ArrayList",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getOrQuery",
+          "callee": "query",
+          "lineNumber": 48
+        },
+        {
+          "caller": "clearClosedBridges",
+          "callee": "synchronized",
+          "lineNumber": 55
+        },
+        {
+          "caller": "clearClosedBridges",
+          "callee": "removeAll",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/ad/HideFullscreenAdsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "HideFullscreenAds",
+          "startLine": 9,
+          "endLine": 35,
+          "params": [
+            "preferenceScreen"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "HideFullscreenAds",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "patch",
+          "lineNumber": 9
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "addPreferences",
+          "lineNumber": 12
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "SwitchPreference",
+          "lineNumber": 13
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "hookMethod",
+          "lineNumber": 18
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "after",
+          "lineNumber": 20
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "get",
+          "lineNumber": 22
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "closeFullscreenAd",
+          "lineNumber": 23
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "hookMethod",
+          "lineNumber": 27
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "getDeclaredMethod",
+          "lineNumber": 27
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "before",
+          "lineNumber": 31
+        },
+        {
+          "caller": "HideFullscreenAds",
+          "callee": "backPressed",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/layout/returnyoutubedislike/LikeDislikeButtons.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 27,
+      "functions": [
+        {
+          "name": "hookLikeDislikeButtons",
+          "startLine": 10,
+          "endLine": 30,
+          "params": [
+            "onComponentHostContentDescription",
+            "onYogaSetWidth"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "hookLikeDislikeButtons",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hookLikeDislikeButtons",
+          "callee": "hookMethod",
+          "lineNumber": 16
+        },
+        {
+          "caller": "hookLikeDislikeButtons",
+          "callee": "before",
+          "lineNumber": 17
+        },
+        {
+          "caller": "hookLikeDislikeButtons",
+          "callee": "onComponentHostContentDescription",
+          "lineNumber": 18
+        },
+        {
+          "caller": "hookLikeDislikeButtons",
+          "callee": "hookMethod",
+          "lineNumber": 26
+        },
+        {
+          "caller": "hookLikeDislikeButtons",
+          "callee": "before",
+          "lineNumber": 28
+        },
+        {
+          "caller": "hookLikeDislikeButtons",
+          "callee": "onYogaSetWidth",
+          "lineNumber": 28
+        },
+        {
+          "caller": "hookLikeDislikeButtons",
+          "callee": "getLong",
+          "lineNumber": 28
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/audio/tracks/ForceOriginalAudioPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 71,
+      "nonEmptyLines": 62,
+      "functions": [
+        {
+          "name": "forceOriginalAudioPatch",
+          "startLine": 15,
+          "endLine": 71,
+          "params": [
+            "block",
+            "executeBlock",
+            "fixUseLocalizedAudioTrackFlag",
+            "forcedServerAdaptiveStreaming",
+            "mainActivityOnCreateFingerprint",
+            "subclassExtensionClassDescriptor",
+            "preferenceScreen"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "forceOriginalAudioPatch",
+          "line": 15,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "patch",
+          "lineNumber": 23
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "block",
+          "lineNumber": 27
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "addPreferences",
+          "lineNumber": 29
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "SwitchPreference",
+          "lineNumber": 30
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "hookMethod",
+          "lineNumber": 41
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "toMethod",
+          "lineNumber": 42
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "toMethod",
+          "lineNumber": 43
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "after",
+          "lineNumber": 44
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "isDefaultAudioStream",
+          "lineNumber": 45
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "getAudioTrackIdMethod",
+          "lineNumber": 47
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "getAudioTrackDisplayNameMethod",
+          "lineNumber": 48
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "fixUseLocalizedAudioTrackFlag",
+          "lineNumber": 55
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "insertLiteralOverride",
+          "lineNumber": 56
+        },
+        {
+          "caller": "forceOriginalAudioPatch",
+          "callee": "executeBlock",
+          "lineNumber": 70
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/auth/AuthHookPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 46,
+      "nonEmptyLines": 39,
+      "functions": [
+        {
+          "name": "authHookPatch",
+          "startLine": 16,
+          "endLine": 46,
+          "params": [
+            "emptyPageIdHook",
+            "block"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "authHookPatch",
+          "line": 16,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "authHookPatch",
+          "callee": "patch",
+          "lineNumber": 19
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "block",
+          "lineNumber": 22
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "hookMethod",
+          "lineNumber": 23
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "dependsOn",
+          "lineNumber": 23
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "after",
+          "lineNumber": 26
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "setPageId",
+          "lineNumber": 26
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "forEach",
+          "lineNumber": 29
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "emptyPageIdHook",
+          "lineNumber": 29
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "hookMethod",
+          "lineNumber": 30
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "before",
+          "lineNumber": 32
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "setPageId",
+          "lineNumber": 32
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "get",
+          "lineNumber": 32
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "hookMethod",
+          "lineNumber": 37
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "after",
+          "lineNumber": 38
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "setIncognitoStatus",
+          "lineNumber": 38
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "hookBuildRequest",
+          "lineNumber": 42
+        },
+        {
+          "caller": "authHookPatch",
+          "callee": "setRequestHeaders",
+          "lineNumber": 43
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/filter/LithoFilterPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 158,
+      "nonEmptyLines": 138,
+      "functions": [
+        {
+          "name": "addLithoFilter",
+          "startLine": 16,
+          "endLine": 18,
+          "params": [
+            "filter"
+          ]
+        },
+        {
+          "name": "sharedLithoFilterPatch",
+          "startLine": 68,
+          "endLine": 158,
+          "params": [
+            "hookNonNativeBuffer",
+            "overrideUpbFeatureFlag",
+            "useLegacyLithoFiltering",
+            "block"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "addLithoFilter",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "sharedLithoFilterPatch",
+          "line": 68,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addLithoFilter",
+          "callee": "addFilter",
+          "lineNumber": 17
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "patch",
+          "lineNumber": 73
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "block",
+          "lineNumber": 76
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "hookMethod",
+          "lineNumber": 79
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "getDeclaredMethod",
+          "lineNumber": 79
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "returnConstant",
+          "lineNumber": 80
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "useLegacyLithoFiltering",
+          "lineNumber": 80
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "hookMethod",
+          "lineNumber": 85
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "before",
+          "lineNumber": 86
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "setProtoBuffer",
+          "lineNumber": 87
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "ThreadLocal",
+          "lineNumber": 98
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "hookMethod",
+          "lineNumber": 99
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "scopedHook",
+          "lineNumber": 99
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "before",
+          "lineNumber": 100
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "set",
+          "lineNumber": 101
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "hookMethod",
+          "lineNumber": 105
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "after",
+          "lineNumber": 111
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "isInstance",
+          "lineNumber": 115
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "protoBufferEncodeMethod",
+          "lineNumber": 116
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "byteArrayOf",
+          "lineNumber": 117
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "get",
+          "lineNumber": 118
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "remove",
+          "lineNumber": 119
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "let",
+          "lineNumber": 120
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "accessibilityIdMethod",
+          "lineNumber": 120
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "let",
+          "lineNumber": 121
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "accessibilityTextMethod",
+          "lineNumber": 121
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "isFiltered",
+          "lineNumber": 123
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "ConversionContext",
+          "lineNumber": 124
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "new",
+          "lineNumber": 130
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "hookMethod",
+          "lineNumber": 139
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "before",
+          "lineNumber": 140
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "getExecutorCorePoolSize",
+          "lineNumber": 141
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "getExecutorMaxThreads",
+          "lineNumber": 142
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "overrideUpbFeatureFlag",
+          "lineNumber": 153
+        },
+        {
+          "caller": "sharedLithoFilterPatch",
+          "callee": "insertLiteralOverride",
+          "lineNumber": 154
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/node/TreeNodeElementHookPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 76,
+      "nonEmptyLines": 67,
+      "functions": [
+        {
+          "name": "hookTreeNodeResult",
+          "startLine": 20,
+          "endLine": 28,
+          "params": [
+            "handler",
+            "isLazilyConvertedElement"
+          ]
+        },
+        {
+          "name": "onComponentLoaded",
+          "startLine": 30,
+          "endLine": 32,
+          "params": [
+            "path",
+            "treeNodeResultList"
+          ]
+        },
+        {
+          "name": "onLazilyConvertedElementLoaded",
+          "startLine": 34,
+          "endLine": 39,
+          "params": [
+            "identifier",
+            "treeNodeResultList"
+          ]
+        },
+        {
+          "name": "createTreeNodeElementHookPatch",
+          "startLine": 50,
+          "endLine": 76,
+          "params": [
+            "sharedExtensionPatchDep",
+            "conversionContextPatchDep",
+            "addLithoContainerInterface",
+            "useLegacyContextRegister"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "hookTreeNodeResult",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "onComponentLoaded",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "onLazilyConvertedElementLoaded",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "createTreeNodeElementHookPatch",
+          "line": 50,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hookTreeNodeResult",
+          "callee": "add",
+          "lineNumber": 27
+        },
+        {
+          "caller": "onComponentLoaded",
+          "callee": "forEach",
+          "lineNumber": 31
+        },
+        {
+          "caller": "onComponentLoaded",
+          "callee": "hook",
+          "lineNumber": 31
+        },
+        {
+          "caller": "onLazilyConvertedElementLoaded",
+          "callee": "forEach",
+          "lineNumber": 38
+        },
+        {
+          "caller": "onLazilyConvertedElementLoaded",
+          "callee": "hook",
+          "lineNumber": 38
+        },
+        {
+          "caller": "createTreeNodeElementHookPatch",
+          "callee": "patch",
+          "lineNumber": 55
+        },
+        {
+          "caller": "createTreeNodeElementHookPatch",
+          "callee": "dependsOn",
+          "lineNumber": 58
+        },
+        {
+          "caller": "createTreeNodeElementHookPatch",
+          "callee": "hookMethod",
+          "lineNumber": 63
+        },
+        {
+          "caller": "createTreeNodeElementHookPatch",
+          "callee": "after",
+          "lineNumber": 64
+        },
+        {
+          "caller": "createTreeNodeElementHookPatch",
+          "callee": "onTreeNodeResultLoaded",
+          "lineNumber": 68
+        },
+        {
+          "caller": "createTreeNodeElementHookPatch",
+          "callee": "ConversionContext",
+          "lineNumber": 69
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 4,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/privacy/SanitizeSharingLinksPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 51,
+      "functions": [
+        {
+          "name": "SanitizeSharingLinks",
+          "startLine": 14,
+          "endLine": 59,
+          "params": [
+            "preferenceScreen",
+            "replaceMusicLinksWithYouTube",
+            "replaceLinksWithShortener"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "SanitizeSharingLinks",
+          "line": 14,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "SanitizeSharingLinks",
+          "callee": "SwitchPreference",
+          "lineNumber": 20
+        },
+        {
+          "caller": "SanitizeSharingLinks",
+          "callee": "addPreferences",
+          "lineNumber": 22
+        },
+        {
+          "caller": "SanitizeSharingLinks",
+          "callee": "SwitchPreference",
+          "lineNumber": 25
+        },
+        {
+          "caller": "SanitizeSharingLinks",
+          "callee": "SwitchPreference",
+          "lineNumber": 26
+        },
+        {
+          "caller": "SanitizeSharingLinks",
+          "callee": "noTitleUnsortedPreferenceCategory",
+          "lineNumber": 28
+        },
+        {
+          "caller": "beforeHookedMethod",
+          "callee": "startsWith",
+          "lineNumber": 37
+        },
+        {
+          "caller": "beforeHookedMethod",
+          "callee": "sanitize",
+          "lineNumber": 38
+        },
+        {
+          "caller": "SanitizeSharingLinks",
+          "callee": "findAndHookMethod",
+          "lineNumber": 42
+        },
+        {
+          "caller": "SanitizeSharingLinks",
+          "callee": "findAndHookMethod",
+          "lineNumber": 51
+        }
+      ],
+      "metrics": {
+        "importCount": 4,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreferenceScreen.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 105,
+      "nonEmptyLines": 91,
+      "functions": [
+        {
+          "name": "close",
+          "startLine": 10,
+          "endLine": 16,
+          "params": []
+        },
+        {
+          "name": "commit",
+          "startLine": 21,
+          "endLine": 21,
+          "params": [
+            "screen"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "BasePreferenceScreen",
+          "startLine": 6,
+          "endLine": 105,
+          "methods": [
+            "close",
+            "commit"
+          ],
+          "properties": [
+            "root"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "close",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "commit",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "BasePreferenceScreen",
+          "line": 6,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "close",
+          "callee": "isEmpty",
+          "lineNumber": 11
+        },
+        {
+          "caller": "close",
+          "callee": "forEach",
+          "lineNumber": 13
+        },
+        {
+          "caller": "close",
+          "callee": "commit",
+          "lineNumber": 14
+        },
+        {
+          "caller": "close",
+          "callee": "transform",
+          "lineNumber": 14
+        },
+        {
+          "caller": "transform",
+          "callee": "PreferenceScreenPreference",
+          "lineNumber": 36
+        },
+        {
+          "caller": "transform",
+          "callee": "map",
+          "lineNumber": 46
+        },
+        {
+          "caller": "transform",
+          "callee": "transform",
+          "lineNumber": 46
+        },
+        {
+          "caller": "ensureScreenInserted",
+          "callee": "contains",
+          "lineNumber": 52
+        },
+        {
+          "caller": "ensureScreenInserted",
+          "callee": "add",
+          "lineNumber": 53
+        },
+        {
+          "caller": "addPreferences",
+          "callee": "ensureScreenInserted",
+          "lineNumber": 58
+        },
+        {
+          "caller": "addPreferences",
+          "callee": "addAll",
+          "lineNumber": 59
+        },
+        {
+          "caller": "transform",
+          "callee": "PreferenceCategory",
+          "lineNumber": 71
+        },
+        {
+          "caller": "addPreferences",
+          "callee": "ensureScreenInserted",
+          "lineNumber": 83
+        },
+        {
+          "caller": "addPreferences",
+          "callee": "contains",
+          "lineNumber": 86
+        },
+        {
+          "caller": "addPreferences",
+          "callee": "add",
+          "lineNumber": 87
+        },
+        {
+          "caller": "addPreferences",
+          "callee": "addAll",
+          "lineNumber": 90
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/playlistautoplay/NavigationIntentHook.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 28,
+      "nonEmptyLines": 25,
+      "functions": [
+        {
+          "name": "navigationIntentHook",
+          "startLine": 17,
+          "endLine": 28,
+          "params": [
+            "callback"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "navigationIntentHook",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "navigationIntentHook",
+          "callee": "forEach",
+          "lineNumber": 18
+        },
+        {
+          "caller": "navigationIntentHook",
+          "callee": "hookMethod",
+          "lineNumber": 20
+        },
+        {
+          "caller": "navigationIntentHook",
+          "callee": "before",
+          "lineNumber": 21
+        },
+        {
+          "caller": "navigationIntentHook",
+          "callee": "callback",
+          "lineNumber": 22
+        },
+        {
+          "caller": "navigationIntentHook",
+          "callee": "get",
+          "lineNumber": 22
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/ClientContextHookPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 93,
+      "nonEmptyLines": 78,
+      "functions": [
+        {
+          "name": "addClientVersionHook",
+          "startLine": 83,
+          "endLine": 87,
+          "params": [
+            "endPoint",
+            "hook"
+          ]
+        },
+        {
+          "name": "addOSNameHook",
+          "startLine": 89,
+          "endLine": 93,
+          "params": [
+            "endPoint",
+            "hook"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "Endpoint",
+          "startLine": 12,
+          "endLine": 38,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "Endpoint",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "addClientVersionHook",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "addOSNameHook",
+          "line": 89,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addClientVersionHook",
+          "callee": "add",
+          "lineNumber": 84
+        },
+        {
+          "caller": "addClientVersionHook",
+          "callee": "set",
+          "lineNumber": 85
+        },
+        {
+          "caller": "addClientVersionHook",
+          "callee": "hook",
+          "lineNumber": 85
+        },
+        {
+          "caller": "addClientVersionHook",
+          "callee": "get",
+          "lineNumber": 85
+        },
+        {
+          "caller": "addOSNameHook",
+          "callee": "add",
+          "lineNumber": 90
+        },
+        {
+          "caller": "addOSNameHook",
+          "callee": "set",
+          "lineNumber": 91
+        },
+        {
+          "caller": "addOSNameHook",
+          "callee": "hook",
+          "lineNumber": 91
+        },
+        {
+          "caller": "addOSNameHook",
+          "callee": "get",
+          "lineNumber": 91
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/LegacyPlayerControlsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 273,
+      "nonEmptyLines": 228,
+      "functions": [
+        {
+          "name": "addTopControl",
+          "startLine": 49,
+          "endLine": 51,
+          "params": [
+            "layout",
+            "startViewId",
+            "endViewId"
+          ]
+        },
+        {
+          "name": "addLegacyBottomControl",
+          "startLine": 53,
+          "endLine": 55,
+          "params": [
+            "layout"
+          ]
+        },
+        {
+          "name": "disableNewPlayerControlsFeatureFlag",
+          "startLine": 59,
+          "endLine": 83,
+          "params": []
+        },
+        {
+          "name": "initializeTopControl",
+          "startLine": 85,
+          "endLine": 87,
+          "params": [
+            "control"
+          ]
+        },
+        {
+          "name": "initializeLegacyBottomControl",
+          "startLine": 89,
+          "endLine": 91,
+          "params": [
+            "control"
+          ]
+        },
+        {
+          "name": "onTopContainerInflate",
+          "startLine": 93,
+          "endLine": 119,
+          "params": [
+            "viewStub",
+            "root"
+          ]
+        },
+        {
+          "name": "onBottomContainerInflate",
+          "startLine": 121,
+          "endLine": 132,
+          "params": [
+            "viewStub",
+            "root"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ControlInitializer",
+          "startLine": 35,
+          "endLine": 38,
+          "methods": [],
+          "properties": [
+            "id",
+            "initializeButton"
+          ]
+        },
+        {
+          "name": "TopControlLayout",
+          "startLine": 40,
+          "endLine": 42,
+          "methods": [],
+          "properties": [
+            "layout",
+            "startViewId",
+            "endViewId"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ControlInitializer",
+          "line": 35,
+          "isDefault": false
+        },
+        {
+          "name": "addTopControl",
+          "line": 49,
+          "isDefault": false
+        },
+        {
+          "name": "addLegacyBottomControl",
+          "line": 53,
+          "isDefault": false
+        },
+        {
+          "name": "disableNewPlayerControlsFeatureFlag",
+          "line": 59,
+          "isDefault": false
+        },
+        {
+          "name": "initializeTopControl",
+          "line": 85,
+          "isDefault": false
+        },
+        {
+          "name": "initializeLegacyBottomControl",
+          "line": 89,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addTopControl",
+          "callee": "add",
+          "lineNumber": 50
+        },
+        {
+          "caller": "addTopControl",
+          "callee": "TopControlLayout",
+          "lineNumber": 50
+        },
+        {
+          "caller": "addLegacyBottomControl",
+          "callee": "add",
+          "lineNumber": 54
+        },
+        {
+          "caller": "disableNewPlayerControlsFeatureFlag",
+          "callee": "insertLiteralOverride",
+          "lineNumber": 64
+        },
+        {
+          "caller": "disableNewPlayerControlsFeatureFlag",
+          "callee": "insertLiteralOverride",
+          "lineNumber": 68
+        },
+        {
+          "caller": "disableNewPlayerControlsFeatureFlag",
+          "callee": "forEach",
+          "lineNumber": 73
+        },
+        {
+          "caller": "disableNewPlayerControlsFeatureFlag",
+          "callee": "hookMethod",
+          "lineNumber": 75
+        },
+        {
+          "caller": "disableNewPlayerControlsFeatureFlag",
+          "callee": "scopedHook",
+          "lineNumber": 75
+        },
+        {
+          "caller": "disableNewPlayerControlsFeatureFlag",
+          "callee": "after",
+          "lineNumber": 76
+        },
+        {
+          "caller": "disableNewPlayerControlsFeatureFlag",
+          "callee": "getOriginalNewPlayerOverlays",
+          "lineNumber": 77
+        },
+        {
+          "caller": "initializeTopControl",
+          "callee": "add",
+          "lineNumber": 86
+        },
+        {
+          "caller": "initializeLegacyBottomControl",
+          "callee": "add",
+          "lineNumber": 90
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "forEach",
+          "lineNumber": 94
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "inflate",
+          "lineNumber": 95
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "getIdIdentifier",
+          "lineNumber": 98
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "getIdIdentifier",
+          "lineNumber": 99
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "findViewById",
+          "lineNumber": 102
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "findViewById",
+          "lineNumber": 103
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "addRule",
+          "lineNumber": 105
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "addRule",
+          "lineNumber": 109
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "forEach",
+          "lineNumber": 116
+        },
+        {
+          "caller": "onTopContainerInflate",
+          "callee": "initializeButton",
+          "lineNumber": 117
+        },
+        {
+          "caller": "onBottomContainerInflate",
+          "callee": "usePlayerBottomControlsExploderLayout",
+          "lineNumber": 122
+        },
+        {
+          "caller": "onBottomContainerInflate",
+          "callee": "forEach",
+          "lineNumber": 126
+        },
+        {
+          "caller": "onBottomContainerInflate",
+          "callee": "inflate",
+          "lineNumber": 127
+        },
+        {
+          "caller": "onBottomContainerInflate",
+          "callee": "forEach",
+          "lineNumber": 129
+        },
+        {
+          "caller": "onBottomContainerInflate",
+          "callee": "initializeButton",
+          "lineNumber": 130
+        },
+        {
+          "caller": "overrideExploderLayout",
+          "callee": "insertLiteralOverride",
+          "lineNumber": 191
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 6,
+        "functionCount": 7,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/test/java/io/github/nexalloy/ApkContext.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 82,
+      "nonEmptyLines": 72,
+      "functions": [
+        {
+          "name": "setupCurrentThread",
+          "startLine": 39,
+          "endLine": 41,
+          "params": []
+        },
+        {
+          "name": "close",
+          "startLine": 43,
+          "endLine": 53,
+          "params": []
+        },
+        {
+          "name": "setupDexKit",
+          "startLine": 55,
+          "endLine": 62,
+          "params": [
+            "apkPath"
+          ]
+        },
+        {
+          "name": "setupJadx",
+          "startLine": 64,
+          "endLine": 72,
+          "params": [
+            "apkPath"
+          ]
+        },
+        {
+          "name": "getAppVersion",
+          "startLine": 74,
+          "endLine": 81,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ApkContext",
+          "startLine": 17,
+          "endLine": 82,
+          "methods": [
+            "setupCurrentThread",
+            "close",
+            "setupDexKit",
+            "setupJadx",
+            "getAppVersion"
+          ],
+          "properties": [
+            "dexkit",
+            "jadx",
+            "appVersion"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "dexkit",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "jadx",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "appVersion",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "setupCurrentThread",
+          "line": 39,
+          "isDefault": false
+        },
+        {
+          "name": "close",
+          "line": 43,
+          "isDefault": false
+        },
+        {
+          "name": "ApkContext",
+          "line": 17,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "get",
+          "callee": "get",
+          "lineNumber": 34
+        },
+        {
+          "caller": "setupCurrentThread",
+          "callee": "set",
+          "lineNumber": 40
+        },
+        {
+          "caller": "setupCurrentThread",
+          "callee": "JadxResourceReader",
+          "lineNumber": 40
+        },
+        {
+          "caller": "close",
+          "callee": "close",
+          "lineNumber": 45
+        },
+        {
+          "caller": "close",
+          "callee": "close",
+          "lineNumber": 48
+        },
+        {
+          "caller": "close",
+          "callee": "clearClosedBridges",
+          "lineNumber": 50
+        },
+        {
+          "caller": "setupDexKit",
+          "callee": "loadLibrary",
+          "lineNumber": 57
+        },
+        {
+          "caller": "setupDexKit",
+          "callee": "loadLibrary",
+          "lineNumber": 59
+        },
+        {
+          "caller": "setupDexKit",
+          "callee": "create",
+          "lineNumber": 61
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "apply",
+          "lineNumber": 65
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "JadxArgs",
+          "lineNumber": 65
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "setInputFile",
+          "lineNumber": 66
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "File",
+          "lineNumber": 66
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "JadxSecurity",
+          "lineNumber": 67
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "none",
+          "lineNumber": 67
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "JadxDecompiler",
+          "lineNumber": 69
+        },
+        {
+          "caller": "setupJadx",
+          "callee": "load",
+          "lineNumber": 70
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "AndroidManifestParser",
+          "lineNumber": 75
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "getAndroidManifest",
+          "lineNumber": 76
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "of",
+          "lineNumber": 77
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "JadxSecurity",
+          "lineNumber": 78
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "none",
+          "lineNumber": 78
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "AppVersion",
+          "lineNumber": 80
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "removeSuffix",
+          "lineNumber": 80
+        },
+        {
+          "caller": "getAppVersion",
+          "callee": "parse",
+          "lineNumber": 80
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    }
+  ]
+}

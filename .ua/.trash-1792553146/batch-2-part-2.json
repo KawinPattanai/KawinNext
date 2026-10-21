@@ -1,0 +1,1604 @@
+{
+ "nodes": [
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ของฟีเจอร์เล่นพื้นหลัง (background playback): ตัวจัดการ playback, ค่า settings ปกติ/legacy และนโยบายของ YouTube Kids ที่หยุดเสียงหลังออกหน้าจอ",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "audio-playback"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackManagerFingerprint",
+   "type": "class",
+   "name": "BackgroundPlaybackManagerFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "lineRange": [
+    22,
+    53
+   ],
+   "summary": "ระบุคลาส BackgroundPlaybackManager ที่ตัดสินว่าจะให้เล่นต่อย่างทฤษฎีเหตุ (แอปถูกทำลาย/สถานะหน้าจอ)",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackSettingsFingerprint",
+   "type": "class",
+   "name": "BackgroundPlaybackSettingsFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "lineRange": [
+    58,
+    76
+   ],
+   "summary": "ระบุเมธอด settings ที่รายงานว่าการเล่นพื้นหลังถูกบังคับหรือปิดใช้ เพื่อ patch บังคับค่า",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackSettingsLegacyFingerprint",
+   "type": "class",
+   "name": "BackgroundPlaybackSettingsLegacyFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "lineRange": [
+    81,
+    93
+   ],
+   "summary": "ตัวแปร legacy ของ fingerprint การตั้งค่า เมื่อเวอร์ชัน YouTube เก่ากว่าใช้ methods ต่างกัน",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:KidsBackgroundPlaybackPolicyControllerFingerprint",
+   "type": "class",
+   "name": "KidsBackgroundPlaybackPolicyControllerFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "lineRange": [
+    105,
+    119
+   ],
+   "summary": "ระบุ controller ของ YouTube Kids ที่ตัดสินว่าจะหยุดเสียงเมื่อสูญหาย focus หรือไม่",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ของ chapter/timed marker และ heatmap: หาคลาส marker, ตัวเข้าถึง array (สร้างแบบไดนามิก) และจุดอ่าน peak ของ heatmap เพื่อซ่อนหรือแปลงสไตล์ components",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "player-ui"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:TimelineMarkerFingerprint",
+   "type": "class",
+   "name": "TimelineMarkerFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "lineRange": [
+    25,
+    31
+   ],
+   "summary": "ระบุคลาส TimelineMarker ที่แอปใช้บรรยายขอบเขตของ chapter",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:HeatMapPeakPointFingerprint",
+   "type": "class",
+   "name": "HeatMapPeakPointFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "lineRange": [
+    42,
+    67
+   ],
+   "summary": "ระบุเมธอดอ่าน peak point ของ heatmap เพื่อใช้กับการซ่อน heatmap หรือปรับความสูงส่วนแสดง",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:getTimelineMarkersArrayFingerprint",
+   "type": "function",
+   "name": "getTimelineMarkersArrayFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "lineRange": [
+    33,
+    40
+   ],
+   "summary": "สร้าง fingerprint แบบไดนามิกจากชื่อคลาส marker เพื่อหาเมธอดที่คืน array ของ chapter markers",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ของ client context hook: จับเมธอดสร้างข้อมูล client (clientContext, form factor, request body) รวมถึง constructors ของ Innertube endpoints หลายชนิด เพื่อสอดแทรกข้อมูล client ของ LSPosed",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube",
+    "xposed"
+   ],
+   "complexity": "complex"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:AuthenticationChangeListenerFingerprint",
+   "type": "class",
+   "name": "AuthenticationChangeListenerFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    25,
+    48
+   ],
+   "summary": "ระบุ listener ที่แอปได้รับแจ้งการเปลี่ยนสถานะ authentication เพื่อซิงก์สถานะ clientContext",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BuildClientContextBodyFingerprint",
+   "type": "class",
+   "name": "BuildClientContextBodyFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    50,
+    64
+   ],
+   "summary": "ระบุเมธอดหลักที่สร้าง body ของ client context สำหรับ request ในแอป",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BuildDummyClientContextBodyFingerprint",
+   "type": "class",
+   "name": "BuildDummyClientContextBodyFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    66,
+    81
+   ],
+   "summary": "ระบุเมธอดที่สร้าง body แบบ dummy/skeleton เพื่อให้เป็นแบบของรูปใน request",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ClientFormFactorEnumOrdinalFingerprint",
+   "type": "class",
+   "name": "ClientFormFactorEnumOrdinalFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    154,
+    159
+   ],
+   "summary": "ระบุลำดับ ordinal ของ enum ClientFormFactor เพื่อแทนค่าที่ต้องการ",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:EndpointRequestBodyFingerprint",
+   "type": "class",
+   "name": "EndpointRequestBodyFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    163,
+    186
+   ],
+   "summary": "ระบุเมธอดที่ได้รับ request body ของ endpoint เพื่อ mutation แอตทริบิวต์ที่ต้องการ",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BrowseEndpointParentFingerprint",
+   "type": "class",
+   "name": "BrowseEndpointParentFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    188,
+    191
+   ],
+   "summary": "ระบุ parent/interface ของ BrowseEndpoint เพื่อตรวจหรือแก้ค่า browseId",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:GuideEndpointConstructorFingerprint",
+   "type": "class",
+   "name": "GuideEndpointConstructorFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    211,
+    215
+   ],
+   "summary": "ระบุ constructor ของ GuideEndpoint เพื่อสอดแทรกค่าขของแผน guide",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:NextEndpointParentFingerprint",
+   "type": "class",
+   "name": "NextEndpointParentFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    217,
+    220
+   ],
+   "summary": "ระบุ parent ของ NextEndpoint (หน้ากดดูวิดีโอ) เพื่อดัดแปลง request",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:PlayerEndpointParentFingerprint",
+   "type": "class",
+   "name": "PlayerEndpointParentFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    222,
+    225
+   ],
+   "summary": "ระบุ parent ของ PlayerEndpoint (จุดเริ่มเล่นวิดีโอ) เพื่อดัดแปลง request",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelCreateItemsEndpointConstructorFingerprint",
+   "type": "class",
+   "name": "ReelCreateItemsEndpointConstructorFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    227,
+    232
+   ],
+   "summary": "ระบุ constructor ของ ReelCreateItemsEndpoint ที่ Shorts ใช้สร้างแผงรายการ",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelItemWatchEndpointConstructorFingerprint",
+   "type": "class",
+   "name": "ReelItemWatchEndpointConstructorFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    234,
+    238
+   ],
+   "summary": "ระบุ constructor ของ ReelItemWatchEndpoint ที่ Shorts ใช้เล่นรายการไว้",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelWatchSequenceEndpointConstructorFingerprint",
+   "type": "class",
+   "name": "ReelWatchSequenceEndpointConstructorFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    240,
+    244
+   ],
+   "summary": "ระบุ constructor ของ ReelWatchSequenceEndpoint ที่บันทึกลำดับ watch ของ Shorts",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:SearchRequestBuildParametersFingerprint",
+   "type": "class",
+   "name": "SearchRequestBuildParametersFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    246,
+    259
+   ],
+   "summary": "ระบุเมธอด build parameters ของ search request เพื่อดัดแปลง query/พารามิเตอร์",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:TranscriptEndpointConstructorFingerprint",
+   "type": "class",
+   "name": "TranscriptEndpointConstructorFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    261,
+    265
+   ],
+   "summary": "ระบุ constructor ของ TranscriptEndpoint (คำบรรยายของวิดีโอ) เพื่อดัดแปลงคำขอ transcript",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ของหน้าต่าง engagement panel ของ YouTube (ความคิดเห็น / รายการแนะนำ) เพื่อดัก/หยุดการอัปเดต panel ในเหตุการณ์ที่กำหนด",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "panels"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt:EngagementPanelUpdateFingerprint",
+   "type": "class",
+   "name": "EngagementPanelUpdateFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt",
+   "lineRange": [
+    12,
+    23
+   ],
+   "summary": "ระบุ private/final method ที่ข้าม target ให้ update/เปิด engagement panel เพื่อแก้พฤติกรรมการแสดงผล",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/Fingerprints.kt",
+   "summary": "โค้ด resolve สำหรับ interleaved request body ฝั่ง Innertube (fix video action bar) โดยใช้ context receiver รับ DexKitBridge สะอาด หา requestUri/method/field ต่าง ๆ ของรายไอเดีย watch เพื่อแก้ปุ่ม action bar",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube",
+    "xposed"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ของ image url hook: ดัก callbacks ของ network stack แนว Chromium (OnResponseStarted/OnFailure/OnSucceeded) และคลาส Request เพื่อแทน URL รูปภาพตอนโหลด",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "networking"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnFailureFingerprint",
+   "type": "class",
+   "name": "OnFailureFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "lineRange": [
+    28,
+    38
+   ],
+   "summary": "ระบุ callback OnFailure ของ image request เพื่อดักเหตุการณ์โหลดรูปล้มเหลว",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnSucceededFingerprint",
+   "type": "class",
+   "name": "OnSucceededFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "lineRange": [
+    40,
+    46
+   ],
+   "summary": "ระบุ callback OnSucceeded ขณะโหลดรูปสำเร็จ เพื่อยืนยันโครงสร้าง callback",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:RequestFingerprint",
+   "type": "class",
+   "name": "RequestFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "lineRange": [
+    50,
+    53
+   ],
+   "summary": "ระบุคลาส Request ที่เก็บ URL รูปภาพ เพื่อดักก่อนโหลดจริง",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:MessageDigestImageUrlFingerprint",
+   "type": "class",
+   "name": "MessageDigestImageUrlFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "lineRange": [
+    71,
+    75
+   ],
+   "summary": "ระบุ setter ของ hash (MessageDigest) ที่ใช้ที่ cache key ของ URL รูปภาพ",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ของ Litho RenderNext (การเรนเดอร์เนื้อหาหน้า feed): จับ feature flag, การตรวจ template และฟังก์ชันช่วยสร้างเงื่อนไขจับคู่การอ่าน field ของ config",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "litho"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextEnablementCheckFingerprint",
+   "type": "class",
+   "name": "RenderNextEnablementCheckFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "lineRange": [
+    23,
+    28
+   ],
+   "summary": "ระบุ getter ของ flag ที่บอกว่าเปิด RenderNext หรือยัง (แหล่งควบคุมการเรนเดอร์)",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextTemplateCheckFingerprint",
+   "type": "class",
+   "name": "RenderNextTemplateCheckFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "lineRange": [
+    93,
+    103
+   ],
+   "summary": "ระบุเมธอดที่ตรวจ template ตอนจัดรูปด้วย RenderNext",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextConfigFieldReadMatches",
+   "type": "function",
+   "name": "RenderNextConfigFieldReadMatches",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "lineRange": [
+    48,
+    79
+   ],
+   "summary": "ฟังก์ชนช่วยสร้างเงื่อนไข fieldAccess แบบ matchAll สำหรับการอ่าน field ของ config ที่ใช้กับ RenderNextConfigField",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "summary": "นิยาม fingerprint เกี่ยวกับการเปิดเล่นวิดีโอใหม่: คำสั่ง open-yt-content ใน mini-app, parcelable ที่แพ็กคอมม่าต์ intent และ flow ของ back button ตอนตัว intent ใหม่",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "intent-flow"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:MiniAppOpenYtContentCommandEndpointFingerprint",
+   "type": "class",
+   "name": "MiniAppOpenYtContentCommandEndpointFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "lineRange": [
+    20,
+    51
+   ],
+   "summary": "ระบุ command endpoint ของ mini-app ที่เรียกเปิดเนื้อหา YouTube ใหม่",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:OpenNewVideoIntentParcelableFingerprint",
+   "type": "class",
+   "name": "OpenNewVideoIntentParcelableFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "lineRange": [
+    53,
+    63
+   ],
+   "summary": "ระบุ parcelable (ข้อมูล status bar) ที่เก็บ intent เปิดวิดีโอใหม่ เพื่อดักการโฟกัส intent",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:BackButtonFinishActivityOnNewVideoIntentFingerprint",
+   "type": "class",
+   "name": "BackButtonFinishActivityOnNewVideoIntentFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "lineRange": [
+    65,
+    87
+   ],
+   "summary": "ระบุสายการจัดการ back button ที่จัด activity ตอนได้รับ intent วิดีโอใหม่ เพื่อเปลี่ยนพฤติกรรมการกด back",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ของ player controls: flag ของ overlay ชุดใหม่, endscreen อัตโนมัติ, โมเดลสถานะ visibility ของปุ่มควบคุม และ image components/tint ที่ถูกใช้ซ่อน/กู้ปุ่ม",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "player-ui"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:NewPlayerOverlaysFeatureFlagFingerprint",
+   "type": "class",
+   "name": "NewPlayerOverlaysFeatureFlagFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "lineRange": [
+    33,
+    38
+   ],
+   "summary": "ระบุ flag ที่บอกว่า player ใช้ overlay ชุดใหม่หรือไม่",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:AutonavEndscreenOverlayFingerprint",
+   "type": "class",
+   "name": "AutonavEndscreenOverlayFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "lineRange": [
+    40,
+    45
+   ],
+   "summary": "ระบุ overlay ของ endscreen/ระบบเล่นต่อ (autonav) เมื่อถึงท้ายวิดีโอ",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:PlayerControlsVisibilityEntityModelInit",
+   "type": "class",
+   "name": "PlayerControlsVisibilityEntityModelInit",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "lineRange": [
+    47,
+    50
+   ],
+   "summary": "ระบุ init ของ entity model ที่เก็บสถานะ visibility ของ controls เพื่อใช้อ่านค่าเริ่มต้น",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:PlayerControlsVisibilityEntityModelFingerprint",
+   "type": "class",
+   "name": "PlayerControlsVisibilityEntityModelFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "lineRange": [
+    52,
+    61
+   ],
+   "summary": "ระบุรูปแบบ model ที่ใช้อ่าน/เขียน state visibility ของปุ่มควบคุม เพื่อ hook การกู้คืน controls",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:ElementsImageComponentFingerprint",
+   "type": "class",
+   "name": "ElementsImageComponentFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "lineRange": [
+    66,
+    69
+   ],
+   "summary": "ระบุเมธอดของ image component (Litho) สำหรับไอคอนที่ใช้ในปุ่ม player",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:ElementsImageTintFingerprint",
+   "type": "class",
+   "name": "ElementsImageTintFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "lineRange": [
+    74,
+    75
+   ],
+   "summary": "ระบุ field tint ของ image component เพื่อปรับสีไอคอน",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "type": "file",
+   "name": "Fingerprints.kt",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "summary": "นิยาม fingerprint ฝั่งประเภทเพลเยอร์ (watch/inline/Shorts) และสถานะวิดีโอ เพื่อให้ patch รู้ว่าอยู่ในบริบทการเล่นแบบใด",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube",
+    "player-state"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:PlayerTypeFingerprint",
+   "type": "class",
+   "name": "PlayerTypeFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "lineRange": [
+    16,
+    23
+   ],
+   "summary": "ระบุ enum PlayerType ที่แอปใช้จำแนกรูปแบบเพลเยอร์ (watch/inline/shorts)",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:ReelWatchPagerFingerprint",
+   "type": "class",
+   "name": "ReelWatchPagerFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "lineRange": [
+    25,
+    32
+   ],
+   "summary": "ระบุ pager ของ Shorts (reel watch pager) เพื่อ hook การสลับรายการ",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:ControlsStateToStringFingerprint",
+   "type": "class",
+   "name": "ControlsStateToStringFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "lineRange": [
+    39,
+    47
+   ],
+   "summary": "ระบุ toString ของสถานะ controls เพื่อดีบัย/ตรวจสอบค่าณ runtime",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:VideoStateEnumFingerprint",
+   "type": "class",
+   "name": "VideoStateEnumFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "lineRange": [
+    49,
+    60
+   ],
+   "summary": "ระบุ enum สถานะวิดีโอ (เล่น/พัก/buffer) เพื่ออ่านค่าสถานะจริงตอน runtime",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnResponseStartedFingerprint",
+   "type": "class",
+   "name": "OnResponseStartedFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "lineRange": [
+    10,
+    26
+   ],
+   "summary": "ระบุ callback OnResponseStarted ที่เก็บ URL ของ response รูปภาพ เพื่อดัก URL ก่อนแสดงผล",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "moderate"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:MessageDigestImageUrlParentFingerprint",
+   "type": "class",
+   "name": "MessageDigestImageUrlParentFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "lineRange": [
+    62,
+    69
+   ],
+   "summary": "ระบุคลาสแม่ (parent) ของคลาสที่คำนวณ message digest ของ URL รูปภาพ เพื่อเสริมการจับคู่ fingerprint",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "youtube"
+   ],
+   "complexity": "simple"
+  },
+  {
+   "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ClientFormFactorEnumConstructorFingerprint",
+   "type": "class",
+   "name": "ClientFormFactorEnumConstructorFingerprint",
+   "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "lineRange": [
+    143,
+    152
+   ],
+   "summary": "ระบุ constructor ของ enum ClientFormFactor ที่สร้างค่า form factor (phone/tablet) เพื่ออ่านหรือแทนค่าที่ส่งใน clientContext",
+   "tags": [
+    "fingerprint",
+    "dexkit",
+    "innertube"
+   ],
+   "complexity": "moderate"
+  }
+ ],
+ "edges": [
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackManagerFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackManagerFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackSettingsFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackSettingsFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackSettingsLegacyFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:BackgroundPlaybackSettingsLegacyFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:KidsBackgroundPlaybackPolicyControllerFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt:KidsBackgroundPlaybackPolicyControllerFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:TimelineMarkerFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:TimelineMarkerFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:HeatMapPeakPointFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:HeatMapPeakPointFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:getTimelineMarkersArrayFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt:getTimelineMarkersArrayFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:AuthenticationChangeListenerFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:AuthenticationChangeListenerFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BuildClientContextBodyFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BuildClientContextBodyFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BuildDummyClientContextBodyFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BuildDummyClientContextBodyFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ClientFormFactorEnumOrdinalFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ClientFormFactorEnumOrdinalFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:EndpointRequestBodyFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:EndpointRequestBodyFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BrowseEndpointParentFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:BrowseEndpointParentFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:GuideEndpointConstructorFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:GuideEndpointConstructorFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:NextEndpointParentFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:NextEndpointParentFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:PlayerEndpointParentFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:PlayerEndpointParentFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelCreateItemsEndpointConstructorFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelCreateItemsEndpointConstructorFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelItemWatchEndpointConstructorFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelItemWatchEndpointConstructorFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelWatchSequenceEndpointConstructorFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ReelWatchSequenceEndpointConstructorFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:SearchRequestBuildParametersFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:SearchRequestBuildParametersFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:TranscriptEndpointConstructorFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:TranscriptEndpointConstructorFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/InstructionFilter.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt:EngagementPanelUpdateFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt:EngagementPanelUpdateFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnFailureFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnFailureFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnSucceededFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnSucceededFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:RequestFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:RequestFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:MessageDigestImageUrlFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:MessageDigestImageUrlFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/StringComparisonType.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextEnablementCheckFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextEnablementCheckFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextTemplateCheckFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextTemplateCheckFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextConfigFieldReadMatches",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt:RenderNextConfigFieldReadMatches",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:MiniAppOpenYtContentCommandEndpointFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:MiniAppOpenYtContentCommandEndpointFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:OpenNewVideoIntentParcelableFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:OpenNewVideoIntentParcelableFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:BackButtonFinishActivityOnNewVideoIntentFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt:BackButtonFinishActivityOnNewVideoIntentFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:NewPlayerOverlaysFeatureFlagFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:NewPlayerOverlaysFeatureFlagFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:AutonavEndscreenOverlayFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:AutonavEndscreenOverlayFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:PlayerControlsVisibilityEntityModelInit",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:PlayerControlsVisibilityEntityModelInit",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:PlayerControlsVisibilityEntityModelFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:PlayerControlsVisibilityEntityModelFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:ElementsImageComponentFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:ElementsImageComponentFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:ElementsImageTintFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt:ElementsImageTintFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/StringComparisonType.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:PlayerTypeFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:PlayerTypeFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:ReelWatchPagerFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:ReelWatchPagerFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:ControlsStateToStringFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:ControlsStateToStringFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:VideoStateEnumFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt:VideoStateEnumFingerprint",
+   "type": "exports",
+   "direction": "forward",
+   "weight": 0.8
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/Fingerprints.kt",
+   "target": "file:app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+   "type": "imports",
+   "direction": "forward",
+   "weight": 0.7
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:OnResponseStartedFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/Fingerprints.kt:MessageDigestImageUrlParentFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  },
+  {
+   "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt",
+   "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/contexthook/Fingerprints.kt:ClientFormFactorEnumConstructorFingerprint",
+   "type": "contains",
+   "direction": "forward",
+   "weight": 1.0
+  }
+ ]
+}

@@ -1,0 +1,960 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 25,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 25,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 25,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/privacy/SanitizeSharingLinksPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 15,
+      "nonEmptyLines": 13,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/settings/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 33,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/shared/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 12,
+      "nonEmptyLines": 9,
+      "classes": [
+        {
+          "name": "MusicActivityOnCreateFingerprint",
+          "startLine": 7,
+          "endLine": 12,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "MusicActivityOnCreateFingerprint",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/RedditHook.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 11,
+      "nonEmptyLines": 9,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/ad/HideAdsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 82,
+      "nonEmptyLines": 70,
+      "callGraph": [
+        {
+          "caller": "hideOldAds",
+          "callee": "hookMethod",
+          "lineNumber": 21
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "loadClass",
+          "lineNumber": 22
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "single",
+          "lineNumber": 23
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "after",
+          "lineNumber": 24
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "getObjectField",
+          "lineNumber": 25
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "mutableListOf",
+          "lineNumber": 26
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "isAssignableFrom",
+          "lineNumber": 30
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "getPromoted",
+          "lineNumber": 30
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "printDebug",
+          "lineNumber": 35
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "add",
+          "lineNumber": 38
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "printDebug",
+          "lineNumber": 40
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "count",
+          "lineNumber": 40
+        },
+        {
+          "caller": "hideOldAds",
+          "callee": "setObjectField",
+          "lineNumber": 41
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/guest/StartAsGuestPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 13,
+      "nonEmptyLines": 10,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/privacy/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 14,
+      "nonEmptyLines": 12,
+      "classes": [
+        {
+          "name": "ShareLinkFormatterFingerprint",
+          "startLine": 7,
+          "endLine": 14,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ShareLinkFormatterFingerprint",
+          "line": 7,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/privacy/SanitizeSharingLinksPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 15,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/version/VersionCheckPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/layout/theme/LithoColorHookPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 20,
+      "functions": [
+        {
+          "name": "lithoColorOverrideHook",
+          "startLine": 9,
+          "endLine": 11,
+          "params": [
+            "override"
+          ]
+        },
+        {
+          "name": "lithoColorHookPatch",
+          "startLine": 13,
+          "endLine": 24,
+          "params": [
+            "useModernHook"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "lithoColorOverrideHook",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "lithoColorHookPatch",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "lithoColorOverrideHook",
+          "callee": "add",
+          "lineNumber": 10
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "patch",
+          "lineNumber": 13
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "useModernHook",
+          "lineNumber": 14
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "hookMethod",
+          "lineNumber": 17
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "scopedHook",
+          "lineNumber": 17
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "getDeclaredMethod",
+          "lineNumber": 17
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "before",
+          "lineNumber": 18
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "get",
+          "lineNumber": 19
+        },
+        {
+          "caller": "lithoColorHookPatch",
+          "callee": "fold",
+          "lineNumber": 20
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/audio/tracks/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 30,
+      "nonEmptyLines": 26,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/debugging/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 144,
+      "nonEmptyLines": 137,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/fix/bitmap/FixRecycledBitmapPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/context/ConversionContextPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "patch_getIdentifier",
+          "startLine": 13,
+          "endLine": 14,
+          "params": []
+        },
+        {
+          "name": "patch_getPathBuilder",
+          "startLine": 16,
+          "endLine": 17,
+          "params": []
+        },
+        {
+          "name": "patch_getHeightConstraint",
+          "startLine": 19,
+          "endLine": 20,
+          "params": []
+        },
+        {
+          "name": "patch_getHorizontalCollectionSwipeProtector",
+          "startLine": 22,
+          "endLine": 23,
+          "params": []
+        },
+        {
+          "name": "toString",
+          "startLine": 25,
+          "endLine": 25,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ConversionContext",
+          "startLine": 12,
+          "endLine": 26,
+          "methods": [
+            "patch_getIdentifier",
+            "patch_getPathBuilder",
+            "patch_getHeightConstraint",
+            "patch_getHorizontalCollectionSwipeProtector",
+            "toString"
+          ],
+          "properties": [
+            "conversion"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "patch_getIdentifier",
+          "line": 13,
+          "isDefault": false
+        },
+        {
+          "name": "patch_getPathBuilder",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "patch_getHeightConstraint",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "patch_getHorizontalCollectionSwipeProtector",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "toString",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "ConversionContext",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "patch_getIdentifier",
+          "callee": "get",
+          "lineNumber": 14
+        },
+        {
+          "caller": "patch_getPathBuilder",
+          "callee": "get",
+          "lineNumber": 17
+        },
+        {
+          "caller": "patch_getHeightConstraint",
+          "callee": "get",
+          "lineNumber": 20
+        },
+        {
+          "caller": "patch_getHorizontalCollectionSwipeProtector",
+          "callee": "get",
+          "lineNumber": 23
+        },
+        {
+          "caller": "toString",
+          "callee": "toString",
+          "lineNumber": 25
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 6,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/context/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 37,
+      "classes": [
+        {
+          "name": "ConversionContextToStringFingerprint",
+          "startLine": 11,
+          "endLine": 22,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ConversionContextToStringFingerprint",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/relayout/LithoRelayoutPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 57,
+      "nonEmptyLines": 52,
+      "callGraph": [
+        {
+          "caller": "patch_forceRelayout",
+          "callee": "get",
+          "lineNumber": 28
+        },
+        {
+          "caller": "patch_forceRelayout",
+          "callee": "setBoolean",
+          "lineNumber": 29
+        },
+        {
+          "caller": "patch_forceRelayout",
+          "callee": "requestLayout",
+          "lineNumber": 30
+        },
+        {
+          "caller": "patch_forceRemount",
+          "callee": "get",
+          "lineNumber": 34
+        },
+        {
+          "caller": "patch_forceRemount",
+          "callee": "unmountAllItems",
+          "lineNumber": 35
+        },
+        {
+          "caller": "patch_forceRemount",
+          "callee": "requestLayout",
+          "lineNumber": 36
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/proto/ElementProtoParserHookPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 33,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "createElementProtoParserHookPatch",
+          "startLine": 14,
+          "endLine": 28,
+          "params": []
+        },
+        {
+          "name": "hookElement",
+          "startLine": 31,
+          "endLine": 33,
+          "params": [
+            "hook"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "createElementProtoParserHookPatch",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "hookElement",
+          "line": 31,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "createElementProtoParserHookPatch",
+          "callee": "patch",
+          "lineNumber": 15
+        },
+        {
+          "caller": "createElementProtoParserHookPatch",
+          "callee": "hookMethod",
+          "lineNumber": 19
+        },
+        {
+          "caller": "createElementProtoParserHookPatch",
+          "callee": "after",
+          "lineNumber": 20
+        },
+        {
+          "caller": "createElementProtoParserHookPatch",
+          "callee": "forEach",
+          "lineNumber": 22
+        },
+        {
+          "caller": "createElementProtoParserHookPatch",
+          "callee": "it",
+          "lineNumber": 23
+        },
+        {
+          "caller": "hookElement",
+          "callee": "add",
+          "lineNumber": 32
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/request/BuildRequestPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 25,
+      "nonEmptyLines": 21,
+      "functions": [
+        {
+          "name": "hookBuildRequest",
+          "startLine": 23,
+          "endLine": 25,
+          "params": [
+            "hook"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "hookBuildRequest",
+          "line": 23,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hookBuildRequest",
+          "callee": "add",
+          "lineNumber": 24
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/IntentPreference.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 33,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 21,
+          "endLine": 30,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "IntentPreference",
+          "startLine": 11,
+          "endLine": 37,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "intent"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 21,
+          "isDefault": false
+        },
+        {
+          "name": "IntentPreference",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "also",
+          "lineNumber": 22
+        },
+        {
+          "caller": "build",
+          "callee": "build",
+          "lineNumber": 22
+        },
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 23
+        },
+        {
+          "caller": "build",
+          "callee": "Intent",
+          "lineNumber": 23
+        },
+        {
+          "caller": "build",
+          "callee": "ComponentName",
+          "lineNumber": 24
+        },
+        {
+          "caller": "build",
+          "callee": "targetPackageSupplier",
+          "lineNumber": 24
+        },
+        {
+          "caller": "build",
+          "callee": "isNotEmpty",
+          "lineNumber": 25
+        },
+        {
+          "caller": "build",
+          "callee": "putExtra",
+          "lineNumber": 26
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/spans/InclusiveSpanPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 30,
+      "functions": [
+        {
+          "name": "addSpanFilter",
+          "startLine": 12,
+          "endLine": 12,
+          "params": [
+            "filter"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "addSpanFilter",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "addSpanFilter",
+          "callee": "addFilter",
+          "lineNumber": 12
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 1,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/textcomponent/TextComponentPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 96,
+      "nonEmptyLines": 82,
+      "functions": [
+        {
+          "name": "hookSpannableString",
+          "startLine": 32,
+          "endLine": 37,
+          "params": [
+            "hook"
+          ]
+        },
+        {
+          "name": "transformLithoText",
+          "startLine": 91,
+          "endLine": 92,
+          "params": [
+            "context",
+            "original"
+          ]
+        },
+        {
+          "name": "hookLithoSpannableString",
+          "startLine": 94,
+          "endLine": 96,
+          "params": [
+            "hook"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "hookSpannableString",
+          "line": 32,
+          "isDefault": false
+        },
+        {
+          "name": "hookLithoSpannableString",
+          "line": 94,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "hookSpannableString",
+          "callee": "add",
+          "lineNumber": 36
+        },
+        {
+          "caller": "hookSpannableString",
+          "callee": "hook",
+          "lineNumber": 36
+        },
+        {
+          "caller": "transformLithoText",
+          "callee": "fold",
+          "lineNumber": 92
+        },
+        {
+          "caller": "transformLithoText",
+          "callee": "hook",
+          "lineNumber": 92
+        },
+        {
+          "caller": "hookLithoSpannableString",
+          "callee": "add",
+          "lineNumber": 95
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 3,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copytext/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 14,
+      "classes": [
+        {
+          "name": "ComponentHostDispatchTouchEventFingerprint",
+          "startLine": 12,
+          "endLine": 17,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ComponentHostDispatchTouchEventFingerprint",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/downloads/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 24,
+      "classes": [
+        {
+          "name": "OfflineVideoEndpointFingerprint",
+          "startLine": 8,
+          "endLine": 26,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "OfflineVideoEndpointFingerprint",
+          "line": 8,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/SeekbarPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 24,
+      "nonEmptyLines": 22,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shelves/HideHorizontalShelvesPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 22,
+      "nonEmptyLines": 19,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

@@ -1,0 +1,820 @@
+{
+  "nodes": [
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/captions/AutoCaptionsPatch.kt",
+      "type": "file",
+      "name": "AutoCaptionsPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/captions/AutoCaptionsPatch.kt",
+      "summary": "แพตช์ 'Auto captions' ที่เพิ่มตัวเลือกปิดคำบรรยายอัตโนมัติใน YouTube โดยเพิ่ม ListPreference ลงหน้าจอตั้งค่าของ player และ hook fingerprint ของ SubtitleManager ให้เรียก extension patch เพื่อบังคับปิดคำบรรยายอัตโนมัติแทน",
+      "tags": [
+        "patch",
+        "youtube",
+        "captions",
+        "feature-flag",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/AddToQueuePatch.kt",
+      "type": "file",
+      "name": "AddToQueuePatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/AddToQueuePatch.kt",
+      "summary": "แพตช์ 'Add to queue' ที่แทนที่ปุ่ม 'Play next in queue' ในเมนู flyout ของฟีดด้วยคิววิดีโอของ Morphe ผ่าน hook ที่ FeedFlyoutButtonsInitializer, ContextualMenuItemBuilder และ playerStatus รวมถึงการยกเลิก intent การนำทางเมื่อ LocalQueuePatch ต้องการรับช่วงแทน",
+      "tags": [
+        "patch",
+        "youtube",
+        "flyout",
+        "queue",
+        "settings"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/FlyoutPatch.kt",
+      "type": "file",
+      "name": "FlyoutPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/FlyoutPatch.kt",
+      "summary": "แพตช์พื้นฐานร่วมสำหรับเมนู flyout ของ YouTube ที่ติดตามการเปิดเมนูทั้งแบบ buffer object, bottom sheet และ popup window รวมถึงเก็บข้อมูลปุ่มและ video id เพื่อให้แพตช์อื่น ๆ (เช่น Add to queue) เอาไปใช้ต่อ",
+      "tags": [
+        "patch",
+        "youtube",
+        "flyout",
+        "shared-hooks",
+        "reflection"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ประกาศ fields แบบ lateinit var เก็บ Field/Class ที่ได้จาก reflection ไว้ใช้หลายแพตช์ และมี helper wrap ให้ object ของ host ตอบสนอง interface ของ extension"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt",
+      "type": "file",
+      "name": "OpenSystemShareSheetPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt",
+      "summary": "แพตช์ 'Open system share sheet' ที่เพิ่มตัวเลือกเปิด share sheet ของระบบแทน share sheet ในแอป โดย hook คำสั่ง ShareEndpoint/ShowActionSheet และแยกวิเคราะห์ protobuf แบบกำหนดเองเพื่อดึง endpoint payload",
+      "tags": [
+        "patch",
+        "youtube",
+        "share-sheet",
+        "protobuf",
+        "settings"
+      ],
+      "complexity": "simple",
+      "languageNotes": "ฟังก์ชัน extractEndpoint อ่าน protobuf wire format ด้วยมือเพื่อหา extension field ที่ถูก inline โดย host"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/shortsnoresume/DisableShortsResumingOnStartupPatch.kt",
+      "type": "file",
+      "name": "DisableShortsResumingOnStartupPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/shortsnoresume/DisableShortsResumingOnStartupPatch.kt",
+      "summary": "แพตช์ 'Disable Shorts resuming on startup' ที่เพิ่มตัวเลือกไม่ให้แอปเปิด Shorts ต่อจากที่ดูค้างไว้ตอนเปิดแอปใหม่ โดยเลือก fingerprint ตามเวอร์ชัน (ปกติ, legacy 21.30, legacy 21.03) และ override feature flag 45358360",
+      "tags": [
+        "patch",
+        "youtube",
+        "shorts",
+        "feature-flag",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/startpage/ChangeStartPagePatch.kt",
+      "type": "file",
+      "name": "ChangeStartPagePatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/startpage/ChangeStartPagePatch.kt",
+      "summary": "แพตช์ 'Change start page' ที่เพิ่ม ListPreference ให้เลือกหน้าที่แอปเปิดเมื่อเริ่มทำงานแทนหน้าแรก โดย hook proto builder ของ browseId และ override Intent action สำหรับ Shorts และหน้าค้นหาซึ่งไม่มี browseId ให้แก้",
+      "tags": [
+        "patch",
+        "youtube",
+        "start-page",
+        "proto",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/thumbnails/BypassImageRegionRestrictionsPatch.kt",
+      "type": "file",
+      "name": "BypassImageRegionRestrictionsPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/thumbnails/BypassImageRegionRestrictionsPatch.kt",
+      "summary": "แพตช์ 'Bypass image region restrictions' ที่เพิ่มตัวเลือกเปลี่ยน host ของรูป avatar และรูปช่องเพื่อแก้ปัญหารูปแสดงไม่ได้ในบางประเทศ ทำงานผ่าน addImageUrlHook ที่ต่อกับ cronetImageUrlHookPatch",
+      "tags": [
+        "patch",
+        "youtube",
+        "thumbnails",
+        "hook",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "type": "file",
+      "name": "BackgroundPlaybackPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "summary": "แพตช์ 'Remove background playback restrictions' ที่เปิดให้เล่นแบบพื้นหลังได้ (รวมวิดีโอของเด็กและ Shorts) โดย hook ของ BackgroundPlaybackManager, hook การตั้งค่า background playback ใน YouTube settings และ override feature flag หลายตัวตามเวอร์ชันแอป",
+      "tags": [
+        "patch",
+        "youtube",
+        "background-playback",
+        "feature-flag",
+        "settings"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "preference 'morphe_shorts_disable_background_playback' ถูกเพิ่มซ้ำสองครั้งใน PreferenceScreen.SHORTS — ระวังตอนแก้ไขไฟล์นี้"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/debugging/EnableDebuggingPatch.kt",
+      "type": "file",
+      "name": "EnableDebuggingPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/debugging/EnableDebuggingPatch.kt",
+      "summary": "แพตช์ EnableDebugging ที่เรียกใช้ enableDebuggingPatch แบบร่วมจาก extension โดยกำหนด hook ของ feature flag แต่ละชนิด (boolean/long/double) ตามเงื่อนไขเวอร์ชัน และเพิ่ม SwitchPreference 'morphe_debug_protobuffer' ลงหน้า MISC",
+      "tags": [
+        "patch",
+        "debugging",
+        "feature-flag",
+        "settings",
+        "youtube"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/RestoreOldVideoActionBarPatch.kt",
+      "type": "file",
+      "name": "RestoreOldVideoActionBarPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/RestoreOldVideoActionBarPatch.kt",
+      "summary": "แพตช์ RestoreOldVideoActionBar ที่ override ค่า X-Youtube-Cold-Config-Data ใน request และ hook การ build body ของ innerTube เพื่อให้ 'Hide video action buttons' และ 'Return YouTube Dislike' ทำงานถูกต้อง โดยแยกเส้นทางตามเวอร์ชัน (20.30 ขึ้นไปแยกตามคลาส request ทั้งหมด ส่วนเก่าใช้การ spoof client version ที่ endpoint GET_WATCH/NEXT)",
+      "tags": [
+        "patch",
+        "youtube",
+        "innertube",
+        "request-hook",
+        "feature-flag"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ใช้ anonymous object ที่ implement ConfigInfoInterface เพื่อเขียน cold config/hash กลับเข้า instance ของ host ผ่าน Field ที่ค้นด้วย reflection"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/whitelist/ChannelWhitelistPatch.kt",
+      "type": "file",
+      "name": "ChannelWhitelistPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/whitelist/ChannelWhitelistPatch.kt",
+      "summary": "แพตช์ 'Channel whitelist' ที่เพิ่มการเลือกช่องที่ยกเว้นให้แสดงโฆษณาตามปกติ หรือไม่บังคับความเร็วการเล่น ผ่าน ChannelWhitelistPreference ในหน้า ADS และกลุ่มตั้งค่าความเร็ว พร้อมเพิ่ม flyout menu ไว้เลือกในหน้า FEED",
+      "tags": [
+        "patch",
+        "youtube",
+        "whitelist",
+        "ads",
+        "settings"
+      ],
+      "complexity": "simple",
+      "languageNotes": "ทำเครื่องหมาย /* unused */ ไว้ใน source และประกาศ setExtensionIsPatchIncluded เพื่อให้ extension รู้ว่าแพตช์นี้ถูกรวมมา"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/codecs/DisableVideoCodecsPatch.kt",
+      "type": "file",
+      "name": "DisableVideoCodecsPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/codecs/DisableVideoCodecsPatch.kt",
+      "summary": "แพตช์ 'Disable video codecs' ที่เพิ่มตัวเลือกปิดหรือบังคับ HDR และปิด codec VP9/AV1 โดย hook การรายงานประเภท HDR ของ Display.HdrCapabilities, fingerprint ตรวจ VR/codec ที่รองรับ และเพิ่ม VideoCodecListPreference ลงหน้า VIDEO",
+      "tags": [
+        "patch",
+        "youtube",
+        "video-codec",
+        "hdr",
+        "feature-flag"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "hook ของ getSupportedHdrTypes ใช้ ThreadLocal guard กันการเรียกซ้ำ (recursion) ภายใน after-hook เดียวกัน"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "type": "file",
+      "name": "VideoInformationPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "summary": "แพตช์กลางสำคัญของ module ที่ hook YouTube เพื่อเก็บข้อมูลวิดีโอที่กำลังเล่นทั้งหมด: player controller (รวม MDX), ความยาววิดีโอ, เวลาเล่นปัจจุบัน, ค่า speed, การเลือก speed ของผู้ใช้ และคุณภาพวิดีโอ พร้อมเปิด hook list ไว้ให้แพตช์อื่น (onCreateHook, videoTimeHooks, videoSpeedChangedHook, userSelectedPlaybackSpeedHook) และต่อการทำงานกับ ExoPlayer",
+      "tags": [
+        "core-patch",
+        "youtube",
+        "playback-controller",
+        "hook",
+        "api"
+      ],
+      "complexity": "complex",
+      "languageNotes": "คลาส proxy (PlaybackController, PlaybackSpeedMenu, VideoQualityProxy) ใช้ WeakReference + bindProxy/createProxy สะท้อน object ของ host ไปยัง interface ของ extension และแตกเส้นทาง hook ตามเวอร์ชันแอป"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/AdvancedVideoQualityMenuPatch.kt",
+      "type": "file",
+      "name": "AdvancedVideoQualityMenuPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/AdvancedVideoQualityMenuPatch.kt",
+      "summary": "แพตช์ 'Advanced video quality menu' ที่เปิดเมนคุณภาพวิดีโอแบบละเอียด (Advanced) ทั้งเมนูเก่าของคลิปปกติและเมนูของ Shorts โดย hook ShowVideoQualityQuickMenu, ShortsQualityConstructor ผ่าน proxy และใช้ RecyclerViewTree/LithoFilter จัดการเมนูรูปแบบใหม่",
+      "tags": [
+        "patch",
+        "youtube",
+        "video-quality",
+        "litho-filter",
+        "settings"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/RememberVideoQualityPatch.kt",
+      "type": "file",
+      "name": "RememberVideoQualityPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/RememberVideoQualityPatch.kt",
+      "summary": "แพตช์ 'Remember video quality' ที่เพิ่ม ListPreference กำหนดคุณภาพเริ่มต้นบน mobile/Wi-Fi สำหรับคลิปปกติและ Shorts พร้อม SwitchPreference ให้จำค่าที่ผู้ใช้เลือกล่าสุด และ override feature flag หลายตัว (เช่น 45408049, 45738253, 45387052) เพื่อบังคับ quality ที่ทำเลือกไว้และส่งข้อจำกัดไปกับ SABR request",
+      "tags": [
+        "patch",
+        "youtube",
+        "video-quality",
+        "feature-flag",
+        "settings"
+      ],
+      "complexity": "moderate",
+      "languageNotes": "ใช้ `j$`.util.Optional (desugared java.util.Optional) ตอนอ่าน/เขียน field resolution เริ่มต้นของ PlaybackStartParameters"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/VideoQualityDialogButtonPatch.kt",
+      "type": "file",
+      "name": "VideoQualityDialogButtonPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/VideoQualityDialogButtonPatch.kt",
+      "summary": "แพตช์ VideoQualityDialogButtonPatch ที่เพิ่มปุ่มเปิด dialog คุณภาพวิดีโอใน player ทั้งแบบปุ่มล่างปกติและรูปแบบ control แบบเก่า (legacy bottom control) โดยลงทะเบียนกับ legacyPlayerControls และ playerOverlayButtonsHook",
+      "tags": [
+        "patch",
+        "youtube",
+        "player-controls",
+        "button",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/button/PlaybackSpeedButtonPatch.kt",
+      "type": "file",
+      "name": "PlaybackSpeedButtonPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/button/PlaybackSpeedButtonPatch.kt",
+      "summary": "แพตช์ PlaybackSpeedButton ที่เพิ่มปุ่มปรับความเร็วการเล่นใน player ทั้งแบบปุ่มล่างปกติและแบบ control เก่า โดยต่อกับ videoSpeedChangedHook/userSelectedPlaybackSpeedHook ให้ปุ่มสะท้อนค่า speed ปัจจุบันเสมอ",
+      "tags": [
+        "patch",
+        "youtube",
+        "player-controls",
+        "button",
+        "settings"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "type": "file",
+      "name": "RememberPlaybackSpeedPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "summary": "แพตช์ 'Remember playback speed' ที่จำความเร็วการเล่นที่ผู้ใช้เลือกไว้ใช้กับวิดีโอถัดไป โดยเพิ่ม ListPreference (รวม speed แบบกำหนดเองและ audio pitch) และต่อกับ InitializePlaybackSpeedValues fingerprint เพื่อตั้งค่าเริ่มต้นทันทีเมื่อเปิดวิดีโอ",
+      "tags": [
+        "patch",
+        "youtube",
+        "playback-speed",
+        "settings",
+        "feature-flag"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:addExoPlayerHooks",
+      "type": "function",
+      "name": "addExoPlayerHooks",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "lineRange": [
+        304,
+        344
+      ],
+      "summary": "ต่อ hook กับ ExoPlayer ของ YouTube โดยหาคลาสและเมธอดผ่าน playbackParametersSetterFingerprint แล้วแทน PlaybackParameters ใหม่ที่มี speed/pitch ที่ VideoInformation ตัดสินใจ พลาง hook constructor เพื่อ map instance ด้วย proxy ExoPlayerInterface",
+      "tags": [
+        "hook",
+        "reflection",
+        "exoplayer"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:onUserSelectedPlaybackSpeed",
+      "type": "function",
+      "name": "onUserSelectedPlaybackSpeed",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "lineRange": [
+        56,
+        58
+      ],
+      "summary": "ฟังก์ชันสะพานที่แจ้งจ่ายค่า speed ที่ผู้ใช้เลือกเองไปยัง listener ทั้งหมดที่ลงทะเบียนใน userSelectedPlaybackSpeedHook",
+      "tags": [
+        "utility",
+        "dispatch-hook",
+        "playback-speed"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:PlaybackController",
+      "type": "class",
+      "name": "PlaybackController",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "lineRange": [
+        60,
+        84
+      ],
+      "summary": "คลาส proxy ของ player controller ที่เก็บ WeakReference ไปยัง instance ของ host และเรียก seekTo/seekToRelative/getVideoTime ผ่านเมธอดจาก fingerprint ที่ bindProxy ไว้ ใช้เป็น handler ให้ onCreateHook ของแพตช์อื่น",
+      "tags": [
+        "proxy",
+        "reflection",
+        "playback-controller"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:PlaybackSpeedMenu",
+      "type": "class",
+      "name": "PlaybackSpeedMenu",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "lineRange": [
+        88,
+        100
+      ],
+      "summary": "คลาส proxy สำหรับเมนูเลือกความเร็วของ YouTube ที่ดึง player controller จาก additional instance field เพื่อเรียก setPlaybackSpeedMethod ตอนปรับ speed ผ่านเมนู",
+      "tags": [
+        "proxy",
+        "reflection",
+        "playback-speed"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:VideoQualityProxy",
+      "type": "class",
+      "name": "VideoQualityProxy",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "lineRange": [
+        102,
+        113
+      ],
+      "summary": "คลาส internal ที่ wrap ข้อมูลคุณภาพวิดีโอของ host ผ่าน reflection เพื่ออ่านชื่อคุณภาพและ resolution ให้ตรง VideoInformation.VideoQualityInterface ของ extension (RememberVideoQuality ใช้ตรวจค่า quality ที่ผู้ใช้เช็ค)",
+      "tags": [
+        "proxy",
+        "reflection",
+        "video-quality"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt:extractEndpoint",
+      "type": "function",
+      "name": "extractEndpoint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt",
+      "lineRange": [
+        61,
+        73
+      ],
+      "summary": "อ่าน protobuf wire format จาก byte array แล้ววนหา tag ที่ตรง fieldNumber แบบ length-delimited เพื่อดึง payload ของ share endpoint ออกจาก command bytes",
+      "tags": [
+        "utility",
+        "protobuf",
+        "parsing"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:addExoPlayerHooks",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:onUserSelectedPlaybackSpeed",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:PlaybackController",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:PlaybackSpeedMenu",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:VideoQualityProxy",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt:extractEndpoint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:addExoPlayerHooks",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:onUserSelectedPlaybackSpeed",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:PlaybackController",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:PlaybackSpeedMenu",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt:VideoQualityProxy",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/captions/AutoCaptionsPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/captions/AutoCaptionsPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/AddToQueuePatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/AddToQueuePatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/FlyoutPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/shortsnoresume/DisableShortsResumingOnStartupPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/startpage/ChangeStartPagePatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/thumbnails/BypassImageRegionRestrictionsPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/debugging/EnableDebuggingPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/RestoreOldVideoActionBarPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/whitelist/ChannelWhitelistPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/whitelist/ChannelWhitelistPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/codecs/DisableVideoCodecsPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/codecs/DisableVideoCodecsPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/PatchExecutor.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/AdvancedVideoQualityMenuPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/RememberVideoQualityPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/RememberVideoQualityPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/RememberVideoQualityPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/VideoQualityDialogButtonPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/button/PlaybackSpeedButtonPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/button/PlaybackSpeedButtonPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "target": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt",
+      "type": "imports",
+      "direction": "forward",
+      "weight": 0.7
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/captions/AutoCaptionsPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt:ListPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/AddToQueuePatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sharesheet/OpenSystemShareSheetPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/shortsnoresume/DisableShortsResumingOnStartupPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/startpage/ChangeStartPagePatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt:ListPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/thumbnails/BypassImageRegionRestrictionsPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt:ListPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgroundplayback/BackgroundPlaybackPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/debugging/EnableDebuggingPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/fix/videoactionbar/RestoreOldVideoActionBarPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/whitelist/ChannelWhitelistPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt:NonInteractivePreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/whitelist/ChannelWhitelistPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/codecs/DisableVideoCodecsPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt:ListPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/codecs/DisableVideoCodecsPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/AdvancedVideoQualityMenuPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/RememberVideoQualityPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt:ListPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/RememberVideoQualityPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/VideoQualityDialogButtonPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/button/PlaybackSpeedButtonPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt:ListPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt:NonInteractivePreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/remember/RememberPlaybackSpeedPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt:SwitchPreference",
+      "type": "calls",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}

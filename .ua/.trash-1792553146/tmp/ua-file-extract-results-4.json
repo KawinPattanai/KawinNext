@@ -1,0 +1,432 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 18,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 18,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 18,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/MusicHook.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 23,
+      "nonEmptyLines": 21,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/ad/HideAdsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 57,
+      "nonEmptyLines": 49,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/debugging/EnableDebuggingPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 20,
+      "nonEmptyLines": 18,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/CheckRecycleBitmapMediaSession.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 35,
+      "nonEmptyLines": 31,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 24,
+          "endLine": 34,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "ListPreference",
+          "startLine": 12,
+          "endLine": 35,
+          "methods": [
+            "build"
+          ],
+          "properties": [
+            "entriesKey",
+            "entryValuesKey"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 24,
+          "isDefault": false
+        },
+        {
+          "name": "ListPreference",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 25
+        },
+        {
+          "caller": "build",
+          "callee": "build",
+          "lineNumber": 25
+        },
+        {
+          "caller": "build",
+          "callee": "let",
+          "lineNumber": 27
+        },
+        {
+          "caller": "build",
+          "callee": "setEntries",
+          "lineNumber": 28
+        },
+        {
+          "caller": "build",
+          "callee": "getArrayIdentifier",
+          "lineNumber": 28
+        },
+        {
+          "caller": "build",
+          "callee": "let",
+          "lineNumber": 30
+        },
+        {
+          "caller": "build",
+          "callee": "setEntryValues",
+          "lineNumber": 31
+        },
+        {
+          "caller": "build",
+          "callee": "getArrayIdentifier",
+          "lineNumber": 31
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 31,
+      "nonEmptyLines": 28,
+      "functions": [
+        {
+          "name": "build",
+          "startLine": 22,
+          "endLine": 30,
+          "params": [
+            "ctx",
+            "prefMgr"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "SwitchPreference",
+          "startLine": 12,
+          "endLine": 31,
+          "methods": [
+            "build"
+          ],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "build",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "SwitchPreference",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "build",
+          "callee": "apply",
+          "lineNumber": 23
+        },
+        {
+          "caller": "build",
+          "callee": "new",
+          "lineNumber": 23
+        },
+        {
+          "caller": "build",
+          "callee": "arrayOf",
+          "lineNumber": 24
+        },
+        {
+          "caller": "build",
+          "callee": "applyBaseAttrs",
+          "lineNumber": 27
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/YoutubeHook.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 125,
+      "nonEmptyLines": 117,
+      "functions": [
+        {
+          "name": "insertLiteralOverride",
+          "startLine": 65,
+          "endLine": 67,
+          "params": [
+            "id",
+            "override"
+          ]
+        },
+        {
+          "name": "insertLiteralOverride",
+          "startLine": 69,
+          "endLine": 71,
+          "params": [
+            "id",
+            "override"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "insertLiteralOverride",
+          "line": 65,
+          "isDefault": false
+        },
+        {
+          "name": "insertLiteralOverride",
+          "line": 69,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 2,
+        "functionCount": 2,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/ad/HideAdsPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 156,
+      "nonEmptyLines": 135,
+      "callGraph": [
+        {
+          "caller": "afterHookedMethod",
+          "callee": "printDebug",
+          "lineNumber": 122
+        },
+        {
+          "caller": "afterHookedMethod",
+          "callee": "hideAdAttributionView",
+          "lineNumber": 123
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/channelsearch/ChannelSearchPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 59,
+      "nonEmptyLines": 49,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copytext/CopyTextPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 45,
+      "nonEmptyLines": 38,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copyvideolink/CopyVideoLinkButtonPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 42,
+      "nonEmptyLines": 38,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/DisablePreciseSeekingGesturePatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 22,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/EnableSlideToSeekPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 28,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/EnableTapToSeekPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 30,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/HideSeekbarPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 47,
+      "nonEmptyLines": 40,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/LiveStreamDVRPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 39,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/SeekbarThumbnailPreviewPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 90,
+      "nonEmptyLines": 78,
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/navigation/NavigationBarPatch.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 146,
+      "nonEmptyLines": 130,
+      "metrics": {
+        "importCount": 3,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    }
+  ]
+}

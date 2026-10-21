@@ -1,0 +1,35 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": "app/src/main/res/xml/license_prefs.xml",
+      "language": "xml",
+      "sizeLines": 72,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/src/main/res/xml/yt_morphe_settings.xml",
+      "language": "xml",
+      "sizeLines": 10,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/src/main/res/xml/yt_morphe_settings_cairo.xml",
+      "language": "xml",
+      "sizeLines": 13,
+      "fileCategory": "config"
+    },
+    {
+      "path": "app/src/main/res/xml/yt_morphe_settings_music.xml",
+      "language": "xml",
+      "sizeLines": 11,
+      "fileCategory": "config"
+    }
+  ],
+  "batchImportData": {
+    "app/src/main/res/xml/license_prefs.xml": [],
+    "app/src/main/res/xml/yt_morphe_settings.xml": [],
+    "app/src/main/res/xml/yt_morphe_settings_cairo.xml": [],
+    "app/src/main/res/xml/yt_morphe_settings_music.xml": []
+  }
+}

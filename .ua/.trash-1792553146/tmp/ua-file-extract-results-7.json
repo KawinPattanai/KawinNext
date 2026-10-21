@@ -1,0 +1,1456 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 4,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 4,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 4,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/AppPatchInfo.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 22,
+      "classes": [
+        {
+          "name": "AppPatchInfo",
+          "startLine": 12,
+          "endLine": 12,
+          "methods": [],
+          "properties": [
+            "appName",
+            "packageName",
+            "patches"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "AppPatchInfo",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/MainHook.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 74,
+      "functions": [
+        {
+          "name": "shouldHook",
+          "startLine": 20,
+          "endLine": 24,
+          "params": [
+            "packageName"
+          ]
+        },
+        {
+          "name": "onModuleLoaded",
+          "startLine": 26,
+          "endLine": 28,
+          "params": [
+            "param"
+          ]
+        },
+        {
+          "name": "onPackageReady",
+          "startLine": 30,
+          "endLine": 53,
+          "params": [
+            "param"
+          ]
+        },
+        {
+          "name": "isReVancedPatched",
+          "startLine": 55,
+          "endLine": 65,
+          "params": [
+            "param"
+          ]
+        },
+        {
+          "name": "inContext",
+          "startLine": 70,
+          "endLine": 85,
+          "params": [
+            "lpparam",
+            "f"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "MainHook",
+          "startLine": 15,
+          "endLine": 67,
+          "methods": [
+            "shouldHook",
+            "onModuleLoaded",
+            "onPackageReady",
+            "isReVancedPatched"
+          ],
+          "properties": [
+            "param",
+            "app",
+            "targetPackageName"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "param",
+          "line": 16,
+          "isDefault": false
+        },
+        {
+          "name": "app",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "targetPackageName",
+          "line": 18,
+          "isDefault": false
+        },
+        {
+          "name": "shouldHook",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "onModuleLoaded",
+          "line": 26,
+          "isDefault": false
+        },
+        {
+          "name": "onPackageReady",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "MainHook",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "inContext",
+          "line": 70,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "shouldHook",
+          "callee": "containsKey",
+          "lineNumber": 21
+        },
+        {
+          "caller": "onPackageReady",
+          "callee": "inContext",
+          "lineNumber": 35
+        },
+        {
+          "caller": "onPackageReady",
+          "callee": "isReVancedPatched",
+          "lineNumber": 37
+        },
+        {
+          "caller": "onPackageReady",
+          "callee": "showToastLong",
+          "lineNumber": 38
+        },
+        {
+          "caller": "get",
+          "callee": "getIdentifier",
+          "lineNumber": 44
+        },
+        {
+          "caller": "get",
+          "callee": "Exception",
+          "lineNumber": 45
+        },
+        {
+          "caller": "onPackageReady",
+          "callee": "applyPatches",
+          "lineNumber": 51
+        },
+        {
+          "caller": "onPackageReady",
+          "callee": "PatchExecutor",
+          "lineNumber": 51
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "runCatching",
+          "lineNumber": 56
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "loadClass",
+          "lineNumber": 57
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "runCatching",
+          "lineNumber": 58
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "loadClass",
+          "lineNumber": 59
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "runCatching",
+          "lineNumber": 60
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "loadClass",
+          "lineNumber": 61
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "runCatching",
+          "lineNumber": 62
+        },
+        {
+          "caller": "isReVancedPatched",
+          "callee": "loadClass",
+          "lineNumber": 63
+        },
+        {
+          "caller": "inContext",
+          "callee": "findClass",
+          "lineNumber": 71
+        },
+        {
+          "caller": "inContext",
+          "callee": "hookMethod",
+          "lineNumber": 72
+        },
+        {
+          "caller": "inContext",
+          "callee": "getMethod",
+          "lineNumber": 72
+        },
+        {
+          "caller": "inContext",
+          "callee": "before",
+          "lineNumber": 73
+        },
+        {
+          "caller": "inContext",
+          "callee": "setContext",
+          "lineNumber": 75
+        },
+        {
+          "caller": "inContext",
+          "callee": "f",
+          "lineNumber": 76
+        },
+        {
+          "caller": "inContext",
+          "callee": "startsWith",
+          "lineNumber": 77
+        },
+        {
+          "caller": "inContext",
+          "callee": "getRemotePreferences",
+          "lineNumber": 78
+        },
+        {
+          "caller": "inContext",
+          "callee": "getBoolean",
+          "lineNumber": 79
+        },
+        {
+          "caller": "inContext",
+          "callee": "hookNewActivity",
+          "lineNumber": 80
+        },
+        {
+          "caller": "inContext",
+          "callee": "UpdateChecker",
+          "lineNumber": 80
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 8,
+        "functionCount": 5,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/activity/SettingsActivity.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 265,
+      "nonEmptyLines": 223,
+      "functions": [
+        {
+          "name": "onCreate",
+          "startLine": 34,
+          "endLine": 55,
+          "params": [
+            "savedInstanceState"
+          ]
+        },
+        {
+          "name": "onStart",
+          "startLine": 57,
+          "endLine": 60,
+          "params": []
+        },
+        {
+          "name": "onStop",
+          "startLine": 62,
+          "endLine": 65,
+          "params": []
+        },
+        {
+          "name": "onServiceStateChanged",
+          "startLine": 67,
+          "endLine": 69,
+          "params": [
+            "service"
+          ]
+        },
+        {
+          "name": "onCreateOptionsMenu",
+          "startLine": 71,
+          "endLine": 75,
+          "params": [
+            "menu"
+          ]
+        },
+        {
+          "name": "onPrepareOptionsMenu",
+          "startLine": 77,
+          "endLine": 92,
+          "params": [
+            "menu"
+          ]
+        },
+        {
+          "name": "onOptionsItemSelected",
+          "startLine": 94,
+          "endLine": 125,
+          "params": [
+            "item"
+          ]
+        },
+        {
+          "name": "onBackPressed",
+          "startLine": 127,
+          "endLine": 131,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "SettingsActivity",
+          "startLine": 29,
+          "endLine": 265,
+          "methods": [
+            "onCreate",
+            "onStart",
+            "onStop",
+            "onServiceStateChanged",
+            "onCreateOptionsMenu",
+            "onPrepareOptionsMenu",
+            "onOptionsItemSelected",
+            "onBackPressed"
+          ],
+          "properties": [
+            "mService",
+            "aboutPreference"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "onCreate",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "onStart",
+          "line": 57,
+          "isDefault": false
+        },
+        {
+          "name": "onStop",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "onServiceStateChanged",
+          "line": 67,
+          "isDefault": false
+        },
+        {
+          "name": "onCreateOptionsMenu",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "onPrepareOptionsMenu",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "onOptionsItemSelected",
+          "line": 94,
+          "isDefault": false
+        },
+        {
+          "name": "onBackPressed",
+          "line": 127,
+          "isDefault": false
+        },
+        {
+          "name": "SettingsActivity",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "onCreate",
+          "callee": "onCreate",
+          "lineNumber": 35
+        },
+        {
+          "caller": "onCreate",
+          "callee": "registerOnBackInvokedCallback",
+          "lineNumber": 37
+        },
+        {
+          "caller": "onCreate",
+          "callee": "onBackPressed",
+          "lineNumber": 40
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setContentView",
+          "lineNumber": 43
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setDisplayShowHomeEnabled",
+          "lineNumber": 44
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setContext",
+          "lineNumber": 46
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 47
+        },
+        {
+          "caller": "onCreate",
+          "callee": "MorpheAboutPreference",
+          "lineNumber": 47
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setTitle",
+          "lineNumber": 48
+        },
+        {
+          "caller": "onCreate",
+          "callee": "commit",
+          "lineNumber": 53
+        },
+        {
+          "caller": "onCreate",
+          "callee": "replace",
+          "lineNumber": 53
+        },
+        {
+          "caller": "onCreate",
+          "callee": "beginTransaction",
+          "lineNumber": 53
+        },
+        {
+          "caller": "onCreate",
+          "callee": "SettingsFragment",
+          "lineNumber": 53
+        },
+        {
+          "caller": "onStart",
+          "callee": "onStart",
+          "lineNumber": 58
+        },
+        {
+          "caller": "onStart",
+          "callee": "addServiceStateListener",
+          "lineNumber": 59
+        },
+        {
+          "caller": "onStop",
+          "callee": "removeServiceStateListener",
+          "lineNumber": 63
+        },
+        {
+          "caller": "onStop",
+          "callee": "onStop",
+          "lineNumber": 64
+        },
+        {
+          "caller": "onCreateOptionsMenu",
+          "callee": "inflate",
+          "lineNumber": 72
+        },
+        {
+          "caller": "onCreateOptionsMenu",
+          "callee": "findItem",
+          "lineNumber": 73
+        },
+        {
+          "caller": "onPrepareOptionsMenu",
+          "callee": "ComponentName",
+          "lineNumber": 78
+        },
+        {
+          "caller": "onPrepareOptionsMenu",
+          "callee": "findItem",
+          "lineNumber": 79
+        },
+        {
+          "caller": "onPrepareOptionsMenu",
+          "callee": "getComponentEnabledSetting",
+          "lineNumber": 80
+        },
+        {
+          "caller": "onPrepareOptionsMenu",
+          "callee": "findItem",
+          "lineNumber": 82
+        },
+        {
+          "caller": "onPrepareOptionsMenu",
+          "callee": "getRemotePreferences",
+          "lineNumber": 84
+        },
+        {
+          "caller": "onPrepareOptionsMenu",
+          "callee": "getBoolean",
+          "lineNumber": 86
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "onPreferenceClick",
+          "lineNumber": 97
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "ComponentName",
+          "lineNumber": 104
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "setComponentEnabledSetting",
+          "lineNumber": 107
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "apply",
+          "lineNumber": 118
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "putBoolean",
+          "lineNumber": 118
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "edit",
+          "lineNumber": 118
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "getRemotePreferences",
+          "lineNumber": 118
+        },
+        {
+          "caller": "onOptionsItemSelected",
+          "callee": "onOptionsItemSelected",
+          "lineNumber": 123
+        },
+        {
+          "caller": "onBackPressed",
+          "callee": "finishAndRemoveTask",
+          "lineNumber": 129
+        },
+        {
+          "caller": "onBackPressed",
+          "callee": "exitProcess",
+          "lineNumber": 130
+        },
+        {
+          "caller": "getPreference",
+          "callee": "apply",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getPreference",
+          "callee": "Preference",
+          "lineNumber": 141
+        },
+        {
+          "caller": "getPreference",
+          "callee": "apply",
+          "lineNumber": 144
+        },
+        {
+          "caller": "getPreference",
+          "callee": "Intent",
+          "lineNumber": 144
+        },
+        {
+          "caller": "getPreference",
+          "callee": "putExtra",
+          "lineNumber": 145
+        },
+        {
+          "caller": "onCreate",
+          "callee": "onCreate",
+          "lineNumber": 152
+        },
+        {
+          "caller": "onCreate",
+          "callee": "createPreferenceScreen",
+          "lineNumber": 154
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 157
+        },
+        {
+          "caller": "onCreate",
+          "callee": "Preference",
+          "lineNumber": 157
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setSummary",
+          "lineNumber": 158
+        },
+        {
+          "caller": "onCreate",
+          "callee": "addPreference",
+          "lineNumber": 160
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setContext",
+          "lineNumber": 163
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 165
+        },
+        {
+          "caller": "onCreate",
+          "callee": "Preference",
+          "lineNumber": 165
+        },
+        {
+          "caller": "onCreate",
+          "callee": "Intent",
+          "lineNumber": 168
+        },
+        {
+          "caller": "onCreate",
+          "callee": "parse",
+          "lineNumber": 168
+        },
+        {
+          "caller": "onCreate",
+          "callee": "addPreference",
+          "lineNumber": 169
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 172
+        },
+        {
+          "caller": "onCreate",
+          "callee": "Preference",
+          "lineNumber": 172
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setTitle",
+          "lineNumber": 173
+        },
+        {
+          "caller": "onCreate",
+          "callee": "Intent",
+          "lineNumber": 174
+        },
+        {
+          "caller": "onCreate",
+          "callee": "parse",
+          "lineNumber": 176
+        },
+        {
+          "caller": "onCreate",
+          "callee": "addPreference",
+          "lineNumber": 178
+        },
+        {
+          "caller": "onCreate",
+          "callee": "addPreferencesFromResource",
+          "lineNumber": 181
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 183
+        },
+        {
+          "caller": "onCreate",
+          "callee": "Preference",
+          "lineNumber": 183
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setTitle",
+          "lineNumber": 184
+        },
+        {
+          "caller": "onCreate",
+          "callee": "trimMargin",
+          "lineNumber": 186
+        },
+        {
+          "caller": "onCreate",
+          "callee": "getRelativeTimeSpanString",
+          "lineNumber": 187
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setOnPreferenceClickListener",
+          "lineNumber": 188
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 189
+        },
+        {
+          "caller": "onCreate",
+          "callee": "UpdateChecker",
+          "lineNumber": 189
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setActivity",
+          "lineNumber": 190
+        },
+        {
+          "caller": "onCreate",
+          "callee": "checkUpdate",
+          "lineNumber": 191
+        },
+        {
+          "caller": "onCreate",
+          "callee": "addPreference",
+          "lineNumber": 195
+        },
+        {
+          "caller": "onCreate",
+          "callee": "apply",
+          "lineNumber": 197
+        },
+        {
+          "caller": "onCreate",
+          "callee": "UpdateChecker",
+          "lineNumber": 197
+        },
+        {
+          "caller": "onCreate",
+          "callee": "setActivity",
+          "lineNumber": 198
+        },
+        {
+          "caller": "onCreate",
+          "callee": "autoCheckUpdate",
+          "lineNumber": 199
+        },
+        {
+          "caller": "onCreate",
+          "callee": "updateDynamicUI",
+          "lineNumber": 202
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "removePreference",
+          "lineNumber": 207
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "removePreference",
+          "lineNumber": 208
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "apply",
+          "lineNumber": 211
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "Preference",
+          "lineNumber": 211
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "setSummary",
+          "lineNumber": 212
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "addPreference",
+          "lineNumber": 214
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "apply",
+          "lineNumber": 217
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "PreferenceCategory",
+          "lineNumber": 217
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "setTitle",
+          "lineNumber": 218
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "addPreference",
+          "lineNumber": 220
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "addPreference",
+          "lineNumber": 222
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "apply",
+          "lineNumber": 222
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "Preference",
+          "lineNumber": 222
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "setSummary",
+          "lineNumber": 223
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "addPreference",
+          "lineNumber": 228
+        },
+        {
+          "caller": "updateDynamicUI",
+          "callee": "getPreference",
+          "lineNumber": 228
+        },
+        {
+          "caller": "onStart",
+          "callee": "onStart",
+          "lineNumber": 235
+        },
+        {
+          "caller": "onStart",
+          "callee": "addServiceStateListener",
+          "lineNumber": 236
+        },
+        {
+          "caller": "onStop",
+          "callee": "removeServiceStateListener",
+          "lineNumber": 240
+        },
+        {
+          "caller": "onStop",
+          "callee": "onStop",
+          "lineNumber": 241
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "runOnUiThread",
+          "lineNumber": 247
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "updateDynamicUI",
+          "lineNumber": 249
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "getRemotePreferences",
+          "lineNumber": 254
+        },
+        {
+          "caller": "onServiceStateChanged",
+          "callee": "updateDynamicUI",
+          "lineNumber": 261
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 9,
+        "functionCount": 8,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/common/UpdateChecker.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 188,
+      "nonEmptyLines": 168,
+      "functions": [
+        {
+          "name": "setActivity",
+          "startLine": 73,
+          "endLine": 75,
+          "params": [
+            "activity"
+          ]
+        },
+        {
+          "name": "hookNewActivity",
+          "startLine": 77,
+          "endLine": 94,
+          "params": []
+        },
+        {
+          "name": "autoCheckUpdate",
+          "startLine": 96,
+          "endLine": 100,
+          "params": []
+        },
+        {
+          "name": "checkUpdate",
+          "startLine": 102,
+          "endLine": 130,
+          "params": [
+            "silent"
+          ]
+        },
+        {
+          "name": "showRelease",
+          "startLine": 132,
+          "endLine": 151,
+          "params": [
+            "version"
+          ]
+        },
+        {
+          "name": "requireActivity",
+          "startLine": 153,
+          "endLine": 153,
+          "params": []
+        },
+        {
+          "name": "showUpdateDialog",
+          "startLine": 155,
+          "endLine": 176,
+          "params": []
+        },
+        {
+          "name": "openReleasePage",
+          "startLine": 178,
+          "endLine": 187,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "ReleaseInfo",
+          "startLine": 30,
+          "endLine": 34,
+          "methods": [],
+          "properties": [
+            "tagName",
+            "releaseNoteHtml",
+            "releaseUrl"
+          ]
+        },
+        {
+          "name": "VersionInfo",
+          "startLine": 36,
+          "endLine": 55,
+          "methods": [],
+          "properties": [
+            "versionCode",
+            "versionName"
+          ]
+        },
+        {
+          "name": "UpdateChecker",
+          "startLine": 61,
+          "endLine": 188,
+          "methods": [
+            "setActivity",
+            "hookNewActivity",
+            "autoCheckUpdate",
+            "checkUpdate",
+            "showRelease",
+            "requireActivity",
+            "showUpdateDialog",
+            "openReleasePage"
+          ],
+          "properties": [
+            "coroutineContext",
+            "currentActivity",
+            "latestVersionInfo",
+            "latestRelease",
+            "runOnce"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "ReleaseInfo",
+          "line": 30,
+          "isDefault": false
+        },
+        {
+          "name": "VersionInfo",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "coroutineContext",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "runOnce",
+          "line": 71,
+          "isDefault": false
+        },
+        {
+          "name": "setActivity",
+          "line": 73,
+          "isDefault": false
+        },
+        {
+          "name": "hookNewActivity",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "autoCheckUpdate",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "checkUpdate",
+          "line": 102,
+          "isDefault": false
+        },
+        {
+          "name": "showRelease",
+          "line": 132,
+          "isDefault": false
+        },
+        {
+          "name": "requireActivity",
+          "line": 153,
+          "isDefault": false
+        },
+        {
+          "name": "UpdateChecker",
+          "line": 61,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "fromTagName",
+          "callee": "split",
+          "lineNumber": 42
+        },
+        {
+          "caller": "fromTagName",
+          "callee": "count",
+          "lineNumber": 43
+        },
+        {
+          "caller": "fromTagName",
+          "callee": "toIntOrNull",
+          "lineNumber": 45
+        },
+        {
+          "caller": "fromTagName",
+          "callee": "toIntOrNull",
+          "lineNumber": 49
+        },
+        {
+          "caller": "fromTagName",
+          "callee": "last",
+          "lineNumber": 49
+        },
+        {
+          "caller": "fromTagName",
+          "callee": "split",
+          "lineNumber": 49
+        },
+        {
+          "caller": "fromTagName",
+          "callee": "VersionInfo",
+          "lineNumber": 52
+        },
+        {
+          "caller": "setActivity",
+          "callee": "WeakReference",
+          "lineNumber": 74
+        },
+        {
+          "caller": "hookNewActivity",
+          "callee": "hookMethod",
+          "lineNumber": 79
+        },
+        {
+          "caller": "hookNewActivity",
+          "callee": "findMethodExact",
+          "lineNumber": 79
+        },
+        {
+          "caller": "hookNewActivity",
+          "callee": "after",
+          "lineNumber": 86
+        },
+        {
+          "caller": "hookNewActivity",
+          "callee": "WeakReference",
+          "lineNumber": 89
+        },
+        {
+          "caller": "hookNewActivity",
+          "callee": "autoCheckUpdate",
+          "lineNumber": 90
+        },
+        {
+          "caller": "autoCheckUpdate",
+          "callee": "nextInt",
+          "lineNumber": 97
+        },
+        {
+          "caller": "autoCheckUpdate",
+          "callee": "printInfo",
+          "lineNumber": 98
+        },
+        {
+          "caller": "autoCheckUpdate",
+          "callee": "runCatching",
+          "lineNumber": 99
+        },
+        {
+          "caller": "autoCheckUpdate",
+          "callee": "checkUpdate",
+          "lineNumber": 99
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "launch",
+          "lineNumber": 103
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "get",
+          "lineNumber": 105
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "mapOf",
+          "lineNumber": 107
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "printException",
+          "lineNumber": 110
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "readString",
+          "lineNumber": 114
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "printDebug",
+          "lineNumber": 115
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "fromJson",
+          "lineNumber": 116
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "Gson",
+          "lineNumber": 116
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "fromTagName",
+          "lineNumber": 117
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "printDebug",
+          "lineNumber": 118
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "printInfo",
+          "lineNumber": 120
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "showUpdateDialog",
+          "lineNumber": 121
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "printInfo",
+          "lineNumber": 123
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "showToastLong",
+          "lineNumber": 124
+        },
+        {
+          "caller": "checkUpdate",
+          "callee": "printException",
+          "lineNumber": 127
+        },
+        {
+          "caller": "showRelease",
+          "callee": "launch",
+          "lineNumber": 134
+        },
+        {
+          "caller": "showRelease",
+          "callee": "get",
+          "lineNumber": 135
+        },
+        {
+          "caller": "showRelease",
+          "callee": "mapOf",
+          "lineNumber": 137
+        },
+        {
+          "caller": "showRelease",
+          "callee": "printException",
+          "lineNumber": 140
+        },
+        {
+          "caller": "showRelease",
+          "callee": "readString",
+          "lineNumber": 144
+        },
+        {
+          "caller": "showRelease",
+          "callee": "printDebug",
+          "lineNumber": 145
+        },
+        {
+          "caller": "showRelease",
+          "callee": "fromJson",
+          "lineNumber": 147
+        },
+        {
+          "caller": "showRelease",
+          "callee": "Gson",
+          "lineNumber": 147
+        },
+        {
+          "caller": "showRelease",
+          "callee": "fromTagName",
+          "lineNumber": 148
+        },
+        {
+          "caller": "showRelease",
+          "callee": "showUpdateDialog",
+          "lineNumber": 149
+        },
+        {
+          "caller": "requireActivity",
+          "callee": "get",
+          "lineNumber": 153
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "launch",
+          "lineNumber": 156
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "isDarkModeEnabled",
+          "lineNumber": 159
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "create",
+          "lineNumber": 161
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "setNegativeButton",
+          "lineNumber": 161
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "setPositiveButton",
+          "lineNumber": 161
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "setMessage",
+          "lineNumber": 161
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "setTitle",
+          "lineNumber": 161
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "Builder",
+          "lineNumber": 161
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "requireActivity",
+          "lineNumber": 161
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "fromHtml",
+          "lineNumber": 164
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "openReleasePage",
+          "lineNumber": 166
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "getString",
+          "lineNumber": 167
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "requireActivity",
+          "lineNumber": 167
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "show",
+          "lineNumber": 169
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "findViewById",
+          "lineNumber": 170
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "getInstance",
+          "lineNumber": 171
+        },
+        {
+          "caller": "showUpdateDialog",
+          "callee": "printException",
+          "lineNumber": 173
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "Intent",
+          "lineNumber": 180
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "parse",
+          "lineNumber": 180
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "addFlags",
+          "lineNumber": 181
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "startActivity",
+          "lineNumber": 182
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "requireActivity",
+          "lineNumber": 182
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "printStackTrace",
+          "lineNumber": 184
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "showToastLong",
+          "lineNumber": 185
+        },
+        {
+          "caller": "openReleasePage",
+          "callee": "toString",
+          "lineNumber": 185
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 11,
+        "functionCount": 8,
+        "classCount": 3
+      }
+    }
+  ]
+}

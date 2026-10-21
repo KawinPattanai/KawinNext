@@ -1,0 +1,2022 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 31,
+  "filesSkipped": [],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 31,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 31,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/InstructionFilter.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 1195,
+      "nonEmptyLines": 1060,
+      "functions": [
+        {
+          "name": "indexIsValidForMatching",
+          "startLine": 20,
+          "endLine": 20,
+          "params": [
+            "previouslyMatchedIndex",
+            "currentIndex"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "InstructionLocation",
+          "startLine": 15,
+          "endLine": 160,
+          "methods": [
+            "indexIsValidForMatching"
+          ],
+          "properties": []
+        },
+        {
+          "name": "InstructionFilter",
+          "startLine": 162,
+          "endLine": 162,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "indexIsValidForMatching",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "InstructionLocation",
+          "line": 15,
+          "isDefault": false
+        },
+        {
+          "name": "InstructionFilter",
+          "line": 162,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "indexIsValidForMatching",
+          "callee": "require",
+          "lineNumber": 40
+        },
+        {
+          "caller": "indexIsValidForMatching",
+          "callee": "require",
+          "lineNumber": 62
+        },
+        {
+          "caller": "indexIsValidForMatching",
+          "callee": "indexIsValidForMatching",
+          "lineNumber": 156
+        },
+        {
+          "caller": "indexIsValidForMatching",
+          "callee": "indexIsValidForMatching",
+          "lineNumber": 157
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 1,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/Opcode.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 267,
+      "nonEmptyLines": 264,
+      "classes": [
+        {
+          "name": "Opcode",
+          "startLine": 3,
+          "endLine": 267,
+          "methods": [],
+          "properties": [
+            "opName"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "Opcode",
+          "line": 3,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/StringComparisonType.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 106,
+      "nonEmptyLines": 88,
+      "functions": [
+        {
+          "name": "parametersMatch",
+          "startLine": 74,
+          "endLine": 88,
+          "params": [
+            "targetMethodParameters",
+            "fingerprintParameters"
+          ]
+        },
+        {
+          "name": "parametersMatch",
+          "startLine": 90,
+          "endLine": 106,
+          "params": [
+            "targetMethodParameters",
+            "fingerprintParameters",
+            "stringComparisonType"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "StringComparisonType",
+          "startLine": 5,
+          "endLine": 66,
+          "methods": [],
+          "properties": [
+            "value"
+          ]
+        }
+      ],
+      "exports": [
+        {
+          "name": "StringComparisonType",
+          "line": 5,
+          "isDefault": false
+        },
+        {
+          "name": "parametersMatch",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "parametersMatch",
+          "line": 90,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "compare",
+          "callee": "contains",
+          "lineNumber": 20
+        },
+        {
+          "caller": "compare",
+          "callee": "startsWith",
+          "lineNumber": 21
+        },
+        {
+          "caller": "compare",
+          "callee": "endsWith",
+          "lineNumber": 22
+        },
+        {
+          "caller": "typeDeclarationToComparison",
+          "callee": "orEmpty",
+          "lineNumber": 28
+        },
+        {
+          "caller": "typeDeclarationToComparison",
+          "callee": "map",
+          "lineNumber": 28
+        },
+        {
+          "caller": "typeDeclarationToComparison",
+          "callee": "require",
+          "lineNumber": 33
+        },
+        {
+          "caller": "typeDeclarationToComparison",
+          "callee": "isNotEmpty",
+          "lineNumber": 33
+        },
+        {
+          "caller": "typeDeclarationToComparison",
+          "callee": "IllegalArgumentException",
+          "lineNumber": 45
+        },
+        {
+          "caller": "typeDeclarationToComparison",
+          "callee": "endsWith",
+          "lineNumber": 49
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "count",
+          "lineNumber": 78
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "count",
+          "lineNumber": 78
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "iterator",
+          "lineNumber": 79
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "forEach",
+          "lineNumber": 81
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "next",
+          "lineNumber": 82
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "compare",
+          "lineNumber": 83
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "typeDeclarationToComparison",
+          "lineNumber": 83
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "count",
+          "lineNumber": 95
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "count",
+          "lineNumber": 95
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "iterator",
+          "lineNumber": 96
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "iterator",
+          "lineNumber": 97
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "forEach",
+          "lineNumber": 99
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "next",
+          "lineNumber": 100
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "next",
+          "lineNumber": 101
+        },
+        {
+          "caller": "parametersMatch",
+          "callee": "compare",
+          "lineNumber": 102
+        }
+      ],
+      "metrics": {
+        "importCount": 0,
+        "exportCount": 3,
+        "functionCount": 2,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/ad/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 40,
+      "nonEmptyLines": 35,
+      "classes": [
+        {
+          "name": "ShowVideoAdsFingerprint",
+          "startLine": 9,
+          "endLine": 16,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "HideGetPremiumFingerprint",
+          "startLine": 22,
+          "endLine": 27,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "MembershipSettingsFingerprint",
+          "startLine": 29,
+          "endLine": 40,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ShowVideoAdsFingerprint",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "HideGetPremiumFingerprint",
+          "line": 22,
+          "isDefault": false
+        },
+        {
+          "name": "MembershipSettingsFingerprint",
+          "line": 29,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/layout/upgradebutton/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 17,
+      "nonEmptyLines": 15,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/audio/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 41,
+      "nonEmptyLines": 37,
+      "classes": [
+        {
+          "name": "AllowExclusiveAudioPlaybackFingerprint",
+          "startLine": 9,
+          "endLine": 23,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AllowExclusiveAudioPlaybackLegacyFingerprint",
+          "startLine": 25,
+          "endLine": 41,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AllowExclusiveAudioPlaybackFingerprint",
+          "line": 9,
+          "isDefault": false
+        },
+        {
+          "name": "AllowExclusiveAudioPlaybackLegacyFingerprint",
+          "line": 25,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/backgroundplayback/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 34,
+      "nonEmptyLines": 31,
+      "classes": [
+        {
+          "name": "BackgroundPlaybackDisableFingerprint",
+          "startLine": 10,
+          "endLine": 25,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "KidsBackgroundPlaybackPolicyControllerFingerprint",
+          "startLine": 27,
+          "endLine": 34,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BackgroundPlaybackDisableFingerprint",
+          "line": 10,
+          "isDefault": false
+        },
+        {
+          "name": "KidsBackgroundPlaybackPolicyControllerFingerprint",
+          "line": 27,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/ad/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 131,
+      "nonEmptyLines": 119,
+      "classes": [
+        {
+          "name": "ListingFingerprint",
+          "startLine": 14,
+          "endLine": 31,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SubmittedListingFingerprint",
+          "startLine": 34,
+          "endLine": 52,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AdPostSectionToStringFingerprint",
+          "startLine": 54,
+          "endLine": 62,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AdPostSectionConstructorFingerprint",
+          "startLine": 64,
+          "endLine": 68,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CommentsAdStateToStringFingerprint",
+          "startLine": 74,
+          "endLine": 82,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CommentsAdStateConstructorFingerprint",
+          "startLine": 85,
+          "endLine": 89,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CommentsViewModelAdLoaderFingerprint",
+          "startLine": 96,
+          "endLine": 109,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ImmutableListBuilderFingerprint",
+          "startLine": 111,
+          "endLine": 126,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ListingFingerprint",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "SubmittedListingFingerprint",
+          "line": 34,
+          "isDefault": false
+        },
+        {
+          "name": "AdPostSectionConstructorFingerprint",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "CommentsAdStateToStringFingerprint",
+          "line": 74,
+          "isDefault": false
+        },
+        {
+          "name": "CommentsAdStateConstructorFingerprint",
+          "line": 85,
+          "isDefault": false
+        },
+        {
+          "name": "CommentsViewModelAdLoaderFingerprint",
+          "line": 96,
+          "isDefault": false
+        },
+        {
+          "name": "ImmutableListBuilderFingerprint",
+          "line": 111,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 7,
+        "functionCount": 0,
+        "classCount": 8
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/reddit/misc/guest/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 27,
+      "nonEmptyLines": 23,
+      "classes": [
+        {
+          "name": "FrontPageApplicationHasFinishedOnboardingFingerprint",
+          "startLine": 11,
+          "endLine": 23,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "FrontPageApplicationHasFinishedOnboardingFingerprint",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 71,
+      "nonEmptyLines": 66,
+      "classes": [
+        {
+          "name": "FormatStreamModelToStringFingerprint",
+          "startLine": 12,
+          "endLine": 27,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "MediaSessionSetMetadataFingerprint",
+          "startLine": 29,
+          "endLine": 37,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SpannableStringBuilderFingerprint",
+          "startLine": 39,
+          "endLine": 67,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "FormatStreamModelToStringFingerprint",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "MediaSessionSetMetadataFingerprint",
+          "line": 29,
+          "isDefault": false
+        },
+        {
+          "name": "SpannableStringBuilderFingerprint",
+          "line": 39,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/ad/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 58,
+      "nonEmptyLines": 51,
+      "classes": [
+        {
+          "name": "LithoDialogBuilderFingerprint",
+          "startLine": 12,
+          "endLine": 23,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CustomDialogOnBackPressedParentFingerprint",
+          "startLine": 37,
+          "endLine": 50,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "CustomDialogOnBackPressedFingerprint",
+          "startLine": 52,
+          "endLine": 58,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LithoDialogBuilderFingerprint",
+          "line": 12,
+          "isDefault": false
+        },
+        {
+          "name": "CustomDialogOnBackPressedFingerprint",
+          "line": 52,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/layout/returnyoutubedislike/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 114,
+      "nonEmptyLines": 99,
+      "functions": [
+        {
+          "name": "likeEndpointParserClass",
+          "startLine": 34,
+          "endLine": 34,
+          "params": []
+        },
+        {
+          "name": "likeEndpointParserFingerprint",
+          "startLine": 56,
+          "endLine": 64,
+          "params": []
+        }
+      ],
+      "classes": [
+        {
+          "name": "EndpointServiceNameFingerprint",
+          "startLine": 14,
+          "endLine": 26,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "DislikeFingerprint",
+          "startLine": 28,
+          "endLine": 31,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ComponentHostSetContentDescriptionFingerprint",
+          "startLine": 95,
+          "endLine": 100,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "YogaSetWidthFingerprint",
+          "startLine": 102,
+          "endLine": 110,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "EndpointServiceNameFingerprint",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "DislikeFingerprint",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "ComponentHostSetContentDescriptionFingerprint",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "YogaSetWidthFingerprint",
+          "line": 102,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "likeEndpointParserClass",
+          "callee": "DislikeFingerprint",
+          "lineNumber": 34
+        },
+        {
+          "caller": "likeEndpointParserFingerprint",
+          "callee": "Fingerprint",
+          "lineNumber": 56
+        },
+        {
+          "caller": "likeEndpointParserFingerprint",
+          "callee": "likeEndpointParserClass",
+          "lineNumber": 57
+        },
+        {
+          "caller": "likeEndpointParserFingerprint",
+          "callee": "listOf",
+          "lineNumber": 59
+        },
+        {
+          "caller": "likeEndpointParserFingerprint",
+          "callee": "fieldAccess",
+          "lineNumber": 60
+        },
+        {
+          "caller": "likeEndpointParserFingerprint",
+          "callee": "MatchFirst",
+          "lineNumber": 60
+        },
+        {
+          "caller": "likeEndpointParserFingerprint",
+          "callee": "fieldAccess",
+          "lineNumber": 61
+        },
+        {
+          "caller": "likeEndpointParserFingerprint",
+          "callee": "string",
+          "lineNumber": 62
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 4
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/layout/theme/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 94,
+      "nonEmptyLines": 87,
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 0,
+        "functionCount": 0,
+        "classCount": 0
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/auth/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 115,
+      "nonEmptyLines": 103,
+      "functions": [
+        {
+          "name": "getIncognitoStatusFingerprint",
+          "startLine": 40,
+          "endLine": 53,
+          "params": [
+            "incognitoField"
+          ]
+        },
+        {
+          "name": "isEmptyPageIdFingerprint",
+          "startLine": 71,
+          "endLine": 89,
+          "params": [
+            "pageIdField"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "AccountIdentityToStringFingerprint",
+          "startLine": 31,
+          "endLine": 38,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "GetPageIdFingerprint",
+          "startLine": 55,
+          "endLine": 69,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccountIdentityToStringFingerprint",
+          "line": 31,
+          "isDefault": false
+        },
+        {
+          "name": "getIncognitoStatusFingerprint",
+          "line": 40,
+          "isDefault": false
+        },
+        {
+          "name": "GetPageIdFingerprint",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "isEmptyPageIdFingerprint",
+          "line": 71,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "getIncognitoStatusFingerprint",
+          "callee": "listOf",
+          "lineNumber": 43
+        },
+        {
+          "caller": "getIncognitoStatusFingerprint",
+          "callee": "listOf",
+          "lineNumber": 44
+        },
+        {
+          "caller": "getIncognitoStatusFingerprint",
+          "callee": "listOf",
+          "lineNumber": 45
+        },
+        {
+          "caller": "getIncognitoStatusFingerprint",
+          "callee": "fieldAccess",
+          "lineNumber": 46
+        },
+        {
+          "caller": "getIncognitoStatusFingerprint",
+          "callee": "MatchFirst",
+          "lineNumber": 48
+        },
+        {
+          "caller": "getIncognitoStatusFingerprint",
+          "callee": "opcode",
+          "lineNumber": 51
+        },
+        {
+          "caller": "getIncognitoStatusFingerprint",
+          "callee": "MatchAfterImmediately",
+          "lineNumber": 51
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "listOf",
+          "lineNumber": 74
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "listOf",
+          "lineNumber": 75
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "listOf",
+          "lineNumber": 76
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "fieldAccess",
+          "lineNumber": 77
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "MatchFirst",
+          "lineNumber": 79
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "string",
+          "lineNumber": 82
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "MatchAfterImmediately",
+          "lineNumber": 82
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "methodCall",
+          "lineNumber": 83
+        },
+        {
+          "caller": "isEmptyPageIdFingerprint",
+          "callee": "MatchAfterImmediately",
+          "lineNumber": 86
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 2,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/initialization/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 32,
+      "classes": [
+        {
+          "name": "GlobalConfigGroupFingerprint",
+          "startLine": 11,
+          "endLine": 25,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "GlobalConfigGroupFingerprint",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/filter/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 124,
+      "nonEmptyLines": 113,
+      "classes": [
+        {
+          "name": "AccessibilityIdFingerprint",
+          "startLine": 17,
+          "endLine": 26,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ComponentCreateFingerprint",
+          "startLine": 55,
+          "endLine": 68,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ProtobufBufferEncodeFingerprint",
+          "startLine": 70,
+          "endLine": 85,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ProtobufBufferReferenceFingerprint",
+          "startLine": 87,
+          "endLine": 97,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "EmptyComponentParentFingerprint",
+          "startLine": 99,
+          "endLine": 105,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "LithoThreadExecutorFingerprint",
+          "startLine": 107,
+          "endLine": 120,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "AccessibilityIdFingerprint",
+          "line": 17,
+          "isDefault": false
+        },
+        {
+          "name": "ComponentCreateFingerprint",
+          "line": 55,
+          "isDefault": false
+        },
+        {
+          "name": "ProtobufBufferEncodeFingerprint",
+          "line": 70,
+          "isDefault": false
+        },
+        {
+          "name": "ProtobufBufferReferenceFingerprint",
+          "line": 87,
+          "isDefault": false
+        },
+        {
+          "name": "LithoThreadExecutorFingerprint",
+          "line": 107,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 6
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/node/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 16,
+      "nonEmptyLines": 14,
+      "classes": [
+        {
+          "name": "TreeNodeResultListFingerprint",
+          "startLine": 9,
+          "endLine": 16,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TreeNodeResultListFingerprint",
+          "line": 9,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/litho/relayout/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 85,
+      "nonEmptyLines": 78,
+      "classes": [
+        {
+          "name": "LithoViewOnMeasureFingerprint",
+          "startLine": 20,
+          "endLine": 41,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "LithoViewUnmountAllItemsFingerprint",
+          "startLine": 46,
+          "endLine": 55,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "LithoTextMountFingerprint",
+          "startLine": 61,
+          "endLine": 74,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "LithoViewOnMeasureFingerprint",
+          "line": 20,
+          "isDefault": false
+        },
+        {
+          "name": "LithoViewUnmountAllItemsFingerprint",
+          "line": 46,
+          "isDefault": false
+        },
+        {
+          "name": "LithoTextMountFingerprint",
+          "line": 61,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/proto/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 37,
+      "nonEmptyLines": 34,
+      "classes": [
+        {
+          "name": "NewElementProtoParserFingerprint",
+          "startLine": 11,
+          "endLine": 20,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ProtoStuffReflectionFingerprint",
+          "startLine": 22,
+          "endLine": 37,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "NewElementProtoParserFingerprint",
+          "line": 11,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/request/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 55,
+      "nonEmptyLines": 52,
+      "classes": [
+        {
+          "name": "BuildRequestFingerprint",
+          "startLine": 12,
+          "endLine": 45,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BuildRequestFingerprint",
+          "line": 12,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/spans/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 26,
+      "nonEmptyLines": 22,
+      "classes": [
+        {
+          "name": "CustomCharacterStyleFingerprint",
+          "startLine": 10,
+          "endLine": 14,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CustomCharacterStyleFingerprint",
+          "line": 10,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/textcomponent/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 95,
+      "nonEmptyLines": 85,
+      "classes": [
+        {
+          "name": "TextComponentConstructorFingerprint",
+          "startLine": 14,
+          "endLine": 17,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "TextComponentLookupFingerprint",
+          "startLine": 19,
+          "endLine": 25,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "TextComponentDataFingerprint",
+          "startLine": 27,
+          "endLine": 32,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "LithoSpannableStringCreationFingerprint",
+          "startLine": 34,
+          "endLine": 50,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "TextComponentConstructorFingerprint",
+          "line": 14,
+          "isDefault": false
+        },
+        {
+          "name": "TextComponentLookupFingerprint",
+          "line": 19,
+          "isDefault": false
+        },
+        {
+          "name": "TextComponentDataFingerprint",
+          "line": 27,
+          "isDefault": false
+        },
+        {
+          "name": "LithoSpannableStringCreationFingerprint",
+          "line": 34,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 4,
+        "functionCount": 0,
+        "classCount": 4
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/videoinformation/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 39,
+      "nonEmptyLines": 35,
+      "classes": [
+        {
+          "name": "PlaybackParametersToStringFingerprint",
+          "startLine": 30,
+          "endLine": 39,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PlaybackParametersToStringFingerprint",
+          "line": 30,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/ad/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 100,
+      "nonEmptyLines": 90,
+      "classes": [
+        {
+          "name": "FullScreenEngagementAdContainerFingerprint",
+          "startLine": 28,
+          "endLine": 45,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "GetPremiumViewFingerprint",
+          "startLine": 47,
+          "endLine": 59,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "PlayerOverlayTimelyShelfFingerprint",
+          "startLine": 61,
+          "endLine": 73,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "LoadVideoAdsFingerprint",
+          "startLine": 83,
+          "endLine": 88,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "PlayerBytesAdLayoutFingerprint",
+          "startLine": 90,
+          "endLine": 96,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "FullScreenEngagementAdContainerFingerprint",
+          "line": 28,
+          "isDefault": false
+        },
+        {
+          "name": "GetPremiumViewFingerprint",
+          "line": 47,
+          "isDefault": false
+        },
+        {
+          "name": "PlayerOverlayTimelyShelfFingerprint",
+          "line": 61,
+          "isDefault": false
+        },
+        {
+          "name": "LoadVideoAdsFingerprint",
+          "line": 83,
+          "isDefault": false
+        },
+        {
+          "name": "PlayerBytesAdLayoutFingerprint",
+          "line": 90,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/channelsearch/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 199,
+      "nonEmptyLines": 183,
+      "classes": [
+        {
+          "name": "BrowseFragmentOnCreateViewFingerprint",
+          "startLine": 79,
+          "endLine": 89,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SearchResultsFragmentOnCreateViewFingerprint",
+          "startLine": 95,
+          "endLine": 105,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SearchBoxHintFingerprint",
+          "startLine": 111,
+          "endLine": 120,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SearchSubmitFingerprint1",
+          "startLine": 133,
+          "endLine": 164,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SearchSubmitFingerprint2",
+          "startLine": 169,
+          "endLine": 199,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "BrowseFragmentOnCreateViewFingerprint",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "SearchResultsFragmentOnCreateViewFingerprint",
+          "line": 95,
+          "isDefault": false
+        },
+        {
+          "name": "SearchBoxHintFingerprint",
+          "line": 111,
+          "isDefault": false
+        },
+        {
+          "name": "SearchSubmitFingerprint1",
+          "line": 133,
+          "isDefault": false
+        },
+        {
+          "name": "SearchSubmitFingerprint2",
+          "line": 169,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 5,
+        "functionCount": 0,
+        "classCount": 5
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 377,
+      "nonEmptyLines": 345,
+      "classes": [
+        {
+          "name": "SwipingUpGestureParentFingerprint",
+          "startLine": 37,
+          "endLine": 43,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ShowSwipingUpGuideFingerprint",
+          "startLine": 45,
+          "endLine": 54,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AllowSwipingUpGestureFingerprint",
+          "startLine": 56,
+          "endLine": 62,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "DisableFastForwardGestureFingerprint",
+          "startLine": 64,
+          "endLine": 77,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "OnTouchEventHandlerFingerprint",
+          "startLine": 79,
+          "endLine": 99,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "TapToSeekFingerprint",
+          "startLine": 101,
+          "endLine": 128,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SlideToSeekFingerprint",
+          "startLine": 130,
+          "endLine": 144,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "VideoStreamingDataAllowSeekingFingerprint",
+          "startLine": 146,
+          "endLine": 157,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "FormatStreamModelMaxDVRDurationFingerprint",
+          "startLine": 161,
+          "endLine": 172,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SeekbarUpdatePointFingerprint",
+          "startLine": 180,
+          "endLine": 208,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SlideSeekbarHandlerOnTouchFingerprint",
+          "startLine": 210,
+          "endLine": 220,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SlideSeekbarGetViewControllerFingerprint",
+          "startLine": 222,
+          "endLine": 244,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SeekbarFineScrubbingBitmapFingerprint",
+          "startLine": 246,
+          "endLine": 257,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SeekbarBigBoardsUpdateFingerprint",
+          "startLine": 259,
+          "endLine": 281,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ShowSwipingUpGuideFingerprint",
+          "line": 45,
+          "isDefault": false
+        },
+        {
+          "name": "AllowSwipingUpGestureFingerprint",
+          "line": 56,
+          "isDefault": false
+        },
+        {
+          "name": "DisableFastForwardGestureFingerprint",
+          "line": 64,
+          "isDefault": false
+        },
+        {
+          "name": "OnTouchEventHandlerFingerprint",
+          "line": 79,
+          "isDefault": false
+        },
+        {
+          "name": "TapToSeekFingerprint",
+          "line": 101,
+          "isDefault": false
+        },
+        {
+          "name": "SlideToSeekFingerprint",
+          "line": 130,
+          "isDefault": false
+        },
+        {
+          "name": "VideoStreamingDataAllowSeekingFingerprint",
+          "line": 146,
+          "isDefault": false
+        },
+        {
+          "name": "FormatStreamModelMaxDVRDurationFingerprint",
+          "line": 161,
+          "isDefault": false
+        },
+        {
+          "name": "SeekbarUpdatePointFingerprint",
+          "line": 180,
+          "isDefault": false
+        },
+        {
+          "name": "SlideSeekbarHandlerOnTouchFingerprint",
+          "line": 210,
+          "isDefault": false
+        },
+        {
+          "name": "SlideSeekbarGetViewControllerFingerprint",
+          "line": 222,
+          "isDefault": false
+        },
+        {
+          "name": "SeekbarFineScrubbingBitmapFingerprint",
+          "line": 246,
+          "isDefault": false
+        },
+        {
+          "name": "SeekbarBigBoardsUpdateFingerprint",
+          "line": 259,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 13,
+        "functionCount": 0,
+        "classCount": 14
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/swipecontrols/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 38,
+      "nonEmptyLines": 35,
+      "classes": [
+        {
+          "name": "PlayerOverlayContainerFingerprint",
+          "startLine": 13,
+          "endLine": 14,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "PlayerOverlayContainerFingerprint",
+          "line": 13,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 1
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/navigation/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 61,
+      "nonEmptyLines": 57,
+      "classes": [
+        {
+          "name": "CreatePivotBarFingerprint",
+          "startLine": 11,
+          "endLine": 23,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AutoHideNavigationBarOnFeedScrollingFingerprint",
+          "startLine": 25,
+          "endLine": 36,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "AutoHideNavigationBarOnDismissMiniplayerFingerprint",
+          "startLine": 38,
+          "endLine": 61,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "CreatePivotBarFingerprint",
+          "line": 11,
+          "isDefault": false
+        },
+        {
+          "name": "AutoHideNavigationBarOnFeedScrollingFingerprint",
+          "line": 25,
+          "isDefault": false
+        },
+        {
+          "name": "AutoHideNavigationBarOnDismissMiniplayerFingerprint",
+          "line": 38,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 3,
+        "functionCount": 0,
+        "classCount": 3
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/captions/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 44,
+      "nonEmptyLines": 40,
+      "classes": [
+        {
+          "name": "SubtitleManagerFingerprintClassFingerprint",
+          "startLine": 14,
+          "endLine": 24,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "SubtitleManagerFingerprint",
+          "startLine": 26,
+          "endLine": 40,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "SubtitleManagerFingerprint",
+          "line": 26,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 1,
+        "functionCount": 0,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/flyout/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 223,
+      "nonEmptyLines": 197,
+      "functions": [
+        {
+          "name": "videoIdField",
+          "startLine": 43,
+          "endLine": 60,
+          "params": [
+            "messageClass"
+          ]
+        }
+      ],
+      "classes": [
+        {
+          "name": "FeedBottomSheetFlyoutFingerprint",
+          "startLine": 62,
+          "endLine": 73,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "FeedPopupWindowFlyoutFingerprint",
+          "startLine": 79,
+          "endLine": 80,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "FeedBottomSheetFlyoutFingerprint",
+          "line": 62,
+          "isDefault": false
+        },
+        {
+          "name": "FeedPopupWindowFlyoutFingerprint",
+          "line": 79,
+          "isDefault": false
+        }
+      ],
+      "callGraph": [
+        {
+          "caller": "videoIdField",
+          "callee": "findFieldDirect",
+          "lineNumber": 43
+        },
+        {
+          "caller": "videoIdField",
+          "callee": "messageClass",
+          "lineNumber": 44
+        },
+        {
+          "caller": "videoIdField",
+          "callee": "last",
+          "lineNumber": 47
+        },
+        {
+          "caller": "videoIdField",
+          "callee": "Fingerprint",
+          "lineNumber": 47
+        },
+        {
+          "caller": "videoIdField",
+          "callee": "listOf",
+          "lineNumber": 50
+        },
+        {
+          "caller": "videoIdField",
+          "callee": "string",
+          "lineNumber": 51
+        },
+        {
+          "caller": "videoIdField",
+          "callee": "fieldAccess",
+          "lineNumber": 52
+        },
+        {
+          "caller": "videoIdField",
+          "callee": "MatchAfterWithin",
+          "lineNumber": 56
+        }
+      ],
+      "metrics": {
+        "importCount": 1,
+        "exportCount": 2,
+        "functionCount": 1,
+        "classCount": 2
+      }
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/general/Fingerprints.kt",
+      "language": "kotlin",
+      "fileCategory": "code",
+      "totalLines": 196,
+      "nonEmptyLines": 177,
+      "classes": [
+        {
+          "name": "ParseElementFromBufferFingerprint",
+          "startLine": 23,
+          "endLine": 28,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "PlayerOverlayFingerprint",
+          "startLine": 30,
+          "endLine": 34,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ShowWatermarkFingerprint",
+          "startLine": 36,
+          "endLine": 41,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "BottomSheetMenuItemBuilderFingerprint",
+          "startLine": 52,
+          "endLine": 65,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ContextualMenuItemBuilderFingerprint",
+          "startLine": 77,
+          "endLine": 105,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ContextualMenuItemBuilderOnClickFingerprint",
+          "startLine": 115,
+          "endLine": 129,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ListMenuItemViewOnMeasureFingerprint",
+          "startLine": 138,
+          "endLine": 143,
+          "methods": [],
+          "properties": []
+        },
+        {
+          "name": "ShowControlsOnRelatedPanelDragFingerprint",
+          "startLine": 175,
+          "endLine": 196,
+          "methods": [],
+          "properties": []
+        }
+      ],
+      "exports": [
+        {
+          "name": "ParseElementFromBufferFingerprint",
+          "line": 23,
+          "isDefault": false
+        },
+        {
+          "name": "ShowWatermarkFingerprint",
+          "line": 36,
+          "isDefault": false
+        },
+        {
+          "name": "BottomSheetMenuItemBuilderFingerprint",
+          "line": 52,
+          "isDefault": false
+        },
+        {
+          "name": "ContextualMenuItemBuilderFingerprint",
+          "line": 77,
+          "isDefault": false
+        },
+        {
+          "name": "ContextualMenuItemBuilderOnClickFingerprint",
+          "line": 115,
+          "isDefault": false
+        },
+        {
+          "name": "ListMenuItemViewOnMeasureFingerprint",
+          "line": 138,
+          "isDefault": false
+        },
+        {
+          "name": "ShowControlsOnRelatedPanelDragFingerprint",
+          "line": 175,
+          "isDefault": false
+        }
+      ],
+      "metrics": {
+        "importCount": 2,
+        "exportCount": 7,
+        "functionCount": 0,
+        "classCount": 8
+      }
+    }
+  ]
+}

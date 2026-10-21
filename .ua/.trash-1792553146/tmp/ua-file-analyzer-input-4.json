@@ -1,0 +1,170 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/MusicHook.kt",
+      "language": "kotlin",
+      "sizeLines": 22,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/ad/HideAdsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 56,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/debugging/EnableDebuggingPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 20,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/CheckRecycleBitmapMediaSession.kt",
+      "language": "kotlin",
+      "sizeLines": 37,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "language": "kotlin",
+      "sizeLines": 31,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/YoutubeHook.kt",
+      "language": "kotlin",
+      "sizeLines": 125,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/ad/HideAdsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 155,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/channelsearch/ChannelSearchPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 59,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copytext/CopyTextPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 45,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copyvideolink/CopyVideoLinkButtonPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/DisablePreciseSeekingGesturePatch.kt",
+      "language": "kotlin",
+      "sizeLines": 26,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/EnableSlideToSeekPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/EnableTapToSeekPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 34,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/HideSeekbarPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 47,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/LiveStreamDVRPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/SeekbarThumbnailPreviewPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 90,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/navigation/NavigationBarPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 146,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "app/src/main/java/io/github/nexalloy/morphe/music/MusicHook.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/CheckRecycleBitmapMediaSession.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/music/ad/HideAdsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/music/misc/debugging/EnableDebuggingPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/CheckRecycleBitmapMediaSession.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/YoutubeHook.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/CheckRecycleBitmapMediaSession.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copyvideolink/CopyVideoLinkButtonPatch.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/thumbnails/BypassImageRegionRestrictionsPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/ad/HideAdsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/channelsearch/ChannelSearchPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copytext/CopyTextPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/copyvideolink/CopyVideoLinkButtonPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/DisablePreciseSeekingGesturePatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/EnableSlideToSeekPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/EnableTapToSeekPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/HideSeekbarPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/LiveStreamDVRPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/seekbar/SeekbarThumbnailPreviewPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/navigation/NavigationBarPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ]
+  }
+}

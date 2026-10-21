@@ -1,0 +1,290 @@
+{
+  "projectRoot": "C:/Users/kawin/Downloads/Compressed/NexAlloy-main/NexAlloy-main",
+  "batchFiles": [
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/music/misc/settings/SettingsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 137,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/debugging/EnableDebuggingPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 116,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/initialization/initializationPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 14,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "language": "kotlin",
+      "sizeLines": 78,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "language": "kotlin",
+      "sizeLines": 9,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "language": "kotlin",
+      "sizeLines": 41,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "language": "kotlin",
+      "sizeLines": 69,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "language": "kotlin",
+      "sizeLines": 77,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt",
+      "language": "kotlin",
+      "sizeLines": 39,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/shared/settings/Preferences.kt",
+      "language": "kotlin",
+      "sizeLines": 4,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/downloads/DownloadsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 60,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/swipecontrols/SwipeControlsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 135,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/action/HideVideoActionButtonsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 105,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/overlay/PlayerOverlayButtonsSettingsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 23,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/dearrow/DeArrowPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 102,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/general/HideLayoutComponentsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 645,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shorts/HideShortsComponentsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 149,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/returnyoutubedislike/ReturnYouTubeDislikePatch.kt",
+      "language": "kotlin",
+      "sizeLines": 110,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sponsorblock/SponsorBlockPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 270,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/aislist/AiSListPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 107,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/node/TreeNodeElementHook.kt",
+      "language": "kotlin",
+      "sizeLines": 11,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/observer/LayoutReloadObserverPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 16,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/settings/SettingsPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 228,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/VideoQualityPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 40,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/PlaybackSpeedPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 44,
+      "fileCategory": "code"
+    },
+    {
+      "path": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/custom/CustomPlaybackSpeedPatch.kt",
+      "language": "kotlin",
+      "sizeLines": 112,
+      "fileCategory": "code"
+    }
+  ],
+  "batchImportData": {
+    "app/src/main/java/io/github/nexalloy/morphe/music/misc/settings/SettingsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreferenceScreen.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/debugging/EnableDebuggingPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/PatchExecutor.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreferenceScreen.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/initialization/initializationPatch.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/shared/settings/Preferences.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/downloads/DownloadsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/interaction/swipecontrols/SwipeControlsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/action/HideVideoActionButtonsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/node/TreeNodeElementHook.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/buttons/overlay/PlayerOverlayButtonsSettingsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/dearrow/DeArrowPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/general/HideLayoutComponentsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/node/TreeNodeElementHook.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/hide/shorts/HideShortsComponentsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/returnyoutubedislike/ReturnYouTubeDislikePatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/sponsorblock/SponsorBlockPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/ListPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/video/information/VideoInformationPatch.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/aislist/AiSListPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/node/TreeNodeElementHook.kt": [],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/observer/LayoutReloadObserverPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/node/TreeNodeElementHook.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/settings/SettingsPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/initialization/initializationPatch.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreferenceScreen.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/NonInteractivePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/video/quality/VideoQualityPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceScreenPreference.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/PlaybackSpeedPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/BasePreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/PreferenceCategory.kt"
+    ],
+    "app/src/main/java/io/github/nexalloy/morphe/youtube/video/speed/custom/CustomPlaybackSpeedPatch.kt": [
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/InputType.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/SwitchPreference.kt",
+      "app/src/main/java/io/github/nexalloy/morphe/shared/misc/settings/preference/TextPreference.kt"
+    ]
+  }
+}

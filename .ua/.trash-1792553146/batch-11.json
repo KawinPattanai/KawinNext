@@ -1,0 +1,95 @@
+{
+  "nodes": [
+    {
+      "id": "config:app/src/main/res/layout/activity_app_patch_settings.xml",
+      "type": "config",
+      "name": "activity_app_patch_settings.xml",
+      "filePath": "app/src/main/res/layout/activity_app_patch_settings.xml",
+      "summary": "เลเอาต์ FrameLayout แบบเต็มหน้าจอสำหรับ container ของการตั้งค่า patch ของแอป เปิดใช้งาน fitsSystemWindows สำหรับจัดการ inset ของระบบ",
+      "tags": ["configuration", "layout", "android", "ui"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/activity_settings.xml",
+      "type": "config",
+      "name": "activity_settings.xml",
+      "filePath": "app/src/main/res/layout/activity_settings.xml",
+      "summary": "เลเอาต์ LinearLayout แนวตั้งสำหรับหน้าตั้งค่าหลัก บรรจุ FrameLayout ชื่อ settings_container สำหรับ fragment ของ preference",
+      "tags": ["configuration", "layout", "android", "ui", "settings"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/morphe_copy_video_url_button.xml",
+      "type": "config",
+      "name": "morphe_copy_video_url_button.xml",
+      "filePath": "app/src/main/res/layout/morphe_copy_video_url_button.xml",
+      "summary": "เลย์เอาต์ merge สำหรับปุ่มคัดลอก URL วิดีโอใน player ของ YouTube ใช้ TouchImageView ขนาด 48x60dp พร้อมไอคอน morphe_yt_copy_bold",
+      "tags": ["configuration", "layout", "youtube", "player-button", "morphe"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/morphe_external_download_button.xml",
+      "type": "config",
+      "name": "morphe_external_download_button.xml",
+      "filePath": "app/src/main/res/layout/morphe_external_download_button.xml",
+      "summary": "เลย์เอาต์ merge สำหรับปุ่มดาวน์โหลดภายนอกใน player ของ YouTube ใช้ TouchImageView พร้อมไอคอน morphe_yt_download_button_bold และขนาดจาก dimen",
+      "tags": ["configuration", "layout", "youtube", "player-button", "download"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/morphe_playback_speed_dialog_button.xml",
+      "type": "config",
+      "name": "morphe_playback_speed_dialog_button.xml",
+      "filePath": "app/src/main/res/layout/morphe_playback_speed_dialog_button.xml",
+      "summary": "เลย์เอาต์ merge สำหรับปุ่มเลือกความเร็วการเล่นใน dialog ของ YouTube player ประกอบด้วย FrameLayout, TouchImageView และ TextView แสดงค่าความเร็ว",
+      "tags": ["configuration", "layout", "youtube", "player-button", "playback-speed"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/morphe_sb_button.xml",
+      "type": "config",
+      "name": "morphe_sb_button.xml",
+      "filePath": "app/src/main/res/layout/morphe_sb_button.xml",
+      "summary": "เลย์เอาต์ merge สำหรับปุ่ม SponsorBlock ใน YouTube player ประกอบด้วยปุ่มโหวตและปุ่มสร้าง segment ทั้งสองใช้ TouchImageView",
+      "tags": ["configuration", "layout", "youtube", "sponsorblock", "player-button"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/morphe_sb_skip_sponsor_button.xml",
+      "type": "config",
+      "name": "morphe_sb_skip_sponsor_button.xml",
+      "filePath": "app/src/main/res/layout/morphe_sb_skip_sponsor_button.xml",
+      "summary": "เลย์เอาต์ LinearLayout แนวนอนสำหรับปุ่มข้าม sponsor ใน YouTube แสดงข้อความ skip และไอคอน skip next พร้อมสีและขนาดจาก dimen",
+      "tags": ["configuration", "layout", "youtube", "sponsorblock", "skip-button"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/morphe_settings_with_toolbar.xml",
+      "type": "config",
+      "name": "morphe_settings_with_toolbar.xml",
+      "filePath": "app/src/main/res/layout/morphe_settings_with_toolbar.xml",
+      "summary": "เลย์เอาต์ merge สำหรับหน้าตั้งค่า Morphe พร้อม Toolbar (navigation arrow, title) และ SearchView ซ่อนได้ พร้อม container สำหรับ fragment ด้านล่าง",
+      "tags": ["configuration", "layout", "morphe", "settings", "toolbar"],
+      "complexity": "moderate"
+    },
+    {
+      "id": "config:app/src/main/res/layout/morphe_video_quality_dialog_button_container.xml",
+      "type": "config",
+      "name": "morphe_video_quality_dialog_button_container.xml",
+      "filePath": "app/src/main/res/layout/morphe_video_quality_dialog_button_container.xml",
+      "summary": "เลย์เอาต์ merge สำหรับปุ่มเลือกคุณภาพวิดีโอใน dialog ของ YouTube player ใช้ FrameLayout บรรจุ TouchImageView และ TextView แสดงค่าคุณภาพ",
+      "tags": ["configuration", "layout", "youtube", "player-button", "video-quality"],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:app/src/main/res/layout/preference_header_buttons.xml",
+      "type": "config",
+      "name": "preference_header_buttons.xml",
+      "filePath": "app/src/main/res/layout/preference_header_buttons.xml",
+      "summary": "เลย์เอาต์ GridLayout สำหรับปุ่มส่วนหัวของ preference (Default, None, App Info) จัดเรียงแนวนอนโดยใช้ buttonBarButtonStyle",
+      "tags": ["configuration", "layout", "android", "preference", "buttons"],
+      "complexity": "simple"
+    }
+  ],
+  "edges": []
+}

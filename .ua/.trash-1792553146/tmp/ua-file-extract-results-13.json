@@ -1,0 +1,23 @@
+{
+  "scriptCompleted": true,
+  "filesAnalyzed": 0,
+  "filesSkipped": [
+    "app/src/main/res/xml/license_prefs.xml",
+    "app/src/main/res/xml/yt_morphe_settings.xml",
+    "app/src/main/res/xml/yt_morphe_settings_cairo.xml",
+    "app/src/main/res/xml/yt_morphe_settings_music.xml"
+  ],
+  "filesUnreadable": [],
+  "analysisOutcomes": {
+    "structure": {
+      "succeeded": 0,
+      "failed": 0
+    },
+    "callGraph": {
+      "succeeded": 0,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "results": []
+}

@@ -1,0 +1,817 @@
+{
+  "nodes": [
+    {
+      "id": "config:app/src/main/res/values-night/themes.xml",
+      "type": "config",
+      "name": "themes.xml",
+      "filePath": "app/src/main/res/values-night/themes.xml",
+      "summary": "ธีม Material สำหรับโหมดกลางคืน (MainTheme) ที่กำหนดสี accent, สี status/navigation bar โปร่งใส และการตั้งค่า light status bar สำหรับ UI ของแอป",
+      "tags": [
+        "configuration",
+        "android",
+        "theme",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/resources/META-INF/xposed/java_init.list",
+      "type": "file",
+      "name": "java_init.list",
+      "filePath": "app/src/main/resources/META-INF/xposed/java_init.list",
+      "summary": "ไฟล์ init ของ Xposed ที่ระบุคลาส entry point io.github.nexalloy.MainHook ให้เฟรมเวิร์ก LSPosed โหลดเมื่อโมดูลเริ่มทำงาน",
+      "tags": [
+        "xposed",
+        "entry-point",
+        "hook",
+        "module-init"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/resources/META-INF/xposed/module.prop",
+      "type": "file",
+      "name": "module.prop",
+      "filePath": "app/src/main/resources/META-INF/xposed/module.prop",
+      "summary": "คุณสมบัติของโมดูล Xposed: minApiVersion/targetApiVersion 101 และ staticScope=true สำหรับ LSPosed",
+      "tags": [
+        "xposed",
+        "configuration",
+        "module",
+        "api-version"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/resources/META-INF/xposed/scope.list",
+      "type": "file",
+      "name": "scope.list",
+      "filePath": "app/src/main/resources/META-INF/xposed/scope.list",
+      "summary": "รายการแพ็กเกจเป้าหมายที่โมดูล NexAlloy ทำงาน (YouTube, YouTube Music, Reddit, Google Photos, Photomath, Instagram, Threads, Strava, AllTrails)",
+      "tags": [
+        "xposed",
+        "scope",
+        "target-apps",
+        "packagelist"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "type": "file",
+      "name": "FilePathArgumentsProvider.kt",
+      "filePath": "app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "summary": "JUnit ArgumentsProvider ที่สแกนโฟลเดอร์ binaries/ เพื่อหาไฟล์ APK และส่งเป็นพารามิเตอร์ให้ FingerprintsKtTest พร้อมเริ่มรายงาน FingerprintTestReport",
+      "tags": [
+        "test",
+        "junit",
+        "arguments-provider",
+        "fingerprint"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt:FilePathArgumentsProvider",
+      "type": "class",
+      "name": "FilePathArgumentsProvider",
+      "filePath": "app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "lineRange": [
+        13,
+        34
+      ],
+      "summary": "คลาส ArgumentsProvider ที่ค้นหา APK ใน binaries/ และส่ง Stream<Arguments> ให้ JUnit parameterized test",
+      "tags": [
+        "test",
+        "junit",
+        "provider"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt:provideArguments",
+      "type": "function",
+      "name": "provideArguments",
+      "filePath": "app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "lineRange": [
+        14,
+        33
+      ],
+      "summary": "ค้นหาไฟล์ APK ใต้ binaries/ พร้อมเริ่ม FingerprintTestReport แล้วคืน Stream ของ Arguments สำหรับแต่ละ APK",
+      "tags": [
+        "test",
+        "junit",
+        "provider"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "type": "file",
+      "name": "FingerprintTestReport.kt",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "summary": "นี่คือ object รายงานผลการทดสอบ fingerprint: บันทึกผล matched/skipped/failed ต่อ APK และแพ็กเกจ แล้วเขียน JSON รายงาน (Gson) พร้อมจับคู่ APK กับแอป (YouTube/Music/Reddit)",
+      "tags": [
+        "test",
+        "report",
+        "fingerprint",
+        "json"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:FingerprintTestReport",
+      "type": "class",
+      "name": "FingerprintTestReport",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "lineRange": [
+        8,
+        78
+      ],
+      "summary": "object FingerprintTestReport ที่เก็บผลการทดสอบต่อ APK/กลุ่ม package และเขียนรายงาน JSON ผ่าน Gson",
+      "tags": [
+        "test",
+        "report",
+        "fingerprint"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:appFor",
+      "type": "function",
+      "name": "appFor",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "lineRange": [
+        35,
+        40
+      ],
+      "summary": "จับคู่ชื่อไฟล์ APK กับแอป (youtube/music/reddit) ตาม prefix ของชื่อไฟล์",
+      "tags": [
+        "test",
+        "report",
+        "mapping"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:start",
+      "type": "function",
+      "name": "start",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "lineRange": [
+        42,
+        52
+      ],
+      "summary": "เริ่มเซสชันรายงาน: สร้าง Apk entries สำหรับ APK ที่รู้จักและเขียนรายงานเริ่มต้น",
+      "tags": [
+        "test",
+        "report",
+        "initialization"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:forApk",
+      "type": "function",
+      "name": "forApk",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "lineRange": [
+        54,
+        57
+      ],
+      "summary": "ดึง Apk entry สำหรับ path ที่ระบุและตั้งค่า appVersion",
+      "tags": [
+        "test",
+        "report",
+        "apk"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:write",
+      "type": "function",
+      "name": "write",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "lineRange": [
+        59,
+        77
+      ],
+      "summary": "เขียนรายงาน JSON ไปยังไฟล์ (fingerprints.report) พร้อมสถานะ complete",
+      "tags": [
+        "test",
+        "report",
+        "io"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "type": "file",
+      "name": "FingerprintsKtTest.kt",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "summary": "ชุดทดสอบ JUnit แบบ parameterized ที่รัน fingerprints ทั้งหมด (val properties และ object : Fingerprint) กับ APK หลายตัว พร้อมจับเวลาและบันทึกผลลง FingerprintTestReport",
+      "tags": [
+        "test",
+        "fingerprint",
+        "junit",
+        "dexkit"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "class:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:FingerprintsKtTest",
+      "type": "class",
+      "name": "FingerprintsKtTest",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        23,
+        296
+      ],
+      "summary": "คลาสทดสอบ parameterized ที่ใช้ DexKitBridge กับ APK ที่ให้มา เพื่อรันและตรวจสอบ fingerprints ทั้งหมดในแพ็กเกจ morphe",
+      "tags": [
+        "test",
+        "fingerprint",
+        "dexkit"
+      ],
+      "complexity": "complex"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:runTest",
+      "type": "function",
+      "name": "runTest",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        59,
+        88
+      ],
+      "summary": "รัน fingerprint ที่ระบุ พร้อมจับเวลาและบันทึกผล matched/failed ลง resultGroup",
+      "tags": [
+        "test",
+        "runner",
+        "timing"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:shouldSkip",
+      "type": "function",
+      "name": "shouldSkip",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        94,
+        122
+      ],
+      "summary": "ตรวจสอบ annotation @SkipTest/@TargetApp/@RequireAppVersion เพื่อตัดสินใจ skip test",
+      "tags": [
+        "test",
+        "skip",
+        "annotations"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:testFingerprints",
+      "type": "function",
+      "name": "testFingerprints",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        133,
+        161
+      ],
+      "summary": "ทดสอบ fingerprints ทั้งหมดของแพ็กเกจ: val properties บน FingerprintsKt และ object : Fingerprint",
+      "tags": [
+        "test",
+        "fingerprint",
+        "discovery"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:testValProperties",
+      "type": "function",
+      "name": "testValProperties",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        166,
+        180
+      ],
+      "summary": "ทดสอบ top-level val properties ที่ getter คืน FindFunc",
+      "tags": [
+        "test",
+        "fingerprint",
+        "reflection"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:testFingerprintObjects",
+      "type": "function",
+      "name": "testFingerprintObjects",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        185,
+        208
+      ],
+      "summary": "ทดสอบ object : Fingerprint(...) declarations ในแพ็กเกจที่ระบุ",
+      "tags": [
+        "test",
+        "fingerprint",
+        "reflection"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:findClassNamesInPackage",
+      "type": "function",
+      "name": "findClassNamesInPackage",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        214,
+        256
+      ],
+      "summary": "ค้นหาชื่อคลาสทั้งหมดในแพ็กเกจ รองรับทั้ง directory และ JAR classpath",
+      "tags": [
+        "test",
+        "classpath",
+        "reflection"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:fingerprintTest",
+      "type": "function",
+      "name": "fingerprintTest",
+      "filePath": "app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "lineRange": [
+        264,
+        293
+      ],
+      "summary": "TestFactory ที่สร้าง DynamicTest สำหรับแต่ละแพ็กเกจ fingerprint ที่พบ",
+      "tags": [
+        "test",
+        "junit",
+        "dynamic-test"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "type": "file",
+      "name": "JadxResourceReader.kt",
+      "filePath": "app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "summary": "อ่านค่า resource ID จาก JadxDecompiler โดยค้น inner class ตาม type และ field ตาม name",
+      "tags": [
+        "test",
+        "jadx",
+        "resource",
+        "utility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt:JadxResourceReader",
+      "type": "class",
+      "name": "JadxResourceReader",
+      "filePath": "app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "lineRange": [
+        6,
+        12
+      ],
+      "summary": "คลาส wrapper สำหรับอ่าน resource constant value ผ่าน JadxDecompiler",
+      "tags": [
+        "test",
+        "jadx",
+        "resource"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt:get",
+      "type": "function",
+      "name": "get",
+      "filePath": "app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "lineRange": [
+        7,
+        11
+      ],
+      "summary": "โอเปอเรเตอร์ get ที่คืนค่า Int ของ resource จาก jadx root appResClass",
+      "tags": [
+        "test",
+        "jadx",
+        "resource"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/test/jniLibs/libdexkit.dll",
+      "type": "file",
+      "name": "libdexkit.dll",
+      "filePath": "app/src/test/jniLibs/libdexkit.dll",
+      "summary": "ไลบรารีเนทีฟ DexKit (native binary) ที่ใช้สำหรับทดสอบ fingerprint ผ่าน JNI บนแพลตฟอร์มต่างๆ",
+      "tags": [
+        "test",
+        "dexkit",
+        "native",
+        "binary"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/test/jniLibs/libdexkit.dylib",
+      "type": "file",
+      "name": "libdexkit.dylib",
+      "filePath": "app/src/test/jniLibs/libdexkit.dylib",
+      "summary": "ไลบรารีเนทีฟ DexKit (native binary) ที่ใช้สำหรับทดสอบ fingerprint ผ่าน JNI บนแพลตฟอร์มต่างๆ",
+      "tags": [
+        "test",
+        "dexkit",
+        "native",
+        "binary"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/test/jniLibs/libdexkit.so",
+      "type": "file",
+      "name": "libdexkit.so",
+      "filePath": "app/src/test/jniLibs/libdexkit.so",
+      "summary": "ไลบรารีเนทีฟ DexKit (native binary) ที่ใช้สำหรับทดสอบ fingerprint ผ่าน JNI บนแพลตฟอร์มต่างๆ",
+      "tags": [
+        "test",
+        "dexkit",
+        "native",
+        "binary"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "build.gradle.kts",
+      "summary": "Top-level build file ที่ประกาศ plugin Android application/library (apply false) สำหรับโปรเจกต์ NexAlloy",
+      "tags": [
+        "build-system",
+        "gradle",
+        "android"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:gradle/gradle-daemon-jvm.properties",
+      "type": "config",
+      "name": "gradle-daemon-jvm.properties",
+      "filePath": "gradle/gradle-daemon-jvm.properties",
+      "summary": "การตั้งค่า Gradle daemon JVM toolchain (Java 21) พร้อม URL ดาวน์โหลดสำหรับหลาย OS/arch",
+      "tags": [
+        "configuration",
+        "gradle",
+        "toolchain",
+        "jvm"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:gradle/libs.versions.toml",
+      "type": "config",
+      "name": "libs.versions.toml",
+      "filePath": "gradle/libs.versions.toml",
+      "summary": "Version catalog ของ Gradle ที่รวม version, library และ plugin aliases สำหรับ dependencies หลัก (DexKit, Xposed, Gson, JUnit, Jadx ฯลฯ)",
+      "tags": [
+        "configuration",
+        "gradle",
+        "versions",
+        "dependencies"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:gradle/wrapper/gradle-wrapper.jar",
+      "type": "file",
+      "name": "gradle-wrapper.jar",
+      "filePath": "gradle/wrapper/gradle-wrapper.jar",
+      "summary": "Gradle Wrapper bootstrap JAR ที่ใช้ดาวน์โหลดและรัน Gradle distribution ตามเวอร์ชันที่กำหนด",
+      "tags": [
+        "build-system",
+        "gradle",
+        "wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "config:gradle/wrapper/gradle-wrapper.properties",
+      "type": "config",
+      "name": "gradle-wrapper.properties",
+      "filePath": "gradle/wrapper/gradle-wrapper.properties",
+      "summary": "การตั้งค่า Gradle Wrapper: distributionUrl Gradle 9.8.1, SHA256 checksum และ timeout",
+      "tags": [
+        "configuration",
+        "gradle",
+        "wrapper"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:gradlew",
+      "type": "file",
+      "name": "gradlew",
+      "filePath": "gradlew",
+      "summary": "สคริปต์ shell สำหรับเรียกใช้ Gradle Wrapper: ตรวจสอบ Java, ตั้งค่า JVM opts และ exec gradle-wrapper.jar",
+      "tags": [
+        "build-system",
+        "gradle",
+        "script",
+        "entry-point"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:libs/dexkit-android-sources.jar",
+      "type": "file",
+      "name": "dexkit-android-sources.jar",
+      "filePath": "libs/dexkit-android-sources.jar",
+      "summary": "Source JAR ของ DexKit Android ที่ใช้สำหรับอ้างอิง/ดีบัก API ของ DexKit ระหว่างการพัฒนา",
+      "tags": [
+        "library",
+        "dexkit",
+        "sources",
+        "dependency"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:libs/dexkit-android.aar",
+      "type": "file",
+      "name": "dexkit-android.aar",
+      "filePath": "libs/dexkit-android.aar",
+      "summary": "Android Archive (AAR) ของ DexKit ที่ให้ DexKitBridge และ API สำหรับค้นหา class/method/field ใน APK",
+      "tags": [
+        "library",
+        "dexkit",
+        "android",
+        "dependency"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:settings.gradle.kts",
+      "type": "file",
+      "name": "settings.gradle.kts",
+      "filePath": "settings.gradle.kts",
+      "summary": "การตั้งค่า Gradle settings: กำหนด rootProject.name=NexAlloy, repositories (google/mavenCentral/xposed) และ include :app, :stub",
+      "tags": [
+        "build-system",
+        "gradle",
+        "settings",
+        "multi-module"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:stub/build.gradle.kts",
+      "type": "file",
+      "name": "build.gradle.kts",
+      "filePath": "stub/build.gradle.kts",
+      "summary": "Build file ของโมดูล stub (Android library) ที่รวม source จาก morphe-patches extensions และปิด Android test",
+      "tags": [
+        "build-system",
+        "gradle",
+        "stub",
+        "android-library"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt:FilePathArgumentsProvider",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt:FilePathArgumentsProvider",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt:provideArguments",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FilePathArgumentsProvider.kt:provideArguments",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:FingerprintTestReport",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:FingerprintTestReport",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:appFor",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:appFor",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:start",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:start",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:forApk",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:forApk",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:write",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintTestReport.kt:write",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:FingerprintsKtTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:FingerprintsKtTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:runTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:shouldSkip",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:testFingerprints",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:testFingerprints",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:testValProperties",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:testFingerprintObjects",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:findClassNamesInPackage",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:fingerprintTest",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/FingerprintsKtTest.kt:fingerprintTest",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt:JadxResourceReader",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "target": "class:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt:JadxResourceReader",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt:get",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt",
+      "target": "function:app/src/test/java/io/github/nexalloy/JadxResourceReader.kt:get",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "config:gradle/gradle-daemon-jvm.properties",
+      "target": "file:gradlew",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:gradle/wrapper/gradle-wrapper.properties",
+      "target": "file:gradlew",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:gradle/libs.versions.toml",
+      "target": "file:build.gradle.kts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    },
+    {
+      "source": "config:gradle/libs.versions.toml",
+      "target": "file:stub/build.gradle.kts",
+      "type": "configures",
+      "direction": "forward",
+      "weight": 0.6
+    }
+  ]
+}

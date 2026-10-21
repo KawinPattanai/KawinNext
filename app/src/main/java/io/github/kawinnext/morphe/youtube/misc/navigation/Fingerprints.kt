@@ -1,0 +1,135 @@
+package io.github.kawinnext.morphe.youtube.misc.navigation
+
+import io.github.kawinnext.morphe.AccessFlags
+import io.github.kawinnext.morphe.Fingerprint
+import io.github.kawinnext.morphe.ResourceType
+import io.github.kawinnext.morphe.accessFlags
+import io.github.kawinnext.morphe.findClassDirect
+import io.github.kawinnext.morphe.findMethodDirect
+import io.github.kawinnext.morphe.findMethodListDirect
+import io.github.kawinnext.morphe.methodCall
+import io.github.kawinnext.morphe.resourceLiteral
+import io.github.kawinnext.morphe.resourceMappings
+import io.github.kawinnext.morphe.returns
+import io.github.kawinnext.morphe.string
+import org.luckypray.dexkit.query.enums.StringMatchType
+
+val toolbarContainerId get() = resourceMappings["id", "toolbar_container"]
+
+object ToolbarLayoutFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.CONSTRUCTOR),
+    filters = listOf(
+        resourceLiteral(ResourceType.ID, "toolbar_container")
+    )
+)
+
+/**
+ * Matches to https://android.googlesource.com/platform/frameworks/support/+/9eee6ba/v7/appcompat/src/android/support/v7/widget/Toolbar.java#963
+ */
+object AppCompatToolbarBackButtonFingerprint : Fingerprint(
+    definingClass = "Landroid/support/v7/widget/Toolbar;",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Landroid/graphics/drawable/Drawable;",
+    parameters = listOf()
+)
+
+/**
+ * Matches to the class found in [PivotBarConstructorFingerprint].
+ */
+internal object InitializeButtonsFingerprint : Fingerprint(
+    classFingerprint = PivotBarConstructorFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    filters = listOf(
+        string("FEvideo_picker")
+    )
+)
+
+val getNavigationEnumMethod = findMethodDirect {
+    InitializeButtonsFingerprint().invokes.findMethod {
+        matcher {
+            declaredClass(navigationEnumClass(this@findMethodDirect).name)
+            accessFlags(AccessFlags.STATIC)
+        }
+    }.single()
+}
+
+/**
+ * Matches to the Enum class that looks up ordinal -> instance.
+ */
+internal object NavigationEnumFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.STATIC, AccessFlags.CONSTRUCTOR),
+    strings = listOf(
+        "PIVOT_HOME",
+        "TAB_SHORTS",
+        "CREATION_TAB_LARGE",
+        "PIVOT_SUBSCRIPTIONS",
+        "TAB_ACTIVITY",
+        "VIDEO_LIBRARY_WHITE",
+        "INCOGNITO_CIRCLE",
+    )
+)
+
+val navigationEnumClass = findClassDirect { NavigationEnumFingerprint().declaredClass!! }
+
+val pivotBarButtonsCreateDrawableViewFingerprint = findMethodDirect {
+    findMethod {
+        matcher {
+            accessFlags(AccessFlags.PUBLIC, AccessFlags.FINAL)
+            returns("Landroid/view/View;")
+            declaredClass {
+                descriptor =
+                    "Lcom/google/android/libraries/youtube/rendering/ui/pivotbar/PivotBar;"
+            }
+        }
+    }.single {
+        it.paramTypes.firstOrNull()?.descriptor == "Landroid/graphics/drawable/Drawable;"
+    }
+}
+
+object PivotBarButtonsCreateResourceStyledViewFingerprint : Fingerprint(
+    definingClass = "Lcom/google/android/libraries/youtube/rendering/ui/pivotbar/PivotBar;",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Landroid/view/View;",
+    parameters = listOf("L", "Z", "I", "L")
+)
+
+internal object PivotBarButtonsViewSetSelectedFingerprint : Fingerprint(
+    definingClass = "Lcom/google/android/libraries/youtube/rendering/ui/pivotbar/PivotBar;",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf("I", "Z"),
+    filters = listOf(
+        methodCall(name = "setSelected")
+    )
+)
+
+val pivotBarButtonsViewSetSelectedSubFingerprint = findMethodDirect {
+    PivotBarButtonsViewSetSelectedFingerprint.instructionMatches.single().instruction.methodRef!!
+}
+
+internal object PivotBarDispatchTouchEventFingerprint : Fingerprint(
+    definingClass = "Lcom/google/android/libraries/youtube/rendering/ui/pivotbar/PivotBar;",
+    name = "dispatchTouchEvent",
+    returnType = "Z",
+    parameters = listOf("Landroid/view/MotionEvent;")
+)
+
+internal object PivotBarConstructorFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
+    filters = listOf(
+        string("com.google.android.apps.youtube.app.endpoint.flags"),
+    )
+)
+
+val getNavIconResIdFingerprint = findMethodListDirect {
+    // two matches in versions 20.24.xx-20.26.xx,
+    // one match in versions <=v20.20.xx and >=v20.28.xx
+    val navigationEnumClass = navigationEnumClass()
+    findMethod {
+        matcher {
+            paramTypes(navigationEnumClass.name, "boolean")
+            returnType = "int"
+        }
+    }
+}

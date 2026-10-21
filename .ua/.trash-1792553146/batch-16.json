@@ -1,0 +1,951 @@
+{
+  "nodes": [
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/originaltitles/VideoTitlesHookPatch.kt",
+      "type": "file",
+      "name": "VideoTitlesHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/originaltitles/VideoTitlesHookPatch.kt",
+      "summary": "Hook ชื่อวิดีโอ คำอธิบายวิดีโอ และคำอธิบายช่อง โดยดึงชื่อต้นฉบับกลับมาแสดงแทนชื่อที่ถูกแปล",
+      "tags": [
+        "hook",
+        "layout",
+        "original-titles",
+        "litho"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt",
+      "type": "file",
+      "name": "PlayerOverlayButtonsHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt",
+      "summary": "ลงทะเบียนปุ่ม overlay ด้านล่างของ player โดยเรียก initializeButton เมื่อพบ fullscreen button",
+      "tags": [
+        "hook",
+        "player",
+        "overlay-button",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt:addPlayerBottomButton",
+      "type": "function",
+      "name": "addPlayerBottomButton",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt",
+      "lineRange": [
+        12,
+        14
+      ],
+      "summary": "เพิ่ม callback สำหรับ initialize ปุ่มด้านล่างของ player ลงในรายการ internal",
+      "tags": [
+        "utility",
+        "hook",
+        "player"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/seekbar/SeekbarColorPatch.kt",
+      "type": "file",
+      "name": "SeekbarColorPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/layout/seekbar/SeekbarColorPatch.kt",
+      "summary": "ซ่อน seekbar ใน thumbnail ของวิดีโอ และปรับ gradient ของ watch history menu items",
+      "tags": [
+        "hook",
+        "seekbar",
+        "theme",
+        "litho"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/auth/AuthHookPatch.kt",
+      "type": "file",
+      "name": "AuthHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/auth/AuthHookPatch.kt",
+      "summary": "Hook หน้า auth ว่าง โดยใช้ shared authHookPatch พร้อม condition ตาม version",
+      "tags": [
+        "hook",
+        "auth",
+        "version-gated"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "type": "file",
+      "name": "BackGesturePatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "summary": "Hook การกด back ของ YouTube main activity และ predictive back gesture สำหรับ version 20.40+",
+      "tags": [
+        "hook",
+        "back-gesture",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt:addBackPressedHook",
+      "type": "function",
+      "name": "addBackPressedHook",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "lineRange": [
+        34,
+        40
+      ],
+      "summary": "ลงทะเบียน hook ที่จะรันก่อน/หลัง activity onBackPressed ตาม flag afterActivityBackPressed",
+      "tags": [
+        "utility",
+        "hook",
+        "back-gesture"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt:addPredictiveBackGestureHook",
+      "type": "function",
+      "name": "addPredictiveBackGestureHook",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "lineRange": [
+        42,
+        46
+      ],
+      "summary": "ลงทะเบียน hook ที่จะรันก่อน onBackInvoked สำหรับ predictive back gesture",
+      "tags": [
+        "utility",
+        "hook",
+        "back-gesture"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/ChaptersHookPatch.kt",
+      "type": "file",
+      "name": "ChaptersHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/ChaptersHookPatch.kt",
+      "summary": "Hook timeline markers และ heatmap peak point เพื่อให้ extension อ่าน chapter ของวิดีโอ",
+      "tags": [
+        "hook",
+        "chapters",
+        "timeline",
+        "video"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/ChaptersHookPatch.kt:TimelineMarkerAdapter",
+      "type": "class",
+      "name": "TimelineMarkerAdapter",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/ChaptersHookPatch.kt",
+      "lineRange": [
+        17,
+        25
+      ],
+      "summary": "Adapter data class แปลง timeline marker ของ YouTube ให้เป็น TimelineMarker interface",
+      "tags": [
+        "data-model",
+        "adapter",
+        "chapters"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt",
+      "type": "file",
+      "name": "EngagementPanelHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt",
+      "summary": "Hook engagement panel controller เพื่อเปิด/ปิด panel และจัดการ panel id ผ่าน ThreadLocal",
+      "tags": [
+        "hook",
+        "engagement-panel",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt:addEngagementPanelIdHook",
+      "type": "function",
+      "name": "addEngagementPanelIdHook",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt",
+      "lineRange": [
+        47,
+        49
+      ],
+      "summary": "เพิ่ม EngagementPanelIdHook ลงในรายการ internal สำหรับกรอง panel",
+      "tags": [
+        "utility",
+        "hook",
+        "engagement-panel"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "type": "file",
+      "name": "CronetImageUrlHook.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "summary": "Hook URL ของรูปภาพที่โหลดผ่าน Cronet รวมถึง success/error callback",
+      "tags": [
+        "hook",
+        "image-url",
+        "cronet",
+        "network"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:getHookedUrl",
+      "type": "function",
+      "name": "getHookedUrl",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "lineRange": [
+        52,
+        52
+      ],
+      "summary": "ดึง URL field จาก CronetUrlRequest ผ่าน reflection field ที่ cache ไว้",
+      "tags": [
+        "utility",
+        "reflection",
+        "image-url"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlHook",
+      "type": "function",
+      "name": "addImageUrlHook",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "lineRange": [
+        61,
+        63
+      ],
+      "summary": "เพิ่ม hook สำหรับแปลง URL รูปภาพ รองรับ highPriority เพื่อเรียกก่อน hook อื่น",
+      "tags": [
+        "utility",
+        "hook",
+        "image-url"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlSuccessCallbackHook",
+      "type": "function",
+      "name": "addImageUrlSuccessCallbackHook",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "lineRange": [
+        69,
+        71
+      ],
+      "summary": "เพิ่ม callback ที่เรียกเมื่อ request รูปภาพสำเร็จ",
+      "tags": [
+        "utility",
+        "hook",
+        "image-url"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlErrorCallbackHook",
+      "type": "function",
+      "name": "addImageUrlErrorCallbackHook",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "lineRange": [
+        76,
+        78
+      ],
+      "summary": "เพิ่ม callback ที่เรียกเมื่อ request รูปภาพล้มเหลว",
+      "tags": [
+        "utility",
+        "hook",
+        "image-url"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/filter/LithoFilterPatch.kt",
+      "type": "file",
+      "name": "LithoFilterPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/filter/LithoFilterPatch.kt",
+      "summary": "กำหนดค่า shared litho filter สำหรับ YouTube ตาม version flags (20.22+/21.15+)",
+      "tags": [
+        "hook",
+        "litho",
+        "filter",
+        "version-gated"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/DisableRenderNextPatch.kt",
+      "type": "file",
+      "name": "DisableRenderNextPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/litho/rendernext/DisableRenderNextPatch.kt",
+      "summary": "ปิด RenderNext เพื่อบังคับ render ด้วย Litho เสมอ รวมถึง override config field",
+      "tags": [
+        "hook",
+        "litho",
+        "rendernext"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/LoadVideoHookPatch.kt",
+      "type": "file",
+      "name": "LoadVideoHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/loadvideo/LoadVideoHookPatch.kt",
+      "summary": "Hook player เพื่อให้ extension ปิด player และเปิดวิดีโอใหม่ รวมถึง block inline playback",
+      "tags": [
+        "hook",
+        "player",
+        "load-video"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "type": "file",
+      "name": "Fingerprints.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "summary": "รวม fingerprint ของ toolbar layout, navigation enum, pivot bar และ back button สำหรับ navigation",
+      "tags": [
+        "fingerprint",
+        "navigation",
+        "dexkit"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:ToolbarLayoutFingerprint",
+      "type": "class",
+      "name": "ToolbarLayoutFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        19,
+        24
+      ],
+      "summary": "Fingerprint สำหรับ ToolbarLayoutFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:AppCompatToolbarBackButtonFingerprint",
+      "type": "class",
+      "name": "AppCompatToolbarBackButtonFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        29,
+        34
+      ],
+      "summary": "Fingerprint สำหรับ AppCompatToolbarBackButtonFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:InitializeButtonsFingerprint",
+      "type": "class",
+      "name": "InitializeButtonsFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        39,
+        46
+      ],
+      "summary": "Fingerprint สำหรับ InitializeButtonsFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:NavigationEnumFingerprint",
+      "type": "class",
+      "name": "NavigationEnumFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        60,
+        71
+      ],
+      "summary": "Fingerprint สำหรับ NavigationEnumFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarButtonsCreateResourceStyledViewFingerprint",
+      "type": "class",
+      "name": "PivotBarButtonsCreateResourceStyledViewFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        90,
+        95
+      ],
+      "summary": "Fingerprint สำหรับ PivotBarButtonsCreateResourceStyledViewFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarButtonsViewSetSelectedFingerprint",
+      "type": "class",
+      "name": "PivotBarButtonsViewSetSelectedFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        97,
+        105
+      ],
+      "summary": "Fingerprint สำหรับ PivotBarButtonsViewSetSelectedFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarDispatchTouchEventFingerprint",
+      "type": "class",
+      "name": "PivotBarDispatchTouchEventFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        111,
+        116
+      ],
+      "summary": "Fingerprint สำหรับ PivotBarDispatchTouchEventFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarConstructorFingerprint",
+      "type": "class",
+      "name": "PivotBarConstructorFingerprint",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "lineRange": [
+        118,
+        123
+      ],
+      "summary": "Fingerprint สำหรับ PivotBarConstructorFingerprint ใช้ DexKit ค้นหา method/class ที่ obfuscated ใน YouTube",
+      "tags": [
+        "fingerprint",
+        "dexkit",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt",
+      "type": "file",
+      "name": "NavigationBarHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt",
+      "summary": "Hook navigation bar และ search bar รวมถึง back button visibility และ notification tab icon",
+      "tags": [
+        "hook",
+        "navigation-bar",
+        "ui"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt:onNavigationTabCreated",
+      "type": "function",
+      "name": "onNavigationTabCreated",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt",
+      "lineRange": [
+        22,
+        24
+      ],
+      "summary": "เรียก callback ทั้งหมดใน hookNavigationButtonCreated เมื่อมี tab ถูกสร้าง",
+      "tags": [
+        "utility",
+        "hook",
+        "navigation"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/PlayerControlsOverlayVisibilityPatch.kt",
+      "type": "file",
+      "name": "PlayerControlsOverlayVisibilityPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playercontrols/PlayerControlsOverlayVisibilityPatch.kt",
+      "summary": "Hook entity model ของ player controls visibility เพื่อบันทึกค่า enum ปัจจุบัน",
+      "tags": [
+        "hook",
+        "player-controls",
+        "visibility"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/PlayerTypeHookPatch.kt",
+      "type": "file",
+      "name": "PlayerTypeHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playertype/PlayerTypeHookPatch.kt",
+      "summary": "Hook player type และ video playback state รวมถึง Shorts view creation",
+      "tags": [
+        "hook",
+        "player-type",
+        "playback-state"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playservice/VersionCheckPatch.kt",
+      "type": "file",
+      "name": "VersionCheckPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/playservice/VersionCheckPatch.kt",
+      "summary": "Patch ตรวจสอบ version ของ YouTube แล้วตั้งค่า version flags (is_XX_YY_or_greater) ทั้งหมด",
+      "tags": [
+        "version-check",
+        "playservice",
+        "utility"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/privacy/SanitizeSharingLinksPatch.kt",
+      "type": "file",
+      "name": "SanitizeSharingLinksPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/privacy/SanitizeSharingLinksPatch.kt",
+      "summary": "ลบ tracking query parameters ออกจากลิงก์ที่แชร์ โดยใช้ shared SanitizeSharingLinks",
+      "tags": [
+        "hook",
+        "privacy",
+        "sharing-links"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/proto/ElementProtoParserHookPatch.kt",
+      "type": "file",
+      "name": "ElementProtoParserHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/proto/ElementProtoParserHookPatch.kt",
+      "summary": "สร้าง hook สำหรับ parse element proto ผ่าน shared factory",
+      "tags": [
+        "hook",
+        "proto",
+        "parser"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/recyclerviewtree/RecyclerViewTreeHookPatch.kt",
+      "type": "file",
+      "name": "RecyclerViewTreeHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/recyclerviewtree/RecyclerViewTreeHookPatch.kt",
+      "summary": "Hook RecyclerView addOnScrollListener เพื่อรัน callback ที่ลงทะเบียนใน addRecyclerViewTreeHook",
+      "tags": [
+        "hook",
+        "recyclerview",
+        "tree"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/settings/Fingerprints.kt",
+      "type": "file",
+      "name": "Fingerprints.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/settings/Fingerprints.kt",
+      "summary": "ค้นหา PreferenceFragmentCompat, LicenseActivity และ setTheme fingerprint สำหรับ settings UI",
+      "tags": [
+        "fingerprint",
+        "settings",
+        "dexkit"
+      ],
+      "complexity": "moderate"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt",
+      "type": "file",
+      "name": "ToolbarHookPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt",
+      "summary": "Hook toolbar icon enum และ image view เพื่อเรียก toolbarHooks callback ตาม enum name",
+      "tags": [
+        "hook",
+        "toolbar",
+        "ui"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt:hookToolBar",
+      "type": "function",
+      "name": "hookToolBar",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt",
+      "lineRange": [
+        42,
+        44
+      ],
+      "summary": "เพิ่ม callback ลงในรายการ toolbarHooks สำหรับรับ (enumName, parentView, imageView)",
+      "tags": [
+        "utility",
+        "hook",
+        "toolbar"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/verticalscroll/FixVerticalScrollPatch.kt",
+      "type": "file",
+      "name": "FixVerticalScrollPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/misc/verticalscroll/FixVerticalScrollPatch.kt",
+      "summary": "แก้ปัญหา refresh feed เมื่อ component แรกเป็น EmptyComponent โดย hook canScrollVertically",
+      "tags": [
+        "hook",
+        "vertical-scroll",
+        "feed"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt",
+      "type": "file",
+      "name": "StartVideoInformerPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt",
+      "summary": "ให้ shared hook สำหรับเมื่อวิดีโอเริ่มเล่น โดยรัน videoStartedHooks ทั้งหมด",
+      "tags": [
+        "hook",
+        "video-start",
+        "shared"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt:hookVideoStarted",
+      "type": "function",
+      "name": "hookVideoStarted",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt",
+      "lineRange": [
+        15,
+        17
+      ],
+      "summary": "เพิ่ม callback ลงใน videoStartedHooks สำหรับแจ้งเมื่อวิดีโอเริ่มเล่น",
+      "tags": [
+        "utility",
+        "hook",
+        "video"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/audio/ForceOriginalAudioPatch.kt",
+      "type": "file",
+      "name": "ForceOriginalAudioPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/audio/ForceOriginalAudioPatch.kt",
+      "summary": "บังคับใช้ original audio track ตาม version flags และ preference screen VIDEO",
+      "tags": [
+        "hook",
+        "audio",
+        "original-audio",
+        "version-gated"
+      ],
+      "complexity": "simple"
+    },
+    {
+      "id": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/video/audio/SoundBoostPatch.kt",
+      "type": "file",
+      "name": "SoundBoostPatch.kt",
+      "filePath": "app/src/main/java/io/github/nexalloy/morphe/youtube/video/audio/SoundBoostPatch.kt",
+      "summary": "เพิ่มตัวเลือก swipe volume เกินระดับสูงสุด โดย hook AudioTrack.getAudioSessionId",
+      "tags": [
+        "hook",
+        "audio",
+        "sound-boost"
+      ],
+      "complexity": "simple"
+    }
+  ],
+  "edges": [
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt:addPlayerBottomButton",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/layout/player/buttons/PlayerOverlayButtonsHookPatch.kt:addPlayerBottomButton",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt:addBackPressedHook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt:addBackPressedHook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt:addPredictiveBackGestureHook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/backgesture/BackGesturePatch.kt:addPredictiveBackGestureHook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/ChaptersHookPatch.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/chapters/ChaptersHookPatch.kt:TimelineMarkerAdapter",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt:addEngagementPanelIdHook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/engagement/EngagementPanelHookPatch.kt:addEngagementPanelIdHook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:getHookedUrl",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:getHookedUrl",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlHook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlHook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlSuccessCallbackHook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlSuccessCallbackHook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlErrorCallbackHook",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/imageurlhook/CronetImageUrlHook.kt:addImageUrlErrorCallbackHook",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:ToolbarLayoutFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:ToolbarLayoutFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:AppCompatToolbarBackButtonFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:AppCompatToolbarBackButtonFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:InitializeButtonsFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:InitializeButtonsFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:NavigationEnumFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:NavigationEnumFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarButtonsCreateResourceStyledViewFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarButtonsCreateResourceStyledViewFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarButtonsViewSetSelectedFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarButtonsViewSetSelectedFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarDispatchTouchEventFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarDispatchTouchEventFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarConstructorFingerprint",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt",
+      "target": "class:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/Fingerprints.kt:PivotBarConstructorFingerprint",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt:onNavigationTabCreated",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/navigation/NavigationBarHookPatch.kt:onNavigationTabCreated",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt:hookToolBar",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/misc/toolbar/ToolbarHookPatch.kt:hookToolBar",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt:hookVideoStarted",
+      "type": "contains",
+      "direction": "forward",
+      "weight": 1.0
+    },
+    {
+      "source": "file:app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt",
+      "target": "function:app/src/main/java/io/github/nexalloy/morphe/youtube/shared/StartVideoInformerPatch.kt:hookVideoStarted",
+      "type": "exports",
+      "direction": "forward",
+      "weight": 0.8
+    }
+  ]
+}
