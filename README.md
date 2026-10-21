@@ -2,7 +2,7 @@
   <h1>KawinNext</h1>
   <a href="https://discord.gg/QWUrAA2mKq"><img alt="Discord Server" src="https://img.shields.io/badge/Discord%20Server-5865F2.svg?logo=discord&logoColor=white"></a>
   <a href="https://t.me/revancedxposed"><img alt="Telegram Channel" src="https://img.shields.io/badge/Telegram_Channel-blue.svg?logo=telegram&logoColor=white"></a>
-  <a href="https://github.com/KawinNext/KawinNext/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/endpoint?url=https%3A%2F%2Fshields.chsbuffer.workers.dev%2F%3Frepos%3DKawinNext%2FKawinNext%26cacheSeconds%3D3600"></a>
+  <a href="https://github.com/KawinPattanai/KawinNext/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/KawinPattanai/KawinNext/total"></a>
   <a href="https://github.com/KawinNext/KawinNext"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/KawinNext/KawinNext"></a>  
   <br>
 </div>
@@ -19,8 +19,8 @@
 > - **Having issues?** Check the **[FAQ](https://github.com/KawinNext/KawinNext/wiki/Frequently-Asked-Questions)** before reporting.
 
 ## Downloads
-- **Release build**: [Download](https://github.com/KawinNext/KawinNext/releases/latest)
-- **Nightly build**: [Download](https://nightly.link/KawinNext/KawinNext/workflows/android/main)
+- **Release build**: [Download](https://github.com/KawinPattanai/KawinNext/releases/latest)
+- **Nightly build**: [Download](https://github.com/KawinPattanai/KawinNext/releases/tag/autobuild)
 
 <sub>If you've joined the YouTube beta program, please try the nightly build before reporting an issue.</sub>
 
