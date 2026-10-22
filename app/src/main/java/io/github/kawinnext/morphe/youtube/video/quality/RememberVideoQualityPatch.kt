@@ -48,7 +48,6 @@ val RememberVideoQuality = patch {
         )
     )
 
-    // Inject a call to override initial video quality.
     ::PlaybackStartParametersInit.hookMethod {
         val initialResolutionField = ::InitialResolutionField.field
         after {
@@ -58,16 +57,8 @@ val RememberVideoQuality = patch {
         }
     }
 
-    // Turn off the YouTube automatic quality selection when the video starts,
-    // so the initial video quality is used as a fixed quality.
     insertLiteralOverride(45408049L, RememberVideoQualityPatch::useInitialVideoQuality)
 
-    // Send the minimum and maximum quality with the SABR requests,
-    // so the server cannot choose a quality outside the quality of the player.
-    insertLiteralOverride(45738253L, RememberVideoQualityPatch::sendQualityConstraintToServer)
-
-    // Use the 'Advanced' video quality setting instead of the 'Video quality preferences'
-    // (Auto, Higher picture quality, Data saver), both on the device and with the SABR requests.
     val advancedMenu = ::advancedVideoQualitySettingField.field.get(null)
     ::getVideoQualitySettingMethod.hookMethod {
         before {
@@ -77,29 +68,22 @@ val RememberVideoQuality = patch {
         }
     }
 
-    // The initial video quality is only used when the video starts. YouTube chooses the quality
-    // again while the video plays, and without a quality selected in the quality menu it is
-    // then chosen automatically, such as 720p for the size of the player.
-    // The default quality is used as a fixed quality for these choices too.
     ::getVideoQualityConstraintMethod.hookMethod {
         val fixedConstraint = ::fixedVideoQualityConstraintMethod.method
         after {
-            val quality = RememberVideoQualityPatch.getFixedVideoQuality()
+            val quality = RememberVideoQualityPatch.getLastSelectedVideoQuality()
             if (quality >= 0 && it.result != null) {
                 it.result = fixedConstraint(it.result, quality)
             }
         }
     }
 
-    // Inject a call to remember the selected quality for Shorts.
     VideoQualityItemOnClickFingerprint.hookMethod {
         before { param ->
             RememberVideoQualityPatch.userChangedShortsQuality(param.args[2] as Int)
         }
     }
 
-    // Inject a call to remember the user selected quality for regular videos.
-    // The quality object is used, as its name is needed to get the fixed resolution.
     VideoQualityChangedFingerprint.hookMethod(scopedHook(::VideoQualityReceiver.member) {
         before { param ->
             RememberVideoQualityPatch.userChangedQuality(VideoQualityProxy(param.args[0]))
