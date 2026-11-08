@@ -19,7 +19,7 @@ The patch logic and the in-app extension code come from the [Morphe](https://mor
 
 ## Install
 
-1. Download the APK from [Releases](https://github.com/KawinPattanai/KawinNext/releases/latest).
+1. Download the APK from [Releases](https://github.com/KawinPattanai/KawinNext/releases/latest). The `autobuild` pre-release is rebuilt from every push to `main`, and is where fixes land first.
 2. Install it, then enable the module in LSPosed and tick the apps you want in its scope.
 3. Reboot the device.
 4. Open the module and pick which patches each app gets. Every patch also has its own settings screen inside the target app: **YouTube → Settings → Morphe**.
