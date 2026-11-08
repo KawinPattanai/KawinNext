@@ -28,6 +28,7 @@ import io.github.kawinnext.morphe.youtube.layout.dearrow.deArrowPatch
 import io.github.kawinnext.morphe.youtube.layout.flyout.addToQueuePatch
 import io.github.kawinnext.morphe.youtube.layout.hide.general.HideLayoutComponents
 import io.github.kawinnext.morphe.youtube.layout.hide.shorts.HideShortsComponents
+import io.github.kawinnext.morphe.youtube.layout.niconicocomments.niconicoCommentsPatch
 import io.github.kawinnext.morphe.youtube.layout.returnyoutubedislike.returnYouTubeDislikePatch
 import io.github.kawinnext.morphe.youtube.layout.sharesheet.openSystemShareSheetPatch
 import io.github.kawinnext.morphe.youtube.layout.shortsnoresume.DisableShortsResumingOnStartup
@@ -121,6 +122,7 @@ val YouTubePatches = arrayOf(
     changeStartPagePatch,
     channelSearchPatch,
     channelWhitelistPatch,
+    niconicoCommentsPatch,
     onTheGoPatch,
     patchesUpdateNoticePatch,
     // make sure settingsHook at end to build preferences
