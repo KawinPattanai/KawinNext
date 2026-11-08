@@ -15,6 +15,7 @@ import io.github.kawinnext.enumValueOf
 import io.github.kawinnext.morphe.youtube.misc.backgesture.addBackPressedHook
 import io.github.kawinnext.morphe.youtube.misc.backgesture.addPredictiveBackGestureHook
 import io.github.kawinnext.morphe.youtube.misc.backgesture.backGesturePatch
+import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_43_or_greater
 import io.github.kawinnext.patch
 import io.github.kawinnext.scopedHook
 import org.luckypray.dexkit.wrap.DexMethod
@@ -37,9 +38,12 @@ val NavigationBarHook = patch(
     })
 
     // Hook the creation of navigation tab views.
-    InitializeButtonsFingerprint.hookMethod(scopedHook(::pivotBarButtonsCreateDrawableViewFingerprint.member) {
-        after { NavigationBar.navigationTabLoaded(it.result as View) }
-    })
+    // The drawable based creation method is gone in 21.43+.
+    if (!is_21_43_or_greater) {
+        InitializeButtonsFingerprint.hookMethod(scopedHook(::pivotBarButtonsCreateDrawableViewFingerprint.member) {
+            after { NavigationBar.navigationTabLoaded(it.result as View) }
+        })
+    }
 
 //    if (!is_20_28_or_greater) {
 //        // TODO
