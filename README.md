@@ -1,28 +1,42 @@
 <div align="center">
+  <img src="kawinnext-icon-preview.png" width="120" alt="KawinNext icon">
   <h1>KawinNext</h1>
-  <a href="https://discord.gg/QWUrAA2mKq"><img alt="Discord Server" src="https://img.shields.io/badge/Discord%20Server-5865F2.svg?logo=discord&logoColor=white"></a>
-  <a href="https://t.me/revancedxposed"><img alt="Telegram Channel" src="https://img.shields.io/badge/Telegram_Channel-blue.svg?logo=telegram&logoColor=white"></a>
-  <a href="https://github.com/KawinPattanai/KawinNext/releases/latest"><img alt="GitHub Downloads" src="https://img.shields.io/github/downloads/KawinPattanai/KawinNext/total"></a>
-  <a href="https://github.com/KawinNext/KawinNext"><img alt="GitHub Stars" src="https://img.shields.io/github/stars/KawinNext/KawinNext"></a>  
-  <br>
+  <p><b>Patches for YouTube, YT Music, Reddit and more — applied at runtime, not baked into the APK.</b></p>
+  <a href="https://github.com/KawinPattanai/KawinNext/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/KawinPattanai/KawinNext?include_prereleases"></a>
+  <a href="https://github.com/KawinPattanai/KawinNext/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/KawinPattanai/KawinNext/total"></a>
+  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL--3.0-blue"></a>
+  <a href="https://discord.gg/QWUrAA2mKq"><img alt="Discord" src="https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white"></a>
+  <a href="https://t.me/revancedxposed"><img alt="Telegram" src="https://img.shields.io/badge/Telegram-channel-2CA5E0?logo=telegram&logoColor=white"></a>
 </div>
 
-**Kawin's LSPosed module, powered by Morphe, ReVanced, and beyond.**  
-> [!CAUTION]
-> **Migration Notice:** This project has evolved from **ReVancedXposed** to **KawinNext**. 
-> 
-> **Upgrading:** We’ve kept the original Package ID for your convenience. You can install this as an update, but **you must manually export your settings from the old version and import them into the new one** to keep your configuration.
+## What this is
 
->[!IMPORTANT]  
-> - This is **NOT an official Morphe or ReVanced project**, do not ask their developers for help.  
-> - **Root access** is strictly **required** to use this module!
-> - **Having issues?** Check the **[FAQ](https://github.com/KawinNext/KawinNext/wiki/Frequently-Asked-Questions)** before reporting.
+KawinNext is an LSPosed module that adds features to apps you already have installed. It finds the methods it needs inside the host app with DexKit and hooks them with Xposed, so nothing is unpacked, patched, re-signed or reinstalled — the store version stays the store version.
 
-## Downloads
-- **Release build**: [Download](https://github.com/KawinPattanai/KawinNext/releases/latest)
-- **Nightly build**: [Download](https://github.com/KawinPattanai/KawinNext/releases/tag/autobuild)
+The patch logic and the in-app extension code come from the [Morphe](https://morphe.software) patch set; this repository is the runtime side of it: the module, the per-app switches, and the hooks that make those patches work without a patched APK.
 
-<sub>If you've joined the YouTube beta program, please try the nightly build before reporting an issue.</sub>
+**Root and LSPosed are required.** Android 8.1 or newer.
+
+## Install
+
+1. Download the APK from [Releases](https://github.com/KawinPattanai/KawinNext/releases/latest).
+2. Install it, then enable the module in LSPosed and tick the apps you want in its scope.
+3. Reboot the device.
+4. Open the module and pick which patches each app gets. Every patch also has its own settings screen inside the target app: **YouTube → Settings → Morphe**.
+
+## Supported apps
+
+| App | Package |
+| --- | --- |
+| YouTube | `com.google.android.youtube` |
+| YouTube Music | `com.google.android.apps.youtube.music` |
+| Reddit | `com.reddit.frontpage` |
+| Google Photos | `com.google.android.apps.photos` |
+| Photomath | `com.microblink.photomath` |
+| Instagram | `com.instagram.android` |
+| Threads | `com.instagram.barcelona` |
+| Strava | `com.strava` |
+| AllTrails | `com.alltrails.alltrails` |
 
 ## Patches
 
@@ -61,6 +75,7 @@
 - Channel whitelist
 
 ### YouTube Music
+
 - Remove music video ads
 - Remove background playback restrictions
 - Hide upgrade button
@@ -68,36 +83,58 @@
 - Enable exclusive audio playback
 
 ### Reddit
+
 - Hide ads
 - Sanitize sharing links
 - Start as guest
 
 ### Google Photos
+
 - Spoof Pixel XL
 
 ### Photomath
+
 - Unlock plus
 
 ### Instagram
+
 - Hide ads
 
 ### Threads
+
 - Hide ads
 
 ### Strava
+
 - Unlock subscription features
 - Disable subscription suggestions
 
 ### AllTrails
+
 - Enable Peak membership
 
-## Supports
-[![Discord Server](https://img.shields.io/badge/Join-Discord-5865F2.svg?logo=discord)](https://discord.gg/QWUrAA2mKq)  
-[![FAQ](https://img.shields.io/badge/Read-FAQ-orange.svg?logo=github)](https://github.com/KawinNext/KawinNext/wiki/Frequently-Asked-Questions)  
-or [Create an issue](https://github.com/KawinNext/KawinNext/issues/new/choose)
+## Limits worth knowing
 
-## ⭐ Credits
+- The module refuses to run on an APK that is already patched by Morphe or ReVanced. Running both would hook the same code twice.
+- A patch only applies where its fingerprinted method still exists in that app version. When one fails, the module reports it and keeps the rest running.
+- Root is not optional, and an unrooted device cannot use this module at all.
 
-[DexKit](https://luckypray.org/DexKit/en/): a high-performance dex runtime parsing library.  
-[Morphe](https://morphe.software): Transform Your Android Apps  
-[ReVanced](https://revanced.app): Continuing the legacy of Vanced at [revanced.app](https://revanced.app)
+## Help
+
+Bugs, crashes and patch requests: [open an issue](https://github.com/KawinPattanai/KawinNext/issues). Include the app version, the module version and the LSPosed log line for the failing patch.
+
+## Credits
+
+- [Morphe](https://morphe.software) — patch set and extension code this module runs.
+- [ReVanced](https://revanced.app) — the project the patch format and many patches originated from.
+- [DexKit](https://luckypray.org/DexKit/en/) — the dex parsing library that finds the methods to hook.
+
+This is not an official Morphe or ReVanced project. Please report issues here, not to their developers.
+
+## Upgrading from ReVancedXposed
+
+KawinNext keeps the original package id, so it installs over the old module as an update. Settings are not migrated automatically: export them from the old version and import them in the new one.
+
+## License
+
+GPL-3.0. See [LICENSE](LICENSE).
