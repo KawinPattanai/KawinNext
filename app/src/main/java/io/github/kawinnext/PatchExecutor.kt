@@ -380,15 +380,18 @@ class PatchExecutor(
 
     private inline fun getDexClass(
         key: String, crossinline findFunc: DexKitBridge.() -> ClassData
-    ): DexClass = dexkit.getClassDirectOrNull(key, wrapFind(key, findFunc) { it.descriptor })!!
+    ): DexClass = dexkit.getClassDirectOrNull(key, wrapFind(key, findFunc) { it.descriptor })
+        ?: throw NoSuchElementException("Fingerprint $key matched no class")
 
     private inline fun getDexMethod(
         key: String, crossinline findFunc: DexKitBridge.() -> MethodData
-    ): DexMethod = dexkit.getMethodDirectOrNull(key, wrapFind(key, findFunc) { it.descriptor })!!
+    ): DexMethod = dexkit.getMethodDirectOrNull(key, wrapFind(key, findFunc) { it.descriptor })
+        ?: throw NoSuchElementException("Fingerprint $key matched no method")
 
     private inline fun getDexField(
         key: String, crossinline findFunc: DexKitBridge.() -> FieldData
-    ): DexField = dexkit.getFieldDirectOrNull(key, wrapFind(key, findFunc) { it.descriptor })!!
+    ): DexField = dexkit.getFieldDirectOrNull(key, wrapFind(key, findFunc) { it.descriptor })
+        ?: throw NoSuchElementException("Fingerprint $key matched no field")
 
     private inline fun getDexMethods(
         key: String, crossinline findFunc: DexKitBridge.() -> List<MethodData>
