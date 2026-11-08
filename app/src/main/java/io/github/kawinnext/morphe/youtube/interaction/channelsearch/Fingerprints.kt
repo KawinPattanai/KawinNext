@@ -120,12 +120,49 @@ internal object SearchBoxHintFingerprint : Fingerprint(
 )
 
 val SearchSubmitFingerprint = findMethodDirect {
-    try {
-        SearchSubmitFingerprint1()
-    } catch (_: Exception) {
-        SearchSubmitFingerprint2()
-    }
+    runCatching { SearchSubmitFingerprint3() }
+        .recoverCatching { SearchSubmitFingerprint1() }
+        .recoverCatching { SearchSubmitFingerprint2() }
+        .getOrThrow()
 }
+
+/**
+ * Every search submit path funnels through this method, including suggestions and filter chips.
+ */
+@SkipTest
+internal object SearchSubmitFingerprint3 : Fingerprint(
+    returnType = "V",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    parameters = listOf(
+        "Ljava/lang/String;",
+        "I",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Ljava/lang/String;",
+        "Z",
+        "Ljava/lang/String;"
+    ),
+    filters = listOf(
+        methodCall( // 21.43+
+            parameters = listOf(
+                "Ljava/lang/String;",
+                "[B",
+                "Ljava/lang/String;",
+                "I",
+                "L",
+                "L",
+                "Ljava/lang/String;",
+                "Ljava/lang/String;",
+                "Ljava/lang/String;",
+                "Ljava/lang/String;",
+                "Z",
+                "Ljava/lang/String;"
+            ),
+            returnType = "V"
+        )
+    ),
+)
 
 /**
  * Every search submit path funnels through this method, including suggestions and filter chips.
