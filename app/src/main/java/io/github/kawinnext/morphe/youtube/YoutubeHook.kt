@@ -33,6 +33,7 @@ import io.github.kawinnext.morphe.youtube.layout.shortsnoresume.DisableShortsRes
 import io.github.kawinnext.morphe.youtube.layout.sponsorblock.SponsorBlock
 import io.github.kawinnext.morphe.youtube.layout.startpage.changeStartPagePatch
 import io.github.kawinnext.morphe.youtube.layout.thumbnails.BypassImageRegionRestrictionsPatch
+import io.github.kawinnext.morphe.youtube.misc.announcements.patchesUpdateNoticePatch
 import io.github.kawinnext.morphe.youtube.misc.backgroundplayback.BackgroundPlayback
 import io.github.kawinnext.morphe.youtube.misc.debugging.EnableDebugging
 import io.github.kawinnext.morphe.youtube.misc.privacy.SanitizeSharingLinks
@@ -119,6 +120,7 @@ val YouTubePatches = arrayOf(
     changeStartPagePatch,
     channelSearchPatch,
     channelWhitelistPatch,
+    patchesUpdateNoticePatch,
     // make sure settingsHook at end to build preferences
     SettingsHook,
     FeatureOverride
