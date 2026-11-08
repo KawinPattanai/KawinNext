@@ -2,7 +2,6 @@
   <img src="kawinnext-icon-preview.png" width="120" alt="KawinNext icon">
   <h1>KawinNext</h1>
   <p><b>Patches for YouTube, YT Music, Reddit and more — applied at runtime, not baked into the APK.</b></p>
-  <p><a href="https://discord.gg/QWUrAA2mKq">Discord</a> · <a href="https://t.me/revancedxposed">Telegram</a></p>
 </div>
 
 ## What this is
