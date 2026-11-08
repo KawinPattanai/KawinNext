@@ -264,6 +264,17 @@ internal object StoryboardFrameRegionFingerprint : Fingerprint (
     )
 )
 
+/**
+ * Paint the seekbar reads last in onDraw, right before it draws the thumb circle.
+ * Tells the thumb circle apart from the circles drawn for timed markers,
+ * which reuse one shared paint.
+ */
+val seekbarThumbPaintField = findFieldDirect {
+    SeekbarFingerprint().declaredClass!!.findMethod {
+        matcher { name = "onDraw" }
+    }.single().instructions.last { it.fieldRef?.typeName == "android.graphics.Paint" }.fieldRef!!
+}
+
 internal object SeekbarFineScrubbingBitmapFingerprint : Fingerprint (
     classFingerprint = StoryboardFrameRegionFingerprint,
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL, AccessFlags.DECLARED_SYNCHRONIZED),
