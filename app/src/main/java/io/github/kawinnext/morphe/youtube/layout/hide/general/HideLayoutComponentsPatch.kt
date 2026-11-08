@@ -3,6 +3,7 @@
 package io.github.kawinnext.morphe.youtube.layout.hide.general
 
 import android.view.View
+import android.view.Menu
 import android.widget.TextView
 import app.morphe.extension.shared.ResourceUtils.getDimenIdentifier
 import app.morphe.extension.shared.ResourceUtils.getIdIdentifier
@@ -502,6 +503,18 @@ val HideLayoutComponents = patch(
             }
         }
     })
+
+    // The toolbar menu, such as the overflow menu of a playlist page, is built by adding its
+    // items one by one, so the filtered items are removed from the menu once it is built.
+    ActionBarMenuBuilderFingerprint.hookMethod {
+        after {
+            val menu = it.args[0] as? Menu ?: return@after
+            for (index in menu.size() - 1 downTo 0) {
+                val item = menu.getItem(index)
+                LayoutComponentsFilter.hideFlyoutMenu(menu, item.itemId, item.title)
+            }
+        }
+    }
 
     // endregion
 
