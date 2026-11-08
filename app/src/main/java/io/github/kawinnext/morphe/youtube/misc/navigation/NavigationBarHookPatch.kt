@@ -130,22 +130,25 @@ val NavigationBarHook = patch(
     // Fix YT bug of notification tab missing the filled icon.
     val tabActivityCairo = ::navigationEnumClass.clazz.enumValueOf("TAB_ACTIVITY_CAIRO")
     if (tabActivityCairo != null) {
-        ::getNavIconResIdFingerprint.dexMethodList.forEach {
-            it.hookMethod {
-                val fillBellCairoBlack = ResourceUtils.getIdentifier(
-                    ResourceType.DRAWABLE,
-                    if (VersionCheckPatch.IS_20_31_OR_GREATER)
-                        "yt_fill_experimental_bell_vd_theme_24"
-                    else
-                        "morphe_fill_bell_cairo_black_24"
-                )
-                after {
-                    val navEnum = it.args[0] as Enum<*>
-                    val selected = it.args[1] as Boolean
-                    if (navEnum == tabActivityCairo && selected)
-                        it.result = fillBellCairoBlack
+        // The query also returns the interface declaration, which has no body to hook.
+        ::getNavIconResIdFingerprint.dexMethodList
+            .filterNot { java.lang.reflect.Modifier.isAbstract(it.toMethod().modifiers) }
+            .forEach {
+                it.hookMethod {
+                    val fillBellCairoBlack = ResourceUtils.getIdentifier(
+                        ResourceType.DRAWABLE,
+                        if (VersionCheckPatch.IS_20_31_OR_GREATER)
+                            "yt_fill_experimental_bell_vd_theme_24"
+                        else
+                            "morphe_fill_bell_cairo_black_24"
+                    )
+                    after {
+                        val navEnum = it.args[0] as Enum<*>
+                        val selected = it.args[1] as Boolean
+                        if (navEnum == tabActivityCairo && selected)
+                            it.result = fillBellCairoBlack
+                    }
                 }
             }
         }
     }
-}
