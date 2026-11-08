@@ -45,8 +45,15 @@ data class VersionInfo(val versionCode: Int, val versionName: String) {
                 versionCode = split[0].toIntOrNull() ?: 0
                 versionName = split[1]
             } else {
-                // X.Y.Z, Z is versionCode
-                versionCode = tagName.split('.').last().toIntOrNull() ?: 0
+                // X.Y.Z, ordered the same way the module's own versionCode is built.
+                val parts = tagName.split('.')
+                versionCode = if (parts.size == 3) {
+                    (parts[0].toIntOrNull() ?: 0) * 10_000 +
+                        (parts[1].toIntOrNull() ?: 0) * 100 +
+                        (parts[2].toIntOrNull() ?: 0)
+                } else {
+                    parts.last().toIntOrNull() ?: 0
+                }
                 versionName = tagName
             }
             return VersionInfo(versionCode, versionName)
@@ -54,7 +61,7 @@ data class VersionInfo(val versionCode: Int, val versionName: String) {
     }
 }
 
-const val OWNER = "KawinNext"
+const val OWNER = "KawinPattanai"
 const val REPO = "KawinNext"
 const val currentVersionCode = BuildConfig.VERSION_CODE
 
