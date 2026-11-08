@@ -185,9 +185,6 @@ val LegacyPlayerControls = patch(
         if (is_21_38_or_greater) insertLiteralOverride(45840190L, false)
     }
 
-    // Override flags that interfere with old player icons override.
-    insertLiteralOverride(45771730, LegacyPlayerControlsPatch::allowModernPlayerLayoutFlags)
-    insertLiteralOverride(45763727, LegacyPlayerControlsPatch::allowModernPlayerLayoutFlags)
     fun overrideExploderLayout(id: Long) = insertLiteralOverride(
         id, LegacyPlayerControlsPatch::usePlayerBottomControlsExploderLayout
     )

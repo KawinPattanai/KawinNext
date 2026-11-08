@@ -11,7 +11,6 @@ import io.github.kawinnext.morphe.youtube.insertLiteralOverride
 import io.github.kawinnext.new
 import io.github.kawinnext.patch
 import io.github.kawinnext.scopedHook
-import java.nio.ByteBuffer
 
 fun addLithoFilter(filter: Filter){
     LithoFilterPatch.addFilter(filter)
@@ -56,17 +55,12 @@ fun addLithoFilter(filter: Filter){
  *    }
  * }
  *
- * @param hookNonNativeBuffer Whether to also insert the non-native ByteBuffer hook.
- *                            Older client versions push data through a non-native path; newer ones
- *                            (YouTube 20.22+, YT Music 9.x) always use the native Upb encode path.
- *                            Evaluated lazily inside execute so version flags are already set.
  * @param overrideUpbFeatureFlag Whether to override the A/B feature flag that enables Upb-native
  *                               protobuf parsing (only present on older YouTube; absent in Music).
  * @param block Callback to add app-specific dependencies (sharedExtensionPatch, conversionContextPatch,
  *              versionCheckPatch, and any app-specific fixes).
  */
 internal fun sharedLithoFilterPatch(
-    hookNonNativeBuffer: () -> Boolean,
     overrideUpbFeatureFlag: () -> Boolean,
     useLegacyLithoFiltering: () -> Boolean,
     block: PatchExecutor.() -> Unit,
@@ -78,18 +72,6 @@ internal fun sharedLithoFilterPatch(
 
     LithoFilterPatch::class.java.getDeclaredMethod("useLegacyLithoFiltering")
         .hookMethod(XC_MethodReplacement.returnConstant(useLegacyLithoFiltering()))
-
-    //region Pass the buffer into extension.
-    if (!hookNonNativeBuffer()) {
-        // Non-native buffer.
-        ProtobufBufferReferenceFingerprint.hookMethod {
-            before { param ->
-                LithoFilterPatch.setProtoBuffer(param.args[1] as ByteBuffer)
-            }
-        }
-    }
-
-    //endregion
 
     // region Hook the method that parses bytes into a ComponentContext.
 

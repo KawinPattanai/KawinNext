@@ -1,18 +1,15 @@
 package io.github.kawinnext.morphe.youtube.layout.buttons.action
 
-import app.morphe.extension.youtube.innertube.NextResponseOuterClass
 import app.morphe.extension.youtube.patches.components.QuickActionButtonsFilter
 import app.morphe.extension.youtube.patches.components.VideoActionButtonsFilter
-import io.github.kawinnext.callMethod
 import io.github.kawinnext.morphe.shared.misc.litho.filter.addLithoFilter
-import io.github.kawinnext.morphe.shared.misc.litho.node.hookTreeNodeResult
+import io.github.kawinnext.morphe.shared.misc.proto.hookElement
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceCategory
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
 import io.github.kawinnext.morphe.youtube.misc.litho.filter.LithoFilter
-import io.github.kawinnext.morphe.youtube.misc.litho.node.TreeNodeElementHook
+import io.github.kawinnext.morphe.youtube.misc.proto.elementProtoParserHookPatch
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
-import io.github.kawinnext.morphe.youtube.shared.WatchNextResponseParserFingerprint
 import io.github.kawinnext.morphe.youtube.video.information.VideoInformationPatch
 import io.github.kawinnext.patch
 
@@ -22,7 +19,7 @@ val HideVideoActionButtons = patch(
 ) {
     dependsOn(
         LithoFilter,
-        TreeNodeElementHook,
+        elementProtoParserHookPatch,
         VideoInformationPatch
     )
 
@@ -83,23 +80,5 @@ val HideVideoActionButtons = patch(
     addLithoFilter(VideoActionButtonsFilter())
     addLithoFilter(QuickActionButtonsFilter())
 
-    hookTreeNodeResult(VideoActionButtonsFilter::onLazilyConvertedElementLoaded)
-
-    WatchNextResponseParserFingerprint.hookMethod {
-        before {
-            val messageLite = it.args[0]
-
-            val nextResponse =
-                NextResponseOuterClass.NextResponse.parseFrom(messageLite.callMethod("toByteArray") as ByteArray)
-
-            if (!nextResponse.hasPrimaryContents()) {
-                return@before
-            }
-
-            val primaryContents = nextResponse.primaryContents
-            if (primaryContents.hasSingleColumnWatchNextResults()) {
-                VideoActionButtonsFilter.onSingleColumnWatchNextResultsLoaded(primaryContents.singleColumnWatchNextResults)
-            }
-        }
-    }
+    hookElement { bytes -> bytes?.let(VideoActionButtonsFilter::hideActionButtons) }
 }

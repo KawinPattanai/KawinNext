@@ -1,5 +1,6 @@
 package io.github.kawinnext.morphe.youtube.video.quality
 
+import app.morphe.extension.youtube.patches.VideoInformation
 import app.morphe.extension.youtube.patches.playback.quality.RememberVideoQualityPatch
 import io.github.kawinnext.morphe.shared.misc.settings.preference.ListPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
@@ -80,7 +81,9 @@ val RememberVideoQuality = patch {
 
     VideoQualityItemOnClickFingerprint.hookMethod {
         before { param ->
-            RememberVideoQualityPatch.userChangedShortsQuality(param.args[2] as Int)
+            RememberVideoQualityPatch.userChangedShortsQuality(
+                VideoInformation.getCurrentQualities(), param.args[2] as Int
+            )
         }
     }
 

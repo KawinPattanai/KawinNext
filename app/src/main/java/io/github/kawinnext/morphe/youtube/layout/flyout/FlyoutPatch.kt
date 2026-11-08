@@ -6,6 +6,7 @@ import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.TextView
 import app.morphe.extension.shared.ResourceUtils
+import app.morphe.extension.youtube.patches.components.CommentsFilter
 import app.morphe.extension.youtube.patches.utils.FlyoutUtils
 import io.github.kawinnext.hookMethod
 import io.github.kawinnext.morphe.shared.misc.proto.hookElement
@@ -79,9 +80,7 @@ val flyoutPatch = patch(
         )
     }
 
-    hookVideoStarted(FlyoutUtils::resetVideoMarkedAsForKids)
-
-    hookElement(FlyoutUtils::onCommentsLoaded)
+    hookElement(CommentsFilter::onCommentsLoaded)
 
     // Track and initialize flyout menu buttons generically.
     val getSubMessageMethod = ::getSubMessageReference.method

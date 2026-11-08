@@ -102,11 +102,17 @@ class PlaybackSpeedMenu(
 internal class VideoQualityProxy(val quality: Any) : VideoInformation.VideoQualityInterface {
     private val qualityNameField = quality.javaClass.findFirstFieldByExactType(String::class.java)
     private val resolutionField = quality.javaClass.findFirstFieldByExactType(Int::class.java)
+    private val formatIdsField = quality.javaClass.declaredFields.firstOrNull {
+        Collection::class.java.isAssignableFrom(it.type)
+    }
 
     override fun patch_getQualityName(): String = qualityNameField.get(quality) as String
     override fun patch_getResolution(): Int = VideoInformation.fixVideoQualityResolution(
         patch_getQualityName(), resolutionField.getInt(quality)
     )
+
+    override fun patch_getFormatIds(): Collection<*> =
+        (formatIdsField?.get(quality) as? Collection<*>) ?: emptyList<Any>()
     override fun toString(): String = quality.toString()
     override fun equals(other: Any?): Boolean = other is VideoQualityProxy && quality == other.quality
     override fun hashCode(): Int = quality.hashCode()
