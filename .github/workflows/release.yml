@@ -42,10 +42,11 @@ jobs:
         cd app/build/outputs/apk/release/
         mv app-release.apk KawinNext-${{ github.ref_name }}.apk
         # Pre-releases for dev/rc tags, stable releases for plain version tags.
-        PRERELEASE=""
-        case "${{ github.ref_name }}" in
-          *-dev*|*-rc*) PRERELEASE="--prerelease" ;;
-        esac
-        gh release create "$PRERELEASE" "${{ github.ref_name }}" "KawinNext-${{ github.ref_name }}.apk"
+        # Passing an empty flag argument would shift gh's positional arguments.
+        if [[ "${{ github.ref_name }}" == *-dev* || "${{ github.ref_name }}" == *-rc* ]]; then
+          gh release create --prerelease "${{ github.ref_name }}" "KawinNext-${{ github.ref_name }}.apk"
+        else
+          gh release create "${{ github.ref_name }}" "KawinNext-${{ github.ref_name }}.apk"
+        fi
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
