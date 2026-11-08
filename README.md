@@ -2,11 +2,7 @@
   <img src="kawinnext-icon-preview.png" width="120" alt="KawinNext icon">
   <h1>KawinNext</h1>
   <p><b>Patches for YouTube, YT Music, Reddit and more — applied at runtime, not baked into the APK.</b></p>
-  <a href="https://github.com/KawinPattanai/KawinNext/releases/latest"><img alt="Release" src="https://img.shields.io/github/v/release/KawinPattanai/KawinNext?include_prereleases"></a>
-  <a href="https://github.com/KawinPattanai/KawinNext/releases"><img alt="Downloads" src="https://img.shields.io/github/downloads/KawinPattanai/KawinNext/total"></a>
-  <a href="LICENSE"><img alt="License" src="https://img.shields.io/badge/license-GPL--3.0-blue"></a>
-  <a href="https://discord.gg/QWUrAA2mKq"><img alt="Discord" src="https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white"></a>
-  <a href="https://t.me/revancedxposed"><img alt="Telegram" src="https://img.shields.io/badge/Telegram-channel-2CA5E0?logo=telegram&logoColor=white"></a>
+  <p><a href="https://discord.gg/QWUrAA2mKq">Discord</a> · <a href="https://t.me/revancedxposed">Telegram</a></p>
 </div>
 
 ## What this is
