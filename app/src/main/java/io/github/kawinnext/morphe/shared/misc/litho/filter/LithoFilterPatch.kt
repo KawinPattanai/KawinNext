@@ -2,7 +2,6 @@ package io.github.kawinnext.morphe.shared.misc.litho.filter
 
 import app.morphe.extension.shared.patches.components.Filter
 import app.morphe.extension.shared.patches.components.LithoFilterPatch
-import de.robv.android.xposed.XC_MethodReplacement
 import io.github.kawinnext.Patch
 import io.github.kawinnext.PatchExecutor
 import io.github.kawinnext.hookMethod
@@ -62,16 +61,11 @@ fun addLithoFilter(filter: Filter){
  */
 internal fun sharedLithoFilterPatch(
     overrideUpbFeatureFlag: () -> Boolean,
-    useLegacyLithoFiltering: () -> Boolean,
     block: PatchExecutor.() -> Unit,
 ): Patch = patch(
     description = "Hooks the method which parses the bytes into a ComponentContext to filter components."
 ) {
     block()
-
-
-    LithoFilterPatch::class.java.getDeclaredMethod("useLegacyLithoFiltering")
-        .hookMethod(XC_MethodReplacement.returnConstant(useLegacyLithoFiltering()))
 
     // region Hook the method that parses bytes into a ComponentContext.
 
