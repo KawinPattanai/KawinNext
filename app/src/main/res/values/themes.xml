@@ -2,26 +2,66 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
 
-    <style name="MainTheme" parent="android:Theme.Material.Light.NoActionBar">
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="p">true</item>
-        <item name="android:colorAccent">#1a73e9</item>
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:navigationBarColor">@android:color/transparent</item>
+    <!-- Halo: the launcher icon's dark ground with a mint glow over it. -->
+    <style name="MainTheme" parent="android:Theme.Material.NoActionBar">
+        <item name="android:windowBackground">@drawable/halo_background</item>
+        <item name="android:colorAccent">@color/halo_mint</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
-
-        <item name="android:textColorPrimary">@android:color/primary_text_light_nodisable</item>
-        <item name="android:textColorSecondary">@android:color/secondary_text_light_nodisable</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="p">false</item>
+        <item name="android:textColorPrimary">@color/halo_text</item>
+        <item name="android:textColorSecondary">@color/halo_text_dim</item>
+        <item name="android:alertDialogTheme">@style/HaloDialogTheme</item>
     </style>
 
-    <style name="ListDividerNull">
+    <style name="SettingsTheme" parent="android:Theme.Material">
+        <item name="android:windowBackground">@drawable/halo_background</item>
+        <item name="android:colorAccent">@color/halo_mint</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="p">false</item>
+        <item name="android:textColorPrimary">@color/halo_text</item>
+        <item name="android:textColorSecondary">@color/halo_text_dim</item>
+        <item name="android:alertDialogTheme">@style/HaloDialogTheme</item>
+        <item name="android:actionBarStyle">@style/HaloActionBar</item>
+        <item name="android:actionBarSize">56dp</item>
+        <item name="android:actionMenuTextColor">@color/halo_text</item>
+        <item name="android:fitsSystemWindows">true</item>
+        <item name="android:singleLineTitle">false</item>
         <item name="android:listDivider">@null</item>
     </style>
 
-    <style name="SettingsTheme" parent="android:Theme.DeviceDefault.Settings">
-        <item name="android:fitsSystemWindows">true</item>
-        <item name="android:singleLineTitle">false</item>
+    <style name="HaloActionBar" parent="@android:style/Widget.Material.ActionBar.Solid">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:elevation">0dp</item>
+        <item name="android:titleTextStyle">@style/HaloActionBarTitle</item>
+        <item name="android:subtitleTextStyle">@style/HaloActionBarSubtitle</item>
+        <item name="android:homeAsUpIndicator">@drawable/halo_back</item>
+        <item name="android:actionMenuTextColor">@color/halo_text</item>
+    </style>
 
+    <style name="HaloActionBarTitle" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Title">
+        <item name="android:textColor">@color/halo_text</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="HaloActionBarSubtitle" parent="@android:style/TextAppearance.Material.Widget.ActionBar.Subtitle">
+        <item name="android:textColor">@color/halo_text_dim</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
+    <style name="HaloDialogTheme" parent="@android:style/Theme.Material.Dialog.Alert">
+        <item name="android:colorAccent">@color/halo_mint</item>
+        <item name="android:windowBackground">@drawable/halo_dialog</item>
+        <item name="android:textColorPrimary">@color/halo_text</item>
+        <item name="android:textColorSecondary">@color/halo_text_dim</item>
+    </style>
+
+    <style name="ListDividerNull">
         <item name="android:listDivider">@null</item>
     </style>
 

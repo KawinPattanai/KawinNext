@@ -9,8 +9,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.preference.Preference
-import android.preference.PreferenceCategory
 import android.preference.PreferenceFragment
 import android.text.format.DateUtils
 import android.view.Menu
@@ -19,9 +17,13 @@ import android.window.OnBackInvokedDispatcher
 import app.morphe.extension.shared.Utils
 import app.morphe.extension.shared.settings.preference.about.MorpheAboutPreference
 import io.github.libxposed.service.XposedService
-import io.github.kawinnext.AppPatchInfo
 import io.github.kawinnext.BuildConfig
 import io.github.kawinnext.R
+import io.github.kawinnext.activity.preference.HaloAppRowPreference
+import io.github.kawinnext.activity.preference.HaloHeroPreference
+import io.github.kawinnext.activity.preference.HaloLabelPreference
+import io.github.kawinnext.activity.preference.HaloNotePreference
+import io.github.kawinnext.activity.preference.HaloRowPreference
 import io.github.kawinnext.appPatchConfigurations
 import io.github.kawinnext.common.UpdateChecker
 import kotlin.system.exitProcess
@@ -133,58 +135,49 @@ class SettingsActivity : Activity(), SettingApplication.ServiceStateListener {
     @Suppress("OVERRIDE_DEPRECATION")
     class SettingsFragment : PreferenceFragment(), SettingApplication.ServiceStateListener {
         private var mService: XposedService? = null
-
-        private var offPreference: Preference? = null
-        private var onCategory: PreferenceCategory? = null
-
-        fun AppPatchInfo.getPreference(): Preference {
-            return Preference(context).apply {
-                title = appName
-                key = appName
-                intent = Intent(context, AppPatchSettingsActivity::class.java).apply {
-                    putExtra(AppPatchSettingsActivity.ARGUMENT_APP_NAME, appName)
-                }
-            }
-        }
+        private var activated = false
 
         @Deprecated("Deprecated in Java")
         override fun onCreate(savedInstanceState: Bundle?) {
             super.onCreate(savedInstanceState)
 
-            val rootScreen = preferenceManager.createPreferenceScreen(context)
-            preferenceScreen = rootScreen
-
-            Preference(context).apply {
-                setSummary(R.string.slogan_summary)
-                isEnabled = false
-                rootScreen.addPreference(this)
-            }
-
             Utils.setContext(context)
+            buildScreen()
 
-            Preference(context).apply {
-                summary =
-                    "This app uses code from Morphe. To learn more, visit https://morphe.software"
-                intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://morphe.software"))
-                rootScreen.addPreference(this)
+            UpdateChecker().apply {
+                setActivity(activity)
+                autoCheckUpdate()
             }
+        }
 
-            Preference(context).apply {
-                setTitle(R.string.faq_title)
-                intent = Intent(
-                    Intent.ACTION_VIEW,
-                    Uri.parse("https://github.com/KawinNext/KawinNext/wiki/Frequently-Asked-Questions")
+        private fun buildScreen() {
+            val ctx = context ?: return
+            val root = preferenceManager.createPreferenceScreen(ctx)
+
+            root.addPreference(HaloHeroPreference(ctx).apply { setActive(activated) })
+            root.addPreference(HaloLabelPreference(ctx, ctx.getString(R.string.patch_selection)))
+            if (activated) {
+                root.addPreference(
+                    HaloNotePreference(ctx, ctx.getString(R.string.force_stop_to_apply_summary))
                 )
-                rootScreen.addPreference(this)
+                for (appPatchInfo in appPatchConfigurations) {
+                    root.addPreference(HaloAppRowPreference(ctx, appPatchInfo).apply {
+                        intent = Intent(ctx, AppPatchSettingsActivity::class.java).apply {
+                            putExtra(AppPatchSettingsActivity.ARGUMENT_APP_NAME, appPatchInfo.appName)
+                        }
+                    })
+                }
+            } else {
+                root.addPreference(
+                    HaloNotePreference(ctx, ctx.getString(R.string.module_not_activated_summary))
+                )
             }
 
-            addPreferencesFromResource(R.xml.license_prefs)
+            root.addPreference(HaloLabelPreference(ctx, ctx.getString(R.string.app_section)))
 
-            Preference(context).apply {
+            root.addPreference(HaloRowPreference(ctx).apply {
                 setTitle(R.string.check_for_update_title)
-                summary =
-                    """Current version: ${BuildConfig.VERSION_NAME} (${BuildConfig.COMMIT_HASH}) ${BuildConfig.BUILD_TYPE}
-                       |Build Date: ${DateUtils.getRelativeTimeSpanString(BuildConfig.COMMIT_DATE * 1000)}""".trimMargin()
+                summary = buildVersionSummary()
                 setOnPreferenceClickListener {
                     UpdateChecker().apply {
                         setActivity(activity)
@@ -192,43 +185,28 @@ class SettingsActivity : Activity(), SettingApplication.ServiceStateListener {
                     }
                     true
                 }
-                rootScreen.addPreference(this)
-            }
-            UpdateChecker().apply {
-                setActivity(activity)
-                autoCheckUpdate()
-            }
+            })
 
-            updateDynamicUI(false)
+            preferenceScreen = root
+
+            // Adds the "Open-source licenses" row into the screen set above.
+            addPreferencesFromResource(R.xml.license_prefs)
+
+            root.addPreference(HaloRowPreference(ctx).apply {
+                setTitle(R.string.morphe_credit_title)
+                summary = "https://morphe.software"
+                intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://morphe.software"))
+            })
+
+            root.addPreference(
+                HaloNotePreference(ctx, ctx.getString(R.string.slogan_summary))
+            )
         }
 
-        fun updateDynamicUI(on: Boolean) {
-            val rootScreen = preferenceScreen ?: return
-            if (onCategory != null) rootScreen.removePreference(onCategory)
-            if (offPreference != null) rootScreen.removePreference(offPreference)
-
-            if (!on) {
-                offPreference = Preference(context).apply {
-                    setSummary(R.string.module_not_activated_summary)
-                    isEnabled = false
-                    rootScreen.addPreference(this)
-                }
-            } else {
-                onCategory = PreferenceCategory(context).apply {
-                    setTitle(R.string.patch_selection)
-
-                    rootScreen.addPreference(this)
-
-                    this.addPreference(Preference(context).apply {
-                        setSummary(R.string.force_stop_to_apply_summary)
-                        isEnabled = false
-                    })
-
-                    for (appPatchInfo in appPatchConfigurations) {
-                        this.addPreference(appPatchInfo.getPreference())
-                    }
-                }
-            }
+        private fun buildVersionSummary(): CharSequence {
+            val buildDate = DateUtils.getRelativeTimeSpanString(BuildConfig.COMMIT_DATE * 1000)
+            return """Current version: ${BuildConfig.VERSION_NAME} (${BuildConfig.COMMIT_HASH}) ${BuildConfig.BUILD_TYPE}
+                       |Build Date: $buildDate""".trimMargin()
         }
 
         override fun onStart() {
@@ -245,20 +223,23 @@ class SettingsActivity : Activity(), SettingApplication.ServiceStateListener {
             mService = service
 
             activity?.runOnUiThread {
-                if (service == null) {
-                    updateDynamicUI(false)
-                    return@runOnUiThread
-                }
+                if (!isAdded) return@runOnUiThread
 
-                val isModuleActivated: Boolean = try {
-                    service.getRemotePreferences("prefs")
-                    service.apiVersion
-                    true
-                } catch (_: Throwable) {
+                val isActivated: Boolean = if (service == null) {
                     false
+                } else {
+                    try {
+                        service.getRemotePreferences("prefs")
+                        service.apiVersion
+                        true
+                    } catch (_: Throwable) {
+                        false
+                    }
                 }
 
-                updateDynamicUI(isModuleActivated)
+                if (isActivated == activated) return@runOnUiThread
+                activated = isActivated
+                buildScreen()
             }
         }
     }

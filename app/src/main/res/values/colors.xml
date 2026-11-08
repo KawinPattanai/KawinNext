@@ -4,4 +4,12 @@
     <!-- YouTube colors referenced by Morphe settings icons -->
     <color name="yt_white1">#FFFFFFFF</color>
     <color name="yt_black0">#FF000000</color>
+
+    <!-- Halo design tokens, taken from the launcher icon -->
+    <color name="halo_ground">#07090C</color>
+    <color name="halo_mint">#37E08C</color>
+    <color name="halo_mint_soft">#5FF0A9</color>
+    <color name="halo_text">#E9EFF3</color>
+    <color name="halo_text_dim">#93A3B1</color>
+    <color name="halo_text_faint">#7A8B99</color>
 </resources>

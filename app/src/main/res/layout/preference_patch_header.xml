@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingStart="16dp"
+    android:paddingTop="6dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/halo_card"
+        android:orientation="vertical"
+        android:padding="14dp">
+
+        <TextView
+            android:id="@+id/header_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:letterSpacing="0.06"
+            android:textColor="@color/halo_text_dim"
+            android:textSize="10sp" />
+
+        <ProgressBar
+            android:id="@+id/header_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_marginTop="10dp"
+            android:max="100"
+            android:progressDrawable="@drawable/halo_progress" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/header_default"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/halo_button"
+                android:gravity="center"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp"
+                android:text="Default"
+                android:textColor="@color/halo_text"
+                android:textSize="12.5sp" />
+
+            <TextView
+                android:id="@+id/header_none"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/halo_button"
+                android:gravity="center"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp"
+                android:text="None"
+                android:textColor="@color/halo_text"
+                android:textSize="12.5sp" />
+
+            <TextView
+                android:id="@+id/header_app_info"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/halo_button"
+                android:gravity="center"
+                android:paddingTop="9dp"
+                android:paddingBottom="9dp"
+                android:text="App info"
+                android:textColor="@color/halo_text"
+                android:textSize="12.5sp" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

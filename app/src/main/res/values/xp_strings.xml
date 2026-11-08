@@ -15,4 +15,10 @@
     <string name="disable_auto_check_update_title">Disable auto update check</string>
     <string name="module_not_activated_summary">Activate this module in Module Management!</string>
     <string name="slogan_summary">Kawin\'s LSPosed module, powered by Morphe, ReVanced, and beyond.\n\nThis is not an official Morphe or ReVanced project, do not ask their developers for help.</string>
+    <string name="hero_status_active">MODULE ACTIVE</string>
+    <string name="hero_status_inactive">NOT ACTIVATED</string>
+    <string name="hero_version_format">v%1$s · patches %2$s</string>
+    <string name="patches_enabled_format">%1$d of %2$d enabled</string>
+    <string name="app_section">App</string>
+    <string name="morphe_credit_title">Morphe</string>
 </resources>

@@ -8,15 +8,17 @@ import android.content.SharedPreferences
 import android.net.Uri
 import android.os.Bundle
 import android.os.Vibrator
-import android.preference.CheckBoxPreference
 import android.preference.Preference
 import android.preference.PreferenceFragment
 import android.provider.Settings
 import android.view.MenuItem
-import android.view.View
-import android.widget.Button
 import io.github.libxposed.service.XposedService
+import io.github.kawinnext.AppPatchInfo
+import io.github.kawinnext.Patch
 import io.github.kawinnext.R
+import io.github.kawinnext.activity.preference.HaloPatchHeaderPreference
+import io.github.kawinnext.activity.preference.HaloPatchPreference
+import io.github.kawinnext.activity.preference.HaloSearchPreference
 import io.github.kawinnext.appPatchConfigurations
 
 class AppPatchSettingsActivity : Activity() {
@@ -56,12 +58,15 @@ class AppPatchSettingsActivity : Activity() {
     @Suppress("OVERRIDE_DEPRECATION")
     class AppPatchSettingsFragment : PreferenceFragment(), SettingApplication.ServiceStateListener {
 
-        @Deprecated("Deprecated in Java")
-        override fun onCreate(savedInstanceState: Bundle?) {
-            super.onCreate(savedInstanceState)
-        }
-
         private var mService: XposedService? = null
+        private var remotePrefs: SharedPreferences? = null
+        private var header: HaloPatchHeaderPreference? = null
+        private var appPatchInfo: AppPatchInfo? = null
+
+        private var patches: List<Patch> = emptyList()
+        private var defaultStates: Map<String, Boolean> = emptyMap()
+        private val patchRows = mutableListOf<Preference>()
+        private var query = ""
 
         override fun onStart() {
             super.onStart()
@@ -76,103 +81,156 @@ class AppPatchSettingsActivity : Activity() {
         override fun onServiceStateChanged(service: XposedService?) {
             mService = service
             if (service == null) {
-                activity.actionBar?.title = "Binder is null"
+                activity.actionBar?.subtitle = "Binder is null"
                 return
             }
 
             activity.runOnUiThread {
-                // Retrieve appName from the Activity's Intent extras
+                if (!isAdded) return@runOnUiThread
+
                 val appName = arguments?.getString(ARGUMENT_APP_NAME)
-                val appPatchInfo = appPatchConfigurations.find { it.appName == appName }
-                if (appPatchInfo == null) throw Exception("AppPatchInfo not found, app_name: $appName")
-                val defaultPatchStates = appPatchInfo.patches.associate { it.name to it.use }
+                val info = appPatchConfigurations.find { it.appName == appName }
+                    ?: throw Exception("AppPatchInfo not found, app_name: $appName")
 
-                val screen = preferenceManager.createPreferenceScreen(context)
+                appPatchInfo = info
+                patches = info.patches
+                    .filter { it.name.isNotEmpty() && !it.name.startsWith("<") }
+                    .sortedBy { it.name }
+                defaultStates = patches.associate { it.name to it.use }
+                remotePrefs = service.getRemotePreferences(info.packageName)
 
-                val remotePrefs = service.getRemotePreferences(appPatchInfo.packageName)
-
-                object : Preference(context) {
-                    @Deprecated("Deprecated in Java")
-                    override fun onBindView(view: View) {
-                        super.onBindView(view)
-                        view.findViewById<Button>(R.id.button_default).setOnClickListener {
-                            restoreDefaultPreferences(remotePrefs, defaultPatchStates)
-                        }
-                        view.findViewById<Button>(R.id.button_none).setOnClickListener {
-                            setAllPreferences(remotePrefs, false)
-                        }
-                        val isInstalled = runCatching {
-                            context.packageManager.getPackageInfo(appPatchInfo.packageName, 0)
-                        }.isSuccess
-
-                        view.findViewById<Button>(R.id.button_app_info).apply {
-                            if (!isInstalled) visibility = View.GONE
-                            setOnClickListener {
-                                val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
-                                    .setData(Uri.parse("package:${appPatchInfo.packageName}"))
-                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                                startActivity(intent)
-                            }
-                        }
-                    }
-                }.apply {
-                    layoutResource = R.layout.preference_header_buttons
-                    screen.addPreference(this)
-                }
-
-                for (patchInfo in appPatchInfo.patches.sortedBy { it.name }) {
-                    if (patchInfo.name == "") continue
-                    if (patchInfo.name.startsWith("<")) continue
-                    CheckBoxPreference(context).apply {
-                        key = patchInfo.name // Pref Key
-                        title = patchInfo.name
-                        summary = patchInfo.description
-                        isChecked = remotePrefs.getBoolean(patchInfo.name, patchInfo.use)
-
-                        setOnPreferenceChangeListener { _, newValue ->
-                            val enabled = newValue as Boolean
-                            remotePrefs.edit().putBoolean(key, enabled).apply()
-
-                            val vibrator =
-                                context.getSystemService(VIBRATOR_SERVICE) as Vibrator?
-                            if (vibrator?.hasVibrator() ?: false) {
-                                vibrator.vibrate(50)
-                            }
-                            true
-                        }
-                        screen.addPreference(this)
-                    }
-                }
-
-                preferenceScreen = screen
+                buildScreen()
             }
         }
 
-        fun setAllPreferences(prefs: SharedPreferences, enable: Boolean) {
-            if (!isAdded) return
-            val editor = prefs.edit()
-            for (i in 0 until preferenceScreen.preferenceCount) {
-                val preference = preferenceScreen.getPreference(i)
-                if (preference is CheckBoxPreference) {
-                    preference.isChecked = enable
-                    editor.putBoolean(preference.key, enable)
-                }
+        private fun buildScreen() {
+            val ctx = context ?: return
+            val prefs = remotePrefs ?: return
+
+            query = ""
+            val root = preferenceManager.createPreferenceScreen(ctx)
+
+            header = HaloPatchHeaderPreference(
+                ctx,
+                showAppInfo = isInstalled(),
+                onDefault = ::restoreDefaults,
+                onNone = ::disableAll,
+                onAppInfo = ::openAppInfo,
+            )
+            root.addPreference(header)
+            root.addPreference(HaloSearchPreference(ctx) { value ->
+                query = value
+                applyFilter()
+            })
+
+            patchRows.clear()
+            for (patch in patches) {
+                val row = makePatchRow(patch, prefs)
+                patchRows += row
+                root.addPreference(row)
             }
-            editor.apply()
+
+            preferenceScreen = root
+            refreshCounts()
         }
 
-        fun restoreDefaultPreferences(prefs: SharedPreferences,defaultPatchStates: Map<String, Boolean>) {
-            if (!isAdded) return
-            val editor = prefs.edit()
-            for (i in 0 until preferenceScreen.preferenceCount) {
-                val preference = preferenceScreen.getPreference(i)
-                if (preference is CheckBoxPreference) {
-                    preference.isChecked =
-                        defaultPatchStates[preference.key] ?: preference.isChecked
-                    editor.putBoolean(preference.key, preference.isChecked)
+        private fun makePatchRow(patch: Patch, prefs: SharedPreferences) =
+            HaloPatchPreference(context).apply {
+                key = patch.name
+                title = patch.name
+                summary = patch.description
+                isChecked = prefs.getBoolean(patch.name, patch.use)
+
+                setOnPreferenceChangeListener { _, newValue ->
+                    prefs.edit().putBoolean(patch.name, newValue as Boolean).apply()
+                    vibrate()
+                    refreshCounts()
+                    true
                 }
             }
+
+        private fun applyFilter() {
+            val root = preferenceScreen ?: return
+            val prefs = remotePrefs ?: return
+
+            patchRows.forEach { root.removePreference(it) }
+            patchRows.clear()
+
+            for (patch in patches) {
+                if (!matches(patch)) continue
+                val row = makePatchRow(patch, prefs)
+                patchRows += row
+                root.addPreference(row)
+            }
+            refreshCounts()
+        }
+
+        private fun matches(patch: Patch): Boolean {
+            if (query.isEmpty()) return true
+            return patch.name.contains(query, ignoreCase = true) ||
+                patch.description.contains(query, ignoreCase = true)
+        }
+
+        private fun refreshCounts() {
+            val prefs = remotePrefs ?: return
+            val enabled = patches.count { prefs.getBoolean(it.name, it.use) }
+            header?.setCounts(enabled, patches.size)
+            context?.let {
+                activity?.actionBar?.subtitle =
+                    it.getString(R.string.patches_enabled_format, enabled, patches.size)
+            }
+        }
+
+        private fun restoreDefaults() {
+            val prefs = remotePrefs ?: return
+            val editor = prefs.edit()
+            for (patch in patches) {
+                val value = defaultStates[patch.name] ?: patch.use
+                editor.putBoolean(patch.name, value)
+            }
             editor.apply()
+            syncRowsFromPrefs()
+            refreshCounts()
+        }
+
+        private fun disableAll() {
+            val prefs = remotePrefs ?: return
+            val editor = prefs.edit()
+            for (patch in patches) {
+                editor.putBoolean(patch.name, false)
+            }
+            editor.apply()
+            syncRowsFromPrefs()
+            refreshCounts()
+        }
+
+        private fun syncRowsFromPrefs() {
+            val prefs = remotePrefs ?: return
+            patchRows.forEach { row ->
+                if (row is HaloPatchPreference) {
+                    row.isChecked = prefs.getBoolean(row.key, false)
+                }
+            }
+        }
+
+        private fun isInstalled(): Boolean {
+            val packageName = appPatchInfo?.packageName ?: return false
+            return runCatching {
+                context?.packageManager?.getPackageInfo(packageName, 0)
+            }.getOrNull() != null
+        }
+
+        private fun openAppInfo() {
+            val packageName = appPatchInfo?.packageName ?: return
+            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+                .setData(Uri.parse("package:$packageName"))
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
+
+        private fun vibrate() {
+            val vibrator = context?.getSystemService(VIBRATOR_SERVICE) as? Vibrator ?: return
+            if (vibrator.hasVibrator()) vibrator.vibrate(50)
         }
     }
 }
