@@ -27,6 +27,7 @@ import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.newInstance
 import io.github.kawinnext.morphe.opcode
+import io.github.kawinnext.morphe.opcode
 import io.github.kawinnext.morphe.resourceLiteral
 import io.github.kawinnext.morphe.shared.FormatStreamModelToStringFingerprint
 import io.github.kawinnext.morphe.string
@@ -243,14 +244,28 @@ internal object SlideSeekbarGetViewControllerFingerprint : Fingerprint (
     )
 )
 
+/**
+ * Where a storyboard frame is cut from its storyboard image: the frame rectangle, then the region decode.
+ */
+internal object StoryboardFrameRegionFingerprint : Fingerprint (
+    returnType = "Landroid/graphics/Bitmap;",
+    parameters = listOf("L", "I", "Landroid/graphics/Bitmap;"),
+    filters = listOf(
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            parameters = listOf("I"),
+            returnType = "Landroid/graphics/Rect;"
+        ),
+        opcode(opcode = Opcode.MOVE_RESULT_OBJECT, location = MatchAfterImmediately()),
+        methodCall(
+            smali = $$"Landroid/graphics/BitmapRegionDecoder;->decodeRegion(Landroid/graphics/Rect;Landroid/graphics/BitmapFactory$Options;)Landroid/graphics/Bitmap;"
+        ),
+        string("Storyboard regionDecoder.decodeRegion exception - ")
+    )
+)
+
 internal object SeekbarFineScrubbingBitmapFingerprint : Fingerprint (
-    classFingerprint = Fingerprint (
-        returnType = "Landroid/graphics/Bitmap;",
-        parameters = listOf("L", "I", "Landroid/graphics/Bitmap;"),
-        filters = listOf(
-            string("Storyboard regionDecoder.decodeRegion exception - ")
-        )
-    ),
+    classFingerprint = StoryboardFrameRegionFingerprint,
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL, AccessFlags.DECLARED_SYNCHRONIZED),
     returnType = "V",
     parameters = listOf("Landroid/graphics/Bitmap;")

@@ -8,7 +8,10 @@
 package io.github.kawinnext.morphe.youtube.interaction.seekbar
 
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.graphics.BitmapRegionDecoder
 import android.graphics.Point
+import android.graphics.Rect
 import android.support.v7.widget.RecyclerView
 import android.view.MotionEvent
 import android.view.View
@@ -24,6 +27,7 @@ import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_21_or_greater
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.youtube.video.information.VideoInformationPatch
 import io.github.kawinnext.patch
+import io.github.kawinnext.scopedHook
 
 val seekbarThumbnailPreviewPatch = patch(
     description = "Adds an option to restore the seekbar thumbnail preview."
@@ -65,6 +69,22 @@ val seekbarThumbnailPreviewPatch = patch(
     SeekbarFineScrubbingBitmapFingerprint.hookMethod {
         before { SeekbarThumbnailPreviewPatch.setFineScrubbingPreviewBitmap(it.args[0] as? Bitmap) }
     }
+
+    // The app cuts storyboard frames with the frame size of the storyboard spec,
+    // which can be smaller than the frames of the storyboard image.
+    StoryboardFrameRegionFingerprint.hookMethod(
+        scopedHook(
+            BitmapRegionDecoder::class.java.getDeclaredMethod(
+                "decodeRegion", Rect::class.java, BitmapFactory.Options::class.java
+            )
+        ) {
+            before {
+                SeekbarThumbnailPreviewPatch.fixStoryboardFrameRect(
+                    it.args[0] as Rect, it.thisObject as BitmapRegionDecoder
+                )
+            }
+        }
+    )
 
     ::seekbarOnDrawFingerprint.hookMethod {
         before { SeekbarThumbnailPreviewPatch.setSeekbarRectangle(it.thisObject as View) }
