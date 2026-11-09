@@ -26,6 +26,7 @@ import io.github.kawinnext.morphe.youtube.layout.buttons.navigation.NavigationBa
 import io.github.kawinnext.morphe.youtube.layout.captions.AutoCaptions
 import io.github.kawinnext.morphe.youtube.layout.dearrow.deArrowPatch
 import io.github.kawinnext.morphe.youtube.layout.flyout.addToQueuePatch
+import io.github.kawinnext.morphe.youtube.layout.hide.ambientmode.ambientModePatch
 import io.github.kawinnext.morphe.youtube.layout.hide.general.HideLayoutComponents
 import io.github.kawinnext.morphe.youtube.layout.hide.shorts.HideShortsComponents
 import io.github.kawinnext.morphe.youtube.layout.niconicocomments.niconicoCommentsPatch
@@ -107,6 +108,7 @@ val YouTubePatches = arrayOf(
     SwipeControls,
     VideoQuality,
     HideLayoutComponents,
+    ambientModePatch,
     HideVideoActionButtons,
     PlaybackSpeed,
     AutoCaptions,
