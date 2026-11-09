@@ -7,9 +7,11 @@
 
 package io.github.kawinnext.morphe.youtube.interaction.onthego
 
+import app.morphe.extension.shared.Utils
 import app.morphe.extension.youtube.patches.onthego.OnTheGoFilter
 import app.morphe.extension.youtube.patches.onthego.OnTheGoPatch
-import com.google.protobuf.MessageLite
+import app.morphe.extension.youtube.patches.utils.FlyoutUtils
+import app.morphe.extension.youtube.settings.Settings
 import io.github.kawinnext.morphe.setExtensionIsPatchIncluded
 import io.github.kawinnext.morphe.shared.misc.litho.filter.addLithoFilter
 import io.github.kawinnext.morphe.shared.misc.proto.hookElement
@@ -22,6 +24,35 @@ import io.github.kawinnext.morphe.youtube.misc.proto.elementProtoParserHookPatch
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.youtube.video.information.VideoInformationPatch
 import io.github.kawinnext.patch
+
+// The commands of the app are messages of the app, which is not the protobuf of the module:
+// the module repackages its own copy under another name, so the command cannot be cast to it.
+// The panel is opened from the bytes of the command instead, which are the only thing the
+// extension needs from it.
+private val onTheGoUpsellRequest = runCatching {
+    OnTheGoPatch::class.java.getDeclaredField("upsellRequest").apply { isAccessible = true }
+}.getOrNull()
+
+private val onTheGoSheetShow = runCatching {
+    Class.forName(
+        "app.morphe.extension.youtube.patches.onthego.OnTheGoSheet",
+        false,
+        OnTheGoPatch::class.java.classLoader
+    ).getDeclaredMethod("show").apply { isAccessible = true }
+}.getOrNull()
+
+private fun isOnTheGoCommand(command: Any): Boolean {
+    val show = onTheGoSheetShow ?: return false
+    val request = onTheGoUpsellRequest?.get(null) as? ByteArray ?: return false
+    val bytes = runCatching {
+        command.javaClass.getMethod("toByteArray").invoke(command) as? ByteArray
+    }.getOrNull() ?: return false
+
+    if (FlyoutUtils.byteIndexOf(bytes, request) < 0) return false
+
+    Utils.runOnMainThread { show.invoke(null) }
+    return true
+}
 
 val onTheGoPatch = patch(
     name = "On-the-go player",
@@ -52,7 +83,10 @@ val onTheGoPatch = patch(
     // Commands of Elements components, such as of the menu item, are run by the command router.
     ::commandRouterExecuteCommandMethod.hookMethod {
         before { param ->
-            if (OnTheGoPatch.onCommand(param.args[0] as MessageLite)) param.result = null
+            if (!Settings.ON_THE_GO.get()) return@before
+
+            val command = param.args[0] ?: return@before
+            if (isOnTheGoCommand(command)) param.result = null
         }
     }
 }
