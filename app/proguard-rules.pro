@@ -13,6 +13,11 @@
 #   public *;
 #}
 
+# The patches reach the extension by the names of its classes, methods and fields,
+# such as isPatchIncluded, getChangelogScope and the flyout menu info, so the extension
+# keeps its names and members.
+-keep class app.morphe.extension.** { *; }
+
 -keep class * extends com.google.protobuf.GeneratedMessageLite { *; }
 -keepnames class * extends io.github.kawinnext.morphe.Fingerprint
 -keepclassmembers class **.* {
