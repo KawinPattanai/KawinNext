@@ -19,6 +19,7 @@ import io.github.kawinnext.morphe.shared.misc.textcomponent.hookLithoSpannableSt
 import io.github.kawinnext.morphe.shared.misc.textcomponent.lithoSpannableStringPatch
 import io.github.kawinnext.morphe.shared.misc.textcomponent.textComponentPatch
 import io.github.kawinnext.morphe.youtube.misc.playertype.PlayerTypeHook
+import io.github.kawinnext.morphe.youtube.misc.feedcards.feedVideoCardsHookPatch
 import io.github.kawinnext.morphe.youtube.misc.fix.videoactionbar.restoreOldVideoActionBarPatch
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.youtube.video.information.VideoInformationPatch
@@ -38,12 +39,16 @@ val returnYouTubeDislikePatch = patch(
         VideoId,
         VideoInformationPatch,
         PlayerTypeHook,
-        restoreOldVideoActionBarPatch
+        restoreOldVideoActionBarPatch,
+        // Finds the feed video cards for the like counts on their thumbnails.
+        feedVideoCardsHookPatch
     )
 
     PreferenceScreen.RETURN_YOUTUBE_DISLIKE.addPreferences(
         SwitchPreference("morphe_ryd_enabled"),
         SwitchPreference("morphe_ryd_dislike_percentage", summary = true),
+        SwitchPreference("morphe_ryd_feed_like_count"),
+        SwitchPreference("morphe_ryd_feed_like_ratio"),
         SwitchPreference("morphe_ryd_estimated_like", summary = true),
         SwitchPreference("morphe_ryd_toast_on_connection_error", summary = true),
         screenInfoPreferenceCategory(
