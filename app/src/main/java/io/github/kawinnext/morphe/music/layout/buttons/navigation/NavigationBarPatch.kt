@@ -24,6 +24,12 @@ import io.github.kawinnext.patch
 import io.github.kawinnext.scopedHook
 import org.luckypray.dexkit.wrap.DexMethod
 
+// The extension hides the buttons and applies the glass to the tabs of the bar it is shown the tab of,
+// and those calls read the visibility of views again, which reaches the hooked method once more.
+private val tabLayoutRunning = object : ThreadLocal<Boolean>() {
+    override fun initialValue() = false
+}
+
 val NavigationBar = patch(
     name = "Navigation bar",
     description = "Adds options to hide the navigation bar, its labels or its buttons, " +
@@ -64,13 +70,19 @@ val NavigationBar = patch(
     TabLayoutTextFingerprint.hookMethod(
         scopedHook(DexMethod("Landroid/view/View;->getVisibility()I").toMember()) {
             before { param ->
+                if (tabLayoutRunning.get()) return@before
                 val tabView = param.thisObject as? View ?: return@before
                 val label = tabView.findViewById<TextView>(MusicGlassNavigationBar.BUTTON_LABEL)
                     ?: return@before
 
-                NavigationBarPatch.hideNavigationButton(tabView)
-                NavigationBarPatch.hideNavigationLabel(label)
-                MusicGlassNavigationBar.navigationTabCreated(tabView)
+                tabLayoutRunning.set(true)
+                try {
+                    NavigationBarPatch.hideNavigationButton(tabView)
+                    NavigationBarPatch.hideNavigationLabel(label)
+                    MusicGlassNavigationBar.navigationTabCreated(tabView)
+                } finally {
+                    tabLayoutRunning.set(false)
+                }
 
                 // Keep the button centered in the tab when the label is hidden, as the app does.
                 val icon = tabView.findViewById<View>(MusicGlassNavigationBar.BUTTON_ICON)

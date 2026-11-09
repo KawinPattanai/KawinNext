@@ -23,6 +23,12 @@ import io.github.kawinnext.patch
 import io.github.kawinnext.scopedHook
 import org.luckypray.dexkit.wrap.DexMethod
 
+// The extension draws the default seekbar circle itself when it has no thumb to draw,
+// and that call reaches the hooked method again while onDraw is still on the stack.
+private val drawingSeekbarThumb = object : ThreadLocal<Boolean>() {
+    override fun initialValue() = false
+}
+
 val customSeekbarThumbPatch = patch(
     description = "Adds an option to customize the seekbar thumb with a custom image or animated GIF."
 ) {
@@ -54,15 +60,21 @@ val customSeekbarThumbPatch = patch(
     ::seekbarOnDrawFingerprint.hookMethod(
         scopedHook(DexMethod(drawCircle).toMethod()) {
             before { param ->
+                if (drawingSeekbarThumb.get()) return@before
                 if (param.args[3] !== thumbPaintField.get(outerParam.thisObject)) return@before
 
-                CustomSeekbarThumbPatch.drawCircle(
-                    param.thisObject as Canvas,
-                    param.args[0] as Float,
-                    param.args[1] as Float,
-                    param.args[2] as Float,
-                    param.args[3] as Paint
-                )
+                drawingSeekbarThumb.set(true)
+                try {
+                    CustomSeekbarThumbPatch.drawCircle(
+                        param.thisObject as Canvas,
+                        param.args[0] as Float,
+                        param.args[1] as Float,
+                        param.args[2] as Float,
+                        param.args[3] as Paint
+                    )
+                } finally {
+                    drawingSeekbarThumb.set(false)
+                }
                 param.result = null
             }
         }
