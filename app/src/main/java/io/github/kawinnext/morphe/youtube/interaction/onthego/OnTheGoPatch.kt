@@ -24,6 +24,8 @@ import io.github.kawinnext.morphe.youtube.misc.proto.elementProtoParserHookPatch
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.youtube.video.information.VideoInformationPatch
 import io.github.kawinnext.patch
+import java.lang.reflect.Field
+import java.lang.reflect.Method
 
 // The commands of the app are messages of the app, which is not the protobuf of the module:
 // the module repackages its own copy under another name, so the command cannot be cast to it.
@@ -52,6 +54,26 @@ private fun isOnTheGoCommand(command: Any): Boolean {
 
     Utils.runOnMainThread { show.invoke(null) }
     return true
+}
+
+// The app cannot be made to implement the interfaces the extension is handed at runtime,
+// so an object of the module stands in for the app object and calls its setter, or reads its field.
+private class OnTheGoStateProxy(
+    private val state: Any,
+    private val setter: Method
+) : OnTheGoPatch.OnTheGoState {
+    override fun patch_setOnTheGoActive(active: Boolean) {
+        setter.invoke(state, active)
+    }
+}
+
+private class SeekLengthProxy(
+    private val length: Any,
+    private val field: Field,
+    private val toMillis: Method
+) : OnTheGoPatch.SeekLength {
+    override fun patch_getSeekLengthMilliseconds(): Long =
+        toMillis.invoke(field.get(length)) as Long
 }
 
 val onTheGoPatch = patch(
@@ -87,6 +109,24 @@ val onTheGoPatch = patch(
 
             val command = param.args[0] ?: return@before
             if (isOnTheGoCommand(command)) param.result = null
+        }
+    }
+
+    // While On-the-go is active, the lock screen and the notification show seek buttons,
+    // which the app turns on through the state object of the player.
+    val stateClass = "L" + OnTheGoSkipToNextActionConstructorFingerprint.method
+        .parameterTypes.first().name.replace('.', '/') + ";"
+    val stateSetter = onTheGoStateSetterFingerprint(stateClass).method
+    onTheGoStateConstructorFingerprint(stateClass).hookMethod {
+        after { OnTheGoPatch.setOnTheGoState(OnTheGoStateProxy(it.thisObject, stateSetter)) }
+    }
+
+    // The seek buttons of the panel use the double tap to seek length of the app settings.
+    val seekLength = ::seekLengthField.field.apply { isAccessible = true }
+    val seekLengthToMillis = ::seekLengthToMillisMethod.method
+    SeekLengthConstructorFingerprint.hookMethod {
+        after {
+            OnTheGoPatch.setSeekLength(SeekLengthProxy(it.thisObject, seekLength, seekLengthToMillis))
         }
     }
 }
