@@ -214,3 +214,13 @@ internal object PlaylistDragUnbindFingerprint : Fingerprint(
         methodCall(smali = "Landroid/view/View;->setOnLongClickListener(Landroid/view/View\$OnLongClickListener;)V")
     )
 )
+
+/** The queue is disposed by dropping its weak reference and its storage. */
+internal object NativeQueueDisposeFingerprint : Fingerprint(
+    classFingerprint = NativeQueueDescriptorFingerprint,
+    returnType = "V",
+    parameters = emptyList(),
+    filters = listOf(
+        methodCall(smali = "Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;")
+    )
+)
