@@ -45,6 +45,27 @@ internal object QueueSaveEditErrorFingerprint : Fingerprint(
     )
 )
 
+/** The capabilities model of the media notification, with its Previous and Next actions. */
+internal object NotificationSkipActionsFingerprint : Fingerprint(
+    returnType = "Ljava/lang/String;",
+    parameters = emptyList(),
+    filters = listOf(
+        // The notification capabilities model.
+        fieldAccess(definingClass = "this", opcode = Opcode.IGET_OBJECT),
+        string("com.google.android.libraries.youtube.player.action.controller_notification_prev"),
+        string("com.google.android.libraries.youtube.player.action.controller_notification_next")
+    )
+)
+
+/** Both snackbar factories live together; the watch-screen factory is its native sibling. */
+internal object QueueSnackbarFactoryFingerprint : Fingerprint(
+    returnType = "L",
+    parameters = listOf("L", "Ljava/util/Map;"),
+    filters = listOf(
+        string("feedback_undo")
+    )
+)
+
 // The navigation descriptor lookup is not found by the log strings of the patch set on
 // 21.44.535: both the descriptor text and the null text fail to match. It needs an anchor
 // from the queue class once the queue fingerprints are found.
