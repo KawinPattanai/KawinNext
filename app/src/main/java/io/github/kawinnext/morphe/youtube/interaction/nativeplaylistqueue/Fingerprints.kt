@@ -14,6 +14,7 @@ import io.github.kawinnext.morphe.Opcode
 import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.anyInstruction
 import io.github.kawinnext.morphe.fieldAccess
+import io.github.kawinnext.morphe.findMethodDirect
 import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.opcode
@@ -66,6 +67,8 @@ internal object QueueSnackbarFactoryFingerprint : Fingerprint(
     )
 )
 
+// The mini app endpoint is matched by its two log strings, but several methods of
+// 21.44.535 carry them, so it needs a narrower anchor than the log text alone.
 // The navigation descriptor lookup is not found by the log strings of the patch set on
 // 21.44.535: both the descriptor text and the null text fail to match. It needs an anchor
 // from the queue class once the queue fingerprints are found.
