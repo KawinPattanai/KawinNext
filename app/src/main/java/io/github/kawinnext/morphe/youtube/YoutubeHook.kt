@@ -19,6 +19,7 @@ import io.github.kawinnext.morphe.youtube.interaction.copytext.copyTextPatch
 import io.github.kawinnext.morphe.youtube.interaction.copyvideolink.CopyVideoLinkButtonPatch
 import io.github.kawinnext.morphe.youtube.interaction.downloads.Downloads
 import io.github.kawinnext.morphe.youtube.interaction.onthego.onTheGoPatch
+import io.github.kawinnext.morphe.youtube.interaction.playlist.playlistPatch
 import io.github.kawinnext.morphe.youtube.interaction.seekbar.seekbarPatch
 import io.github.kawinnext.morphe.youtube.interaction.swipecontrols.SwipeControls
 import io.github.kawinnext.morphe.youtube.layout.buttons.action.HideVideoActionButtons
@@ -126,6 +127,7 @@ val YouTubePatches = arrayOf(
     channelWhitelistPatch,
     niconicoCommentsPatch,
     onTheGoPatch,
+    playlistPatch,
     patchesUpdateNoticePatch,
     // make sure settingsHook at end to build preferences
     SettingsHook,
