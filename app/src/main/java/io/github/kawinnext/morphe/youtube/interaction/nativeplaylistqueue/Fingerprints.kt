@@ -19,6 +19,7 @@ import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.opcode
 import io.github.kawinnext.morphe.resourceLiteral
+import io.github.kawinnext.morphe.StringComparisonType
 import io.github.kawinnext.morphe.string
 
 /** The native batch request, not the modern panel's single-video parameter. */
@@ -69,9 +70,37 @@ internal object QueueSnackbarFactoryFingerprint : Fingerprint(
 
 // The mini app endpoint is matched by its two log strings, but several methods of
 // 21.44.535 carry them, so it needs a narrower anchor than the log text alone.
-// The navigation descriptor lookup is not found by the log strings of the patch set on
-// 21.44.535: both the descriptor text and the null text fail to match. It needs an anchor
-// from the queue class once the queue fingerprints are found.
+/**
+ * The native playback queue's navigation descriptor lookup. It wraps the delegated queue call
+ * in the queue's own change transaction.
+ */
+internal object NativeQueueDescriptorFingerprint : Fingerprint(
+    returnType = "L",
+    parameters = listOf("L"),
+    filters = listOf(
+        // Begin the change transaction.
+        methodCall(
+            definingClass = "this",
+            opcode = Opcode.INVOKE_DIRECT,
+            parameters = emptyList(),
+            returnType = "Ljava/lang/Object;"
+        ),
+        opcode(Opcode.MOVE_RESULT_OBJECT, location = MatchAfterImmediately()),
+        // Queue storage.
+        fieldAccess(definingClass = "this", opcode = Opcode.IGET_OBJECT, location = MatchAfterImmediately()),
+        methodCall(opcode = Opcode.INVOKE_INTERFACE, location = MatchAfterImmediately()),
+        opcode(Opcode.MOVE_RESULT_OBJECT, location = MatchAfterImmediately()),
+        // End the change transaction.
+        methodCall(
+            definingClass = "this",
+            opcode = Opcode.INVOKE_DIRECT,
+            returnType = "V",
+            location = MatchAfterWithin(1)
+        ),
+        // 21.20+ formats the diagnostic in one string.
+        string("getNavigationDescriptor for ", StringComparisonType.STARTS_WITH)
+    )
+)
 
 /** Rich playlist rows, as opposed to the compact/offline binders. */
 internal object PlaylistRichRowConstructorFingerprint : Fingerprint(
