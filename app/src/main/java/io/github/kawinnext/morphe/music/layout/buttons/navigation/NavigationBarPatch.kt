@@ -7,15 +7,21 @@
 
 package io.github.kawinnext.morphe.music.layout.buttons.navigation
 
+import android.media.session.MediaSession
+import android.media.session.PlaybackState
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import app.morphe.extension.music.patches.MusicGlassMiniplayer
 import app.morphe.extension.music.patches.MusicGlassNavigationBar
 import app.morphe.extension.music.patches.NavigationBarPatch
+import app.morphe.extension.music.settings.preference.MusicGlassMiniplayerPreference
 import app.morphe.extension.music.settings.preference.MusicGlassNavigationBarPreference
 import app.morphe.extension.shared.settings.preference.SeekBarPreference
+import io.github.kawinnext.morphe.music.layout.miniplayer.miniplayerColorHookPatch
 import io.github.kawinnext.morphe.music.misc.debugging.insertLiteralOverride
 import io.github.kawinnext.morphe.music.misc.settings.PreferenceScreen
+import io.github.kawinnext.morphe.shared.MediaSessionSetPlaybackStateFingerprint
 import io.github.kawinnext.morphe.shared.misc.settings.preference.NonInteractivePreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
@@ -33,8 +39,11 @@ private val tabLayoutRunning = object : ThreadLocal<Boolean>() {
 val NavigationBar = patch(
     name = "Navigation bar",
     description = "Adds options to hide the navigation bar, its labels or its buttons, " +
-            "and to show the navigation bar as glass."
+            "and to show the navigation bar and the miniplayer as glass."
 ) {
+    // The color of the album art, for the tint of the glass.
+    dependsOn(miniplayerColorHookPatch)
+
     PreferenceScreen.GENERAL.addPreferences(
         PreferenceScreenPreference(
             key = "morphe_music_navigation_bar_screen",
@@ -63,6 +72,42 @@ val NavigationBar = patch(
                 )
             )
         )
+    )
+
+    PreferenceScreen.addMiniplayerPreferences(
+        SwitchPreference("morphe_music_miniplayer_glass", summary = true),
+        // Corner radius, artwork padding, rim brightness and opacity, with a preview.
+        NonInteractivePreference(
+            key = "morphe_music_miniplayer_glass_corner_radius",
+            titleKey = "morphe_music_miniplayer_glass_style_title",
+            summaryKey = "morphe_music_miniplayer_glass_style_summary",
+            tag = MusicGlassMiniplayerPreference::class.java,
+            selectable = true
+        ),
+        NonInteractivePreference(
+            key = "morphe_music_miniplayer_glass_blur",
+            tag = SeekBarPreference::class.java,
+            selectable = true
+        ),
+        SwitchPreference("morphe_music_miniplayer_glass_light", summary = true),
+        SwitchPreference("morphe_music_miniplayer_glass_album_tint", summary = true),
+        SwitchPreference("morphe_music_miniplayer_glass_spinning_artwork", summary = true),
+        SwitchPreference("morphe_music_miniplayer_glass_hide_progress_bar", summary = true)
+    )
+
+    // The artwork of the glass miniplayer spins while the media session plays.
+    val setPlaybackState = MediaSession::class.java.getMethod("setPlaybackState", PlaybackState::class.java)
+    MediaSessionSetPlaybackStateFingerprint.hookMethod(
+        scopedHook(setPlaybackState) {
+            before { param -> MusicGlassMiniplayer.onSetPlaybackState(param.args[0] as? PlaybackState) }
+        }
+    )
+
+    // The time bars of the player and of the miniplayer share a class, which the glass miniplayer finds
+    // the progress bar of the miniplayer by. A class of the app cannot be made to implement the interface
+    // the extension looks for at runtime, so the class is given to the extension instead.
+    MusicGlassMiniplayer.setTimeBarClass(
+        classLoader.loadClass("com.google.android.apps.youtube.music.watchpage.MusicPlaybackControlsTimeBar").superclass
     )
 
     // The navigation bar reads the visibility of the tab view it has just built,
