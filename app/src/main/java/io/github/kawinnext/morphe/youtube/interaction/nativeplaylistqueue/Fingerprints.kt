@@ -14,7 +14,10 @@ import io.github.kawinnext.morphe.Opcode
 import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.anyInstruction
 import io.github.kawinnext.morphe.fieldAccess
+import io.github.kawinnext.morphe.findClassDirect
+import io.github.kawinnext.morphe.findFieldDirect
 import io.github.kawinnext.morphe.findMethodDirect
+import io.github.kawinnext.morphe.instanceOf
 import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.opcode
@@ -224,3 +227,25 @@ internal object NativeQueueDisposeFingerprint : Fingerprint(
         methodCall(smali = "Ljava/lang/ref/WeakReference;->get()Ljava/lang/Object;")
     )
 )
+
+/**
+ * The navigator wrapper remembers whether its initial navigator is the native queue.
+ *
+ * @param queueClass Descriptor of the native queue class, which the wrapper checks its
+ *                   navigator against.
+ */
+internal fun nativeQueueWrapperFingerprint(queueClass: String) = Fingerprint(
+    name = "<init>",
+    filters = listOf(
+        instanceOf(queueClass),
+        fieldAccess(
+            definingClass = "this",
+            type = "Z",
+            opcode = Opcode.IPUT_BOOLEAN,
+            location = MatchAfterImmediately()
+        )
+    )
+)
+
+// The wrapper class and its flag field are resolved in the patch itself, where both the
+// queue class and the matched instructions are in scope.
