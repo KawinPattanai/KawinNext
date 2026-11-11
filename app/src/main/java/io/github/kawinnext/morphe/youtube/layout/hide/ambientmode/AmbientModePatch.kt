@@ -17,6 +17,8 @@ import io.github.kawinnext.hookMethod
 import io.github.kawinnext.morphe.shared.layout.theme.lithoColorHookPatch
 import io.github.kawinnext.morphe.shared.layout.theme.lithoDrawableColorHook
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
+import app.morphe.extension.shared.settings.preference.SeekBarPreference
+import io.github.kawinnext.morphe.shared.misc.settings.preference.NonInteractivePreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
 import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
 import io.github.kawinnext.morphe.youtube.insertLiteralOverride
@@ -66,6 +68,12 @@ val ambientModePatch = patch(
             preferences = setOf(
                 SwitchPreference("morphe_enhanced_ambient_mode", summary = true),
                 SwitchPreference("morphe_enhanced_ambient_mode_readable_text", summary = true),
+            SwitchPreference("morphe_enhanced_ambient_mode_dim_while_scrolling", summary = true),
+            NonInteractivePreference(
+                key = "morphe_enhanced_ambient_mode_dim_duration",
+                tag = SeekBarPreference::class.java,
+                selectable = true
+            ),
                 SwitchPreference("morphe_bypass_ambient_mode_restrictions", summary = true),
                 SwitchPreference("morphe_disable_ambient_mode"),
                 SwitchPreference("morphe_disable_fullscreen_ambient_mode"),
