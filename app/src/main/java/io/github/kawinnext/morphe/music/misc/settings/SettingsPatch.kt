@@ -12,10 +12,12 @@ import app.morphe.extension.shared.settings.preference.about.MorpheAboutPreferen
 import de.robv.android.xposed.XC_MethodReplacement
 import io.github.kawinnext.R
 import io.github.kawinnext.morphe.music.shared.MusicActivityOnCreateFingerprint
+import io.github.kawinnext.morphe.shared.misc.settings.preference.BasePreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.BasePreferenceScreen
 import io.github.kawinnext.morphe.shared.misc.settings.preference.InputType
 import io.github.kawinnext.morphe.shared.misc.settings.preference.NonInteractivePreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
+import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
 import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.TextPreference
 import io.github.kawinnext.morphe.shared.settings.preferences
@@ -102,6 +104,25 @@ val SettingsHook = patch(
 }
 
 object PreferenceScreen : BasePreferenceScreen() {
+    private val miniplayerPreferences = mutableSetOf<BasePreference>()
+
+    /**
+     * Adds preferences to the Miniplayer screen of the Player screen,
+     * which is added with the first preferences.
+     */
+    fun addMiniplayerPreferences(vararg preferences: BasePreference) {
+        if (miniplayerPreferences.isEmpty()) {
+            PLAYER.addPreferences(
+                PreferenceScreenPreference(
+                    key = "morphe_music_miniplayer_screen",
+                    sorting = Sorting.UNSORTED,
+                    preferences = miniplayerPreferences
+                )
+            )
+        }
+        miniplayerPreferences.addAll(preferences)
+    }
+
     val ADS = Screen(
         key = "morphe_settings_music_screen_1_ads",
         summaryKey = null,

@@ -4,6 +4,7 @@ import io.github.kawinnext.ExtensionResourceHook
 import io.github.kawinnext.morphe.music.ad.HideAds
 import io.github.kawinnext.morphe.music.audio.exclusiveaudio.EnableExclusiveAudioPlayback
 import io.github.kawinnext.morphe.music.layout.buttons.navigation.NavigationBar
+import io.github.kawinnext.morphe.music.layout.miniplayer.ChangeMiniplayerColor
 import io.github.kawinnext.morphe.music.interaction.loop.musicLoopVideoPatch
 import io.github.kawinnext.morphe.music.layout.upgradebutton.HideUpgradeButton
 import io.github.kawinnext.morphe.music.misc.backgroundplayback.BackgroundPlayback
@@ -21,6 +22,7 @@ val YTMusicPatches = arrayOf(
     BackgroundPlayback,
     HideUpgradeButton,
     NavigationBar,
+    ChangeMiniplayerColor,
     HideAds,
     EnableExclusiveAudioPlayback,
     CheckRecycleBitmapMediaSession,
