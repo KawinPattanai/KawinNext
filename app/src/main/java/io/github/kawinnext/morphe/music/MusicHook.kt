@@ -10,10 +10,12 @@ import io.github.kawinnext.morphe.music.misc.debugging.EnableDebugging
 import io.github.kawinnext.morphe.music.misc.debugging.FeatureOverride
 import io.github.kawinnext.morphe.music.misc.privacy.SanitizeSharingLinks
 import io.github.kawinnext.morphe.music.misc.settings.SettingsHook
+import io.github.kawinnext.morphe.music.video.information.musicVideoInformationPatch
 import io.github.kawinnext.morphe.shared.misc.CheckRecycleBitmapMediaSession
 
 val YTMusicPatches = arrayOf(
     ExtensionResourceHook,
+    musicVideoInformationPatch,
     BackgroundPlayback,
     HideUpgradeButton,
     NavigationBar,
