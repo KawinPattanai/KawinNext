@@ -52,8 +52,8 @@ val RememberVideoQuality = patch {
     ::PlaybackStartParametersInit.hookMethod {
         val initialResolutionField = ::InitialResolutionField.field
         after {
-            val oldValue = initialResolutionField.get(it.thisObject)
-            val newValue = RememberVideoQualityPatch.getInitialVideoQuality(oldValue as Optional<*>?)
+            val oldValue = initialResolutionField.get(it.thisObject) as? Optional<Int>
+            val newValue = RememberVideoQualityPatch.getInitialVideoQuality(oldValue)
             initialResolutionField.set(it.thisObject, newValue)
         }
     }

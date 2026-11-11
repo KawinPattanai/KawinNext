@@ -106,16 +106,15 @@ val flyoutPatch = patch(
         }
     })
 
-    FlyoutUtils::class.java.getDeclaredMethod(
-        "getFlyoutMenuInfo", Any::class.java, Int::class.javaPrimitiveType
-    ).hookMethod {
+    // The menu info is built with the index of the first button, which is the start of the menu.
+    FlyoutUtils::class.java.getDeclaredMethod("getFlyoutMenuInfo", Any::class.java).hookMethod {
         after {
             if (it.result == null) {
                 val popupWindow = it.args[0] as? PopupWindow
                 val root = popupWindow?.contentView as? FrameLayout
                 val menuContainer = root?.getChildAt(0) as? LinearLayout
                 if (menuContainer != null) {
-                    it.result = FlyoutUtils.FlyoutMenuInfo(menuContainer, it.args[1] as Int, popupWindow)
+                    it.result = FlyoutUtils.FlyoutMenuInfo(menuContainer, 0, popupWindow)
                 }
             }
         }
