@@ -14,6 +14,7 @@ import io.github.kawinnext.morphe.InstructionLocation.MatchAfterImmediately
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterWithin
 import io.github.kawinnext.morphe.Opcode
 import io.github.kawinnext.morphe.fieldAccess
+import io.github.kawinnext.morphe.findFieldDirect
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.opcode
 import io.github.kawinnext.morphe.string
@@ -45,6 +46,11 @@ internal object TimeBarSetScrubPositionFingerprint : Fingerprint(
         methodCall(definingClass = "Ljava/lang/Math;", name = "max")
     )
 )
+
+/** Bounds of the thumb, which the time bar keeps for the scrub position. */
+val timeBarThumbRectField = findFieldDirect {
+    TimeBarSetScrubPositionFingerprint.instructionMatches.first().instruction.fieldRef!!
+}
 
 /** Time formatter call, its toString() and the resulting label String. */
 private fun timeLabelFilters(location: InstructionLocation) = arrayOf(
