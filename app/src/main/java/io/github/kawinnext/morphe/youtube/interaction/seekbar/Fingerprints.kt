@@ -128,6 +128,44 @@ internal object TapToSeekFingerprint : Fingerprint(
     )
 )
 
+/**
+ * ตัวรับ touch ของ time bar ตรงจุดที่มันปิด scrub ให้จบ เมื่อ time bar ใช้งานไม่ได้
+ * เช่นตอนที่ controls ของ player ถูกซ่อน
+ * filter ตัวแรกคือ getter ของสถานะกำลัง scrub และ call ถัดจากนั้นคือตัวที่ปิด scrub
+ */
+@StrictQuery
+internal object TimeBarCompleteHiddenScrubFingerprint : Fingerprint(
+    classFingerprint = TapToSeekFingerprint,
+    name = "onTouchEvent",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Z",
+    parameters = listOf("Landroid/view/MotionEvent;"),
+    filters = listOf(
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            parameters = listOf(),
+            returnType = "Z"
+        ),
+        opcode(Opcode.MOVE_RESULT, location = MatchAfterImmediately()),
+        opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            parameters = listOf(),
+            returnType = "V",
+            location = MatchAfterImmediately()
+        ),
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            parameters = listOf(),
+            returnType = "Z",
+            location = MatchAfterImmediately()
+        ),
+        opcode(Opcode.MOVE_RESULT, location = MatchAfterImmediately()),
+        opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
+        opcode(Opcode.INT_TO_FLOAT, location = MatchAfterImmediately())
+    )
+)
+
 @StrictQuery
 internal object SlideToSeekFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PRIVATE, AccessFlags.FINAL),
@@ -369,6 +407,19 @@ val tapSeekTouchDownMethod = findMethodDirect {
 
 val tapSeekPointField = findFieldDirect {
     TapToSeekFingerprint.instructionMatches[5].instruction.fieldRef!!
+}
+
+/** getter ของสถานะที่ time bar กำลังถูก scrub อยู่ ซึ่งต้องเช็กก่อนปิด scrub */
+val timeBarIsScrubbingMethod = findMethodDirect {
+    TimeBarCompleteHiddenScrubFingerprint.instructionMatches.first().instruction.methodRef!!
+}
+
+/**
+ * call ที่ปิด scrub ของ time bar ให้จบ ตัวเดียวกับที่ time bar เรียกตอน controls ถูกซ่อน
+ * เป็น methodCall filter ตัวที่ 4 ของ fingerprint (index 3) ตามที่ upstream ใช้
+ */
+val timeBarCompleteScrubMethod = findMethodDirect {
+    TimeBarCompleteHiddenScrubFingerprint.instructionMatches[3].instruction.methodRef!!
 }
 
 val slideToSeekCheckMethod = findMethodDirect {
