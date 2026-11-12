@@ -15,7 +15,28 @@ import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_23_or_greater
 import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_36_or_greater
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.youtube.video.information.onCreateHook
+import io.github.kawinnext.hookMethod
 import io.github.kawinnext.patch
+import java.lang.reflect.Method
+
+private var backgroundPlaybackSettingInstance: Any? = null
+private var backgroundPlaybackSettingGetter: Method? = null
+
+/**
+ * Reads the background playback setting of the account the same way the app does, so the extension
+ * knows whether playback may resume when the app returns to the foreground.
+ * <p>
+ * The upstream patch adds the method that answers this to the class of the setting. A module cannot
+ * add a method to a class of the app, so the setting object is kept here and read again.
+ */
+private object BackgroundPlaybackAccountSetting : BackgroundPlaybackPatch.BackgroundPlaybackSetting {
+    override fun patch_isBackgroundPlaybackAllowed(): Boolean {
+        val instance = backgroundPlaybackSettingInstance ?: return true
+        val getter = backgroundPlaybackSettingGetter ?: return true
+
+        return runCatching { getter.invoke(instance) as? Boolean ?: true }.getOrDefault(true)
+    }
+}
 
 val BackgroundPlayback = patch(
     name = "Remove background playback restrictions",
@@ -65,6 +86,16 @@ val BackgroundPlayback = patch(
     // and the app was subsequently brought to the foreground.
     if (is_21_15_or_greater) {
         insertLiteralOverride(45770945L, BackgroundPlaybackPatch::isAutomaticForegroundPlaybackAllowed)
+
+        // The setting object is kept as it is read, and the extension reads its value again.
+        backgroundPlaybackSettingGetter = ::backgroundPlaybackSettingMethod.member as? Method
+        ::backgroundPlaybackSettingMethod.hookMethod {
+            after { param ->
+                val instance = param.thisObject ?: return@after
+                backgroundPlaybackSettingInstance = instance
+                BackgroundPlaybackPatch.setBackgroundPlaybackSetting(BackgroundPlaybackAccountSetting)
+            }
+        }
     }
 
     // Prevents playback from pausing when the overlay video settings is invoked.

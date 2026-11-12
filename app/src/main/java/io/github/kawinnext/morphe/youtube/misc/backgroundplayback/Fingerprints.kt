@@ -16,6 +16,7 @@ import io.github.kawinnext.morphe.parameters
 import io.github.kawinnext.morphe.resourceLiteral
 import io.github.kawinnext.morphe.resourceMappings
 import io.github.kawinnext.morphe.returns
+import org.luckypray.dexkit.result.MethodData
 
 val prefBackgroundAndOfflineCategoryId get() = resourceMappings["string", "pref_background_and_offline_category"]
 
@@ -132,4 +133,45 @@ val backgroundPlaybackManagerShortsFingerprint = findMethodListDirect {
             literal { 151635310 }
         }
     }
+}
+
+/**
+ * Reads the background playback setting of the account, together with the audio state.
+ */
+internal object BackgroundPlaybackSettingAllowedFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.STATIC),
+    returnType = "Z",
+    parameters = listOf("L", "L", "L"),
+    filters = listOf(
+        methodCall(definingClass = "Landroid/media/AudioManager;", name = "isWiredHeadsetOn"),
+        methodCall(definingClass = "Landroid/media/AudioManager;", name = "isBluetoothA2dpOn"),
+        methodCall(definingClass = "Landroid/media/AudioManager;", name = "isBluetoothScoOn")
+    )
+)
+
+/**
+ * The setting of the account that allows background playback. The extension reads it to know
+ * whether playback may resume when the app returns to the foreground.
+ */
+internal fun backgroundPlaybackSettingFingerprint(
+    allowedMethod: MethodData
+) = Fingerprint(
+    classFingerprint = BackgroundPlaybackSettingAllowedFingerprint,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Z",
+    parameters = listOf(),
+    filters = listOf(
+        // Setting store of the account.
+        methodCall(
+            opcode = Opcode.INVOKE_INTERFACE,
+            returnType = "Lcom/google/protobuf/MessageLite;"
+        ),
+        methodCall(reference = allowedMethod)
+    )
+)
+
+val backgroundPlaybackSettingMethod = findMethodDirect {
+    backgroundPlaybackSettingFingerprint(BackgroundPlaybackSettingAllowedFingerprint.match().method)
+        .match()
+        .method
 }
