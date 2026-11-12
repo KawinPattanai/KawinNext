@@ -59,7 +59,13 @@ private val queueFlyoutPopupMethod = findMethodDirect {
     val resolver = QueueFlyoutResolverFingerprint().declaredClass!!.descriptor
     val menu = QueueFlyoutRendererFingerprint.matchAll().first()
         .instructionMatches.first().instruction.fieldRef!!.type.descriptor
-    queueFlyoutPopupFingerprint(resolver, menu, queueFlyoutItemField(this)).match().method
+    // The resolver holds the call that returns the future of the menu and the check that answers
+    // whether it can be made. Both read the items of the menu, so the call is the one whose
+    // return type is an object rather than a boolean.
+    queueFlyoutPopupFingerprint(resolver, menu, queueFlyoutItemField(this))
+        .matchAll()
+        .single { it.method.descriptor.endsWith(";") }
+        .method
 }
 
 /** แปลงรายการเมนูเป็นโมเดลไอคอนของแอป ซึ่งตัวสร้างปุ่มของ flyout ใช้ร่วมกัน */
