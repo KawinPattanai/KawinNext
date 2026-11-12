@@ -1,9 +1,14 @@
 package io.github.kawinnext.morphe.youtube.layout.hide.shorts
 
 import android.view.View
+import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.ResourceUtils.getIdIdentifier
 import app.morphe.extension.youtube.patches.components.ShortsFilter
+import com.google.protobuf.MessageLite
 import de.robv.android.xposed.XC_MethodReplacement
+import io.github.kawinnext.morphe.findFieldDirect
+import io.github.kawinnext.morphe.findFieldListDirect
+import io.github.kawinnext.morphe.findMethodListDirect
 import io.github.kawinnext.morphe.shared.misc.litho.filter.addLithoFilter
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceCategory
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
@@ -15,6 +20,34 @@ import io.github.kawinnext.morphe.youtube.misc.litho.observer.LayoutReloadObserv
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.patch
 import org.luckypray.dexkit.wrap.DexMethod
+
+/** ฟิลด์ของ settings ของ navigation bar ใน config ของหน้า Shorts */
+private val shortsReelWatchNavigationBarSettingsField = findFieldDirect {
+    ShortsNavigationBarModeFingerprint.instructionMatches.first().instruction.fieldRef!!
+}
+
+/** ฟิลด์ของโหมด navigation bar ใน config ของหน้า Shorts */
+private val shortsNavigationBarModeField = findFieldDirect {
+    ShortsNavigationBarModeFingerprint.instructionMatches[3].instruction.fieldRef!!
+}
+
+/** ฟิลด์ static ที่ถือ config ซึ่งเมธอดของแอปอ่านโหมด navigation bar จากมัน */
+private val shortsNavigationBarModeHolderFields = findFieldListDirect {
+    shortsNavigationBarModeReadFingerprint(
+        shortsReelWatchNavigationBarSettingsField(),
+        shortsNavigationBarModeField()
+    ).matchAll()
+        .map { it.instructionMatches[2].instruction.fieldRef!! }
+        .distinctBy { it.descriptor }
+}
+
+/** ทุกเมธอดที่อ่านโหมด navigation bar ของหน้า Shorts */
+private val shortsNavigationBarModeReadMethods = findMethodListDirect {
+    shortsNavigationBarModeReadFingerprint(
+        shortsReelWatchNavigationBarSettingsField(),
+        shortsNavigationBarModeField()
+    ).matchAll().map { it.method }
+}
 
 val HideShortsComponents = patch(
     name = "Hide Shorts components",
@@ -132,6 +165,89 @@ val HideShortsComponents = patch(
 
     // endregion
 
+
+    // region Keep the navigation bar of the Shorts that show the comment bar instead of it.
+
+    // The Shorts opened from a channel show the comment bar below them instead of the
+    // navigation bar. When "Hide preview comment" hides the comment bar, nothing is shown
+    // in place of the navigation bar. The navigation bar is kept for these Shorts.
+    //
+    // upstream เติมโค้ดไว้ในเมธอดที่อ่านโหมดของ navigation bar สองจุด:
+    //   setReelWatchConfig(config) ที่ label ต้นทางของคำสั่งที่อ่าน field ของ settings
+    //   getNavigationBarMode(mode) หลังคำสั่งที่อ่านโหมด เพื่อแทนค่าที่เพิ่มอ่านได้
+    // โมดูลนี้ไม่แพตช์ bytecode จึง hook ทุกเมธอดที่อ่านโหมด (matchAll) แล้วทำใน before-hook:
+    //   1. ส่ง config ของหน้า Shorts ให้ extension รู้ว่าหน้านั้นมีแถบ comment ใต้คลิปหรือไม่
+    //   2. ค่าโหมดเป็น register ภายในเมธอดซึ่ง hook แทนค่าไม่ได้ จึงสลับค่าที่ฟิลด์ของ config
+    //      ก่อนเมธอดอ่าน แล้วคืนค่าเดิมใน after-hook
+    runCatching {
+        val navigationBarSettingsField = ::shortsReelWatchNavigationBarSettingsField.field
+            .apply { isAccessible = true }
+        val modeField = ::shortsNavigationBarModeField.field.apply { isAccessible = true }
+        val modeHolderFields = ::shortsNavigationBarModeHolderFields.fieldList
+            .onEach { it.isAccessible = true }
+
+        // ค่าโหมดเดิมของแต่ละครั้งที่สลับ เก็บเป็น stack เพราะเมธอดที่อ่านโหมดอาจเรียกซ้อนกัน
+        val swappedModes =
+            ThreadLocal.withInitial<ArrayDeque<List<Pair<Any, Int>>>> { ArrayDeque() }
+
+        fun swapNavigationBarMode() {
+            val swapped = mutableListOf<Pair<Any, Int>>()
+            try {
+                modeHolderFields.forEach { holderField ->
+                    val holder = holderField.get(null) ?: return@forEach
+                    val original = modeField.getInt(holder)
+                    val mode = ShortsFilter.getNavigationBarMode(original)
+                    if (mode == original) return@forEach
+
+                    modeField.setInt(holder, mode)
+                    swapped += holder to original
+                }
+            } finally {
+                // เก็บค่าไว้คืนใน after-hook แม้สลับได้ไม่ครบ เพื่อให้จำนวนครั้งที่สลับกับคืนตรงกัน
+                swappedModes.get()!!.addLast(swapped)
+            }
+        }
+
+        fun restoreNavigationBarMode() {
+            swappedModes.get()!!.removeLastOrNull()?.forEach { (holder, original) ->
+                // คืนค่าเดิมเฉพาะเมื่อยังเป็นค่าที่ hook ใส่ไว้ กันทับค่าที่แอปเขียนระหว่างนั้น
+                if (modeField.getInt(holder) == ShortsFilter.getNavigationBarMode(original)) {
+                    modeField.setInt(holder, original)
+                }
+            }
+        }
+
+        // upstream ใช้ register ที่ถือ config ของหน้านั้น ตอน hook จึงหา instance ของคลาส
+        // ที่ประกาศ field ของ settings จาก this และอาร์กิวเมนต์ของเมธอดที่ถูก hook แทน
+        val reelWatchConfigClass = navigationBarSettingsField.declaringClass
+
+        ::shortsNavigationBarModeReadMethods.dexMethodList.forEach { method ->
+            method.hookMethod {
+                before { param ->
+                    runCatching {
+                        val config = sequenceOf(param.thisObject)
+                            .plus(param.args.asSequence())
+                            .firstOrNull { reelWatchConfigClass.isInstance(it) } as? MessageLite
+
+                        ShortsFilter.setReelWatchConfig(config)
+                        swapNavigationBarMode()
+                    }.onFailure {
+                        Logger.printException({ "Shorts navigation bar mode failure" }, it)
+                    }
+                }
+
+                after {
+                    runCatching { restoreNavigationBarMode() }.onFailure {
+                        Logger.printException({ "Shorts navigation bar mode restore failure" }, it)
+                    }
+                }
+            }
+        }
+    }.onFailure {
+        Logger.printException({ "Shorts navigation bar mode hook failure" }, it)
+    }
+
+    // endregion
 
     // region Hide Shorts gesture hints.
 
