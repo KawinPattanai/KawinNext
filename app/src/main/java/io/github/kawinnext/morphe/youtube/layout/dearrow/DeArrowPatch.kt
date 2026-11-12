@@ -99,4 +99,17 @@ val deArrowPatch = patch(
     addImageUrlHook(DeArrowPatch::overrideImageURL)
     addImageUrlSuccessCallbackHook(DeArrowPatch::handleCronetSuccess)
     addImageUrlErrorCallbackHook(DeArrowPatch::handleCronetFailure)
+
+    // Thumbnails are loaded with Glide, which caches them by the URL before it's replaced.
+    // The original thumbnail of a video whose DeArrow icon was tapped is loaded with another image model,
+    // so the replaced thumbnail cached for the URL is not shown.
+    //
+    // upstream เติมโค้ดนี้ไว้ที่คำสั่งแรกของ loadGeneric(Object) ด้วย addInstructions(0)
+    // ซึ่งเป็นตำแหน่งเดียวกันกับ before-hook เพราะ p1 ของเมธอดนั้นคืออาร์กิวเมนต์ตัวแรกพอดี
+    // โมดูลนี้ไม่แพตช์ bytecode จึงเปลี่ยน image model ก่อนเมธอดทำงานแทน
+    GlideRequestBuilderLoadGenericFingerprint.hookMethod {
+        before {
+            it.args[0] = DeArrowPatch.getImageModel(it.args[0])
+        }
+    }
 }
