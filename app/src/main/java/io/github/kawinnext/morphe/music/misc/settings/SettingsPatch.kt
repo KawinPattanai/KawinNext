@@ -7,7 +7,9 @@ import app.morphe.extension.music.settings.preference.AppLanguagePreference
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.ResourceUtils
 import app.morphe.extension.shared.Utils
+import app.morphe.extension.shared.settings.preference.ClearNewSettingsIndicatorPreference
 import app.morphe.extension.shared.settings.preference.ImportExportPreference
+import app.morphe.extension.shared.settings.preference.SeekBarPreference
 import app.morphe.extension.shared.settings.preference.about.MorpheAboutPreference
 import de.robv.android.xposed.XC_MethodReplacement
 import io.github.kawinnext.R
@@ -20,6 +22,7 @@ import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScre
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
 import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.TextPreference
+import io.github.kawinnext.morphe.shared.misc.settings.preference.noTitleUnsortedPreferenceCategory
 import io.github.kawinnext.morphe.shared.settings.preferences
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceFragmentCompat_addPreferencesFromResource
 import io.github.kawinnext.patch
@@ -58,6 +61,18 @@ val SettingsHook = patch(
     )
 
     PreferenceScreen.MISC.addPreferences(
+        noTitleUnsortedPreferenceCategory(
+            NonInteractivePreference(
+                key = "morphe_settings_new_indicator_days",
+                tag = SeekBarPreference::class.java,
+                selectable = true
+            ),
+            NonInteractivePreference(
+                key = "morphe_settings_new_indicator_clear",
+                tag = ClearNewSettingsIndicatorPreference::class.java,
+                selectable = true
+            )
+        ),
         NonInteractivePreference(
             key = "morphe_music_app_language",
             summaryKey = null,
@@ -128,6 +143,13 @@ object PreferenceScreen : BasePreferenceScreen() {
         summaryKey = null,
         icon = "@drawable/morphe_settings_screen_01_ads",
         iconBold = "@drawable/morphe_settings_screen_01_ads_bold",
+        layout = "@layout/morphe_preference_with_icon"
+    )
+    val FEED = Screen(
+        key = "morphe_settings_music_screen_2_feed",
+        summaryKey = null,
+        icon = "@drawable/morphe_settings_screen_03_feed",
+        iconBold = "@drawable/morphe_settings_screen_03_feed_bold",
         layout = "@layout/morphe_preference_with_icon"
     )
     val GENERAL = Screen(

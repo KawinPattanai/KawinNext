@@ -62,7 +62,14 @@ val NavigationBar = patch(
                     tag = SeekBarPreference::class.java,
                     selectable = true
                 ),
+                NonInteractivePreference(
+                    key = "morphe_music_navigation_bar_glass_blur",
+                    tag = SeekBarPreference::class.java,
+                    selectable = true
+                ),
                 SwitchPreference("morphe_music_navigation_bar_glass_light", summary = true),
+                SwitchPreference("morphe_music_navigation_bar_glass_album_tint", summary = true),
+                SwitchPreference("morphe_music_navigation_bar_glass_hide_indicator", summary = true),
                 NonInteractivePreference(
                     key = "morphe_music_navigation_bar_glass_height",
                     titleKey = "morphe_music_navigation_bar_glass_size_title",

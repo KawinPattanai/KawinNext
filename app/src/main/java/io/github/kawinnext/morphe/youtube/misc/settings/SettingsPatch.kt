@@ -2,7 +2,9 @@ package io.github.kawinnext.morphe.youtube.misc.settings
 
 import android.app.Activity
 import app.morphe.extension.shared.ResourceUtils
+import app.morphe.extension.shared.settings.preference.ClearNewSettingsIndicatorPreference
 import app.morphe.extension.shared.settings.preference.ImportExportPreference
+import app.morphe.extension.shared.settings.preference.SeekBarPreference
 import app.morphe.extension.shared.settings.preference.about.MorpheAboutPreference
 import app.morphe.extension.youtube.settings.YouTubeActivityHook
 import de.robv.android.xposed.XC_MethodHook
@@ -17,6 +19,7 @@ import io.github.kawinnext.morphe.shared.misc.settings.preference.NonInteractive
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
 import io.github.kawinnext.morphe.shared.misc.settings.preference.TextPreference
+import io.github.kawinnext.morphe.shared.misc.settings.preference.noTitleUnsortedPreferenceCategory
 import io.github.kawinnext.morphe.shared.settings.preferences
 import io.github.kawinnext.morphe.youtube.layout.buttons.overlay.PlayerOverlayButtonsSettings
 import io.github.kawinnext.patch
@@ -94,6 +97,18 @@ val SettingsHook = patch(
 //    )
 
     PreferenceScreen.MISC.addPreferences(
+        noTitleUnsortedPreferenceCategory(
+            NonInteractivePreference(
+                key = "morphe_settings_new_indicator_days",
+                tag = SeekBarPreference::class.java,
+                selectable = true
+            ),
+            NonInteractivePreference(
+                key = "morphe_settings_new_indicator_clear",
+                tag = ClearNewSettingsIndicatorPreference::class.java,
+                selectable = true
+            )
+        ),
         TextPreference(
             key = null,
             titleKey = "morphe_pref_import_export_title",
