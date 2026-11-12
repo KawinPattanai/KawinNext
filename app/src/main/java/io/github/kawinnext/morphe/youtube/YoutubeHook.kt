@@ -18,6 +18,7 @@ import io.github.kawinnext.morphe.youtube.interaction.channelsearch.channelSearc
 import io.github.kawinnext.morphe.youtube.interaction.copytext.copyTextPatch
 import io.github.kawinnext.morphe.youtube.interaction.copyvideolink.CopyVideoLinkButtonPatch
 import io.github.kawinnext.morphe.youtube.interaction.downloads.Downloads
+import io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue.nativePlaylistQueuePatch
 import io.github.kawinnext.morphe.youtube.interaction.onthego.onTheGoPatch
 import io.github.kawinnext.morphe.youtube.interaction.playlist.playlistPatch
 import io.github.kawinnext.morphe.youtube.interaction.seekbar.seekbarPatch
@@ -120,6 +121,7 @@ val YouTubePatches = arrayOf(
     openSystemShareSheetPatch,
     seekbarPatch,
     addToQueuePatch,
+    nativePlaylistQueuePatch,
     BypassImageRegionRestrictionsPatch,
     CheckRecycleBitmapMediaSession,
     changeStartPagePatch,
