@@ -15,6 +15,7 @@ import app.morphe.extension.youtube.ambientlight.AmbientLightController
 import app.morphe.extension.youtube.patches.AmbientModePatch
 import app.morphe.extension.youtube.settings.Settings
 import io.github.kawinnext.hookMethod
+import java.lang.reflect.Modifier
 import io.github.kawinnext.morphe.shared.layout.theme.lithoColorHookPatch
 import io.github.kawinnext.morphe.shared.layout.theme.lithoDrawableColorHook
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
@@ -162,7 +163,17 @@ val ambientModePatch = patch(
     // bypass is left out of that build instead of taking the rest of the patch down with it.
     runCatching {
         val powerSaveModeSink = ::powerSaveModeSinkMethod.method
-        ::powerSaveModeReadMethods.dexMethodList.forEach { readMethod ->
+        // The interface the sink is declared on is abstract and has no body to hook, so the
+        // methods that only declare it are left out and the ones that hold a body are hooked.
+        val readMethods = ::powerSaveModeReadMethods.dexMethodList
+            .filter { method ->
+                runCatching { method.toMethod().modifiers and Modifier.ABSTRACT == 0 }
+                    .getOrDefault(false)
+            }
+        if (readMethods.isEmpty()) {
+            Logger.printInfo { "Ambient mode: no method of this build holds the power save sink" }
+        }
+        readMethods.forEach { readMethod ->
             readMethod.hookMethod(
                 scopedHook(powerSaveModeSink) {
                     before { param ->
