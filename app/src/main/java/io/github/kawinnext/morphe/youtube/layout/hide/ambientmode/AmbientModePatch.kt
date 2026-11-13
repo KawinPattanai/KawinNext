@@ -9,6 +9,7 @@ package io.github.kawinnext.morphe.youtube.layout.hide.ambientmode
 
 import android.view.View
 import android.view.ViewGroup
+import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.ResourceUtils
 import app.morphe.extension.youtube.ambientlight.AmbientLightController
 import app.morphe.extension.youtube.patches.AmbientModePatch
@@ -156,15 +157,24 @@ val ambientModePatch = patch(
     }
 
     // Battery saver turns the Ambient mode of the app off. The bypass reports that the system
-    // is not in power save mode to the state object of the Ambient mode.
-    val powerSaveModeSink = ::powerSaveModeSinkMethod.method
-    ::powerSaveModeReadMethods.dexMethodList.forEach { readMethod ->
-        readMethod.hookMethod(
-            scopedHook(powerSaveModeSink) {
-                before { param ->
-                    if (Settings.BYPASS_AMBIENT_MODE_RESTRICTIONS.get()) param.args[0] = false
+    // is not in power save mode to the state object of the Ambient mode. The state reports to a
+    // method the app declares on an interface on 21.44.535, which has no body to hook, so the
+    // bypass is left out of that build instead of taking the rest of the patch down with it.
+    runCatching {
+        val powerSaveModeSink = ::powerSaveModeSinkMethod.method
+        ::powerSaveModeReadMethods.dexMethodList.forEach { readMethod ->
+            readMethod.hookMethod(
+                scopedHook(powerSaveModeSink) {
+                    before { param ->
+                        if (Settings.BYPASS_AMBIENT_MODE_RESTRICTIONS.get()) param.args[0] = false
+                    }
                 }
-            }
+            )
+        }
+    }.onFailure { error ->
+        Logger.printInfo(
+            { "Ambient mode: the power save sink of this build has no body to hook" },
+            error as? Exception
         )
     }
 
