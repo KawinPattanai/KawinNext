@@ -127,7 +127,14 @@ private val playlistPageNavigationSelector = findMethodDirect {
 private val playlistPageNavigationProto = findFieldDirect {
     val selector = playlistPageNavigationSelector(this)
     val set = selector.returnType!!
-    val constructor = set.methods.single { it.name == "<init>" }
+    // The set holds more than one constructor on 21.44.535, so the one that takes the message
+    // of the set is the one whose first parameter is held by a field of it.
+    val constructor = set.methods
+        .filter { it.name == "<init>" && it.paramCount > 0 }
+        .firstOrNull { candidate -> set.fields.any { field -> field.type == candidate.paramTypes.first() } }
+        ?: throw IllegalStateException(
+            "Native playlist queue: no constructor of the navigation set holds its message"
+        )
     set.fields.single { it.type == constructor.paramTypes.first() }
 }
 

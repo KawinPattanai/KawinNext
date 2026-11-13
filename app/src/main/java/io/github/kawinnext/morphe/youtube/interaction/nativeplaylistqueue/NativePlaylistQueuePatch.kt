@@ -56,7 +56,7 @@ val nativePlaylistQueuePatch = patch(
         val context = this
         runCatching { context.step() }.onFailure { error ->
             Logger.printException(
-                { "Native playlist queue: the step '$name' of this build is not hooked" },
+                { "Native playlist queue: the step '$name' of this build is not hooked: " + error },
                 error
             )
         }
