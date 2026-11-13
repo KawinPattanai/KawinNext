@@ -71,21 +71,54 @@ abstract class IHook(val xposed: XposedInterface) : XposedInterface by xposed {
 
     fun DexClass.toClass() = getInstance(classLoader)
     fun DexMethod.toMethod(): Method {
-        var clz = classLoader.loadClass(className)
-        do {
-            return XposedHelpers.findMethodExactIfExists(clz, name, *paramTypeNames.toTypedArray())
-                ?: continue
-        } while (clz.superclass.also { clz = it } != null)
-        throw NoSuchMethodException("Method $this not found")
+        val loaded = classLoader.loadClass(className)
+        var clz: Class<*>? = loaded
+        while (clz != null) {
+            XposedHelpers.findMethodExactIfExists(clz, name, *paramTypeNames.toTypedArray())
+                ?.let { return it }
+            clz = clz.superclass
+        }
+        // The helper cannot always resolve a parameter type by its name, so the method is looked
+        // up again and matched on the simple names of the parameters, which the platform keeps
+        // even when it replaces a type of the dex with one of its own.
+        val names = paramTypeNames.map { it.substringAfterLast('.') }
+        clz = loaded
+        while (clz != null) {
+            clz.declaredMethods.firstOrNull {
+                it.name == name && it.parameterTypes.size == names.size &&
+                    it.parameterTypes.map { type -> type.simpleName } == names
+            }?.let { return it.apply { isAccessible = true } }
+            clz = clz.superclass
+        }
+        throw NoSuchMethodException(
+            "Method $this not found. Loaded $loaded interface=${loaded.isInterface}" +
+                " ctors=${loaded.declaredConstructors.size} methods=${loaded.declaredMethods.size}" +
+                " loader=${loaded.classLoader}"
+        )
     }
 
     fun DexMethod.toConstructor(): Constructor<*> {
-        var clz = classLoader.loadClass(className)
-        do {
-            return XposedHelpers.findConstructorExactIfExists(clz, *paramTypeNames.toTypedArray())
-                ?: continue
-        } while (clz.superclass.also { clz = it } != null)
-        throw NoSuchMethodException("Method $this not found")
+        val loaded = classLoader.loadClass(className)
+        var clz: Class<*>? = loaded
+        while (clz != null) {
+            XposedHelpers.findConstructorExactIfExists(clz, *paramTypeNames.toTypedArray())
+                ?.let { return it }
+            clz = clz.superclass
+        }
+        val names = paramTypeNames.map { it.substringAfterLast('.') }
+        clz = loaded
+        while (clz != null) {
+            clz.declaredConstructors.firstOrNull {
+                it.parameterTypes.size == names.size &&
+                    it.parameterTypes.map { type -> type.simpleName } == names
+            }?.let { return it.apply { isAccessible = true } }
+            clz = clz.superclass
+        }
+        throw NoSuchMethodException(
+            "Method $this not found. Loaded $loaded interface=${loaded.isInterface}" +
+                " ctors=${loaded.declaredConstructors.size} methods=${loaded.declaredMethods.size}" +
+                " loader=${loaded.classLoader}"
+        )
     }
 
     fun DexMethod.toMember(): Member {
