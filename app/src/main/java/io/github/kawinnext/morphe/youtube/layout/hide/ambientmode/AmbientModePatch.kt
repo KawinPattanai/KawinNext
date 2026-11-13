@@ -125,7 +125,8 @@ val ambientModePatch = patch(
 
     // The /next response can have a static color style, so the background does not change
     // with the video. Override what the server decides, unless the Ambient mode is disabled.
-    val rendererConstructor = ::ambientModeRendererConstructorMethod.method
+    // The fingerprinted member is the constructor of the renderer, which is not a method of the class.
+    val rendererConstructor = ::ambientModeRendererConstructorMethod.constructor
     val rendererOptionalType = rendererConstructor.parameterTypes[1]
     val optionalIsPresent = rendererOptionalType.getMethod("isPresent")
     val optionalGet = rendererOptionalType.getMethod("get")

@@ -114,7 +114,8 @@ val onTheGoPatch = patch(
 
     // While On-the-go is active, the lock screen and the notification show seek buttons,
     // which the app turns on through the state object of the player.
-    val stateClass = "L" + OnTheGoSkipToNextActionConstructorFingerprint.method
+    // The fingerprinted member is a constructor, which the class does not hold as a method.
+    val stateClass = "L" + OnTheGoSkipToNextActionConstructorFingerprint.constructor
         .parameterTypes.first().name.replace('.', '/') + ";"
     val stateSetter = onTheGoStateSetterFingerprint(stateClass).method
     onTheGoStateConstructorFingerprint(stateClass).hookMethod {
