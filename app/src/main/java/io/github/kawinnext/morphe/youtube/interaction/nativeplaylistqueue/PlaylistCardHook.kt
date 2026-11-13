@@ -240,7 +240,9 @@ internal fun PatchExecutor.installPlaylistCardSource() {
     val futureField = ::cardTapFuture.field
     val decode = ::cardTapDecode.method
 
-    check(ownerField.declaringClass == ::cardNodeClick.type) {
+    // The owner of the click may be declared by a superclass of the click node, which still reads
+    // from the node, so the field has to belong to the node rather than be declared by it exactly.
+    check(ownerField.declaringClass.isAssignableFrom(::cardNodeClick.type)) {
         "Native playlist queue: the click owner must belong to its mounted handler"
     }
 
