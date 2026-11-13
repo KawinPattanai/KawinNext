@@ -72,23 +72,30 @@ abstract class IHook(val xposed: XposedInterface) : XposedInterface by xposed {
     fun DexClass.toClass() = getInstance(classLoader)
     fun DexMethod.toMethod(): Method {
         val loaded = classLoader.loadClass(className)
-        var clz: Class<*>? = loaded
-        while (clz != null) {
-            XposedHelpers.findMethodExactIfExists(clz, name, *paramTypeNames.toTypedArray())
+        // A method the app declares on an interface is not held by the class that implements it,
+        // so the search walks the interfaces of the class as well as its superclasses.
+        val types = mutableListOf<Class<*>>()
+        val pending = ArrayDeque<Class<*>>()
+        pending.addLast(loaded)
+        while (pending.isNotEmpty()) {
+            val type = pending.removeFirst()
+            if (!types.add(type)) continue
+            type.superclass?.let { pending.addLast(it) }
+            type.interfaces.forEach { pending.addLast(it) }
+        }
+        types.forEach { type ->
+            XposedHelpers.findMethodExactIfExists(type, name, *paramTypeNames.toTypedArray())
                 ?.let { return it }
-            clz = clz.superclass
         }
         // The helper cannot always resolve a parameter type by its name, so the method is looked
         // up again and matched on the simple names of the parameters, which the platform keeps
         // even when it replaces a type of the dex with one of its own.
         val names = paramTypeNames.map { it.substringAfterLast('.') }
-        clz = loaded
-        while (clz != null) {
-            clz.declaredMethods.firstOrNull {
+        types.forEach { type ->
+            type.declaredMethods.firstOrNull {
                 it.name == name && it.parameterTypes.size == names.size &&
-                    it.parameterTypes.map { type -> type.simpleName } == names
+                    it.parameterTypes.map { param -> param.simpleName } == names
             }?.let { return it.apply { isAccessible = true } }
-            clz = clz.superclass
         }
         throw NoSuchMethodException(
             "Method $this not found. Loaded $loaded interface=${loaded.isInterface}" +
