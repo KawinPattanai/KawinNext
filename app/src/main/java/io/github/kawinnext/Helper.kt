@@ -66,13 +66,30 @@ class HookDsl<TCallback>(emptyCallback: TCallback) {
     }
 }
 
+/**
+ * A method of an interface has no body to hook, and the bridge rejects it. The hook is left out with
+ * a line in the log, so a patch that reaches one of them still applies the rest.
+ */
+fun Member.isAbstractHookTarget(): Boolean {
+    if (this is java.lang.reflect.Method && java.lang.reflect.Modifier.isAbstract(modifiers)) {
+        app.morphe.extension.shared.Logger.printInfo(
+            { "The hook of $this is skipped: an abstract method has no body" },
+            null
+        )
+        return true
+    }
+    return false
+}
+
 fun Member.hookMethod(cb: XC_MethodHook) {
+    if (isAbstractHookTarget()) return
     XposedBridge.hookMethod(this, cb)
 }
 
 inline fun Member.hookMethod(
     crossinline block: HookDsl<IHookCallback>.() -> Unit
 ) {
+    if (isAbstractHookTarget()) return
     val builder = HookDsl<IHookCallback> {}.apply(block)
     hookMethodInternal(builder.before, builder.after, builder.priority)
 }
