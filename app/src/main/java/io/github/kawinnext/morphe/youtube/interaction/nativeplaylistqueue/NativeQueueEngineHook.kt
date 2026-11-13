@@ -35,6 +35,17 @@ internal val nativeQueueRequestClass = findClassDirect {
     nativeQueueRequestConstructor(this).declaredClass!!
 }
 
+/** อินเตอร์เฟซ navigator ซึ่งคลาสคิวประกาศเมธอด descriptor ตัวเดียวกับที่ fingerprint คิวจับได้ */
+internal val nativeQueueNavigatorType = findClassDirect {
+    val descriptor = nativeQueueDescriptor(this)
+    descriptor.declaredClass!!.interfaces.first { candidate ->
+        candidate.methods.any { method ->
+            method.name == descriptor.name &&
+                    method.paramTypes.map { it.descriptor } == descriptor.paramTypes.map { it.descriptor }
+        }
+    }
+}
+
 /** คลาสของ navigator wrapper ซึ่งถือ navigator ที่ใช้งานอยู่ของคิว */
 internal val nativeQueueWrapperClass = findClassDirect {
     nativeQueueWrapperFlag(this).declaredClass
@@ -43,7 +54,8 @@ internal val nativeQueueWrapperClass = findClassDirect {
 /** ฟิลด์ธงของ wrapper ที่บอกว่า navigator ปัจจุบันเป็นคิวของแอป */
 private val nativeQueueWrapperFlag = findFieldDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    nativeQueueWrapperFingerprint(queue).match().instructionMatches.last().instruction.fieldRef!!
+    uniqueMatch(nativeQueueWrapperFingerprint(queue, nativeQueueNavigatorType(this).descriptor))
+        .instructionMatches.last().instruction.fieldRef!!
 }
 
 /** เมธอด descriptor ของคิว ซึ่งสร้างคำขอเลื่อนตำแหน่งจากคอนเทนเนอร์ */
@@ -82,28 +94,28 @@ private val nativeQueueDispose = findMethodDirect {
 /** เมธอดที่รับ response ของ playlist ซึ่งอาจเปลี่ยน navigator เป็นคิวของแอป */
 private val nativeQueueReceive = findMethodDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    NativeQueueReceiveFingerprint(queue).match().method
+    nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor).method
 }
 
 /** ฟิลด์ของ response: แผง, navigator, คอนเทนเนอร์, คำสั่ง watch, ที่เก็บ response */
 private val nativeQueueReceiveFields = findFieldListDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    val receive = NativeQueueReceiveFingerprint(queue).match()
-    listOf(1, 3, 4, 7, 8, 16).map { receive.instructionMatches[it].instruction.fieldRef!! }
+    val receive = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
+    listOf(4, 6, 7, 10, 11, 19).map { receive.instructionMatches[it].instruction.fieldRef!! }
 }
 
 /** เมธอดของ response: ตัวสร้าง builder, สร้าง descriptor, สร้างคิว, สลับ navigator, ส่งต่อ */
 private val nativeQueueReceiveMethods = findMethodListDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    val receive = NativeQueueReceiveFingerprint(queue).match()
-    listOf(6, 9, 11, 13, 18).map { receive.instructionMatches[it].instruction.methodRef!! }
+    val receive = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
+    listOf(9, 12, 14, 16, 21).map { receive.instructionMatches[it].instruction.methodRef!! }
 }
 
 /** เมธอดที่รับ response เข้าคิว ซึ่งเก็บ response ไว้ในฟิลด์ของคิว */
 private val nativeQueueAccept = findMethodDirect {
     val descriptor = NativeQueueDescriptorFingerprint.match()
     val queue = descriptor.method.declaredClass!!.descriptor
-    val receive = NativeQueueReceiveFingerprint(queue).match()
+    val receive = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
     nativeQueueAcceptFingerprint(
         queue,
         receive.method.paramTypes.single().descriptor,
@@ -115,7 +127,7 @@ private val nativeQueueAccept = findMethodDirect {
 private val nativeQueueStoredResponse = findFieldDirect {
     val descriptor = NativeQueueDescriptorFingerprint.match()
     val queue = descriptor.method.declaredClass!!.descriptor
-    val receive = NativeQueueReceiveFingerprint(queue).match()
+    val receive = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
     nativeQueueAcceptFingerprint(
         queue,
         receive.method.paramTypes.single().descriptor,
@@ -126,23 +138,28 @@ private val nativeQueueStoredResponse = findFieldDirect {
 /** เมธอดตั้งและอ่านโหมดเล่นซ้ำ ซึ่ง wrapper ส่งต่อไปยัง navigator */
 private val nativeQueueRepeatMethods = findMethodListDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
+    val navigator = nativeQueueNavigatorType(this).descriptor
     listOf(
-        NativeQueueRepeatSetterFingerprint(queue).match().instructionMatches.last().instruction.methodRef!!,
-        NativeQueueRepeatGetterFingerprint(queue).match().instructionMatches.last().instruction.methodRef!!,
+        uniqueMatch(NativeQueueRepeatSetterFingerprint(queue, navigator))
+            .instructionMatches.last().instruction.methodRef!!,
+        uniqueMatch(NativeQueueRepeatGetterFingerprint(queue, navigator))
+            .instructionMatches.last().instruction.methodRef!!,
     )
 }
 
 /** ตัวสร้าง response เปล่า ซึ่งรับคำสั่ง watch ของ response เดิม และฟิลด์ของมัน */
 private val nativeQueueResponseConstructor = findMethodDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    val response = NativeQueueReceiveFingerprint(queue).match().method.paramTypes.single().descriptor
+    val response = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
+        .method.paramTypes.single().descriptor
     nativeQueueResponseConstructorFingerprint(response).match().method
 }
 
 /** ฟิลด์ของ response: คำสั่ง watch ต้นฉบับ และชุดการนำทางของ playlist */
 private val nativeQueueResponseFields = findFieldListDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    val response = NativeQueueReceiveFingerprint(queue).match().method.paramTypes.single().descriptor
+    val response = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
+        .method.paramTypes.single().descriptor
     val constructor = nativeQueueResponseConstructorFingerprint(response).match().method
     val navigationType = PlaylistModelDescriptionFingerprint.match().method
         .findFieldFromToString(", navigationSets=").type.descriptor
@@ -193,10 +210,10 @@ private val nativeQueueLocalPlaylistId = findMethodDirect {
 /** เมธอดที่รับ navigator ของ autoplay ซึ่งแทน navigator ของคิวของเรา */
 private val nativeQueueAutoplay = findMethodDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    val receive = NativeQueueReceiveFingerprint(queue).match()
+    val receive = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
     nativeQueueAutoplayFingerprint(
-        receive.instructionMatches[3].instruction.fieldRef!!,
-        receive.instructionMatches[13].instruction.methodRef!!,
+        receive.instructionMatches[6].instruction.fieldRef!!,
+        receive.instructionMatches[16].instruction.methodRef!!,
     ).match().method
 }
 
@@ -209,9 +226,9 @@ private val nativeQueueAutoplayConstructor = findMethodDirect {
 /** เมธอดที่ปลด wrapper ซึ่งต้องล้างธงคิวของเราและ navigator ที่จำไว้ */
 private val nativeQueueWrapperDispose = findMethodDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
-    val receive = NativeQueueReceiveFingerprint(queue).match()
+    val receive = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
     nativeQueueWrapperDisposeFingerprint(
-        receive.instructionMatches[3].instruction.fieldRef!!,
+        receive.instructionMatches[6].instruction.fieldRef!!,
         NativeQueueDisposeFingerprint.match().method.name,
     ).match().method
 }

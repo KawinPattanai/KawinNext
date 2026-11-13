@@ -14,6 +14,7 @@ import io.github.kawinnext.morphe.InstructionLocation.MatchAfterAnywhere
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterImmediately
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterWithin
 import io.github.kawinnext.morphe.InstructionLocation.MatchFirst
+import io.github.kawinnext.morphe.Match
 import io.github.kawinnext.morphe.Opcode
 import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.anyInstruction
@@ -29,6 +30,7 @@ import io.github.kawinnext.morphe.opcode
 import io.github.kawinnext.morphe.resourceLiteral
 import io.github.kawinnext.morphe.StringComparisonType
 import io.github.kawinnext.morphe.string
+import org.luckypray.dexkit.DexKitBridge
 import org.luckypray.dexkit.result.FieldData
 import org.luckypray.dexkit.result.MethodData
 
@@ -246,10 +248,16 @@ internal object NativeQueueDisposeFingerprint : Fingerprint(
 /**
  * The navigator wrapper remembers whether its initial navigator is the native queue.
  *
+ * Every constructor of the app that tests some class the same way answers the query of the two
+ * filters, so the class is narrowed by the navigator interface the wrapper declares: it forwards
+ * every navigation of the queue to the navigator it holds.
+ *
  * @param queueClass Descriptor of the native queue class, which the wrapper checks its
  *                   navigator against.
+ * @param navigatorType Descriptor of the navigator interface of the queue, which the wrapper
+ *                      implements.
  */
-internal fun nativeQueueWrapperFingerprint(queueClass: String) = Fingerprint(
+internal fun nativeQueueWrapperFingerprint(queueClass: String, navigatorType: String) = Fingerprint(
     name = "<init>",
     filters = listOf(
         instanceOf(queueClass),
@@ -259,7 +267,12 @@ internal fun nativeQueueWrapperFingerprint(queueClass: String) = Fingerprint(
             opcode = Opcode.IPUT_BOOLEAN,
             location = MatchAfterImmediately()
         )
-    )
+    ),
+    custom = {
+        declaredClass {
+            addInterface(interfaceType(navigatorType))
+        }
+    }
 )
 
 // The wrapper class and its flag field are resolved in the patch itself, where both the
@@ -384,14 +397,22 @@ internal fun nativeQueueAcceptFingerprint(
  *
  * @param queueClass Descriptor of the native queue class, which scopes the wrapper class.
  */
-internal fun NativeQueueReceiveFingerprint(queueClass: String) = Fingerprint(
-    classFingerprint = nativeQueueWrapperFingerprint(queueClass),
+internal fun NativeQueueReceiveFingerprint(queueClass: String, navigatorType: String) = Fingerprint(
+    classFingerprint = nativeQueueWrapperFingerprint(queueClass, navigatorType),
     returnType = "V",
     parameters = listOf("L"),
     filters = listOf(
         fieldAccess(definingClass = "this", type = "Z", opcode = Opcode.IGET_BOOLEAN),
-        // Response playlist panel.
-        fieldAccess(opcode = Opcode.IGET_OBJECT),
+        // 21.44 gates the switch on an experiment before it looks for the panel.
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            parameters = listOf("I", "J", "Z"),
+            returnType = "Z"
+        ),
+        opcode(Opcode.MOVE_RESULT, location = MatchAfterImmediately()),
+        opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
+        // Response playlist panel, read after the response itself is checked.
+        fieldAccess(opcode = Opcode.IGET_OBJECT, location = MatchAfterWithin(2)),
         opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
         // Active navigator and queue container.
         fieldAccess(definingClass = "this", opcode = Opcode.IGET_OBJECT, location = MatchAfterImmediately()),
@@ -426,9 +447,10 @@ internal fun NativeQueueReceiveFingerprint(queueClass: String) = Fingerprint(
  * The wrapper delegates the repeat mode to the active navigator.
  *
  * @param queueClass Descriptor of the native queue class, which scopes the wrapper class.
+ * @param navigatorType Descriptor of the navigator interface the wrapper declares.
  */
-internal fun NativeQueueRepeatSetterFingerprint(queueClass: String) = Fingerprint(
-    classFingerprint = nativeQueueWrapperFingerprint(queueClass),
+internal fun NativeQueueRepeatSetterFingerprint(queueClass: String, navigatorType: String) = Fingerprint(
+    classFingerprint = nativeQueueWrapperFingerprint(queueClass, navigatorType),
     returnType = "V",
     parameters = listOf("I"),
     filters = listOf(
@@ -442,8 +464,8 @@ internal fun NativeQueueRepeatSetterFingerprint(queueClass: String) = Fingerprin
     )
 )
 
-internal fun NativeQueueRepeatGetterFingerprint(queueClass: String) = Fingerprint(
-    classFingerprint = nativeQueueWrapperFingerprint(queueClass),
+internal fun NativeQueueRepeatGetterFingerprint(queueClass: String, navigatorType: String) = Fingerprint(
+    classFingerprint = nativeQueueWrapperFingerprint(queueClass, navigatorType),
     returnType = "I",
     parameters = emptyList(),
     filters = listOf(
@@ -1353,6 +1375,38 @@ internal fun playlistServiceNavigatorFingerprint(wrapperType: String) = Fingerpr
         )
     )
 )
+
+/**
+ * The one method the fingerprint of the playback service describes.
+ *
+ * Its query is every void method of the app that takes a navigation request, so only the
+ * instructions tell the dispatch of the service apart: 21.44.535 answers ten such methods and the
+ * dispatch is the only one that compares the id of the playing video. [match] asks the raw query for
+ * a single method and refuses before reading any instruction, so the dispatch is read here instead.
+ */
+internal fun DexKitBridge.playlistServiceNavigator(wrapperType: String): Match =
+    playlistServiceNavigatorFingerprint(wrapperType).matchAllOrNull()?.singleOrNull()
+        ?: throw IllegalStateException(
+            "Native playlist queue: no single playback service dispatch for $wrapperType"
+        )
+
+/**
+ * The one method a fingerprint describes, counted after its instructions narrowed the query.
+ *
+ * A fingerprint whose query is a shape the whole app shares, such as a constructor that tests a
+ * class or a void method that takes a request, answers more candidates than the instructions keep.
+ * [match] asks the raw query for a single one and refuses before reading any instruction.
+ */
+internal fun DexKitBridge.uniqueMatch(fingerprint: Fingerprint): Match =
+    fingerprint.matchAllOrNull()?.singleOrNull()
+        ?: throw IllegalStateException(
+            "Native playlist queue: fingerprint " +
+                    (fingerprint::class.simpleName ?: "anonymous") + " must describe one method"
+        )
+
+/** The receive method of the wrapper of the native queue, which the engine and the page hook read. */
+internal fun DexKitBridge.nativeQueueReceive(queueClass: String, navigatorType: String): Match =
+    uniqueMatch(NativeQueueReceiveFingerprint(queueClass, navigatorType))
 
 /** The direct-backend watch navigator reports failed starts through this stable diagnostic. */
 internal object DirectQueueNavigatorFingerprint : Fingerprint(

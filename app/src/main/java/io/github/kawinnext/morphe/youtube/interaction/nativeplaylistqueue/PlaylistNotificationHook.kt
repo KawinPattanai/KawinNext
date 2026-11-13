@@ -52,13 +52,13 @@ private val notificationRequests = findFieldListDirect {
 
 /** The dispatch of the playback service, which every request of a playlist passes. */
 private val notificationServiceDispatch = findMethodDirect {
-    playlistServiceNavigatorFingerprint(nativeQueueRequestClass(this).descriptor).match().method
+    playlistServiceNavigator(nativeQueueRequestClass(this).descriptor).method
 }
 
 /** The player fields of that service, which reach the state that names the playing video. */
 private val notificationServicePlayers = findFieldListDirect {
-    playlistServiceNavigatorFingerprint(nativeQueueRequestClass(this).descriptor)
-        .match().instructionMatches.take(3).map { it.instruction.fieldRef!! }
+    playlistServiceNavigator(nativeQueueRequestClass(this).descriptor)
+        .instructionMatches.take(3).map { it.instruction.fieldRef!! }
 }
 
 /** The media owner that dispatches the skips of the notification. */
@@ -176,8 +176,8 @@ private val directQueueBackend = findFieldDirect {
 /** The player owner of the navigator, and the fields below it that name the playing video. */
 private val directQueuePlayers = findFieldListDirect {
     val navigator = DirectQueueNavigatorFingerprint().declaredClass!!.descriptor
-    val players = playlistServiceNavigatorFingerprint(nativeQueueRequestClass(this).descriptor)
-        .match().instructionMatches.take(3).map { it.instruction.fieldRef!! }
+    val players = playlistServiceNavigator(nativeQueueRequestClass(this).descriptor)
+        .instructionMatches.take(3).map { it.instruction.fieldRef!! }
     val owner = directQueuePlayerOwnerFingerprint(navigator, players.first().type.descriptor)
         .match().instructionMatches.single().instruction.fieldRef!!
     players + owner
@@ -185,8 +185,8 @@ private val directQueuePlayers = findFieldListDirect {
 
 /** The method of that player state which returns the playing video id. */
 private val directQueueVideoId = findMethodDirect {
-    playlistServiceNavigatorFingerprint(nativeQueueRequestClass(this).descriptor)
-        .match().instructionMatches[4].instruction.methodRef!!
+    playlistServiceNavigator(nativeQueueRequestClass(this).descriptor)
+        .instructionMatches[4].instruction.methodRef!!
 }
 
 /** The navigation intent of a request, which the paging decision of the navigator reads. */

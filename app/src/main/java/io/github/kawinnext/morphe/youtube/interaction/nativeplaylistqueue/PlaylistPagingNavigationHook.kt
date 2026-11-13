@@ -60,7 +60,7 @@ private val playlistRequests = findFieldListDirect {
 
 /** The dispatch of the playback service, which every request of a playlist passes. */
 private val playlistServiceNavigation = findMethodDirect {
-    playlistServiceNavigatorFingerprint(playlistRequestType()).match().method
+    playlistServiceNavigator(playlistRequestType()).method
 }
 
 /** The method of the service that answers whether a request may navigate. */
@@ -72,20 +72,20 @@ private val playlistServiceCapability = findMethodDirect {
 
 /** The player fields of the service, which reach the state that names the playing video. */
 private val playlistServicePlayers = findFieldListDirect {
-    playlistServiceNavigatorFingerprint(playlistRequestType())
-        .match().instructionMatches.take(3).map { it.instruction.fieldRef!! }
+    playlistServiceNavigator(playlistRequestType())
+        .instructionMatches.take(3).map { it.instruction.fieldRef!! }
 }
 
 /** The method of that state which returns the playing video id. */
 private val playlistServiceVideoId = findMethodDirect {
-    playlistServiceNavigatorFingerprint(playlistRequestType())
-        .match().instructionMatches[4].instruction.methodRef!!
+    playlistServiceNavigator(playlistRequestType())
+        .instructionMatches[4].instruction.methodRef!!
 }
 
 /** The sequencer holder of the service, the sequencer it holds and the queue navigator inside it. */
 private val playlistServiceSequencer = findFieldListDirect {
-    val service = playlistServiceNavigatorFingerprint(playlistRequestType())
-        .match().method.declaredClass!!.descriptor
+    val service = playlistServiceNavigator(playlistRequestType())
+        .method.declaredClass!!.descriptor
     val loader = nativeQueueLoaderFingerprint(service).match()
     val sequencer = loader.instructionMatches[0].instruction.fieldRef!!
     val sequencerType = loader.instructionMatches[2].instruction.classRef!!.descriptor

@@ -74,7 +74,7 @@ private val nativeQueueNavigationRequests = findFieldListDirect {
 /** ฟิลด์ของ player ที่ navigator ใช้หาวิดีโอที่เล่นอยู่ และฟิลด์ที่ถือมันไว้ */
 private val nativeQueuePlayerFields = findFieldListDirect {
     val request = queueRequestType()
-    val players = playlistServiceNavigatorFingerprint(request).match().instructionMatches
+    val players = playlistServiceNavigator(request).instructionMatches
         .take(3).map { it.instruction.fieldRef!! }
     val owner = directQueuePlayerOwnerFingerprint(directQueueType(), players[0].type.descriptor)
         .match().instructionMatches.single().instruction.fieldRef!!
@@ -83,7 +83,7 @@ private val nativeQueuePlayerFields = findFieldListDirect {
 
 /** เมธอดที่อ่านวิดีโอของ player ซึ่ง navigator ใช้ตรวจคำขอที่ซ้ำกับวิดีโอที่เล่นอยู่ */
 private val nativeQueuePlayerVideoId = findMethodDirect {
-    playlistServiceNavigatorFingerprint(queueRequestType()).match()
+    playlistServiceNavigator(queueRequestType())
         .instructionMatches[4].instruction.methodRef!!
 }
 

@@ -87,13 +87,15 @@ private val playlistPageEntryId = findFieldDirect {
 
 /** The watch response a page request builds, which is the response the queue engine receives. */
 private fun DexKitBridge.playlistPageResponse(): String =
-    NativeQueueReceiveFingerprint(nativeQueueWrapperClass(this).descriptor).match()
-        .method.paramTypes.single().descriptor
+    nativeQueueReceive(
+        nativeQueueWrapperClass(this).descriptor, nativeQueueNavigatorType(this).descriptor
+    ).method.paramTypes.single().descriptor
 
 /** The panel field of that response. */
 private val playlistPageResponsePanel = findFieldDirect {
-    NativeQueueReceiveFingerprint(nativeQueueWrapperClass(this).descriptor).match()
-        .instructionMatches[1].instruction.fieldRef!!
+    nativeQueueReceive(
+        nativeQueueWrapperClass(this).descriptor, nativeQueueNavigatorType(this).descriptor
+    ).instructionMatches[4].instruction.fieldRef!!
 }
 
 /** The method of the playback service that performs a page request and returns its response. */
