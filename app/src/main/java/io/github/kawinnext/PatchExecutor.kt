@@ -61,12 +61,28 @@ class Patch(
 abstract class IHook(val xposed: XposedInterface) : XposedInterface by xposed {
     abstract val classLoader: ClassLoader
 
+    /**
+     * A method of an interface has no body to hook, and the bridge rejects it. The hook is left out
+     * with a line in the log, so a patch that reaches one of them still applies the rest.
+     */
+    private fun Member.skipAbstractHook(): Boolean {
+        if (this is Method && java.lang.reflect.Modifier.isAbstract(modifiers)) {
+            Logger.printInfo({ "The hook of $this is skipped: an abstract method has no body" }, null)
+            return true
+        }
+        return false
+    }
+
     fun DexMethod.hookMethod(callback: XC_MethodHook) {
-        toMember().hookMethod(callback)
+        val member = toMember()
+        if (member.skipAbstractHook()) return
+        member.hookMethod(callback)
     }
 
     fun DexMethod.hookMethod(block: HookDsl<IHookCallback>.() -> Unit) {
-        toMember().hookMethod(block)
+        val member = toMember()
+        if (member.skipAbstractHook()) return
+        member.hookMethod(block)
     }
 
     fun DexClass.toClass() = getInstance(classLoader)
