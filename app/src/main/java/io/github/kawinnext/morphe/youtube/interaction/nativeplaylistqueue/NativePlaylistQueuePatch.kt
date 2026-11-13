@@ -56,7 +56,7 @@ val nativePlaylistQueuePatch = patch(
         val context = this
         runCatching { context.step() }.onFailure { error ->
             Logger.printException(
-                { "queue step '$name': $error" },
+                { "queue step '$name': " + (error.message ?: error.toString()) },
                 error
             )
         }
