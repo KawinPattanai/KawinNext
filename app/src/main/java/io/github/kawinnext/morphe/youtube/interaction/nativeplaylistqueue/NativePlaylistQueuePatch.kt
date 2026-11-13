@@ -7,7 +7,9 @@
 
 package io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue
 
+import app.morphe.extension.shared.Logger
 import app.morphe.extension.youtube.patches.queue.NativePlaylistQueuePatch
+import io.github.kawinnext.PatchExecutor
 import io.github.kawinnext.morphe.setExtensionIsPatchIncluded
 import io.github.kawinnext.morphe.shared.misc.proto.hookElement
 import io.github.kawinnext.morphe.youtube.layout.flyout.flyoutPatch
@@ -47,15 +49,28 @@ val nativePlaylistQueuePatch = patch(
     // Same order as upstream. The picker of the queue save, the undo of a removal, the playback
     // engine and the notification of the watch history are installed by the hooks below, which are
     // the callers upstream installs them from.
-    installQueueFlyout()
-    installPlaylistCardSource()
-    installPlaylistPages()
-    installPlaylistPaging()
-    installPlaylistPanel()
-    installPlaylistTitle()
-    installRatingCapture()
-    installPlaylistRemoval()
-    installFullscreenPlaylist()
+    // Each step is bound to the shape the app has in a version. A step that does not fit the
+    // build is skipped and named in the log, so the rest of the queue still works and a single
+    // run tells every step that does not fit instead of the first one only.
+    fun installStep(name: String, step: PatchExecutor.() -> Unit) {
+        val context = this
+        runCatching { context.step() }.onFailure { error ->
+            Logger.printException(
+                { "Native playlist queue: the step '$name' of this build is not hooked" },
+                error
+            )
+        }
+    }
+
+    installStep("flyout") { installQueueFlyout() }
+    installStep("card source") { installPlaylistCardSource() }
+    installStep("pages") { installPlaylistPages() }
+    installStep("paging") { installPlaylistPaging() }
+    installStep("panel") { installPlaylistPanel() }
+    installStep("title") { installPlaylistTitle() }
+    installStep("rating capture") { installRatingCapture() }
+    installStep("removal") { installPlaylistRemoval() }
+    installStep("fullscreen") { installFullscreenPlaylist() }
 
     hookElement { bytes -> NativePlaylistQueuePatch.onElementLoaded(bytes) }
     videoIdHooks.add(NativePlaylistQueuePatch::onVideoChanged)

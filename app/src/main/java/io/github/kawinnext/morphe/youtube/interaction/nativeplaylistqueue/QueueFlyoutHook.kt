@@ -8,6 +8,7 @@
 package io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue
 
 import app.morphe.extension.youtube.innertube.queue.PlaylistQueueRenderer
+import app.morphe.extension.shared.Logger
 import app.morphe.extension.youtube.patches.queue.QueueFlyoutActions
 import io.github.kawinnext.PatchExecutor
 import io.github.kawinnext.hookMethod
@@ -153,13 +154,22 @@ internal fun PatchExecutor.installQueueFlyout() {
     val iconGetter = ::queueFlyoutIconGetter.method
     val iconField = ::queueFlyoutIconField.field
     val iconEnum = ::queueFlyoutIconEnum.method
-    val clicks = ::queueFlyoutClicks.dexMethodList.map { it.toMethod() }.chunked(2)
-    val clickItems = ::queueFlyoutClickItems.fieldList
-    check(clicks.size == clickItems.size) {
-        "Native playlist queue: every sheet click must have its item field"
+    // บาง build เปลี่ยนที่มาของรายการที่กด: อ่านจากฟิลด์ของปุ่ม หรือรับปุ่มเข้ามาเป็นพารามิเตอร์
+    // ถ้าหาคู่ของคลิกกับฟิลด์รายการไม่ครบ ให้ข้ามการ hook คลิกของชีตไปพร้อมบอกใน log
+    // ดีกว่าให้ทั้งแพตช์ใช้งานไม่ได้ เพราะเมนูของป๊อปอัปยังทำงานได้ตามปกติ
+    val clickPairs = runCatching {
+        val clicks = ::queueFlyoutClicks.dexMethodList.map { it.toMethod() }.chunked(2)
+        val clickItems = ::queueFlyoutClickItems.fieldList
+        check(clicks.size == clickItems.size) {
+            "Native playlist queue: every sheet click must have its item field"
+        }
+        clicks.zip(clickItems)
+    }.getOrElse { error ->
+        Logger.printInfo({ "Native playlist queue: the sheet clicks of this build are not hooked" }, error as? Exception)
+        emptyList()
     }
 
-    clicks.zip(clickItems).forEach { (pair, itemField: Field) ->
+    clickPairs.forEach { (pair, itemField: Field) ->
         val click: Method = pair.first()
         val dismissal: Method = pair.last()
         click.hookMethod {
