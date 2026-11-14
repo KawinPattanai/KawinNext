@@ -368,8 +368,9 @@ class PatchExecutor(
     val KProperty0<FindFieldFunc>.declaredClass
         get() = classLoader.loadClass(dexField.declaredClassName)
 
+    // The class of a field is the one that declares it; the type of the field is its own.
     val KProperty0<FindFieldFunc>.type
-        get() = classLoader.loadClass(dexField.className)
+        get() = classLoader.loadClass(dexField.typeName)
 
     val KProperty0<FindClassFunc>.dexClass
         get() = getDexClass(this.name, this.get())
