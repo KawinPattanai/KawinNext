@@ -47,6 +47,7 @@ import io.github.kawinnext.morphe.youtube.misc.announcements.patchesUpdateNotice
 import io.github.kawinnext.morphe.youtube.misc.backgroundplayback.BackgroundPlayback
 import io.github.kawinnext.morphe.youtube.misc.debugging.EnableDebugging
 import io.github.kawinnext.morphe.youtube.misc.fix.mediasession.fixMediaSessionStopPatch
+import io.github.kawinnext.morphe.youtube.misc.spoof.spoofVideoStreamsPatch
 import io.github.kawinnext.morphe.youtube.misc.privacy.SanitizeSharingLinks
 import io.github.kawinnext.morphe.youtube.misc.settings.SettingsHook
 import io.github.kawinnext.morphe.youtube.misc.whitelist.channelWhitelistPatch
@@ -143,6 +144,7 @@ val YouTubePatches = arrayOf(
     fullscreenPlaylistPanelPatch,
     fixMediaSessionStopPatch,
     patchesUpdateNoticePatch,
+    spoofVideoStreamsPatch,
     // make sure settingsHook at end to build preferences
     SettingsHook,
     FeatureOverride
