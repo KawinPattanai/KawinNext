@@ -314,8 +314,10 @@ internal fun PatchExecutor.installPlaylistPagingSequence(
     check(nativeNavigator.declaringClass == wrapperType) {
         "Native playlist queue: the sequence field belongs to another queue wrapper"
     }
-    check(nativeNavigator.type == queueType) {
-        "Native playlist queue: the wrapper holds a sequence of another class"
+    // 21.44 declares the field as the navigator interface, which every navigator of the player
+    // implements, so the queue is one of the sequences it may hold rather than its whole type.
+    check(nativeNavigator.type.isAssignableFrom(queueType)) {
+        "Native playlist queue: the wrapper holds navigators the native queue does not belong to"
     }
     check(descriptor.declaringClass == queueType) {
         "Native playlist queue: the descriptor lookup belongs to another native queue"
