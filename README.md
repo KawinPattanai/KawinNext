@@ -35,47 +35,79 @@ The patch logic and the in-app extension code come from the [Morphe](https://mor
 
 ## Patches
 
+These are the switches the module shows for each app, one entry per patch that is registered in that app's hook. An app whose hook carries a patch gets its settings screen in the app itself, under **Settings → Morphe**.
+
+| App | Patches |
+| --- | --- |
+| YouTube | 41 |
+| YouTube Music | 13 |
+| Reddit | 3 |
+| Google Photos | 2 |
+| Photomath | 1 |
+| Instagram | 1 |
+| Threads | 1 |
+| Strava | 2 |
+| AllTrails | 1 |
+
 ### YouTube
 
-- Remove ads
-- SponsorBlock
-- Return YouTube Dislike
-- DeArrow (alternative titles and thumbnails)
-- Remove background playback restrictions
-- AI channel filtering and reporting (AiSList)
 - Add to queue
-- Swipe controls
-- Seekbar
-- Remove share links tracking query parameter
-- Open system share sheet
-- Hide and change navigation buttons
-- Remember video quality changes
-- Show video quality button
-- Show advanced video quality menu
-- Copy video url video player button
-- Copy video titles and comments
-- Open external downloader app
-- Custom playback speed
-- Remember playback speed
-- Playback speed dialog button
-- Hide layout components
-- Hide feed flyout menu items
-- Hide video action buttons
-- Disable Shorts resuming on startup
-- Disable video codecs
-- Disable auto captions
+- Ambient mode
+- Auto captions
+- Autoplay control
 - Bypass image region restrictions
 - Change start page
 - Channel search
 - Channel whitelist
+- Copy text
+- Copy video link
+- DeArrow
+- Disable Shorts resuming on startup
+- Disable video codecs
+- Downloads
+- Enable debugging
+- Feed thumbnail like position
+- Fix media session stop
+- Force original audio
+- Fullscreen playlist panel
+- Hide ads
+- Hide layout components
+- Hide Shorts components
+- Hide video action buttons
+- Miniplayer
+- Native playlist queue
+- Navigation bar
+- Niconico comments
+- On-the-go player
+- Open system share sheet
+- Patches update notice
+- Playback speed
+- Playlist button
+- Playlist improvements
+- Remove background playback restrictions
+- Return YouTube Dislike
+- Sanitize sharing links
+- Seekbar
+- SponsorBlock
+- Spoof video streams
+- Swipe controls
+- Video quality
 
 ### YouTube Music
 
-- Remove music video ads
-- Remove background playback restrictions
-- Hide upgrade button
-- Hide 'Get Music Premium' label
+- A-B loop
+- Change miniplayer color
+- Disable auto captions
+- Enable debugging
 - Enable exclusive audio playback
+- Hide ads
+- Hide layout components
+- Hide upgrade button
+- Navigation bar
+- Remember video quality
+- Remove background playback restrictions
+- Sanitize sharing links
+- SponsorBlock
 
 ### Reddit
 
@@ -85,7 +117,8 @@ The patch logic and the in-app extension code come from the [Morphe](https://mor
 
 ### Google Photos
 
-- Spoof Pixel XL
+- Enable DCIM folders backup control
+- Spoof features
 
 ### Photomath
 
@@ -101,8 +134,8 @@ The patch logic and the in-app extension code come from the [Morphe](https://mor
 
 ### Strava
 
-- Unlock subscription features
 - Disable subscription suggestions
+- Unlock subscription features
 
 ### AllTrails
 
