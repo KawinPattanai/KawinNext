@@ -8,6 +8,8 @@
 package io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue
 
 import app.morphe.extension.youtube.patches.queue.NativePlaylistQueuePatch
+import io.github.kawinnext.HookDsl
+import io.github.kawinnext.IScopedHookCallback
 import app.morphe.extension.youtube.patches.queue.NativePlaylistQueuePatch.PlayerControls
 import io.github.kawinnext.PatchExecutor
 import io.github.kawinnext.hookMethod
@@ -96,10 +98,16 @@ private val playerControlPresses = findMethodListDirect {
 }
 
 /** The native capability check of the navigator, which both eligibility checks evaluate. */
-private val playerControlsCapability = findMethodDirect {
+/**
+ * The bodies of the navigator check, one per implementation of the navigator interface.
+ *
+ * The eligibility method of the controls asks its navigator whether it may navigate; the interface
+ * declares that check without a body, so every implementation is hooked for it.
+ */
+private val playerControlsCapabilities = findMethodListDirect {
     playlistNavigatorCanNavigateFingerprint(
         playlistNavigatorType(), nativeQueueRequestClass(this).descriptor
-    ).match().method
+    ).matchAllOrNull()?.map { it.method }.orEmpty()
 }
 
 /** The direction of the Next control in the native order of the two checks. */
@@ -159,7 +167,7 @@ internal fun PatchExecutor.installPlaylistPlayerControls(
         PlayerControlsProxy(instance, navigator, eligibility)
     }
     val presses = ::playerControlPresses.dexMethodList.map { it.toMethod() }
-    val capability = ::playerControlsCapability.method
+    val capabilities = ::playerControlsCapabilities.dexMethodList.map { it.toMethod() }
 
     ::playerControlsConstructor.constructor.hookMethod {
         after { param ->
@@ -173,7 +181,7 @@ internal fun PatchExecutor.installPlaylistPlayerControls(
     eligibility.forEachIndexed { direction, check ->
         // The extension replaces the value the native check computed, which is the register the
         // upstream injection rewrites just before the cached value is compared with it.
-        check.hookMethod(scopedHook(capability) {
+        val body: HookDsl<IScopedHookCallback>.() -> Unit = {
             after { param ->
                 val original = param.result as? Boolean ?: return@after
                 val instance = outerParam.thisObject ?: return@after
@@ -183,7 +191,8 @@ internal fun PatchExecutor.installPlaylistPlayerControls(
                     )
                 } ?: original
             }
-        })
+        }
+        check.hookMethod(scopedHook(*capabilities.map { capability -> capability to body }.toTypedArray()))
     }
 
     presses.forEachIndexed { direction, press ->

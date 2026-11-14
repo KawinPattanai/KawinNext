@@ -1530,15 +1530,21 @@ internal fun playlistServiceCanNavigateFingerprint(serviceType: String, requestT
 )
 
 /**
- * The navigator checks the same as above, declared by the interface the controls hold it as.
+ * Every body of the navigator check, which the interface itself only declares.
  *
- * 21.44 reaches the controls through the navigator interface, whose method is abstract rather than
- * final, so the check is asked for without the flags only one implementation has.
+ * 21.44 reaches the controls through the navigator interface, whose method is abstract and so has
+ * nothing to hook. The check is read where it is written instead: in the classes of the player that
+ * implement the interface and declare the check as public and final.
  */
 internal fun playlistNavigatorCanNavigateFingerprint(navigatorType: String, requestType: String) = Fingerprint(
-    definingClass = navigatorType,
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "Z",
-    parameters = listOf(requestType)
+    parameters = listOf(requestType),
+    custom = {
+        declaredClass {
+            addInterface(interfaceType(navigatorType))
+        }
+    }
 )
 
 /** Load a new watch target; native JUMP only accepts targets in an existing playlist. */
