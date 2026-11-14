@@ -14,6 +14,7 @@ package io.github.kawinnext.morphe.youtube.misc.spoof
 
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.patches.MediaHttpRequest
+import app.morphe.extension.shared.patches.HttpHeaderAccess
 import app.morphe.extension.shared.spoof.SpoofVideoStreamsPatch
 import com.google.android.libraries.youtube.media.interfaces.HttpHeader
 import java.lang.reflect.Field
@@ -211,8 +212,22 @@ internal class MediaRequestProxy(
 ) : MediaHttpRequest {
 
     @Suppress("UNCHECKED_CAST")
-    override fun patch_getHeaders(): ArrayList<HttpHeader>? =
-        readField(request, headersField) as ArrayList<HttpHeader>?
+    override fun patch_getHeaders(): ArrayList<HttpHeader>? {
+        val headers = readField(request, headersField) as ArrayList<HttpHeader>?
+        // The extension reads the name of a header from the fields of its class, because the module
+        // cannot add an interface to a class of the app the way the patch of upstream does. The
+        // class is read once, from a header the app built, so the fields come from the class itself
+        // and not from a guess about the order it writes them in.
+        if (!HttpHeaderAccess.isResolved()) {
+            headers?.firstOrNull()?.let { header ->
+                val strings = header.javaClass.declaredFields.filter { it.type == String::class.java }
+                if (strings.size >= 2) {
+                    runCatching { HttpHeaderAccess.setFields(strings[0], strings[1]) }
+                }
+            }
+        }
+        return headers
+    }
 
     override fun patch_getUrl(): String? = readField(request, urlField) as String?
 
