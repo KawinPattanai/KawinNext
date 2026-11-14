@@ -23,6 +23,7 @@ import io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue.native
 import io.github.kawinnext.morphe.youtube.interaction.onthego.onTheGoPatch
 import io.github.kawinnext.morphe.youtube.interaction.playlist.playlistPatch
 import io.github.kawinnext.morphe.youtube.interaction.playlistpanel.playlistPanelButtonPatch
+import io.github.kawinnext.morphe.youtube.interaction.returnyoutubedislike.feedCountsPositionPatch
 import io.github.kawinnext.morphe.youtube.interaction.seekbar.seekbarPatch
 import io.github.kawinnext.morphe.youtube.interaction.swipecontrols.SwipeControls
 import io.github.kawinnext.morphe.youtube.layout.buttons.action.HideVideoActionButtons
@@ -106,6 +107,7 @@ val YouTubePatches = arrayOf(
     SponsorBlock,
     copyTextPatch,
     returnYouTubeDislikePatch,
+    feedCountsPositionPatch,
     CopyVideoLinkButtonPatch,
     Downloads,
     HideShortsComponents,
