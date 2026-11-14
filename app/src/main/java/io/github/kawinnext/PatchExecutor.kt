@@ -195,7 +195,9 @@ class SharedPrefCache(app: Application) : DexKitCacheBridge.Cache {
         map.forEach { (k, v) ->
             edit.putString(k, v)
         }
-        edit.commit()
+        // The map is rebuilt by every patch, and a write that waits for the disk holds the thread
+        // that is starting the app.
+        edit.apply()
     }
 }
 
@@ -259,7 +261,9 @@ class PatchExecutor(
 
         val id = "${packageInfo.lastUpdateTime}-$moduleRel"
         val cachedId = cache.getString("id", null)
-        val isCached = cachedId.equals(id) && !DEBUG
+        // The id carries the build of the host and of the module, so a cache of another build can
+        // never answer for this one; a build that is only debugged is no different.
+        val isCached = cachedId.equals(id)
 
         Logger.printInfo { "cache ID : $id" }
         Logger.printInfo { "cached ID: ${cachedId ?: ""}" }
@@ -286,6 +290,9 @@ class PatchExecutor(
             }.onSuccess {
                 appliedPatches.add(hook)
             }
+            // Keep what the patches resolved so far: a run that is cut short still saves the
+            // expensive lookups for the next one instead of losing all of them.
+            cache.saveCache()
         }
     }
 

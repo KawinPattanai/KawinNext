@@ -48,7 +48,15 @@ class MainHook : XposedModule() {
             }
 
             val patches = patchesByPackage[param.packageName] ?: return@inContext
-            PatchExecutor(app, param, this).applyPatches(patches)
+            // Resolving the fingerprints of every patch takes longer than the app is given to
+            // finish starting, so the process is killed while it runs and no patch is installed.
+            // The patches are applied on their own thread instead, which lets the app start; the
+            // cache carries what is already resolved into the next launch.
+            val module = this
+            Thread({
+                runCatching { PatchExecutor(app, param, module).applyPatches(patches) }
+                    .onFailure { XposedBridge.log(it) }
+            }, "KawinNext patches").start()
         }
     }
 
