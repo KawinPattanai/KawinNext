@@ -193,11 +193,18 @@ class HaloSearchPreference(
     }
 }
 
-/** A patch toggle: name and description on the left, Halo switch on the right. */
+/**
+ * A patch toggle: name and description on the left, Halo switch on the right.
+ *
+ * The value lives in the target app's remote preferences, which is what the hook reads
+ * (`PatchExecutor`). The row therefore must not keep a second copy in this app's own
+ * preferences, or the two can disagree after the remote value is restored or reset.
+ */
 class HaloPatchPreference(context: Context) : CheckBoxPreference(context) {
     init {
         layoutResource = R.layout.preference_patch_row
         widgetLayoutResource = 0
+        isPersistent = false
     }
 
     override fun onBindView(view: View) {
