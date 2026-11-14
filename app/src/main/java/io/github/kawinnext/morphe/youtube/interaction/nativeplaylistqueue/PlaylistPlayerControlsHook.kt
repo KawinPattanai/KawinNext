@@ -28,8 +28,8 @@ import java.lang.reflect.Method
 // interface is the proxy below, the eligibility is replaced at the native capability call that
 // feeds it, and the callbacks are hooked at entry.
 
-/** The playlist navigator the controls of the playlist are created with. */
-private fun DexKitBridge.playlistNavigatorType(): String =
+/** The playlist navigator the controls of the playlist are created with, which the header holds too. */
+internal fun DexKitBridge.playlistNavigatorType(): String =
     PlaylistControlsCreationFingerprint.match().instructionMatches[4].instruction.classRef!!.descriptor
 
 /** The native request of one skip direction, which the controls dispatch. */
@@ -81,15 +81,23 @@ private val playerControlPresses = findMethodListDirect {
     ).match()
     val controls = availability.method.declaredClass!!.descriptor
     val delegate = availability.instructionMatches.first().instruction.fieldRef!!
-    listOf("NEXT", "PREVIOUS").map { direction ->
-        playlistControlPressFingerprint(controls, delegate, playerControlRequest(direction))
-            .match().method
+    val directions = listOf("NEXT", "PREVIOUS")
+    val logged = directions.map { direction ->
+        runCatching {
+            playlistControlPressFingerprint(controls, delegate, playerControlRequest(direction)).match().method
+        }.getOrNull()
     }
+    // 21.44 asks its delegate first and dispatches through the navigator, without the log call.
+    logged.takeIf { it.all { method -> method != null } }?.map { method -> method!! }
+        ?: directions.map { direction ->
+            playlistControlPressDispatchFingerprint(controls, playerControlRequest(direction))
+                .match().method
+        }
 }
 
 /** The native capability check of the navigator, which both eligibility checks evaluate. */
 private val playerControlsCapability = findMethodDirect {
-    playlistServiceCanNavigateFingerprint(
+    playlistNavigatorCanNavigateFingerprint(
         playlistNavigatorType(), nativeQueueRequestClass(this).descriptor
     ).match().method
 }

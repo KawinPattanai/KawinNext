@@ -42,9 +42,12 @@ private val repeatCapabilities = findMethodDirect {
     PlaylistRepeatCapabilitiesFingerprint.match().method
 }
 
-/** The navigator field of the header. */
+/**
+ * The navigator field of the header, which is held by the interface the controls are created with
+ * rather than by the class of the header that stores it.
+ */
 private val repeatNavigator = findFieldDirect {
-    playlistHeaderNavigatorFingerprint(repeatHeaderType()).match()
+    playlistHeaderNavigatorFingerprint(playlistNavigatorType()).match()
         .instructionMatches.single().instruction.fieldRef!!
 }
 
