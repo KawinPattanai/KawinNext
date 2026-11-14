@@ -173,6 +173,21 @@ object PreferenceScreen : BasePreferenceScreen() {
         iconBold = "@drawable/morphe_settings_screen_11_misc_bold",
         layout = "@layout/morphe_preference_with_icon"
     )
+    val SPONSORBLOCK = Screen(
+        key = "morphe_settings_music_screen_09_sponsorblock",
+        summaryKey = null,
+        icon = "@drawable/morphe_settings_screen_10_sponsorblock",
+        iconBold = "@drawable/morphe_settings_screen_10_sponsorblock_bold",
+        layout = "@layout/morphe_preference_with_icon",
+        sorting = Sorting.UNSORTED
+    )
+    val VIDEO = Screen(
+        key = "morphe_settings_music_screen_10_video",
+        summaryKey = null,
+        icon = "@drawable/morphe_settings_screen_12_video",
+        iconBold = "@drawable/morphe_settings_screen_12_video_bold",
+        layout = "@layout/morphe_preference_with_icon"
+    )
 
     override fun commit(screen: PreferenceScreenPreference) {
         preferences += screen
