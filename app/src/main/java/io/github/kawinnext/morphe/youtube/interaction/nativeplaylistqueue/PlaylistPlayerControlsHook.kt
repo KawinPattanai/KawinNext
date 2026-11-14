@@ -144,7 +144,7 @@ internal fun PatchExecutor.installPlaylistPlayerControls(
     check(navigator.type == navigatorType) {
         "Native playlist queue: the player controls hold a navigator of another class"
     }
-    check(::playerControlsDelegate.field.declaringClass == ::playerControlsConstructor.method.declaringClass) {
+    check(::playerControlsDelegate.field.declaringClass == ::playerControlsConstructor.constructor.declaringClass) {
         "Native playlist queue: the player controls of the eligibility check are another class"
     }
     check(NavigationIntentEnumFingerprint.declaredClass == enumType) {
@@ -161,7 +161,7 @@ internal fun PatchExecutor.installPlaylistPlayerControls(
     val presses = ::playerControlPresses.dexMethodList.map { it.toMethod() }
     val capability = ::playerControlsCapability.method
 
-    ::playerControlsConstructor.method.hookMethod {
+    ::playerControlsConstructor.constructor.hookMethod {
         after { param ->
             val instance = param.thisObject ?: return@after
             queueAction("onPlayerControlsCreated") {
