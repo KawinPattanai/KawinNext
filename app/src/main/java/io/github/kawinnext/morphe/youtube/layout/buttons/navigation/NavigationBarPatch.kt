@@ -1,9 +1,11 @@
 package io.github.kawinnext.morphe.youtube.layout.buttons.navigation
 
+import android.view.View
 import android.widget.TextView
 import app.morphe.extension.youtube.patches.NavigationBarPatch
 import io.github.kawinnext.morphe.setExtensionIsPatchIncluded
 import io.github.kawinnext.morphe.shared.misc.settings.preference.ListPreference
+import io.github.kawinnext.morphe.shared.misc.settings.preference.NonInteractivePreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
 import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
@@ -49,6 +51,12 @@ val NavigationBar = patch(
 //        SwitchPreference("morphe_disable_icon_only_navigation_buttons", summary = true),
         SwitchPreference("morphe_hide_navigation_new_content_dot"),
         SwitchPreference("morphe_navigation_bar_animations", summary = true),
+        SwitchPreference("morphe_navigation_bar_glass", summary = true),
+        NonInteractivePreference(
+            key = "morphe_navigation_bar_glass_opacity",
+            tag = app.morphe.extension.shared.settings.preference.SeekBarPreference::class.java,
+        ),
+        SwitchPreference("morphe_navigation_bar_glass_round", summary = true),
 //        SwitchPreference("morphe_disable_translucent_navigation", summary = true)
     )
 
@@ -92,6 +100,21 @@ val NavigationBar = patch(
     insertLiteralOverride(45630927L, NavigationBarPatch::useTranslucentNavigationBar)
     insertLiteralOverride(45632194L, NavigationBarPatch::useTranslucentNavigationBar)
     insertLiteralOverride(45631257L, NavigationBarPatch::useTranslucentNavigationBar)
+
+    // The glass style draws the navigation bar as a floating translucent capsule. The capsule is
+    // applied whenever the app creates the container of the navigation bar, and the extension
+    // leaves the bar untouched while the style is turned off.
+    InitializeBottomBarContainerFingerprint.hookMethod(
+        scopedHook(
+            DexMethod(
+                $$"Landroid/view/View;->addOnLayoutChangeListener(Landroid/view/View$OnLayoutChangeListener;)V"
+            ).toMethod()
+        ) {
+            after { param ->
+                NavigationBarPatch.setNavigationBarGlass(param.thisObject as View)
+            }
+        }
+    )
 
     // TODO Paint over the translucent status bar and navigation bar
 

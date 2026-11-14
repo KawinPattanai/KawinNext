@@ -5,8 +5,10 @@ import io.github.kawinnext.morphe.Fingerprint
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterWithin
 import io.github.kawinnext.morphe.Opcode
 import io.github.kawinnext.morphe.OpcodesFilter
+import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
+import io.github.kawinnext.morphe.resourceLiteral
 
 internal object CreatePivotBarFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
@@ -20,6 +22,22 @@ internal object CreatePivotBarFingerprint : Fingerprint(
         Opcode.INVOKE_VIRTUAL,
         Opcode.RETURN_VOID,
     ),
+)
+
+/**
+ * Creates the container of the navigation bar and the slim status bar.
+ */
+internal object InitializeBottomBarContainerFingerprint : Fingerprint(
+    name = "run",
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    filters = listOf(
+        resourceLiteral(ResourceType.ID, "bottom_bar_container"),
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            smali = $$"Landroid/view/View;->addOnLayoutChangeListener(Landroid/view/View$OnLayoutChangeListener;)V"
+        )
+    )
 )
 
 internal object AutoHideNavigationBarOnFeedScrollingFingerprint : Fingerprint(
