@@ -58,13 +58,41 @@ private fun isOnTheGoCommand(command: Any): Boolean {
 
 // The app cannot be made to implement the interfaces the extension is handed at runtime,
 // so an object of the module stands in for the app object and calls its setter, or reads its field.
+/**
+ * Reads the active flag of the state object of the app, which the setter alone cannot answer.
+ * The app holds the flag in a boolean field, or in an atomic one it reads through the field.
+ */
+private fun onTheGoStateReader(stateType: Class<*>): (Any) -> Boolean {
+    val plain = stateType.declaredFields.firstOrNull { it.type == Boolean::class.javaPrimitiveType }
+    if (plain != null) {
+        plain.isAccessible = true
+        return { plain.getBoolean(it) }
+    }
+
+    val atomic = stateType.declaredFields.firstOrNull {
+        it.type.name == "java.util.concurrent.atomic.AtomicBoolean"
+    }
+    if (atomic != null) {
+        atomic.isAccessible = true
+        val get = atomic.type.getMethod("get")
+        return { get.invoke(atomic.get(it)) as Boolean }
+    }
+
+    // A state without a flag of either shape is never active, which leaves the media controls as
+    // the app made them rather than turning them on without a reason.
+    return { false }
+}
+
 private class OnTheGoStateProxy(
     private val state: Any,
-    private val setter: Method
+    private val setter: Method,
+    private val reader: (Any) -> Boolean
 ) : OnTheGoPatch.OnTheGoState {
     override fun patch_setOnTheGoActive(active: Boolean) {
         setter.invoke(state, active)
     }
+
+    override fun patch_isOnTheGoActive(): Boolean = reader(state)
 }
 
 private class SeekLengthProxy(
@@ -119,7 +147,11 @@ val onTheGoPatch = patch(
         .parameterTypes.first().name.replace('.', '/') + ";"
     val stateSetter = onTheGoStateSetterFingerprint(stateClass).method
     onTheGoStateConstructorFingerprint(stateClass).hookMethod {
-        after { OnTheGoPatch.setOnTheGoState(OnTheGoStateProxy(it.thisObject, stateSetter)) }
+        after {
+            OnTheGoPatch.setOnTheGoState(
+                OnTheGoStateProxy(it.thisObject, stateSetter, onTheGoStateReader(stateSetter.declaringClass))
+            )
+        }
     }
 
     // The seek buttons of the panel use the double tap to seek length of the app settings.
