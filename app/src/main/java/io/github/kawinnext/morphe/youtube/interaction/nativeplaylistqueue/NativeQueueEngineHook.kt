@@ -211,10 +211,12 @@ private val nativeQueueLocalPlaylistId = findMethodDirect {
 private val nativeQueueAutoplay = findMethodDirect {
     val queue = nativeQueueDescriptor(this).declaredClass!!.descriptor
     val receive = nativeQueueReceive(queue, nativeQueueNavigatorType(this).descriptor)
-    nativeQueueAutoplayFingerprint(
-        receive.instructionMatches[6].instruction.fieldRef!!,
-        receive.instructionMatches[16].instruction.methodRef!!,
-    ).match().method
+    uniqueMatch(
+        nativeQueueAutoplayFingerprint(
+            receive.instructionMatches[6].instruction.fieldRef!!,
+            receive.instructionMatches[16].instruction.methodRef!!,
+        )
+    ).method
 }
 
 /** ตัวสร้าง navigator ของ autoplay ซึ่งใช้เมื่อคืนคิวให้ autoplay ของเซิร์ฟเวอร์ */
