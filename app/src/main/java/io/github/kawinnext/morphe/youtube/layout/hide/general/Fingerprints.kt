@@ -14,6 +14,7 @@ import io.github.kawinnext.morphe.fieldAccess
 import io.github.kawinnext.morphe.findFieldDirect
 import io.github.kawinnext.morphe.findMethodDirect
 import io.github.kawinnext.morphe.findMethodListDirect
+import io.github.kawinnext.morphe.getResourceId
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.opcode
 import io.github.kawinnext.morphe.resourceLiteral
@@ -100,8 +101,18 @@ internal object ContextualMenuItemBuilderFingerprint : Fingerprint(
             returnType = "I",
             location = MatchAfterWithin(7),
         ),
-        resourceLiteral(ResourceType.DIMEN, "poster_art_width_default"),
-    )
+        // The text color is resolved right after the style, in the same order in 21.44 and 21.45.
+        methodCall(
+            opcode = Opcode.INVOKE_STATIC,
+            returnType = "Landroid/content/res/ColorStateList;",
+            location = MatchAfterWithin(7),
+        ),
+    ),
+    custom = {
+        // 21.45 moved the dimension constant before the text is set, so it cannot be an
+        // instruction filter anymore. It still narrows the query to the menu item builder.
+        addUsingNumber(getResourceId(ResourceType.DIMEN, "poster_art_width_default").toLong())
+    }
 )
 
 val contextualMenuItemTextViewField = findFieldDirect {
@@ -117,11 +128,8 @@ internal object ContextualMenuItemBuilderOnClickFingerprint : Fingerprint(
     name = "onClick",
     parameters = listOf("Landroid/view/View;"),
     filters = listOf(
-        fieldAccess(
-            opcode = Opcode.IGET_OBJECT,
-            definingClass = "this",
-            type = "Ljava/lang/Object;"
-        ),
+        // The message of the item, cast to its proto type when the click is handled.
+        fieldAccess(opcode = Opcode.IGET_OBJECT, definingClass = "this"),
         opcode(Opcode.CHECK_CAST, location = MatchAfterImmediately()),
         opcode(Opcode.INVOKE_STATIC, location = MatchAfterImmediately()),
         opcode(Opcode.MOVE_RESULT_OBJECT, location = MatchAfterImmediately())
