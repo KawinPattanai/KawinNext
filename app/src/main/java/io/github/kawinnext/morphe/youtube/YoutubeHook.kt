@@ -27,6 +27,7 @@ import io.github.kawinnext.morphe.youtube.interaction.returnyoutubedislike.feedC
 import io.github.kawinnext.morphe.youtube.interaction.seekbar.seekbarPatch
 import io.github.kawinnext.morphe.youtube.interaction.swipecontrols.SwipeControls
 import io.github.kawinnext.morphe.youtube.layout.buttons.action.HideVideoActionButtons
+import io.github.kawinnext.morphe.youtube.layout.miniplayer.miniplayerPatch
 import io.github.kawinnext.morphe.youtube.layout.player.playlistpanel.fullscreenPlaylistPanelPatch
 import io.github.kawinnext.morphe.youtube.layout.buttons.navigation.NavigationBar
 import io.github.kawinnext.morphe.youtube.layout.captions.AutoCaptions
@@ -135,6 +136,7 @@ val YouTubePatches = arrayOf(
     channelWhitelistPatch,
     niconicoCommentsPatch,
     onTheGoPatch,
+    miniplayerPatch,
     playlistPatch,
     autoplayControlPatch,
     playlistPanelButtonPatch,
