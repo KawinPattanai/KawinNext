@@ -1077,6 +1077,32 @@ internal fun playlistControlAvailabilityFingerprint(
     )
 )
 
+/**
+ * The press callback of 21.44: it asks its delegate first, then dispatches the request through the
+ * navigator, which answers whether it may navigate.
+ */
+internal fun playlistControlPressDispatchFingerprint(controlsType: String, request: FieldData) = Fingerprint(
+    definingClass = controlsType,
+    returnType = "V",
+    parameters = emptyList(),
+    filters = listOf(
+        fieldAccess(opcode = Opcode.IGET_OBJECT),
+        opcode(Opcode.IF_EQZ, location = MatchAfterImmediately()),
+        methodCall(
+            opcode = Opcode.INVOKE_INTERFACE,
+            parameters = emptyList(),
+            returnType = "Z",
+            location = MatchAfterImmediately()
+        ),
+        fieldAccess(reference = request, opcode = Opcode.SGET_OBJECT),
+        methodCall(
+            opcode = Opcode.INVOKE_INTERFACE,
+            parameters = listOf(request.type.descriptor),
+            returnType = "Z"
+        )
+    )
+)
+
 /** The press callback logs first, then dispatches to its delegate or the navigator. */
 internal fun playlistControlPressFingerprint(
     controlsType: String,
@@ -1499,6 +1525,18 @@ internal fun notificationForegroundSkipFingerprint(callbackType: String, request
 internal fun playlistServiceCanNavigateFingerprint(serviceType: String, requestType: String) = Fingerprint(
     definingClass = serviceType,
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "Z",
+    parameters = listOf(requestType)
+)
+
+/**
+ * The navigator checks the same as above, declared by the interface the controls hold it as.
+ *
+ * 21.44 reaches the controls through the navigator interface, whose method is abstract rather than
+ * final, so the check is asked for without the flags only one implementation has.
+ */
+internal fun playlistNavigatorCanNavigateFingerprint(navigatorType: String, requestType: String) = Fingerprint(
+    definingClass = navigatorType,
     returnType = "Z",
     parameters = listOf(requestType)
 )
