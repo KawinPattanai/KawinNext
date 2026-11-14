@@ -30,10 +30,6 @@ import java.lang.reflect.Method
 // module cannot add a member to a class of the app, so the navigator is a proxy over the service, the
 // sequence bridge is the playback proxy of the engine, and the four call sites are the hooks below.
 
-/** The native queue of the app, which the wrapper replaces with the owned queue. */
-private fun DexKitBridge.playlistQueueType(): String =
-    NativeQueueDescriptorFingerprint.match().method.declaredClass!!.descriptor
-
 /** The type of the request that carries an intent to navigate. */
 private fun DexKitBridge.playlistRequestType(): String = nativeQueueRequestClass(this).descriptor
 
@@ -93,7 +89,9 @@ private val playlistServiceSequencer = findFieldListDirect {
         nativeQueueSequencerOwnerFingerprint(service, sequencer.declaredClass!!.descriptor)
             .match().instructionMatches.first().instruction.fieldRef!!,
         sequencer,
-        nativeQueueSequencerNavigatorFingerprint(sequencerType, playlistQueueType())
+        // 21.44 holds the active navigator in a field of the navigator interface, which the queue
+        // is one implementation of, so the field is looked up by that interface.
+        nativeQueueSequencerNavigatorFingerprint(sequencerType, nativeQueueNavigatorType(this).descriptor)
             .match().instructionMatches.single().instruction.fieldRef!!,
     )
 }
