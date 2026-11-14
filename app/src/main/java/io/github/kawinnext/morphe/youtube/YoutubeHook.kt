@@ -17,13 +17,16 @@ import io.github.kawinnext.morphe.youtube.ad.HideAds
 import io.github.kawinnext.morphe.youtube.interaction.channelsearch.channelSearchPatch
 import io.github.kawinnext.morphe.youtube.interaction.copytext.copyTextPatch
 import io.github.kawinnext.morphe.youtube.interaction.copyvideolink.CopyVideoLinkButtonPatch
+import io.github.kawinnext.morphe.youtube.interaction.autoplay.autoplayControlPatch
 import io.github.kawinnext.morphe.youtube.interaction.downloads.Downloads
 import io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue.nativePlaylistQueuePatch
 import io.github.kawinnext.morphe.youtube.interaction.onthego.onTheGoPatch
 import io.github.kawinnext.morphe.youtube.interaction.playlist.playlistPatch
+import io.github.kawinnext.morphe.youtube.interaction.playlistpanel.playlistPanelButtonPatch
 import io.github.kawinnext.morphe.youtube.interaction.seekbar.seekbarPatch
 import io.github.kawinnext.morphe.youtube.interaction.swipecontrols.SwipeControls
 import io.github.kawinnext.morphe.youtube.layout.buttons.action.HideVideoActionButtons
+import io.github.kawinnext.morphe.youtube.layout.player.playlistpanel.fullscreenPlaylistPanelPatch
 import io.github.kawinnext.morphe.youtube.layout.buttons.navigation.NavigationBar
 import io.github.kawinnext.morphe.youtube.layout.captions.AutoCaptions
 import io.github.kawinnext.morphe.youtube.layout.dearrow.deArrowPatch
@@ -41,6 +44,7 @@ import io.github.kawinnext.morphe.youtube.layout.thumbnails.BypassImageRegionRes
 import io.github.kawinnext.morphe.youtube.misc.announcements.patchesUpdateNoticePatch
 import io.github.kawinnext.morphe.youtube.misc.backgroundplayback.BackgroundPlayback
 import io.github.kawinnext.morphe.youtube.misc.debugging.EnableDebugging
+import io.github.kawinnext.morphe.youtube.misc.fix.mediasession.fixMediaSessionStopPatch
 import io.github.kawinnext.morphe.youtube.misc.privacy.SanitizeSharingLinks
 import io.github.kawinnext.morphe.youtube.misc.settings.SettingsHook
 import io.github.kawinnext.morphe.youtube.misc.whitelist.channelWhitelistPatch
@@ -130,6 +134,10 @@ val YouTubePatches = arrayOf(
     niconicoCommentsPatch,
     onTheGoPatch,
     playlistPatch,
+    autoplayControlPatch,
+    playlistPanelButtonPatch,
+    fullscreenPlaylistPanelPatch,
+    fixMediaSessionStopPatch,
     patchesUpdateNoticePatch,
     // make sure settingsHook at end to build preferences
     SettingsHook,
