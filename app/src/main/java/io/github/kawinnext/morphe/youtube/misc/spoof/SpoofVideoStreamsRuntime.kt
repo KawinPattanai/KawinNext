@@ -19,6 +19,7 @@ import app.morphe.extension.shared.spoof.SpoofVideoStreamsPatch
 import com.google.android.libraries.youtube.media.interfaces.HttpHeader
 import java.lang.reflect.Field
 import java.lang.reflect.Method
+import java.nio.ByteBuffer
 
 /**
  * @return The field of this class with the exact type, or null.
@@ -102,20 +103,215 @@ private fun Class<*>.methodOrNull(name: String, vararg parameters: Class<*>): Me
     }
 
 /**
+ * @return The default instance of a message class, or null if the class has none.
+ */
+private fun defaultInstanceOf(messageClass: Class<*>): Any? = try {
+    (messageClass.declaredFields + messageClass.fields).firstOrNull { field ->
+        java.lang.reflect.Modifier.isStatic(field.modifiers) && field.type == messageClass
+    }?.apply { isAccessible = true }?.get(null)
+} catch (ex: Exception) {
+    Logger.printException({ "Could not read the default instance of: ${messageClass.name}" }, ex)
+    null
+}
+
+/**
+ * @return The method the messages of the app build themselves with, or null.
+ *
+ * A generated message keeps one method that makes every object it needs, which is the only method
+ * its class declares: the runtime calls it for the message itself, and so it cannot be removed.
+ * The first parameter of the method tells which of those objects is wanted.
+ */
+private fun generatedDynamicMethod(messageClass: Class<*>): Method? =
+    messageClass.declaredMethods.firstOrNull { method ->
+        val cases = method.parameterTypes.firstOrNull()
+        method.parameterTypes.size == 3 && cases != null && cases.isEnum &&
+            (cases.enumConstants?.size ?: 0) >= 2
+    }
+
+/**
+ * @return The parser of a message class, or null if the app has none for it.
+ *
+ * The messages the app parses keep no parser of their own, and a message the app never parses from
+ * bytes keeps none either, such as the streaming data of a player response. The parser of every
+ * message can still be read from the generated method of the message, which builds the parser.
+ */
+private fun messageParser(messageClass: Class<*>): Any? = try {
+    val instance = defaultInstanceOf(messageClass)
+    if (instance == null) {
+        null
+    } else {
+        instance.javaClass.methods.firstOrNull {
+            it.name == "getParserForType" && it.parameterTypes.isEmpty()
+        }?.invoke(instance) ?: run {
+            val dynamicMethod = generatedDynamicMethod(messageClass)
+            val cases = dynamicMethod?.parameterTypes?.getOrNull(0)?.enumConstants
+            if (dynamicMethod == null || cases == null) {
+                null
+            } else {
+                // The parser is the last case of the method, which reads its own name.
+                val parserCase = cases.lastOrNull { it is Enum<*> && it.name == "GET_PARSER" }
+                    ?: cases.last()
+                dynamicMethod.invoke(instance, parserCase, null, null)
+            }
+        }
+    }
+} catch (ex: Exception) {
+    Logger.printException({ "Could not read the parser of: ${messageClass.name}" }, ex)
+    null
+}
+
+/**
+ * @return The message the parser read from its bytes, or null if it cannot read them.
+ *
+ * A parser keeps the ways of the runtime to read a message, and the shrinker removes the ways the
+ * app does not call itself. Each way is tried, and they are found by the types they take and return
+ * instead of their names, because the names of the runtime of the app are obfuscated.
+ *
+ * @param withExtensions If the fields the app registers as extensions of the message are wanted.
+ */
+private fun Any.parseBytes(
+    messageClass: Class<*>,
+    bytes: ByteArray,
+    withExtensions: Boolean,
+): Any? {
+    val readers = javaClass.methods.filter { method ->
+        method.returnType == messageClass && method.parameterTypes.isNotEmpty()
+    }
+
+    // The bytes are read as they are, or as a buffer of them.
+    fun direct(): Any? {
+        readers.firstOrNull { reader ->
+            reader.parameterTypes.contentEquals(arrayOf(ByteArray::class.java))
+        }?.let { return it.invoke(this, bytes) }
+        readers.firstOrNull { reader ->
+            reader.parameterTypes.contentEquals(arrayOf(ByteBuffer::class.java))
+        }?.let { return it.invoke(this, ByteBuffer.wrap(bytes)) }
+        return null
+    }
+
+    // The bytes are read as a stream, with the fields the app registered for the message.
+    fun withRegistry(): Any? {
+        val reader = readers.firstOrNull { reader ->
+            reader.parameterTypes.size == 2 &&
+                reader.parameterTypes[0] != ByteArray::class.java &&
+                reader.parameterTypes[1] != ByteArray::class.java
+        } ?: return null
+        val input = reader.parameterTypes[0].codedInputOf(bytes) ?: return null
+        val registry = reader.parameterTypes[1].registryOf(withExtensions) ?: return null
+        return reader.invoke(this, input, registry)
+    }
+
+    return if (withExtensions) withRegistry() ?: direct() else direct() ?: withRegistry()
+}
+
+/**
+ * @return The stream of coded bytes of this class, or null if the class has no way to make one.
+ */
+private fun Class<*>.codedInputOf(bytes: ByteArray): Any? = methods.firstOrNull { method ->
+    java.lang.reflect.Modifier.isStatic(method.modifiers) && method.returnType == this &&
+        method.parameterTypes.contentEquals(arrayOf(ByteArray::class.java))
+}?.invoke(null, bytes)
+
+/**
+ * @return The registry of extensions of this class, or null if the class has no way to make one.
+ *
+ * @param generated If the registry of the fields the app registered is wanted, and not the empty one.
+ */
+private fun Class<*>.registryOf(generated: Boolean): Any? {
+    val factories = methods.filter { method ->
+        java.lang.reflect.Modifier.isStatic(method.modifiers) && method.returnType == this &&
+            method.parameterTypes.isEmpty()
+    }
+    val factory = if (generated) {
+        factories.firstOrNull { it.name.contains("Generated") } ?: factories.firstOrNull()
+    } else {
+        factories.firstOrNull { it.name.contains("Empty") } ?: factories.firstOrNull()
+    }
+    return factory?.invoke(null)
+}
+
+/**
+ * @return The methods of this class and of the classes it extends.
+ */
+private fun Class<*>.allMethods(): List<Method> {
+    val methods = mutableListOf<Method>()
+    var type: Class<*>? = this
+    while (type != null) {
+        methods += type.declaredMethods
+        type = type.superclass
+    }
+    return methods
+}
+
+/**
+ * Reads the bytes of a message with the method the runtime keeps for every message of the app,
+ * which takes the default instance of the message and its bytes.
+ *
+ * The messages the app never parses from bytes, such as the streaming data of a player response,
+ * keep no parse method of their own, but the runtime parses the messages of the app with this one.
+ *
+ * @param withExtensions If the fields the app registers as extensions of the message are wanted.
+ * @return The message, or null if the runtime has no such method for the message.
+ */
+private fun parseWithDefaultInstance(
+    messageClass: Class<*>,
+    bytes: ByteArray,
+    withExtensions: Boolean,
+): Any? {
+    val instance = defaultInstanceOf(messageClass) ?: return null
+    val parseMethods = instance.javaClass.allMethods().filter { method ->
+        java.lang.reflect.Modifier.isStatic(method.modifiers) &&
+            method.name == "parseFrom" &&
+            method.parameterTypes.size in 2..3 &&
+            method.parameterTypes[0].isAssignableFrom(instance.javaClass) &&
+            method.parameterTypes[1] == ByteArray::class.java
+    }
+    // The message is read with the fields the app registered for it when that way is kept, and the
+    // ways of the runtime are used in the other order when the other one is the one that is left.
+    val parseFrom = if (withExtensions) {
+        parseMethods.firstOrNull { it.parameterTypes.size == 3 }
+            ?: parseMethods.firstOrNull { it.parameterTypes.size == 2 }
+    } else {
+        parseMethods.firstOrNull { it.parameterTypes.size == 2 }
+            ?: parseMethods.firstOrNull { it.parameterTypes.size == 3 }
+    } ?: return null
+
+    val registryType = parseFrom.parameterTypes.getOrNull(2)
+    if (registryType != null) {
+        val registry = registryType.registryOf(generated = withExtensions) ?: return null
+        return parseFrom.invoke(null, instance, bytes, registry)
+    }
+    return parseFrom.invoke(null, instance, bytes)
+}
+
+/**
  * Parses a message with the proto class of the app.
  *
  * The bytes the extension returns are the bytes of a message of the app, so they must be parsed
  * with the class of the app and not with the class of the extension.
  *
+ * The app is built with the proto runtime of the full library, and the shrinker removes the static
+ * parsers of the messages the app builds itself but never parses from bytes, such as the streaming
+ * data of a player response. The method the runtime parses the messages of the app with is kept, so
+ * a message whose class has no parser is parsed with it.
+ *
  * @return The parsed message, or null if the class cannot parse.
  */
 internal fun parseProtoMessage(messageClass: Class<*>, bytes: ByteArray): Any? {
     return try {
+        // The parser of the class itself, which the app keeps for the messages it parses.
         messageClass.methodOrNull("parseFrom", ByteArray::class.java)?.let { parseFrom ->
             return parseFrom.invoke(null, bytes)
         }
 
-        // A message without a parseFrom method is parsed with its builder.
+        // The parse method of the runtime, which takes the default instance of the message.
+        parseWithDefaultInstance(messageClass, bytes, withExtensions = false)?.let { return it }
+
+        // The parser of the generated method of the message, which the app also keeps.
+        messageParser(messageClass)?.parseBytes(messageClass, bytes, withExtensions = false)
+            ?.let { return it }
+
+        // A message without a parser is parsed with its builder.
         messageClass.methodOrNull("newBuilder")?.let { newBuilder ->
             val builder = newBuilder.invoke(null) ?: return null
             val mergeFrom = builder.javaClass.methods.firstOrNull {
@@ -129,6 +325,14 @@ internal fun parseProtoMessage(messageClass: Class<*>, bytes: ByteArray): Any? {
             } ?: return null
             return build.invoke(merged)
         }
+
+        // Nothing of the class parses the bytes, and the reason is worth knowing: the player keeps
+        // the streams of the app, which are not the streams that were fetched for it.
+        Logger.printDebug {
+            "Could not parse a message of: ${messageClass.name}, default instance: " +
+                (defaultInstanceOf(messageClass) != null) +
+                ", methods: " + messageClass.declaredMethods.joinToString { method -> method.name }
+        }
     } catch (ex: Exception) {
         Logger.printException({ "Could not parse a message of: ${messageClass.name}" }, ex)
     }
@@ -141,44 +345,19 @@ internal fun parseProtoMessage(messageClass: Class<*>, bytes: ByteArray): Any? {
  *
  * The player config holds such fields, such as the exo player config and the android media library
  * config. A message parsed without them has none of them, and the player fails to play the streams.
+ * The config of the app is left as it is instead of being replaced with a message that lost them.
  *
- * @return The parsed message, or null if the class cannot parse.
+ * @return The parsed message, or null if the class cannot parse its bytes with the extensions.
  */
 internal fun parseProtoMessageWithRegistry(messageClass: Class<*>, bytes: ByteArray): Any? {
     return try {
-        val defaultInstanceField = messageClass.declaredFields.firstOrNull { field ->
-            java.lang.reflect.Modifier.isStatic(field.modifiers) && field.type == messageClass
-        } ?: return parseProtoMessage(messageClass, bytes)
-        defaultInstanceField.isAccessible = true
-        val defaultInstance = defaultInstanceField.get(null)
-            ?: return parseProtoMessage(messageClass, bytes)
-
-        val builder = defaultInstance.javaClass.methods.firstOrNull {
-            it.name == "createBuilder" && it.parameterTypes.isEmpty()
-        }?.invoke(defaultInstance) ?: return parseProtoMessage(messageClass, bytes)
-
-        val registryClass = messageClass.classLoader
-            ?.loadClass("com.google.protobuf.ExtensionRegistryLite")
-            ?: return parseProtoMessage(messageClass, bytes)
-        val registry = registryClass.getMethod("getGeneratedRegistry").invoke(null)
-
-        val mergeFrom = builder.javaClass.methods.firstOrNull { method ->
-            method.name == "mergeFrom" && method.parameterTypes.size == 2 &&
-                method.parameterTypes[0] == ByteArray::class.java &&
-                method.parameterTypes[1] == registryClass
-        } ?: return parseProtoMessage(messageClass, bytes)
-
-        val merged = mergeFrom.invoke(builder, bytes, registry) ?: builder
-        val build = merged.javaClass.methods.firstOrNull {
-            it.name == "build" && it.parameterTypes.isEmpty()
-        } ?: return parseProtoMessage(messageClass, bytes)
-
-        build.invoke(merged)
+        parseWithDefaultInstance(messageClass, bytes, withExtensions = true)
+            ?: messageParser(messageClass)?.parseBytes(messageClass, bytes, withExtensions = true)
     } catch (ex: Exception) {
         Logger.printException(
             { "Could not parse a message with its extensions: ${messageClass.name}" }, ex
         )
-        parseProtoMessage(messageClass, bytes)
+        null
     }
 }
 
@@ -340,6 +519,9 @@ internal class StreamingDataFields(
             val parsed = parseProtoMessage(playerProto.javaClass, stream) ?: return
             val streamingData = readField(parsed, getStreamingData) ?: return
             spoofedStreamsApplied = writeField(instance, setStreamingData, streamingData)
+            Logger.printDebug {
+                "Streaming data of $videoId given to the player: $spoofedStreamsApplied"
+            }
 
             // The replacement streams can be of another video, such as an album track played as
             // its song version, and then the app keeps the timeline of the music video.
