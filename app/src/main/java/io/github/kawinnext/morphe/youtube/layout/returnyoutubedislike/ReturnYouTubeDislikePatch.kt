@@ -18,6 +18,7 @@ import io.github.kawinnext.morphe.shared.misc.settings.preference.screenInfoPref
 import io.github.kawinnext.morphe.shared.misc.textcomponent.hookLithoSpannableString
 import io.github.kawinnext.morphe.shared.misc.textcomponent.lithoSpannableStringPatch
 import io.github.kawinnext.morphe.shared.misc.textcomponent.textComponentPatch
+import io.github.kawinnext.morphe.youtube.interaction.returnyoutubedislike.videoActionBarIconsPatch
 import io.github.kawinnext.morphe.youtube.misc.playertype.PlayerTypeHook
 import io.github.kawinnext.morphe.youtube.misc.feedcards.feedVideoCardsHookPatch
 import io.github.kawinnext.morphe.youtube.misc.fix.videoactionbar.restoreOldVideoActionBarPatch
@@ -40,6 +41,8 @@ val returnYouTubeDislikePatch = patch(
         VideoInformationPatch,
         PlayerTypeHook,
         restoreOldVideoActionBarPatch,
+        // ปุ่ม like/dislike ของ action bar 21.45 มาโดยไม่มีไอคอนจากเซิร์ฟเวอร์
+        videoActionBarIconsPatch,
         // Finds the feed video cards for the like counts on their thumbnails.
         feedVideoCardsHookPatch
     )
