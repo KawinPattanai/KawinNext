@@ -81,6 +81,11 @@ val ambientModePatch = patch(
             preferences = setOf(
                 SwitchPreference("morphe_enhanced_ambient_mode", summary = true),
                 NonInteractivePreference(
+                    key = "morphe_enhanced_ambient_mode_strength",
+                    tag = SeekBarPreference::class.java,
+                    selectable = true
+                ),
+                NonInteractivePreference(
                     key = "morphe_enhanced_ambient_mode_smoothing",
                     tag = SeekBarPreference::class.java,
                     selectable = true
