@@ -236,13 +236,31 @@ internal class MediaRequestProxy(
     override fun patch_withBodyAndHeaders(
         body: ByteArray?,
         headers: ArrayList<HttpHeader>?,
-    ): MediaHttpRequest = MediaRequestProxy(
-        createRequest(request, patch_getUrl(), headers, body),
-        urlField,
-        bodyField,
-        headersField,
-        createRequest,
-    )
+    ): MediaHttpRequest {
+        val url = patch_getUrl()
+        // A request that leaves without a url of its own fails on the player side with
+        // ERR_INVALID_URL, and the player retries until the video gives up, which the user sees as a
+        // spinner that never ends. The request of the app is handed back untouched instead.
+        // The app reads every header it is handed, and a request it builds from a null list fails
+        // later with "Attempt to invoke getClass() on a null object reference", which the player
+        // reports as a stream that never loads.
+        if (url.isNullOrBlank() || !url.contains("://") || headers == null) {
+            return this
+        }
+        // The player reads fvip and mn out of every googlevideo url it is handed and fails on a url
+        // that does not carry them, which it reports as a stream that never loads. A spoofed url
+        // without them is left alone and the request of the app is used as it is.
+        if (url.contains("googlevideo.com") && (!url.contains("fvip=") || !url.contains("mn="))) {
+            return this
+        }
+        return MediaRequestProxy(
+            createRequest(request, url, headers, body),
+            urlField,
+            bodyField,
+            headersField,
+            createRequest,
+        )
+    }
 }
 
 /**
