@@ -7,6 +7,9 @@
 
 package io.github.kawinnext.morphe.youtube.layout.hide.ambientmode
 
+import android.graphics.Canvas
+import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.view.View
 import android.view.ViewGroup
 import app.morphe.extension.shared.Logger
@@ -51,6 +54,14 @@ private const val AMBIENT_MODE_BLACK_BACKGROUND_FEATURE_FLAG = 45767512L
  */
 private const val PRESENTATION_STYLE_DYNAMIC_BLURRED = 5
 
+/** A drawable with no size, which draws nothing. Takes the place of a background already drawn. */
+private val EMPTY_DRAWABLE = ColorDrawable(0)
+
+/** Backgrounds that the extension drew, waiting for the app to finish the draw of their row. */
+private val drawnBackgrounds = object : ThreadLocal<ArrayDeque<Drawable>>() {
+    override fun initialValue() = ArrayDeque<Drawable>()
+}
+
 val ambientModePatch = patch(
     name = "Ambient mode",
     description = "Adds Enhanced Ambient mode and options to force Ambient mode on, " +
@@ -69,13 +80,23 @@ val ambientModePatch = patch(
             sorting = Sorting.UNSORTED,
             preferences = setOf(
                 SwitchPreference("morphe_enhanced_ambient_mode", summary = true),
+                NonInteractivePreference(
+                    key = "morphe_enhanced_ambient_mode_smoothing",
+                    tag = SeekBarPreference::class.java,
+                    selectable = true
+                ),
+                NonInteractivePreference(
+                    key = "morphe_enhanced_ambient_mode_blur",
+                    tag = SeekBarPreference::class.java,
+                    selectable = true
+                ),
                 SwitchPreference("morphe_enhanced_ambient_mode_readable_text", summary = true),
-            SwitchPreference("morphe_enhanced_ambient_mode_dim_while_scrolling", summary = true),
-            NonInteractivePreference(
-                key = "morphe_enhanced_ambient_mode_dim_duration",
-                tag = SeekBarPreference::class.java,
-                selectable = true
-            ),
+                SwitchPreference("morphe_enhanced_ambient_mode_dim_while_scrolling", summary = true),
+                NonInteractivePreference(
+                    key = "morphe_enhanced_ambient_mode_dim_duration",
+                    tag = SeekBarPreference::class.java,
+                    selectable = true
+                ),
                 SwitchPreference("morphe_bypass_ambient_mode_restrictions", summary = true),
                 SwitchPreference("morphe_disable_ambient_mode"),
                 SwitchPreference("morphe_disable_fullscreen_ambient_mode"),
@@ -90,6 +111,39 @@ val ambientModePatch = patch(
     // The light follows the video time, and stops while the toggle of the flyout menu turns
     // the Ambient mode of the app off.
     videoTimeHooks.add(AmbientLightController::setVideoTime)
+
+    // The rows of the playlist and of the other panels draw the background of the view with this
+    // drawable, which keeps the plain color of the page. The background is drawn by the extension
+    // as the light of the video, and the app then draws the touch feedback of the row over it.
+    val backgroundField = ::touchFeedbackBackgroundDrawableField.field.apply { isAccessible = true }
+    TouchFeedbackDrawableDrawFingerprint.hookMethod {
+        before { param ->
+            val feedback = param.thisObject as? Drawable ?: return@before
+            // The background is a final field of the app, and a build that refuses the write
+            // keeps the plain background of the app instead of drawing twice.
+            val background = runCatching { backgroundField.get(feedback) }.getOrNull() as? Drawable
+                ?: return@before
+            val replaced = runCatching { backgroundField.set(feedback, EMPTY_DRAWABLE) }
+            if (replaced.isFailure) {
+                Logger.printInfo(
+                    { "Ambient mode: the background of the rows cannot be replaced" },
+                    replaced.exceptionOrNull() as? Exception
+                )
+                return@before
+            }
+            // The app draws only the touch feedback now, over the background drawn here.
+            drawnBackgrounds.get()!!.addLast(background)
+            AmbientLightController.drawTouchFeedbackBackground(
+                background, param.args[0] as Canvas, feedback
+            )
+        }
+        after { param ->
+            val background = drawnBackgrounds.get()!!.removeLastOrNull() ?: return@after
+            (param.thisObject as? Drawable)?.let { feedback ->
+                runCatching { backgroundField.set(feedback, background) }
+            }
+        }
+    }
 
     // The flyout menu saves the state of each of its items with these methods.
     ::ambientModeToggleMethods.dexMethodList.forEach { toggleMethod ->

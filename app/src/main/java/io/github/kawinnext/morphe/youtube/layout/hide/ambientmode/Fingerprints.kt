@@ -32,6 +32,8 @@ private const val GET_ACTION_METHOD_CALL = "Landroid/content/Intent;->getAction(
 private const val IS_POWER_SAVE_MODE_METHOD_CALL = "Landroid/os/PowerManager;->isPowerSaveMode()Z"
 private const val POWER_SAVE_MODE_CHANGED = "android.os.action.POWER_SAVE_MODE_CHANGED"
 private const val RENDERER_LOADED_STATE_FIELD = "rendererLoadedState="
+private const val DRAWABLE_DRAW_METHOD_CALL = "Landroid/graphics/drawable/Drawable;->draw(Landroid/graphics/Canvas;)V"
+private const val DRAWABLE_TYPE = "Landroid/graphics/drawable/Drawable;"
 
 /**
  * Receives the Ambient mode toggle of the player flyout menu when the app resumes and whenever
@@ -154,6 +156,32 @@ val powerSaveModeSinkMethod = findMethodDirect {
     instructions.drop(valueOfIndex + 1)
         .first { it.methodRef != null }
         .methodRef!!
+}
+
+/**
+ * Draws the background of a view, such as a row of the playlist, and the touch feedback over it.
+ */
+internal object TouchFeedbackDrawableDrawFingerprint : Fingerprint(
+    definingClass = "Lcom/google/android/libraries/youtube/rendering/ui/spec/motion/TouchFeedbackDrawable;",
+    name = "draw",
+    returnType = "V",
+    parameters = listOf("Landroid/graphics/Canvas;"),
+    filters = listOf(
+        methodCall(smali = DRAWABLE_DRAW_METHOD_CALL)
+    )
+)
+
+/**
+ * The drawable of [TouchFeedbackDrawableDrawFingerprint] that holds the background of its view.
+ * The drawable is loaded into the register the background is drawn from, before the touch feedback.
+ */
+val touchFeedbackBackgroundDrawableField = findFieldDirect {
+    val method = TouchFeedbackDrawableDrawFingerprint.run()
+    val drawIndex = method.instructions.indexOfFirst { it.methodRef?.descriptor == DRAWABLE_DRAW_METHOD_CALL }
+    check(drawIndex > 0) { "No background draw in ${method.descriptor}" }
+    method.instructions.take(drawIndex)
+        .last { it.fieldRef?.type?.descriptor == DRAWABLE_TYPE }
+        .fieldRef!!
 }
 
 /**
