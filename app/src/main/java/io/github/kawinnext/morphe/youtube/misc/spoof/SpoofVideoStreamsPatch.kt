@@ -46,13 +46,19 @@ private const val NO_SPOOFED_CLIENT = "Unknown"
 /**
  * @return If the streams of another client were given to the player.
  *
+ * A client can be fetched and its response still not be read for the video, and then the player has
+ * the streams of the app. The player would be told that its streams are not SABR streams, which
+ * leaves it with an address without a host that it retries until the video gives up, so the client
+ * only counts when its streams were really written into the player response.
+ *
  * The requests the app makes for its own streams must be left as they are. The client the user chose
  * can also fail to fetch its streams, such as when the JavaScript solver of the client is not usable,
  * and then the app plays its own streams and playback must still work.
  */
 private fun areStreamsSpoofed(): Boolean = try {
     SpoofVideoStreams.isSpoofingEnabled() &&
-        StreamingDataRequest.getLastSpoofedClientName() != NO_SPOOFED_CLIENT
+        StreamingDataRequest.getLastSpoofedClientName() != NO_SPOOFED_CLIENT &&
+        spoofedStreamsApplied
 } catch (ex: Exception) {
     false
 }

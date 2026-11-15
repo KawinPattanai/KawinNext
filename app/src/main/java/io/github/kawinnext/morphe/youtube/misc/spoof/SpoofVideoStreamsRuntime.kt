@@ -291,6 +291,18 @@ internal class MediaRequestFactory(
 }
 
 /**
+ * If the streams of the spoofed client were written into the player response of the app.
+ *
+ * A client is fetched before the player response of a video is built, and the streams it returned
+ * can still not be written into that response, such as when the response of the app does not parse
+ * the bytes of the client. The player then keeps the streams of the app, and the hooks that change
+ * how the app requests its streams must not act as if it had the streams of the client: the app
+ * requests SABR streams with an address without a host, which the player retries without end.
+ */
+@Volatile
+internal var spoofedStreamsApplied: Boolean = false
+
+/**
  * Replaces the streaming data and the player config of a player response with the ones of the
  * spoofed client.
  *
@@ -316,13 +328,18 @@ internal class StreamingDataFields(
         try {
             if (!SpoofVideoStreamsPatch.isSpoofingEnabled() || playerProto == null) return
 
+            // The streams of the app stay in the player response until the streams of the client
+            // are written into it, and the hooks that change how the app requests its streams read
+            // this to know whose streams the player has.
+            spoofedStreamsApplied = false
+
             val details = readField(instance, videoDetails) ?: return
             val videoId = readField(details, this.videoId) as? String ?: return
 
             val stream = SpoofVideoStreamsPatch.getStreamingData(videoId, playerProto) ?: return
             val parsed = parseProtoMessage(playerProto.javaClass, stream) ?: return
             val streamingData = readField(parsed, getStreamingData) ?: return
-            writeField(instance, setStreamingData, streamingData)
+            spoofedStreamsApplied = writeField(instance, setStreamingData, streamingData)
 
             // The replacement streams can be of another video, such as an album track played as
             // its song version, and then the app keeps the timeline of the music video.
