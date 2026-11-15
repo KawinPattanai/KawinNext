@@ -12,8 +12,10 @@ import io.github.kawinnext.morphe.music.misc.backgroundplayback.BackgroundPlayba
 import io.github.kawinnext.morphe.music.misc.debugging.EnableDebugging
 import io.github.kawinnext.morphe.music.misc.debugging.FeatureOverride
 import io.github.kawinnext.morphe.music.misc.privacy.SanitizeSharingLinks
+import io.github.kawinnext.morphe.music.interaction.pausewhenmuted.PauseWhenMuted
 import io.github.kawinnext.morphe.music.layout.captions.DisableAutoCaptions
 import io.github.kawinnext.morphe.music.layout.sponsorblock.MusicSponsorBlock
+import io.github.kawinnext.morphe.music.misc.medianotification.MusicMediaNotificationControls
 import io.github.kawinnext.morphe.music.misc.settings.SettingsHook
 import io.github.kawinnext.morphe.music.video.quality.RememberVideoQuality
 import io.github.kawinnext.morphe.music.video.information.musicVideoInformationPatch
@@ -34,6 +36,8 @@ val YTMusicPatches = arrayOf(
     EnableDebugging,
     SanitizeSharingLinks,
     FeatureOverride,
+    PauseWhenMuted,
+    MusicMediaNotificationControls,
     DisableAutoCaptions,
     RememberVideoQuality,
     MusicSponsorBlock,
