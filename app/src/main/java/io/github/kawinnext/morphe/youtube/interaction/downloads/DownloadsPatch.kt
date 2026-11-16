@@ -2,11 +2,15 @@ package io.github.kawinnext.morphe.youtube.interaction.downloads
 
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
+import app.morphe.extension.shared.patches.BaseInAppDownloadsPatch
+import app.morphe.extension.shared.patches.DownloadMode
+import app.morphe.extension.shared.settings.SharedYouTubeSettings
 import app.morphe.extension.shared.settings.preference.ExternalDownloaderPreference
 import app.morphe.extension.youtube.patches.DownloadsPatch
 import app.morphe.extension.youtube.patches.InAppDownloadsPatch
 import app.morphe.extension.youtube.videoplayer.ExternalDownloadButton
 import app.morphe.extension.youtube.videoplayer.ShortsDownloadButton
+import com.google.protobuf.MessageLite
 import io.github.kawinnext.R
 import io.github.kawinnext.morphe.findFieldDirect
 import io.github.kawinnext.morphe.setExtensionIsPatchIncluded
@@ -21,6 +25,11 @@ import io.github.kawinnext.morphe.youtube.misc.playercontrols.initializeTopContr
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.youtube.video.information.VideoInformationPatch
 import io.github.kawinnext.patch
+import java.lang.reflect.Modifier
+import java.lang.reflect.Proxy
+
+/** คลาส registry ของ protobuf ที่แอปใช้ ซึ่งเก็บทุก endpoint ที่แอปสร้าง */
+private const val APP_PROTO_REGISTRY = "com.google.protobuf.ExtensionRegistryLite"
 
 /** บิต 512 ของ ShowActionSheetCommand ที่ทำให้เมธอดแสดงแผงอ่านช่อง skipCollapsed */
 private const val PICKER_EXPAND_BIT = 0x200
@@ -71,6 +80,116 @@ private fun pickerCommandOf(result: Any?, commandType: Class<*>): Any? {
  */
 private fun appCanResolveLabel(label: Int): Boolean =
     runCatching { Utils.getResources().getString(label) }.isSuccess
+
+/**
+ * โหมดดาวน์โหลดในแอป ซึ่งเป็นโหมดเดียวที่ส่วนขยายแทนคำสั่งและคำตอบของ endpoint ดาวน์โหลดให้
+ * คำสั่งทุกตัวของแอปผ่าน hook ที่แปลงเป็น bytes ค่าตั้งจึงถูกอ่านก่อน
+ */
+private fun inAppDownloadMode(): Boolean =
+    SharedYouTubeSettings.DOWNLOAD_MODE.get() == DownloadMode.IN_APP
+
+/**
+ * ข้อความของแอปในรูป [MessageLite] ของโมดูล ซึ่งถือ bytes ของข้อความนั้นไว้
+ *
+ * โมดูลกับแอปมี protobuf คนละสำเนา ออบเจกต์ของแอปจึงไม่ใช่อินสแตนซ์ของ [MessageLite] ที่ส่วนขยายรับ
+ * แต่ส่วนขยายอ่านคำสั่งและคำตอบของ endpoint เป็น bytes เท่านั้น ([MessageLite.toByteArray])
+ * proxy นี้จึงพอสำหรับส่งข้อความของแอปข้ามฝั่ง
+ */
+private fun appMessageLite(message: Any): MessageLite? {
+    val bytes = message.javaClass.methods.firstOrNull {
+        it.name == "toByteArray" && it.parameterTypes.isEmpty()
+    }?.let { method ->
+        runCatching { method.invoke(message) as? ByteArray }.getOrNull()
+    } ?: return null
+
+    return Proxy.newProxyInstance(
+        MessageLite::class.java.classLoader,
+        arrayOf(MessageLite::class.java),
+    ) { proxy, method, args ->
+        when (method.name) {
+            "toByteArray" -> bytes
+            "getSerializedSize" -> bytes.size
+            "equals" -> proxy === args?.getOrNull(0)
+            "hashCode" -> System.identityHashCode(proxy)
+            "toString" -> "app message of ${bytes.size} bytes"
+            else -> defaultValueOf(method.returnType)
+        }
+    } as MessageLite
+}
+
+/** ค่าที่ proxy คืนให้เมธอดของ [MessageLite] ที่ส่วนขยายไม่ได้เรียก */
+private fun defaultValueOf(type: Class<*>): Any? = when (type) {
+    Boolean::class.javaPrimitiveType -> false
+    Byte::class.javaPrimitiveType -> 0.toByte()
+    Char::class.javaPrimitiveType -> '\u0000'
+    Short::class.javaPrimitiveType -> 0.toShort()
+    Int::class.javaPrimitiveType -> 0
+    Long::class.javaPrimitiveType -> 0L
+    Float::class.javaPrimitiveType -> 0f
+    Double::class.javaPrimitiveType -> 0.0
+    else -> null
+}
+
+/**
+ * แปลง [bytes] ที่ส่วนขยายสร้างกลับเป็นข้อความของแอปคลาสเดียวกับ [like]
+ *
+ * endpoint ของคำสั่งดาวน์โหลดเป็นฟิลด์ที่แอปลงทะเบียนไว้ใน registry ของ protobuf
+ * การอ่านจึงต้องใช้ registry ของแอปเอง ไม่อย่างนั้น endpoint จะกลายเป็นฟิลด์ที่ไม่รู้จัก
+ * แล้ว router ของแอปหาตัวจัดการของคำสั่งไม่เจอ (ต้นทางอ่านด้วย registry เดียวกันนี้)
+ *
+ * ถ้าแอปไม่มีทางอ่านด้วย registry คืน null ซึ่งปล่อยคำตอบเดิมของแอปไว้ ไม่ให้หน้าขาย Premium หาย
+ */
+private fun parseAppMessage(like: Any, bytes: ByteArray): Any? {
+    val type = like.javaClass
+    val registryType = runCatching {
+        Class.forName(APP_PROTO_REGISTRY, false, type.classLoader)
+    }.getOrNull()
+    val registryInfo = registryType?.let { registryClass ->
+        val registry = runCatching {
+            registryClass.getMethod("getGeneratedRegistry").invoke(null)
+        }.getOrNull()
+        if (registry == null) null else registryClass to registry
+    }
+    val parser = runCatching { type.getMethod("getParserForType").invoke(like) }.getOrNull()
+
+    // ทางเดียวกับที่ต้นทางใช้: parser ของข้อความอ่านพร้อม registry ของแอป
+    // ซึ่งเป็นทางเดียวที่ endpoint ที่แอปลงทะเบียนไว้ยังถูกอ่าน (ทางที่เหลืออ่านได้แต่ไม่มี endpoint)
+    val parsed = (if (registryInfo != null) {
+        val (registryClass, registry) = registryInfo
+        parser?.invokeParse(type, arrayOf(ByteArray::class.java, registryClass), bytes, registry)
+    } else {
+        null
+    }) ?: parser?.invokeParse(type, arrayOf(ByteArray::class.java), bytes)
+        ?: type.invokeStaticParse(bytes)
+    if (parsed != null) return parsed
+
+    Logger.printInfo { "Downloads: the app cannot read the replacement of ${type.name}" }
+    return null
+}
+
+/**
+ * เรียกเมธอดของ [this] ที่อ่าน bytes เป็นข้อความของแอปคลาส [type]
+ *
+ * แอปเปลี่ยนชื่อเมธอดของ protobuf ไว้ในแต่ละเวอร์ชัน (เช่น `l([B, registry)`) จึงหาจากชนิดของ
+ * พารามิเตอร์และของผลลัพธ์ ไม่ใช่จากชื่อเมธอด
+ */
+private fun Any.invokeParse(
+    type: Class<*>,
+    parameterTypes: Array<Class<*>>,
+    vararg args: Any?,
+): Any? = runCatching {
+    javaClass.methods.firstOrNull {
+        !Modifier.isStatic(it.modifiers) && it.parameterTypes.contentEquals(parameterTypes)
+    }?.invoke(this, *args)?.takeIf(type::isInstance)
+}.getOrNull()
+
+/** เมธอดอ่าน bytes ของคลาสข้อความเอง ซึ่งมีเฉพาะบางเวอร์ชัน */
+private fun Class<*>.invokeStaticParse(bytes: ByteArray): Any? = runCatching {
+    methods.firstOrNull {
+        Modifier.isStatic(it.modifiers) &&
+            it.parameterTypes.contentEquals(arrayOf(ByteArray::class.java))
+    }?.invoke(null, bytes)?.takeIf(this::isInstance)
+}.getOrNull()
 
 val Downloads = patch(
     name = "Downloads",
@@ -162,6 +281,46 @@ val Downloads = patch(
     OfflineVideoEndpointFingerprint.hookMethod {
         before {
             if (DownloadsPatch.inAppDownloadButtonOnClick(it.args[2] as String)) it.result = null
+        }
+    }
+
+    // คำสั่งที่ router ได้รับจากเซิร์ฟเวอร์เป็นคำสั่งที่เปิดหน้าขาย Premium (บัญชีที่ไม่ใช่ Premium)
+    // คำสั่งนั้นถูกแทนด้วยคำสั่งที่บันทึกวิดีโอจริง ก่อนที่ router จะหาตัวจัดการของคำสั่ง
+    // คำสั่งทุกตัวของแอปผ่าน hook นี้ ค่าตั้งจึงถูกอ่านก่อนแปลงเป็น bytes
+    ResolveCommandFingerprint.hookMethod {
+        before { param ->
+            if (!inAppDownloadMode()) return@before
+            val command = param.args[0] ?: return@before
+            val message = appMessageLite(command) ?: return@before
+            val bytes = InAppDownloadsPatch.replaceDownloadActionCommand(message) ?: return@before
+            val replacement = parseAppMessage(command, bytes) ?: return@before
+
+            param.args[0] = replacement
+            Logger.printDebug { "Downloads: replaced the download action command" }
+        }
+    }
+
+    // คำตอบของ endpoint ที่เปิดหน้าขาย Premium ซึ่งเป็นคำตอบของการกดคุณภาพในแผงดาวน์โหลด
+    // ถูกแทนด้วยคำตอบที่สั่งให้บันทึกวิดีโอ คำสั่งของ endpoint อ่านจากฟิลด์ของตัวรับคำตอบ
+    val upsellCommandField = ::offlineUpsellCommandField.field.apply { isAccessible = true }
+    OfflineUpsellResponseFingerprint.hookMethod {
+        before { param ->
+            if (!inAppDownloadMode()) return@before
+            val response = param.args[0] ?: return@before
+            val command = runCatching { upsellCommandField.get(param.thisObject) }.getOrNull()
+                ?: return@before
+            val commandMessage = appMessageLite(command) ?: return@before
+            val responseMessage = appMessageLite(response) ?: return@before
+            val bytes = BaseInAppDownloadsPatch.replaceOfflineUpsell(commandMessage, responseMessage)
+            if (bytes == null) {
+                // คำตอบที่ส่วนขยายไม่แทน (เช่น คำตอบที่ไม่มี renderer ของการขาย Premium)
+                Logger.printDebug { "Downloads: kept the offline upsell response of the app" }
+                return@before
+            }
+            val replacement = parseAppMessage(response, bytes) ?: return@before
+
+            param.args[0] = replacement
+            Logger.printDebug { "Downloads: replaced the offline upsell response" }
         }
     }
 

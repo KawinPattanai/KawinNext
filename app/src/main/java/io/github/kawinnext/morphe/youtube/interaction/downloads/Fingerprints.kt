@@ -6,6 +6,7 @@ import io.github.kawinnext.morphe.InstructionLocation.MatchAfterWithin
 import io.github.kawinnext.morphe.Opcode
 import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.anyInstruction
+import io.github.kawinnext.morphe.checkCast
 import io.github.kawinnext.morphe.fieldAccess
 import io.github.kawinnext.morphe.findFieldDirect
 import io.github.kawinnext.morphe.indexOfFirstInstruction
@@ -19,6 +20,9 @@ import io.github.kawinnext.morphe.string
 import io.github.kawinnext.morphe.writeRegister
 import io.github.kawinnext.morphe.youtube.shared.VideoStreamingDataToStringFingerprint
 import org.luckypray.dexkit.result.MethodData
+
+/** เลขฟิลด์ proto ของ renderer ที่ขาย Premium ในคำตอบของ offline upsell (ไม่ใช่ resource id) */
+private const val OFFLINE_UPSELL_RENDERER_FIELD = 131899791
 
 internal object OfflineVideoEndpointFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
@@ -39,6 +43,56 @@ internal object OfflineVideoEndpointFingerprint : Fingerprint(
         addUsingString("Unsupported Offline Video Action: ")
     }
 )
+
+/**
+ * เมธอดของ command router ที่หาตัวจัดการของคำสั่งทีละตัวจากรายการที่ router มี
+ *
+ * ปุ่ม Download ถามเซิร์ฟเวอร์ก่อนว่าจะดาวน์โหลดแบบไหน แล้วเซิร์ฟเวอร์ตอบบัญชีที่ไม่ใช่ Premium
+ * กลับมาเป็นคำสั่งที่เปิดหน้าขาย Premium คำสั่งที่ router ได้รับจึงถูกแทนด้วยคำสั่งที่บันทึกวิดีโอ
+ */
+internal object ResolveCommandFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf(
+        "L", // คำสั่งที่กำลังหาตัวจัดการ
+        "Ljava/util/Map;" // บริบทของคำสั่ง
+    ),
+    filters = listOf(
+        anyInstruction(
+            string("Unknown command not resolved"), // 21.14 และต่ำกว่า
+            string("Unknown command not resolved %s") // 21.15 ขึ้นไป
+        )
+    ),
+    custom = {
+        addUsingString("Unknown command not resolved")
+    }
+)
+
+/**
+ * เมธอดรับคำตอบของ endpoint `ypc/get_offline_upsell` ซึ่งเป็นคำตอบของการกดคุณภาพในแผงดาวน์โหลด
+ *
+ * เซิร์ฟเวอร์ตอบบัญชีที่ไม่ใช่ Premium ด้วยหน้าขาย Premium คำตอบนั้นจึงถูกแทนด้วยคำตอบที่บันทึก
+ * วิดีโอ ซึ่งอ่านรหัสวิดีโอได้จากคำสั่งของ endpoint ที่ตัวรับคำตอบเก็บไว้เป็นฟิลด์ของตัวเอง
+ */
+internal object OfflineUpsellResponseFingerprint : Fingerprint(
+    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
+    returnType = "V",
+    parameters = listOf("Ljava/lang/Object;"),
+    filters = listOf(
+        checkCast("L"), // คำตอบของ endpoint
+        literal(OFFLINE_UPSELL_RENDERER_FIELD), // renderer ของการขาย Premium ในคำตอบ
+        fieldAccess(opcode = Opcode.IGET_OBJECT, definingClass = "this"), // คำสั่งของ endpoint
+        string("YpcGetOfflineUpsellResponse_videoIdKey")
+    )
+)
+
+/**
+ * ฟิลด์ที่ตัวรับคำตอบของ offline upsell เก็บคำสั่งของ endpoint ไว้
+ * (ฟิลด์ที่ [OfflineUpsellResponseFingerprint] ใช้ยืนยันคลาส ซึ่งเป็นคลาสเดียวกับตัวรับ)
+ */
+internal val offlineUpsellCommandField = findFieldDirect {
+    OfflineUpsellResponseFingerprint.instructionMatches[2].instruction.fieldRef!!
+}
 
 /**
  * คลาสที่เก็บแผนที่ของ format type ไปยังความสูงและไปยังป้ายชื่อคุณภาพของหน้าตั้งค่าดาวน์โหลด
