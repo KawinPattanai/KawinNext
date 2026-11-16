@@ -39,8 +39,8 @@ These are the switches the module shows for each app, one entry per patch that i
 
 | App | Patches |
 | --- | --- |
-| YouTube | 41 |
-| YouTube Music | 13 |
+| YouTube | 45 |
+| YouTube Music | 20 |
 | Reddit | 3 |
 | Google Photos | 2 |
 | Photomath | 1 |
