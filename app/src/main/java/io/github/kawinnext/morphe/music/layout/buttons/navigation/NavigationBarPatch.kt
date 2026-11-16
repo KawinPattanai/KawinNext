@@ -126,6 +126,12 @@ val NavigationBar = patch(
                 val tabView = param.thisObject as? View ?: return@before
                 val label = tabView.findViewById<TextView>(MusicGlassNavigationBar.BUTTON_LABEL)
                     ?: return@before
+                // The glass of the bar hides the buttons of the tab before it draws itself, and the
+                // extension reads the setting once when its class is loaded. Reading the setting here
+                // keeps the buttons of the bar when the glass is off, which it is for most users.
+                if (!app.morphe.extension.music.settings.Settings.NAVIGATION_BAR_GLASS.get()) {
+                    return@before
+                }
 
                 tabLayoutRunning.set(true)
                 try {
