@@ -43,6 +43,12 @@ import java.util.concurrent.ConcurrentHashMap
  * แพตช์นี้จึงทำงานที่ชั้น element เหมือน `HideVideoActionButtonsPatch`: เก็บไอคอนที่เซิร์ฟเวอร์เคยส่ง
  * ของแต่ละปุ่มไว้ก่อน แล้วเติมให้ปุ่มที่มาว่าง ด้วยไอคอนชุดเดียวกับ upstream (ชื่อของแอปเวอร์ชันใหม่ก่อน)
  * ไม่แตะ layout ที่เซิร์ฟเวอร์เลือก จึงไม่กระทบหน้าตาของ action bar นอกจากการได้ไอคอนกลับมา
+ *
+ * ปุ่ม dislike ของ action bar แบบ segmented เป็นปุ่มที่ Return YouTube Dislike วาดยอดไว้ข้างไอคอน
+ * ใน margin ที่มันขอจาก Yoga (`onYogaSetWidth`) ไอคอนที่เติมที่นี่จึงเป็นไอคอนที่ยอดนั้นวางข้าง ๆ
+ * และเป็นไอคอนที่เหลืออยู่เมื่อดึงยอดไม่ได้ ซึ่ง extension ไม่ให้ margin เลยในกรณีนั้น (fix ของ
+ * upstream) ปุ่มจึงเหลือไอคอนเดียวโดยไม่มีช่องว่างค้าง ตรวจบน 21.45.82 แล้วทั้งสองฝั่งทำงานร่วมกัน:
+ * log ขึ้น "Giving the dislike button a margin of 71" และปุ่มขึ้น `👍 19M | 👎 522K` ครบทั้งสองช่อง
  */
 val videoActionBarIconsPatch = patch(
     description = "Gives the buttons of the video action bar the icon the server left out, " +
