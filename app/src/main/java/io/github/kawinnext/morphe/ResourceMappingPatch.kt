@@ -66,6 +66,13 @@ class ResourceLiteralFilter(
     location: InstructionLocation
 ) : OpcodesFilter(null as List<Opcode>?, location) {
 
+    /**
+     * The id is looked up every time it is read, and is deliberately not cached in this filter.
+     *
+     * A fingerprint is a singleton, so its filters are shared by every APK the same run
+     * examines, and the id of one resource differs between APK versions. A cached id
+     * would resolve against the first APK and then fail against the next one.
+     */
     private val literalValue: Long? get() {
         return if (exceptionIfResourceNotFound || hasResourceId(type, name)) {
             getResourceId(type, name).toLong()
@@ -84,9 +91,11 @@ class ResourceLiteralFilter(
 
         if (instruction.literal == null) return false
 
-        if (literalValue == null) return false
+        // Decoding a resource id is not free (on device it goes through Resources),
+        // so resolve it once for this instruction instead of once per read.
+        val literal = literalValue ?: return false
 
-        return instruction.literal == literalValue
+        return instruction.literal == literal
     }
 
     context(matcher: MethodMatcher)
