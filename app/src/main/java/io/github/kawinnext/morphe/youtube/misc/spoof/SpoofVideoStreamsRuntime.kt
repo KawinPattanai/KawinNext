@@ -15,7 +15,9 @@ package io.github.kawinnext.morphe.youtube.misc.spoof
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.patches.MediaHttpRequest
 import app.morphe.extension.shared.patches.HttpHeaderAccess
+import app.morphe.extension.shared.spoof.ClientType
 import app.morphe.extension.shared.spoof.SpoofVideoStreamsPatch
+import app.morphe.extension.shared.spoof.requests.StreamingDataRequest
 import com.google.android.libraries.youtube.media.interfaces.HttpHeader
 import java.lang.reflect.Field
 import java.lang.reflect.Method
@@ -482,6 +484,49 @@ internal class MediaRequestFactory(
 internal var spoofedStreamsApplied: Boolean = false
 
 /**
+ * ตัวบ่งชี้ว่าเป็นไลฟ์สดหรือพรีเมียร์ ซึ่งเซิร์ฟเวอร์ใส่ไว้ใน url ของสตรีม
+ *
+ * upstream อ่านตัวบ่งชี้นี้จาก server abr url ของไคลเอนต์ที่สปูฟ เพื่อสลับไคลเอนต์ให้ไลฟ์
+ * ทางนี้ไม่มีคลาสของ player response ที่อ่านฟิลด์นั้นได้ จึงอ่านเป็นไบต์ของข้อความแล้วหาตัวบ่งชี้
+ * ในไบต์ของ player response แทน ซึ่งได้ผลเหมือนกันเพราะ url ถูกเก็บเป็นข้อความทั้งก้อนในไบต์
+ */
+private val liveStreamMarkers = arrayOf("yt_live_broadcast", "yt_premiere_broadcast")
+
+/**
+ * @return ถ้า player response นี้เป็นของไลฟ์สดหรือของพรีเมียร์
+ */
+private fun isLiveStreamResponse(playerResponse: ByteArray?): Boolean {
+    if (playerResponse == null || playerResponse.isEmpty()) return false
+    val text = String(playerResponse, Charsets.ISO_8859_1)
+    return liveStreamMarkers.any { marker -> text.contains(marker) }
+}
+
+/**
+ * ไคลเอนต์ที่ใช้สปูฟไลฟ์สด ซึ่งเป็นไคลเอนต์ที่ upstream สลับให้ไลฟ์อยู่แล้ว
+ *
+ * ไคลเอนต์ที่ขอสตรีมแบบ SABR ส่งสตรีมของไลฟ์ที่ผู้เล่นเล่นไม่ได้ เซิร์ฟเวอร์ตอบเป็น 403 ผู้เล่นจึง
+ * ค้างรอสตรีมที่เล่นไม่ได้ TV_DASH เป็นไคลเอนต์เดียวกับ TV_SABR แต่ขอสตรีมแบบ DASH ซึ่งเล่นไลฟ์ได้
+ * ไคลเอนต์นี้ไม่ปรากฏในรายการไคลเอนต์ให้ผู้ใช้เลือก จึงถูกใช้กับไลฟ์เท่านั้น
+ */
+private val liveStreamClient = ClientType.TV_DASH
+
+/**
+ * จำนวนไลฟ์ที่ไคลเอนต์ให้สตรีมมาไม่ได้ติดกัน
+ *
+ * ไลฟ์ที่เล่นได้เพราะสตรีมของแอปยังไม่เสียหาย การลองไคลเอนต์ที่ใช้ไม่ได้ซ้ำกับไลฟ์ทุกตัวมีแต่ทำให้
+ * ไลฟ์เริ่มช้า เพราะต้องรอไคลเอนต์ที่ตอบไม่ได้จนหมดเวลา ไลฟ์ที่ไคลเอนต์ให้สตรีมมาได้จะล้างค่านี้
+ * เพราะเซิร์ฟเวอร์ตอบไลฟ์ด้วย "The page needs to be reloaded" ได้เป็นครั้งคราว ซึ่งไม่ควรปิด
+ * การสปูฟไลฟ์ไปตลอดทั้งโปรเซส
+ */
+@Volatile
+private var liveStreamClientFailures: Int = 0
+
+/**
+ * จำนวนไลฟ์ที่ไคลเอนต์ให้สตรีมมาไม่ได้ติดกัน ก่อนจะเลิกลองกับไลฟ์ตัวถัดไป
+ */
+private const val MAX_LIVE_STREAM_CLIENT_FAILURES = 2
+
+/**
  * Replaces the streaming data and the player config of a player response with the ones of the
  * spoofed client.
  *
@@ -503,6 +548,68 @@ internal class StreamingDataFields(
         .singleOrNull { it.type == Long::class.javaPrimitiveType }
         ?.apply { isAccessible = true }
 
+    /**
+     * ปล่อยให้ผู้เล่นใช้สตรีมของแอปเอง และบอกส่วนอื่นของส่วนขยายว่าวิดีโอนี้ไม่ได้ใช้สตรีมที่สปูฟ
+     *
+     * ใช้เมื่อไคลเอนต์ที่ขอสตรีมให้ไลฟ์ให้สตรีมมาไม่ได้ สตรีมของแอปเป็นสตรีมที่ผู้เล่นเล่นได้
+     * ไลฟ์จึงยังเล่นได้เหมือนก่อนแพตช์
+     *
+     * ส่วนอื่นอ่านค่านี้ไปตัดสินว่าจะปิด SABR หรือจะตัด post body ของคำขอสตรีม ซึ่งต้องไม่ทำกับ
+     * สตรีมของแอป ไม่งั้นไลฟ์สดที่ไม่ได้สปูฟก็เล่นไม่ได้
+     */
+    private fun keepAppStreams(videoId: String) {
+        StreamingDataRequest.setPlayerClient(videoId, null)
+        // เก็บเป็น log ระดับ info เพื่อให้เห็นใน logcat ได้โดยไม่ต้องเปิด debug logging
+        Logger.printInfo { "Keeping the streams of the app for the live stream: $videoId" }
+    }
+
+    /**
+     * ขอสตรีมของไลฟ์สดด้วยไคลเอนต์ [liveStreamClient] แล้วเขียนลงใน player response ของแอป
+     *
+     * ใช้ทางขอสตรีมของส่วนขยายที่มีอยู่ คือ [StreamingDataRequest.fetchRequestForDownload] ซึ่งขอ
+     * สตรีมของวิดีโอเดียวด้วยไคลเอนต์ที่กำหนดและไม่เก็บผลลงแคช ไคลเอนต์ที่ผู้ใช้เลือกไว้จึงยังใช้กับ
+     * วิดีโอปกติ และการสลับไคลเอนต์ไม่กระทบวิดีโออื่นที่ขอสตรีมพร้อมกัน
+     *
+     * @return ถ้าไคลเอนต์ให้สตรีมที่เขียนลงใน player response ได้
+     */
+    private fun spoofLiveStreamWithLiveClient(
+        instance: Any,
+        playerProto: Any,
+        videoId: String,
+    ): Boolean {
+        val stream = StreamingDataRequest.fetchRequestForDownload(
+            videoId,
+            listOf(liveStreamClient),
+            liveStreamClient,
+        ).getStream()
+        if (stream == null) {
+            Logger.printInfo {
+                "No playable streams from ${liveStreamClient.name} for the live stream: $videoId"
+            }
+            // ไคลเอนต์ให้สตรีมมาไม่ได้ เช่นตัวแก้ลายเซ็น JavaScript ของเครื่องใช้ไม่ได้
+            // ไลฟ์ตัวถัดไปยังลองอยู่จนกว่าจะล้มติดกันหลายตัว แล้วจึงเลิก เพื่อไม่ให้รอไคลเอนต์ที่
+            // ใช้ไม่ได้ทุกครั้งที่เปิดไลฟ์
+            liveStreamClientFailures++
+            return false
+        }
+
+        val parsed = parseProtoMessage(playerProto.javaClass, stream.streamingData()) ?: return false
+        val streamingData = readField(parsed, getStreamingData) ?: return false
+        spoofedStreamsApplied = writeField(instance, setStreamingData, streamingData)
+        if (!spoofedStreamsApplied) return false
+
+        // ผู้เล่นเลือก SABR จากไคลเอนต์ของสตรีมที่ได้ และส่วนอื่นของส่วนขยายอ่านค่านี้ไปตัดสินว่าจะ
+        // ปิด SABR หรือจะตัด post body ของคำขอสตรีม
+        StreamingDataRequest.setPlayerClient(videoId, liveStreamClient)
+        // เก็บเป็น log ระดับ info เพื่อให้เห็นใน logcat ได้โดยไม่ต้องเปิด debug logging
+        Logger.printInfo {
+            "Live stream given the streams of client ${liveStreamClient.name} " +
+                "(${liveStreamClient.friendlyName}): $videoId"
+        }
+        liveStreamClientFailures = 0
+        return true
+    }
+
     fun apply(instance: Any, playerProto: Any?) {
         try {
             if (!SpoofVideoStreamsPatch.isSpoofingEnabled() || playerProto == null) return
@@ -515,7 +622,35 @@ internal class StreamingDataFields(
             val details = readField(instance, videoDetails) ?: return
             val videoId = readField(details, this.videoId) as? String ?: return
 
+            // ไลฟ์สดและพรีเมียร์ถูกสปูฟด้วยไคลเอนต์ที่รองรับไลฟ์ ไม่ใช่ไคลเอนต์ที่ผู้ใช้เลือก
+            // เซิร์ฟเวอร์ตอบสตรีมของไคลเอนต์ที่ผู้ใช้เลือกด้วย 403 ผู้เล่นจึงค้างรอสตรีมที่เล่นไม่ได้
+            // จนกว่าจะปิดแอป ตรวจจาก player response ของแอปก่อน เพื่อไม่ต้องขอสตรีมของไคลเอนต์อื่นมาทิ้ง
+            val appStreams = readField(playerProto, getStreamingData)?.let(::protoMessageToBytes)
+            if (isLiveStreamResponse(appStreams)) {
+                if (liveStreamClientFailures < MAX_LIVE_STREAM_CLIENT_FAILURES &&
+                    spoofLiveStreamWithLiveClient(instance, playerProto, videoId)
+                ) {
+                    return
+                }
+                keepAppStreams(videoId)
+                return
+            }
+
             val stream = SpoofVideoStreamsPatch.getStreamingData(videoId, playerProto) ?: return
+
+            // player response ของแอปอาจไม่มีตัวบ่งชี้ทั้งที่วิดีโอเป็นไลฟ์ เช่นเมื่อแอปขอสตรีมด้วย SABR
+            // อย่างเดียว ตัวบ่งชี้ใน player response ของไคลเอนต์จึงถูกตรวจซ้ำอีกชั้น แล้วสลับไคลเอนต์
+            // ให้ไลฟ์ก่อนที่สตรีมที่เล่นไม่ได้จะถูกเขียนลงใน player response
+            if (isLiveStreamResponse(stream)) {
+                if (liveStreamClientFailures < MAX_LIVE_STREAM_CLIENT_FAILURES &&
+                    spoofLiveStreamWithLiveClient(instance, playerProto, videoId)
+                ) {
+                    return
+                }
+                keepAppStreams(videoId)
+                return
+            }
+
             val parsed = parseProtoMessage(playerProto.javaClass, stream) ?: return
             val streamingData = readField(parsed, getStreamingData) ?: return
             spoofedStreamsApplied = writeField(instance, setStreamingData, streamingData)
