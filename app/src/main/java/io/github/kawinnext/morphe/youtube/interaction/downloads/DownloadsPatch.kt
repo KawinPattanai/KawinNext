@@ -1,5 +1,6 @@
 package io.github.kawinnext.morphe.youtube.interaction.downloads
 
+import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.Utils
 import app.morphe.extension.shared.settings.preference.ExternalDownloaderPreference
 import app.morphe.extension.youtube.patches.DownloadsPatch
@@ -23,6 +24,16 @@ import io.github.kawinnext.patch
 
 /** บิต 512 ของ ShowActionSheetCommand ที่ทำให้เมธอดแสดงแผงอ่านช่อง skipCollapsed */
 private const val PICKER_EXPAND_BIT = 0x200
+
+/**
+ * คุณภาพและข้อมูลสตรีมของดาวน์โหลดที่กำลังเริ่ม
+ *
+ * เมธอดที่เริ่มดาวน์โหลดมีทั้งสองค่า แต่เมธอดที่ดึงความยาวสตรีมซึ่งเป็นจุดที่ยังแก้สตรีมวิดีโอได้
+ * มีแค่สตรีม ค่าจึงถูกส่งต่อผ่าน thread ที่ดาวน์โหลดเริ่มขึ้น ซึ่งเรียกทั้งสองเมธอดต่อกันใน thread เดียว
+ */
+private class DownloadScope(val quality: Int, val streamingData: Any)
+
+private val downloadScope = ThreadLocal<DownloadScope?>()
 
 /** ช่องบิตของคำสั่ง ซึ่ง [DownloadQualityPickerCommandFingerprint] เขียนและเมธอดแสดงแผงอ่าน */
 private val pickerExpandBitField = findFieldDirect {
@@ -83,6 +94,8 @@ val Downloads = patch(
                 SwitchPreference("morphe_external_downloader_action_button", summary = true),
                 // รายการดาวน์โหลดที่ส่วนขยายเติมให้เมนูของวิดีโอ ซึ่งแอปไม่มีรายการให้
                 SwitchPreference("morphe_feed_download_flyout_button", summary = true),
+                // บังคับคุณภาพ 1440p และ 4K ของดาวน์โหลด แม้แอปตัดสินว่าอุปกรณ์นี้เล่นคุณภาพนั้นไม่ได้
+                SwitchPreference("morphe_download_force_4k", summary = true),
                 TextPreference(
                     "morphe_external_downloader_name",
                     tag = ExternalDownloaderPreference::class.java
@@ -149,6 +162,77 @@ val Downloads = patch(
     OfflineVideoEndpointFingerprint.hookMethod {
         before {
             if (DownloadsPatch.inAppDownloadButtonOnClick(it.args[2] as String)) it.result = null
+        }
+    }
+
+    // ค่าของสตรีมที่ส่วนขยายอ่าน ซึ่งต้นทางอ่านผ่านอินเทอร์เฟซที่ตัวติดตั้งเพิ่มให้คลาสของแอป
+    val streamAccess = DownloadStreamAccess(
+        formatStreamsField = ::videoFormatStreamsField.field,
+        formatField = ::formatStreamFormatField.field,
+        itagField = ::formatStreamItagField.field,
+        widthField = ::formatStreamWidthField.field,
+        heightField = ::formatStreamHeightField.field,
+        mimeTypeField = ::formatStreamMimeTypeField.field,
+    )
+    val fetchContentLengthMethod = FetchContentLengthFingerprint.method
+
+    // แผงเลือกคุณภาพเรียกเมธอดนี้ทีละคุณภาพ เพื่อเลือกสตรีมของวิดีโอและของเสียง
+    // คุณภาพที่สูงกว่า 1080p ซึ่งตรวจของอุปกรณ์หรือของเซิร์ฟเวอร์ไม่ผ่าน ถูกบังคับด้วยสตรีมของคุณภาพนั้น
+    // เมื่อผู้ใช้เปิดค่าตั้ง (แอปจะได้สตรีมของคุณภาพที่ต่ำกว่าแทน และแผงทิ้งคุณภาพนั้นไป)
+    DownloadStreamSelectorFingerprint.hookMethod {
+        after { param ->
+            // สตรีมเสียงไม่ต้องบังคับคุณภาพ
+            if (param.args[4] as Boolean) return@after
+            val streamingData = param.args[3] ?: return@after
+
+            val forcedStream = forceDownloadStream(
+                selector = param.thisObject,
+                pickedStream = param.result,
+                quality = param.args[0] as Int,
+                maxHeight = param.args[1] as Int,
+                audioQuality = param.args[2] as Int,
+                streamingData = streamingData,
+                playerConfig = param.args[5],
+                access = streamAccess,
+                fetchContentLength = fetchContentLengthMethod,
+            )
+            if (forcedStream != null) param.result = forcedStream
+        }
+    }
+
+    // การดาวน์โหลดเริ่มขึ้น: จำคุณภาพและข้อมูลสตรีมไว้ให้ hook ที่ดึงความยาวสตรีม
+    DownloadTransferStreamsFingerprint.hookMethod {
+        before { param ->
+            val streamingData = param.args[4] ?: return@before
+            val quality = param.args[0] as Int
+            downloadScope.set(DownloadScope(quality, streamingData))
+            Logger.printDebug { "Downloads: download started, quality=${quality}p" }
+        }
+        after { downloadScope.remove() }
+    }
+
+    // การดาวน์โหลดเลือกสตรีมของวิดีโออีกรอบด้วยการตรวจชุดเดียวกับแผงเลือกคุณภาพ แล้วดึงความยาวของ
+    // สตรีมก่อนจับคู่กับสตรีมเสียง จุดนี้จึงเป็นจุดสุดท้ายที่ยังแทนสตรีมวิดีโอได้ และแอปจะดึงความยาว
+    // ให้สตรีมที่แทนเข้าไปเอง ซึ่งเป็นขั้นเดียวกับที่ต้นทางแทนสตรีมก่อนจับคู่
+    FetchContentLengthFingerprint.hookMethod {
+        before { param ->
+            val scope = downloadScope.get() ?: return@before
+            val stream = param.args[0] ?: return@before
+            if (!streamAccess.isVideoStream(stream)) return@before
+            downloadScope.remove()
+
+            val forcedStream = forceDownloadVideoStream(
+                stream = stream,
+                quality = scope.quality,
+                streamingData = scope.streamingData,
+                access = streamAccess,
+            )
+            if (forcedStream == null || forcedStream === stream) return@before
+
+            Logger.printInfo {
+                "Downloads: forced ${scope.quality}p video stream, was ${streamAccess.describe(stream)}"
+            }
+            param.args[0] = forcedStream
         }
     }
 }
