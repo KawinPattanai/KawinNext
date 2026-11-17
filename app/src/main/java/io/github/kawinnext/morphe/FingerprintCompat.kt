@@ -416,7 +416,12 @@ open class Fingerprint internal constructor(
     }
 
     context(dexkit: DexKitBridge)
-    fun match() = matchOrNull(run()) ?: throw Exception("getInstructionMatches failed")
+    // A method found while the cache of the dex is still being built carries no instructions, which
+    // fails every instruction filter of this fingerprint and the caller loses the hook for the whole
+    // run. Asking once more reads the method the cache holds by then.
+    fun match() = matchOrNull(run())
+        ?: matchOrNull(run())
+        ?: throw Exception("getInstructionMatches failed")
 
     context(dexkit: DexKitBridge)
     fun matchOrNull() = matchOrNull(run())

@@ -55,8 +55,11 @@ val nativePlaylistQueuePatch = patch(
     fun installStep(name: String, step: PatchExecutor.() -> Unit) {
         val context = this
         runCatching { context.step() }.onFailure { error ->
+            // A class that fails while it is initialized reports nothing but its own type, so the
+            // step names the error underneath it instead of the wrapper.
+            val reported = (error as? ExceptionInInitializerError)?.cause ?: error
             Logger.printException(
-                { "queue step '$name': " + (error.message ?: error.toString()) },
+                { "queue step '$name': " + (reported.message ?: reported.toString()) },
                 error
             )
         }
