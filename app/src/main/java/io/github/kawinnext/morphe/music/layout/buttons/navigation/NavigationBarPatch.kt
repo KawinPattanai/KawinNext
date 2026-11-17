@@ -143,7 +143,11 @@ val NavigationBar = patch(
                 }
 
                 // Keep the button centered in the tab when the label is hidden, as the app does.
-                val icon = tabView.findViewById<View>(MusicGlassNavigationBar.BUTTON_ICON)
+                var icon: View? = null
+                for (id in MusicGlassNavigationBar.BUTTON_ICONS) {
+                    icon = tabView.findViewById(id)
+                    if (icon != null) break
+                }
                 (icon?.layoutParams as? LinearLayout.LayoutParams)?.let { layoutParams ->
                     layoutParams.weight = 0.5f
                     icon.layoutParams = layoutParams
