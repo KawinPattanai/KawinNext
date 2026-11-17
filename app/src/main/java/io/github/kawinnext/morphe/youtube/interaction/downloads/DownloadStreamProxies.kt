@@ -1,30 +1,32 @@
-package io.github.kawinnext.morphe.youtube.interaction.downloads
+﻿package io.github.kawinnext.morphe.youtube.interaction.downloads
 
 import app.morphe.extension.shared.Logger
+import app.morphe.extension.shared.patches.BaseInAppDownloadsPatch.FormatStreamInterface
+import app.morphe.extension.shared.patches.BaseInAppDownloadsPatch.StreamingDataInterface
 import app.morphe.extension.youtube.patches.InAppDownloadsPatch
 import app.morphe.extension.youtube.patches.VideoFormat
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
-// ต้นทางเพิ่มอินเทอร์เฟซของส่วนขยายให้คลาสของแอป (ข้อมูลสตรีม สตรีม และ format ของสตรีม) แล้วเรียก
-// เมธอดของอินเทอร์เฟซนั้นเพื่ออ่านค่าของสตรีม ตอนรันเพิ่มอินเทอร์เฟซให้คลาสที่โหลดแล้วไม่ได้ โมดูลจึง
-// อ่านฟิลด์ของออบเจกต์เดียวกันเอง แล้วส่ง proxy ที่ส่วนขยายเรียกใช้ได้ข้ามขอบเขตแทนออบเจกต์ของแอป
+// เธ•เนเธเธ—เธฒเธเน€เธเธดเนเธกเธญเธดเธเน€เธ—เธญเธฃเนเน€เธเธเธเธญเธเธชเนเธงเธเธเธขเธฒเธขเนเธซเนเธเธฅเธฒเธชเธเธญเธเนเธญเธ (เธเนเธญเธกเธนเธฅเธชเธ•เธฃเธตเธก เธชเธ•เธฃเธตเธก เนเธฅเธฐ format เธเธญเธเธชเธ•เธฃเธตเธก) เนเธฅเนเธงเน€เธฃเธตเธขเธ
+// เน€เธกเธเธญเธ”เธเธญเธเธญเธดเธเน€เธ—เธญเธฃเนเน€เธเธเธเธฑเนเธเน€เธเธทเนเธญเธญเนเธฒเธเธเนเธฒเธเธญเธเธชเธ•เธฃเธตเธก เธ•เธญเธเธฃเธฑเธเน€เธเธดเนเธกเธญเธดเธเน€เธ—เธญเธฃเนเน€เธเธเนเธซเนเธเธฅเธฒเธชเธ—เธตเนเนเธซเธฅเธ”เนเธฅเนเธงเนเธกเนเนเธ”เน เนเธกเธ”เธนเธฅเธเธถเธ
+// เธญเนเธฒเธเธเธดเธฅเธ”เนเธเธญเธเธญเธญเธเน€เธเธเธ•เนเน€เธ”เธตเธขเธงเธเธฑเธเน€เธญเธ เนเธฅเนเธงเธชเนเธ proxy เธ—เธตเนเธชเนเธงเธเธเธขเธฒเธขเน€เธฃเธตเธขเธเนเธเนเนเธ”เนเธเนเธฒเธกเธเธญเธเน€เธเธ•เนเธ—เธเธญเธญเธเน€เธเธเธ•เนเธเธญเธเนเธญเธ
 
 /**
- * ค่าที่อ่านได้จากออบเจกต์ของแอป ซึ่งต้นทางอ่านผ่าน StreamingDataInterface, FormatStreamInterface
- * และ VideoFormat.FormatInterface ที่ตัวติดตั้งเพิ่มให้คลาสของแอป
+ * เธเนเธฒเธ—เธตเนเธญเนเธฒเธเนเธ”เนเธเธฒเธเธญเธญเธเน€เธเธเธ•เนเธเธญเธเนเธญเธ เธเธถเนเธเธ•เนเธเธ—เธฒเธเธญเนเธฒเธเธเนเธฒเธ StreamingDataInterface, FormatStreamInterface
+ * เนเธฅเธฐ VideoFormat.FormatInterface เธ—เธตเนเธ•เธฑเธงเธ•เธดเธ”เธ•เธฑเนเธเน€เธเธดเนเธกเนเธซเนเธเธฅเธฒเธชเธเธญเธเนเธญเธ
  */
 internal class DownloadStreamAccess(
-    /** ฟิลด์ list ของทุกสตรีมของวิดีโอ ในข้อมูลสตรีมของวิดีโอ */
+    /** เธเธดเธฅเธ”เน list เธเธญเธเธ—เธธเธเธชเธ•เธฃเธตเธกเธเธญเธเธงเธดเธ”เธตเนเธญ เนเธเธเนเธญเธกเธนเธฅเธชเธ•เธฃเธตเธกเธเธญเธเธงเธดเธ”เธตเนเธญ */
     private val formatStreamsField: Field,
-    /** ฟิลด์ของออบเจกต์ format ที่สตรีมถืออยู่ */
+    /** เธเธดเธฅเธ”เนเธเธญเธเธญเธญเธเน€เธเธเธ•เน format เธ—เธตเนเธชเธ•เธฃเธตเธกเธ–เธทเธญเธญเธขเธนเน */
     private val formatField: Field,
     private val itagField: Field,
     private val widthField: Field,
     private val heightField: Field,
     private val mimeTypeField: Field,
 ) {
-    /** ทุกสตรีมของวิดีโอ หรือ list ว่างถ้าข้อมูลสตรีมยังไม่มีสตรีม */
+    /** เธ—เธธเธเธชเธ•เธฃเธตเธกเธเธญเธเธงเธดเธ”เธตเนเธญ เธซเธฃเธทเธญ list เธงเนเธฒเธเธ–เนเธฒเธเนเธญเธกเธนเธฅเธชเธ•เธฃเธตเธกเธขเธฑเธเนเธกเนเธกเธตเธชเธ•เธฃเธตเธก */
     fun formatStreams(streamingData: Any): List<Any> =
         (formatStreamsField.get(streamingData) as? List<*>)?.filterNotNull() ?: emptyList()
 
@@ -38,18 +40,18 @@ internal class DownloadStreamAccess(
 
     fun mimeTypeOf(format: Any?): String? = format?.let { mimeTypeField.get(it) } as? String
 
-    /** ชนิด mime ของสตรีม ซึ่งบอกว่าสตรีมนี้เป็นวิดีโอหรือเสียง */
+    /** เธเธเธดเธ” mime เธเธญเธเธชเธ•เธฃเธตเธก เธเธถเนเธเธเธญเธเธงเนเธฒเธชเธ•เธฃเธตเธกเธเธตเนเน€เธเนเธเธงเธดเธ”เธตเนเธญเธซเธฃเธทเธญเน€เธชเธตเธขเธ */
     fun mimeTypeOfStream(stream: Any): String? = mimeTypeOf(formatOf(stream))
 
     fun isVideoStream(stream: Any): Boolean = mimeTypeOfStream(stream)?.startsWith("video/") == true
 
-    /** ข้อความของสตรีมสำหรับ log ซึ่งบอกคุณภาพและ codec ของสตรีม */
+    /** เธเนเธญเธเธงเธฒเธกเธเธญเธเธชเธ•เธฃเธตเธกเธชเธณเธซเธฃเธฑเธ log เธเธถเนเธเธเธญเธเธเธธเธ“เธ เธฒเธเนเธฅเธฐ codec เธเธญเธเธชเธ•เธฃเธตเธก */
     fun describe(stream: Any): String {
         val format = formatOf(stream)
         return "itag ${itagOf(format)} ${widthOf(format)}x${heightOf(format)} ${codecOf(format)}"
     }
 
-    /** codec ของสตรีม เช่น "vp9" หรือ "av01.0.12M.08" ซึ่งอยู่ในชนิด mime หลัง codecs= */
+    /** codec เธเธญเธเธชเธ•เธฃเธตเธก เน€เธเนเธ "vp9" เธซเธฃเธทเธญ "av01.0.12M.08" เธเธถเนเธเธญเธขเธนเนเนเธเธเธเธดเธ” mime เธซเธฅเธฑเธ codecs= */
     fun codecOf(format: Any?): String {
         val mimeType = mimeTypeOf(format) ?: return ""
         val codecsStart = mimeType.indexOf("codecs=\"")
@@ -60,26 +62,31 @@ internal class DownloadStreamAccess(
     }
 
     private companion object {
-        const val CODECS_PREFIX_LENGTH = 8 // ความยาวของ codecs="
+        const val CODECS_PREFIX_LENGTH = 8 // เธเธงเธฒเธกเธขเธฒเธงเธเธญเธ codecs="
     }
 }
 
 /**
- * สตรีมของแอปหนึ่งสตรีม ในรูปที่ส่วนขยายอ่าน format ของมันได้
+ * เธชเธ•เธฃเธตเธกเธเธญเธเนเธญเธเธซเธเธถเนเธเธชเธ•เธฃเธตเธก เนเธเธฃเธนเธเธ—เธตเนเธชเนเธงเธเธเธขเธฒเธขเธญเนเธฒเธ format เธเธญเธเธกเธฑเธเนเธ”เน
  */
 internal class DownloadFormatStreamProxy(
     val appStream: Any,
     private val access: DownloadStreamAccess,
-) : InAppDownloadsPatch.FormatStreamInterface {
-    override fun patch_getFormat(): VideoFormat.FormatInterface =
-        DownloadFormatProxy(access.formatOf(appStream), access)
+) : FormatStreamInterface {
+    override fun patch_getItag(): Int = access.itagOf(access.formatOf(appStream))
 
-    // ส่วนขยายอ่านค่านี้เฉพาะตอนแทนสตรีมเสียงให้ตรงกับ container ของวิดีโอ ซึ่งยังไม่พอร์ต
+    override fun patch_getWidth(): Int = access.widthOf(access.formatOf(appStream))
+
+    override fun patch_getHeight(): Int = access.heightOf(access.formatOf(appStream))
+
+    override fun patch_getMimeType(): String? = access.mimeTypeOf(access.formatOf(appStream))
+
+    // เธชเนเธงเธเธเธขเธฒเธขเธญเนเธฒเธเธเนเธฒเธเธตเนเน€เธเธเธฒเธฐเธ•เธญเธเนเธ—เธเธชเธ•เธฃเธตเธกเน€เธชเธตเธขเธเนเธซเนเธ•เธฃเธเธเธฑเธ container เธเธญเธเธงเธดเธ”เธตเนเธญ เธเธถเนเธเธขเธฑเธเนเธกเนเธเธญเธฃเนเธ•
     override fun patch_getXtags(): String? = null
 }
 
 /**
- * format ของสตรีมหนึ่งสตรีม ซึ่งให้ค่าที่แอปพิมพ์ใน toString ของสตรีม
+ * format เธเธญเธเธชเธ•เธฃเธตเธกเธซเธเธถเนเธเธชเธ•เธฃเธตเธก เธเธถเนเธเนเธซเนเธเนเธฒเธ—เธตเนเนเธญเธเธเธดเธกเธเนเนเธ toString เธเธญเธเธชเธ•เธฃเธตเธก
  */
 internal class DownloadFormatProxy(
     private val appFormat: Any?,
@@ -95,22 +102,22 @@ internal class DownloadFormatProxy(
 }
 
 /**
- * ข้อมูลสตรีมของวิดีโอ ในรูปที่ส่วนขยายอ่านทุกสตรีมของวิดีโอได้
+ * เธเนเธญเธกเธนเธฅเธชเธ•เธฃเธตเธกเธเธญเธเธงเธดเธ”เธตเนเธญ เนเธเธฃเธนเธเธ—เธตเนเธชเนเธงเธเธเธขเธฒเธขเธญเนเธฒเธเธ—เธธเธเธชเธ•เธฃเธตเธกเธเธญเธเธงเธดเธ”เธตเนเธญเนเธ”เน
  */
 internal class DownloadStreamingDataProxy(
     private val appStreamingData: Any,
     private val access: DownloadStreamAccess,
-) : InAppDownloadsPatch.StreamingDataInterface {
-    override fun patch_getFormatStreams(): List<InAppDownloadsPatch.FormatStreamInterface> =
+) : StreamingDataInterface {
+    override fun patch_getFormatStreams(): List<FormatStreamInterface> =
         access.formatStreams(appStreamingData).map { DownloadFormatStreamProxy(it, access) }
 }
 
 /**
- * คลาสของแอปที่เลือกสตรีมของคุณภาพ ในรูปที่ส่วนขยายเรียกเมธอดของมันได้
+ * เธเธฅเธฒเธชเธเธญเธเนเธญเธเธ—เธตเนเน€เธฅเธทเธญเธเธชเธ•เธฃเธตเธกเธเธญเธเธเธธเธ“เธ เธฒเธ เนเธเธฃเธนเธเธ—เธตเนเธชเนเธงเธเธเธขเธฒเธขเน€เธฃเธตเธขเธเน€เธกเธเธญเธ”เธเธญเธเธกเธฑเธเนเธ”เน
  *
- * ส่วนขยายเรียกเมธอดเลือกสตรีมของแอปเอง แล้วบังคับคุณภาพของสตรีมที่มันคืนมา ต้นทางเปลี่ยนชื่อ
- * เมธอดเดิมของแอปไว้ให้ส่วนขยายเรียก ตอนรันเปลี่ยนชื่อเมธอดที่โหลดแล้วไม่ได้ เมธอดเดิมจึงถูกเรียก
- * ไปแล้วโดย hook ที่ได้ผลลัพธ์มาแล้ว proxy นี้คืนผลลัพธ์นั้นแทนการเรียกซ้ำ
+ * เธชเนเธงเธเธเธขเธฒเธขเน€เธฃเธตเธขเธเน€เธกเธเธญเธ”เน€เธฅเธทเธญเธเธชเธ•เธฃเธตเธกเธเธญเธเนเธญเธเน€เธญเธ เนเธฅเนเธงเธเธฑเธเธเธฑเธเธเธธเธ“เธ เธฒเธเธเธญเธเธชเธ•เธฃเธตเธกเธ—เธตเนเธกเธฑเธเธเธทเธเธกเธฒ เธ•เนเธเธ—เธฒเธเน€เธเธฅเธตเนเธขเธเธเธทเนเธญ
+ * เน€เธกเธเธญเธ”เน€เธ”เธดเธกเธเธญเธเนเธญเธเนเธงเนเนเธซเนเธชเนเธงเธเธเธขเธฒเธขเน€เธฃเธตเธขเธ เธ•เธญเธเธฃเธฑเธเน€เธเธฅเธตเนเธขเธเธเธทเนเธญเน€เธกเธเธญเธ”เธ—เธตเนเนเธซเธฅเธ”เนเธฅเนเธงเนเธกเนเนเธ”เน เน€เธกเธเธญเธ”เน€เธ”เธดเธกเธเธถเธเธ–เธนเธเน€เธฃเธตเธขเธ
+ * เนเธเนเธฅเนเธงเนเธ”เธข hook เธ—เธตเนเนเธ”เนเธเธฅเธฅเธฑเธเธเนเธกเธฒเนเธฅเนเธง proxy เธเธตเนเธเธทเธเธเธฅเธฅเธฑเธเธเนเธเธฑเนเธเนเธ—เธเธเธฒเธฃเน€เธฃเธตเธขเธเธเนเธณ
  */
 internal class DownloadStreamSelectorProxy(
     private val appSelector: Any,
@@ -122,15 +129,15 @@ internal class DownloadStreamSelectorProxy(
         quality: Int,
         maxHeight: Int,
         audioQuality: Int,
-        streamingData: InAppDownloadsPatch.StreamingDataInterface?,
+        streamingData: StreamingDataInterface?,
         audio: Boolean,
         playerConfig: Any?,
-    ): InAppDownloadsPatch.FormatStreamInterface? =
+    ): FormatStreamInterface? =
         pickedStream?.let { DownloadFormatStreamProxy(it, access) }
 
     override fun patch_fetchContentLength(
-        stream: InAppDownloadsPatch.FormatStreamInterface,
-    ): InAppDownloadsPatch.FormatStreamInterface {
+        stream: FormatStreamInterface,
+    ): FormatStreamInterface {
         val appStream = (stream as? DownloadFormatStreamProxy)?.appStream ?: return stream
         val fetched = try {
             fetchContentLength.invoke(appSelector, appStream)
@@ -147,13 +154,13 @@ internal class DownloadStreamSelectorProxy(
 }
 
 /**
- * จุดฉีดของส่วนขยาย: สตรีมของหนึ่งคุณภาพที่แผงเลือกคุณภาพของดาวน์โหลดกำลังสร้าง
+ * เธเธธเธ”เธเธตเธ”เธเธญเธเธชเนเธงเธเธเธขเธฒเธข: เธชเธ•เธฃเธตเธกเธเธญเธเธซเธเธถเนเธเธเธธเธ“เธ เธฒเธเธ—เธตเนเนเธเธเน€เธฅเธทเธญเธเธเธธเธ“เธ เธฒเธเธเธญเธเธ”เธฒเธงเธเนเนเธซเธฅเธ”เธเธณเธฅเธฑเธเธชเธฃเนเธฒเธ
  *
- * แผงทิ้งคุณภาพที่สตรีมของมันเป็นสตรีมเดียวกับคุณภาพที่ต่ำกว่า และแอปเลือกคุณภาพที่ต่ำกว่าถ้า
- * ตรวจของอุปกรณ์หรือของเซิร์ฟเวอร์ไม่ผ่าน ส่วนขยายจึงคืนสตรีมของคุณภาพนั้นแทน ซึ่งคุณภาพที่สูงกว่า
- * 1080p บังคับได้เมื่อผู้ใช้เปิดค่าตั้งไว้
+ * เนเธเธเธ—เธดเนเธเธเธธเธ“เธ เธฒเธเธ—เธตเนเธชเธ•เธฃเธตเธกเธเธญเธเธกเธฑเธเน€เธเนเธเธชเธ•เธฃเธตเธกเน€เธ”เธตเธขเธงเธเธฑเธเธเธธเธ“เธ เธฒเธเธ—เธตเนเธ•เนเธณเธเธงเนเธฒ เนเธฅเธฐเนเธญเธเน€เธฅเธทเธญเธเธเธธเธ“เธ เธฒเธเธ—เธตเนเธ•เนเธณเธเธงเนเธฒเธ–เนเธฒ
+ * เธ•เธฃเธงเธเธเธญเธเธญเธธเธเธเธฃเธ“เนเธซเธฃเธทเธญเธเธญเธเน€เธเธดเธฃเนเธเน€เธงเธญเธฃเนเนเธกเนเธเนเธฒเธ เธชเนเธงเธเธเธขเธฒเธขเธเธถเธเธเธทเธเธชเธ•เธฃเธตเธกเธเธญเธเธเธธเธ“เธ เธฒเธเธเธฑเนเธเนเธ—เธ เธเธถเนเธเธเธธเธ“เธ เธฒเธเธ—เธตเนเธชเธนเธเธเธงเนเธฒ
+ * 1080p เธเธฑเธเธเธฑเธเนเธ”เนเน€เธกเธทเนเธญเธเธนเนเนเธเนเน€เธเธดเธ”เธเนเธฒเธ•เธฑเนเธเนเธงเน
  *
- * @return สตรีมของแอปที่ควรใช้ หรือ null ถ้าไม่มีสตรีมของคุณภาพนั้น
+ * @return เธชเธ•เธฃเธตเธกเธเธญเธเนเธญเธเธ—เธตเนเธเธงเธฃเนเธเน เธซเธฃเธทเธญ null เธ–เนเธฒเนเธกเนเธกเธตเธชเธ•เธฃเธตเธกเธเธญเธเธเธธเธ“เธ เธฒเธเธเธฑเนเธ
  */
 internal fun forceDownloadStream(
     selector: Any,
@@ -181,12 +188,12 @@ internal fun forceDownloadStream(
 }
 
 /**
- * จุดฉีดของส่วนขยาย: สตรีมวิดีโอของการดาวน์โหลดที่กำลังเริ่ม
+ * เธเธธเธ”เธเธตเธ”เธเธญเธเธชเนเธงเธเธเธขเธฒเธข: เธชเธ•เธฃเธตเธกเธงเธดเธ”เธตเนเธญเธเธญเธเธเธฒเธฃเธ”เธฒเธงเธเนเนเธซเธฅเธ”เธ—เธตเนเธเธณเธฅเธฑเธเน€เธฃเธดเนเธก
  *
- * การดาวน์โหลดเลือกสตรีมของมันอีกรอบด้วยการตรวจชุดเดียวกับแผงเลือกคุณภาพ และได้สตรีมของคุณภาพ
- * ที่ต่ำกว่าเมื่อตรวจไม่ผ่าน ส่วนขยายจึงคืนสตรีมของคุณภาพที่ผู้ใช้เลือกแทน
+ * เธเธฒเธฃเธ”เธฒเธงเธเนเนเธซเธฅเธ”เน€เธฅเธทเธญเธเธชเธ•เธฃเธตเธกเธเธญเธเธกเธฑเธเธญเธตเธเธฃเธญเธเธ”เนเธงเธขเธเธฒเธฃเธ•เธฃเธงเธเธเธธเธ”เน€เธ”เธตเธขเธงเธเธฑเธเนเธเธเน€เธฅเธทเธญเธเธเธธเธ“เธ เธฒเธ เนเธฅเธฐเนเธ”เนเธชเธ•เธฃเธตเธกเธเธญเธเธเธธเธ“เธ เธฒเธ
+ * เธ—เธตเนเธ•เนเธณเธเธงเนเธฒเน€เธกเธทเนเธญเธ•เธฃเธงเธเนเธกเนเธเนเธฒเธ เธชเนเธงเธเธเธขเธฒเธขเธเธถเธเธเธทเธเธชเธ•เธฃเธตเธกเธเธญเธเธเธธเธ“เธ เธฒเธเธ—เธตเนเธเธนเนเนเธเนเน€เธฅเธทเธญเธเนเธ—เธ
  *
- * @return สตรีมของแอปที่ควรใช้ ซึ่งเป็นสตรีมเดิมถ้าไม่ต้องบังคับ
+ * @return เธชเธ•เธฃเธตเธกเธเธญเธเนเธญเธเธ—เธตเนเธเธงเธฃเนเธเน เธเธถเนเธเน€เธเนเธเธชเธ•เธฃเธตเธกเน€เธ”เธดเธกเธ–เนเธฒเนเธกเนเธ•เนเธญเธเธเธฑเธเธเธฑเธ
  */
 internal fun forceDownloadVideoStream(
     stream: Any?,
