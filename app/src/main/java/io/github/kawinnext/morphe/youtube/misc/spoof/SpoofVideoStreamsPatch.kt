@@ -107,14 +107,16 @@ val spoofVideoStreamsPatch = patch(
 
     // The scripts of the JavaScript solver are raw resources of the app upstream, which the module
     // cannot add, so a raw resource the app does not have is read from the assets of the module.
+    // The read is answered before the app looks the resource up, because a lookup that finds nothing
+    // logs the resource as null and shows it to the user before the asset could be given back.
+    // A name the module has no asset for is left to the app, which reads it as it did before.
     ResourceUtils::class.java
         .getDeclaredMethod("getRawResource", String::class.java)
         .hookMethod {
-            after { param ->
-                if (param.result == null) {
-                    (param.args.getOrNull(0) as? String)?.let { name ->
-                        param.result = readModuleAsset(name)
-                    }
+            before { param ->
+                val name = param.args.getOrNull(0) as? String
+                if (name != null) {
+                    readModuleAsset(name)?.let { content -> param.result = content }
                 }
             }
         }

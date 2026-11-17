@@ -49,8 +49,9 @@ internal fun Class<*>.fieldOfTypeName(typeName: String): Field? =
 internal fun readModuleAsset(name: String): String? {
     val shortName = name.substringAfterLast('/').removeSuffix(".js")
     assets[shortName]?.let { return it }
+    if (shortName in missingAssets) return null
 
-    return try {
+    val content = try {
         // The module is not one of the packages the app can look up, so its assets are read from
         // the module itself instead of from a context of the module.
         java.util.zip.ZipFile(io.github.kawinnext.modulePath).use { zip ->
@@ -60,18 +61,32 @@ internal fun readModuleAsset(name: String): String? {
                         zip.getInputStream(entry).bufferedReader().use { reader -> reader.readText() }
                     }
                 }
-                ?.also { assets[shortName] = it }
         }
     } catch (ex: Exception) {
         Logger.printException({ "Could not read the asset: $name" }, ex)
         null
     }
+
+    // A raw resource of the app that the module has no asset for is not looked up again.
+    if (content == null) {
+        missingAssets.add(shortName)
+        return null
+    }
+
+    Logger.printDebug { "Read the asset of the module: $shortName (${content.length} characters)" }
+    assets[shortName] = content
+    return content
 }
 
 /**
  * The scripts the extension reads from the resources of the app, which are read once.
  */
 private val assets = java.util.concurrent.ConcurrentHashMap<String, String>()
+
+/**
+ * The names the module has no asset for, so the module is not opened for the same name again.
+ */
+private val missingAssets: MutableSet<String> = java.util.concurrent.ConcurrentHashMap.newKeySet()
 
 /**
  * Reads a field of the object, also when the class of the object is obfuscated.
