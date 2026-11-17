@@ -19,6 +19,7 @@ import io.github.kawinnext.morphe.findMethodListDirect
 import io.github.kawinnext.morphe.youtube.layout.flyout.FeedFlyoutButtonsInitializerFingerprint
 import org.luckypray.dexkit.DexKitBridge
 import org.luckypray.dexkit.result.FieldData
+import org.luckypray.dexkit.result.MethodData
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 
@@ -27,12 +28,12 @@ import java.lang.reflect.Method
 // ฟิลด์หรือพารามิเตอร์ตัวเดียวกับที่ smali ของต้นทางใช้
 
 /** ชนิดของรายการเมนู ซึ่งตัวสร้างปุ่มของ flyout และชีตใช้ร่วมกัน */
-private fun DexKitBridge.queueFlyoutItemType(): String =
+internal fun DexKitBridge.queueFlyoutItemType(): String =
     FeedFlyoutButtonsInitializerFingerprint.match().instructionMatches.first()
         .instruction.methodRef!!.paramTypes.single().descriptor
 
 /** คลาสปุ่มของชีต ซึ่งฟิลด์รายการเมนูอยู่บนปุ่ม ไม่ได้อยู่บนชีต */
-private fun DexKitBridge.queueFlyoutButtonType(): String =
+internal fun DexKitBridge.queueFlyoutButtonType(): String =
     queueFlyoutButtonConstructorFingerprint(
         FeedFlyoutButtonsInitializerFingerprint.match().method, queueFlyoutItemType()
     ).match().instructionMatches.single().instruction.methodRef!!.declaredClass!!.descriptor
@@ -102,9 +103,22 @@ private val queueFlyoutClicks = findMethodListDirect {
     val button = queueFlyoutButtonType()
     QueueFlyoutRendererFingerprint.matchAll().flatMap { sheet ->
         val click = queueFlyoutClickFingerprint(sheet.method.declaredClass!!.descriptor, button, item).match()
-        listOf(click.method, click.instructionMatches[1].instruction.methodRef!!)
+        listOf(click.method, dismissCallOf(click.method))
     }
 }
+
+/**
+ * เมธอดที่ปิดชีต ซึ่งคลิกเรียกเป็นคำสั่งสุดท้ายก่อนคืนค่า
+ *
+ * ตัวจับของ fingerprint หยุดที่คำสั่งแรกที่ตรง จึงอาจไปเจอเมธอดไม่มีอาร์กิวเมนต์ตัวอื่นของ fragment
+ * ที่ถูกเรียกก่อนปิดชีต การอ่านจากคำสั่งจริงของเมธอดคลิกจึงตรงกับที่แอปทำเสมอ
+ */
+internal fun dismissCallOf(click: MethodData): MethodData =
+    click.instructions.toList().lastOrNull { instruction ->
+        val callee = instruction.methodRef
+        callee != null && callee.paramTypes.isEmpty() && callee.returnType?.descriptor == "V"
+    }?.methodRef
+        ?: throw IllegalStateException("Native playlist queue: the sheet click has no dismiss call")
 
 /** ฟิลด์รายการเมนูที่ปุ่มของชีตถืออยู่ ตามลำดับเดียวกับ [queueFlyoutClicks] */
 private val queueFlyoutClickItems = findFieldListDirect {

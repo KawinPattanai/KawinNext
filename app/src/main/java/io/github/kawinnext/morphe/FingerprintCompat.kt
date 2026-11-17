@@ -424,7 +424,12 @@ open class Fingerprint internal constructor(
         ?: throw Exception("getInstructionMatches failed")
 
     context(dexkit: DexKitBridge)
-    fun matchOrNull() = matchOrNull(run())
+    fun matchOrNull(): Match? {
+        // A query that finds nothing, or finds more than one method, is no match rather than the end
+        // of the run: the callers read null as "this build does not have that shape" and keep going.
+        val method = runCatching { run() }.getOrNull() ?: return null
+        return matchOrNull(method)
+    }
 
     fun matchOrNull(
         method: MethodData

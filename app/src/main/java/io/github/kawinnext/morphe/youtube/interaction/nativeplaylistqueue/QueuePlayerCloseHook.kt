@@ -7,6 +7,7 @@
 
 package io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue
 
+import app.morphe.extension.shared.Logger
 import app.morphe.extension.youtube.patches.queue.NativePlaylistQueuePatch
 import io.github.kawinnext.HookDsl
 import io.github.kawinnext.IScopedHookCallback
@@ -32,14 +33,24 @@ private val queuePlayerDismiss = findMethodDirect { dismissPlayerMethod(this) }
 /** เส้นทางที่ผู้ใช้ปิด player ในรุ่นนี้ ทุกตัวเรียกเมธอด dismiss ข้างต้น */
 private val queuePlayerCloseMethods = findMethodListDirect {
     val dismiss = queuePlayerDismiss(this)
+    // But a build only carries some of these paths. A path that does not fit is named in the log and
+    // skipped, so the ones that do fit are still hooked.
     listOf(
-        QueuePlayerCloseClickFingerprint(dismiss),
-        QueuePlayerCloseFlingFingerprint(dismiss),
-        QueuePlayerCloseFlingLegacyFingerprint(dismiss),
-        QueuePlayerCloseTouchFingerprint(dismiss),
-        QueuePlayerControllerFlingFingerprint(dismiss),
-        QueuePlayerControllerReleaseFingerprint(dismiss),
-    ).mapNotNull { it.matchOrNull()?.method }
+        "click" to QueuePlayerCloseClickFingerprint(dismiss),
+        "fling" to QueuePlayerCloseFlingFingerprint(dismiss),
+        "fling legacy" to QueuePlayerCloseFlingLegacyFingerprint(dismiss),
+        "touch" to QueuePlayerCloseTouchFingerprint(dismiss),
+        "controller fling" to QueuePlayerControllerFlingFingerprint(dismiss),
+        "controller release" to QueuePlayerControllerReleaseFingerprint(dismiss),
+    ).mapNotNull { (path, fingerprint) ->
+        val matched = fingerprint.matchOrNull()?.method
+        if (matched == null) {
+            Logger.printInfo {
+                "Native playlist queue: the player close path '$path' is not in this build"
+            }
+        }
+        matched
+    }
 }
 
 /** ปลายทางของ feedback ที่ controller ของ playlist ใช้ ซึ่งเป็นของ activity ไม่ใช่ของ playback */

@@ -1808,15 +1808,19 @@ internal fun queueFlyoutPopupFingerprint(
     )
 )
 
-/** Sheet item dispatch bypasses the model's Runnable in both native sheet variants. */
+/**
+ * Sheet item dispatch bypasses the model's Runnable in both native sheet variants.
+ *
+ * Only the read of the button's item is matched here. A sheet can call another no-argument method
+ * of the fragment before it dismisses itself, and a filter matches its first hit without looking
+ * further, so the dismiss call is read from the instructions of the matched method instead
+ * (see `dismissCallOf` in the hook) rather than by a second and third filter.
+ */
 internal fun queueFlyoutClickFingerprint(sheetType: String, buttonType: String, itemType: String) = Fingerprint(
     definingClass = sheetType,
     returnType = "V",
     filters = listOf(
-        fieldAccess(opcode = Opcode.IGET_OBJECT, definingClass = buttonType, type = itemType),
-        // Dismissal is inherited from the native fragment superclass.
-        methodCall(parameters = emptyList(), returnType = "V"),
-        opcode(Opcode.RETURN_VOID, location = MatchAfterImmediately())
+        fieldAccess(opcode = Opcode.IGET_OBJECT, definingClass = buttonType, type = itemType)
     )
 )
 
