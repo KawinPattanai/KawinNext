@@ -41,6 +41,46 @@ internal object MiniPlayerConstructorFingerprint : Fingerprint(
 )
 
 /**
+ * Matches the miniplayer method that animates it to the color in its color field.
+ *
+ * The extension asks for this method through `patch_resetColors` of its miniplayer interface. A
+ * patched app has that interface injected into the miniplayer class; the module reaches the same
+ * method here instead.
+ */
+internal object MiniplayerResetColorsFingerprint : Fingerprint(
+    classFingerprint = MiniPlayerConstructorFingerprint,
+    returnType = "V",
+    parameters = listOf(),
+    filters = listOf(
+        fieldAccess(
+            opcode = Opcode.IGET,
+            definingClass = "this",
+            type = "I"
+        ),
+        fieldAccess(
+            opcode = Opcode.IGET,
+            definingClass = "this",
+            type = "I",
+            location = MatchAfterImmediately()
+        ),
+        literal(
+            literal = 200L,
+            location = MatchAfterImmediately()
+        ),
+        opcode(
+            opcode = Opcode.IF_EQ,
+            location = MatchAfterImmediately()
+        ),
+        fieldAccess(
+            opcode = Opcode.IPUT,
+            definingClass = "this",
+            type = "I",
+            location = MatchAfterImmediately()
+        )
+    )
+)
+
+/**
  * Matches the TabLayout method that assigns the navigation bar background color.
  */
 internal object NavigationBarTabLayoutFingerprint : Fingerprint(

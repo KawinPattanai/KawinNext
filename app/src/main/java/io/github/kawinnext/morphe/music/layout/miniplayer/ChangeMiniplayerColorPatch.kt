@@ -20,6 +20,8 @@ import io.github.kawinnext.morphe.music.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.shared.misc.settings.preference.SwitchPreference
 import io.github.kawinnext.patch
 import io.github.kawinnext.scopedHook
+import java.lang.reflect.Field
+import java.lang.reflect.Method
 import org.luckypray.dexkit.wrap.DexMethod
 
 /** Field of the miniplayer that holds the color of its background. */
@@ -56,14 +58,21 @@ internal val miniplayerColorHookPatch = patch {
     val albumColorSource = ::albumColorSourceField.field.apply { isAccessible = true }
     val albumColor = ::albumColorField.field.apply { isAccessible = true }
 
-    // The color the miniplayer gets from the theme.
+    // The color the miniplayer gets from the theme. The extension asks its miniplayer interface for
+    // the color field and the reset method, which a patched app has injected into the class; the
+    // module hands over an adapter that writes the same field and calls the same method.
+    val resetColors = MiniplayerResetColorsFingerprint.method
     MiniPlayerConstructorFingerprint.hookMethod {
         after { param ->
-            ChangeMiniplayerColorPatch.setDefaultMiniplayerColor(miniplayerColor.getInt(param.thisObject))
+            ChangeMiniplayerColorPatch.setDefaultMiniplayerColor(
+                MiniplayerAccessAdapter(param.thisObject, miniplayerColor, resetColors),
+                miniplayerColor.getInt(param.thisObject)
+            )
         }
     }
 
     // The extension decides the color of the miniplayer, and keeps the color of the album art
+    // (see MiniplayerAccessAdapter for the two methods the extension calls).
     // for the navigation bar and the glass.
     SwitchToggleColorParentFingerprint.hookMethod {
         before { param ->
@@ -107,4 +116,26 @@ val ChangeMiniplayerColor = patch(
         SwitchPreference("morphe_music_change_miniplayer_color", summary = true),
         SwitchPreference("morphe_music_change_navigation_bar_color", summary = true)
     )
+}
+
+/**
+ * The miniplayer as the extension sees it.
+ *
+ * A patched app implements the extension's miniplayer interface inside the class itself. The module
+ * cannot, so it hands over this adapter, which reaches the same color field and the same reset
+ * method that the extension calls through the interface.
+ */
+private class MiniplayerAccessAdapter(
+    private val miniplayer: Any,
+    private val colorField: Field,
+    private val resetColors: Method,
+) : ChangeMiniplayerColorPatch.MiniplayerAccess {
+
+    override fun patch_setColor(color: Int) {
+        colorField.setInt(miniplayer, color)
+    }
+
+    override fun patch_resetColors() {
+        resetColors.invoke(miniplayer)
+    }
 }
