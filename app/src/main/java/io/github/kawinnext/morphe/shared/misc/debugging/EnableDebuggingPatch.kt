@@ -5,6 +5,7 @@ import io.github.kawinnext.PatchExecutor
 import io.github.kawinnext.hookMethod
 import io.github.kawinnext.morphe.shared.misc.settings.preference.BasePreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.BasePreferenceScreen
+import io.github.kawinnext.morphe.shared.misc.settings.preference.ListPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.NonInteractivePreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference
 import io.github.kawinnext.morphe.shared.misc.settings.preference.PreferenceScreenPreference.Sorting
@@ -23,8 +24,11 @@ fun enableDebuggingPatch(
     name = "Enable debugging",
     description = "Adds options for debugging and exporting Morphe logs to the clipboard.",
 ) {
+    // Debug logging is the DEBUG_LEVEL setting. A switch for a "morphe_debug" key stood here and
+    // named no setting the module has, so it toggled nothing and the screen had no way to turn
+    // logging on at all: the list of levels was only ever added to the Reddit settings.
     val preferences = mutableSetOf<BasePreference>(
-        SwitchPreference("morphe_debug"),
+        ListPreference("morphe_debug_level"),
     )
 
     preferences.addAll(additionalDebugPreferences)
