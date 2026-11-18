@@ -26,8 +26,8 @@ android {
 
     defaultConfig {
         applicationId = "io.github.kawinnext"
-        versionCode = 20215
-        versionName = "2.2.9_5"
+        versionCode = 20300
+        versionName = "2.3.0"
         val patchVersion = Properties().apply {
             rootProject.file("morphe-patches/gradle.properties").inputStream().use { load(it) }
         }["version"]
