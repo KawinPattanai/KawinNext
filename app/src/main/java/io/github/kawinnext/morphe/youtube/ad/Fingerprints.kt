@@ -6,7 +6,6 @@ import io.github.kawinnext.morphe.Fingerprint
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterImmediately
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterWithin
 import io.github.kawinnext.morphe.Opcode
-import io.github.kawinnext.morphe.OpcodesFilter
 import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.fieldAccess
 import io.github.kawinnext.morphe.findClassDirect
@@ -50,11 +49,16 @@ internal object GetPremiumViewFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PROTECTED, AccessFlags.FINAL),
     returnType = "V",
     parameters = listOf("I", "I"),
-    filters = OpcodesFilter.opcodesToFilters(
-        Opcode.ADD_INT_2ADDR,
-        Opcode.ADD_INT_2ADDR,
-        Opcode.INVOKE_VIRTUAL,
-        Opcode.RETURN_VOID,
+    filters = listOf(
+        // The last call of the method, which the patch replaces with a zero size.
+        methodCall(
+            opcode = Opcode.INVOKE_VIRTUAL,
+            definingClass = "this",
+            name = "setMeasuredDimension",
+            parameters = listOf("I", "I"),
+            returnType = "V"
+        ),
+        opcode(Opcode.RETURN_VOID, MatchAfterImmediately())
     )
 )
 

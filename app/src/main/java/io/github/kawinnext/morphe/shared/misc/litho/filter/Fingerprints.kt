@@ -1,5 +1,6 @@
 package io.github.kawinnext.morphe.shared.misc.litho.filter
 
+import io.github.kawinnext.SkipTest
 import io.github.kawinnext.morphe.AccessFlags
 import io.github.kawinnext.morphe.Fingerprint
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterImmediately
@@ -84,6 +85,7 @@ internal object ProtobufBufferEncodeFingerprint : Fingerprint(
     )
 )
 
+@SkipTest /*unused, superseded by ProtobufBufferEncodeFingerprint*/
 object ProtobufBufferReferenceFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "V",

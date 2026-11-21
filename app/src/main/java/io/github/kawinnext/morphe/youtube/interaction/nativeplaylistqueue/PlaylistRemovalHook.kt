@@ -8,7 +8,7 @@
 package io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue
 
 import android.view.View
-import app.morphe.extension.youtube.innertube.queue.PlaylistQueueRenderer
+import app.morphe.extension.shared.innertube.queue.PlaylistQueueRenderer
 import app.morphe.extension.youtube.patches.queue.NativePlaylistQueuePatch
 import io.github.kawinnext.PatchExecutor
 import io.github.kawinnext.hookMethod

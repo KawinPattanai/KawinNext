@@ -11,6 +11,7 @@ import io.github.kawinnext.morphe.AccessFlags
 import io.github.kawinnext.morphe.Fingerprint
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterWithin
 import io.github.kawinnext.morphe.Opcode
+import io.github.kawinnext.morphe.accessFlags
 import io.github.kawinnext.morphe.fieldAccess
 import io.github.kawinnext.morphe.findFieldDirect
 import io.github.kawinnext.morphe.findMethodDirect
@@ -18,6 +19,7 @@ import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.newInstance
 import io.github.kawinnext.morphe.string
+import org.luckypray.dexkit.result.ClassData
 
 /**
  * Name of the "Skip to next" media session action, which is only shown while On-the-go is active.
@@ -33,13 +35,21 @@ internal object OnTheGoSkipToNextActionFingerprint : Fingerprint(
 )
 
 /**
- * Constructor of the On-the-go media session action, whose first parameter is the state object.
+ * Constructor ที่มี state ของ On-the-go เป็นพารามิเตอร์ตัวแรก
+ * 21.47+ ตัด constructor ของ action เองออก เหลือแต่ constructor ของคลาสแม่ที่ทุก action สืบทอด
+ * จึงอ่านของ action ก่อน แล้วถอยไปที่คลาสแม่เมื่อ action ไม่มี constructor ของตัวเอง
  */
-internal object OnTheGoSkipToNextActionConstructorFingerprint : Fingerprint(
-    classFingerprint = OnTheGoSkipToNextActionFingerprint,
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR),
-    name = "<init>"
-)
+internal val onTheGoSkipToNextActionConstructor = findMethodDirect {
+    fun ClassData.constructors() = findMethod {
+        matcher {
+            name = "<init>"
+            accessFlags(AccessFlags.PUBLIC, AccessFlags.CONSTRUCTOR)
+        }
+    }
+
+    val actionClass = OnTheGoSkipToNextActionFingerprint().declaredClass!!
+    actionClass.constructors().ifEmpty { actionClass.superClass!!.constructors() }.single()
+}
 
 /**
  * Constructor of the app object that keeps the seek length, which is set from the double tap

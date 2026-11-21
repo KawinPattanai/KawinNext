@@ -13,6 +13,7 @@ import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_15_or_greater
 import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_21_or_greater
 import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_23_or_greater
 import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_36_or_greater
+import io.github.kawinnext.morphe.youtube.misc.playservice.is_21_46_or_greater
 import io.github.kawinnext.morphe.youtube.misc.settings.PreferenceScreen
 import io.github.kawinnext.morphe.youtube.video.information.onCreateHook
 import io.github.kawinnext.hookMethod
@@ -107,7 +108,11 @@ val BackgroundPlayback = patch(
     insertLiteralOverride(45415425, true)
 
     // Force allowing background play for videos labeled for kids.
-    KidsBackgroundPlaybackPolicyControllerFingerprint.hookMethod(returnConstant(Unit))
+    if (is_21_46_or_greater) {
+        KidsBackgroundPlaybackPolicyControllerFingerprint
+    } else {
+        KidsBackgroundPlaybackPolicyControllerLegacyFingerprint
+    }.hookMethod(returnConstant(Unit))
 
     // Fix PiP buttons not working after locking/unlocking device screen.
     if (!is_21_21_or_greater) {

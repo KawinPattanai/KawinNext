@@ -19,6 +19,7 @@ import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.StrictQuery
 import io.github.kawinnext.morphe.checkCast
 import io.github.kawinnext.morphe.fieldAccess
+import io.github.kawinnext.morphe.findClassDirect
 import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.newInstance
@@ -95,11 +96,10 @@ internal object MiniplayerDragAndDropFingerprint : Fingerprint(
 
 /**
  * Drag area of the miniplayer, and its last position in the field the reposition method reads.
+ * 21.47+ inlines this into a method of another class.
  */
+@StrictQuery
 internal object MiniplayerRectDragFieldsNameFingerprint : Fingerprint(
-    accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
-    returnType = "Landroid/graphics/Rect;",
-    parameters = listOf("I", "I"),
     filters = listOf(
         opcode(opcode = Opcode.IF_GEZ),
         fieldAccess(
@@ -132,8 +132,17 @@ internal object MiniplayerRectDragFieldsNameFingerprint : Fingerprint(
     )
 )
 
+/**
+ * The miniplayer class the drag fields belong to, which the methods that move the miniplayer are
+ * declared in. 21.47+ reads the fields from another class, so the class is read from the field
+ * reference instead of from the method.
+ */
+private val miniplayerRectDragClass = findClassDirect {
+    MiniplayerRectDragFieldsNameFingerprint
+        .instructionMatches[1].instruction.fieldRef!!.declaredClass
+}
+
 internal object MiniplayerHorizontalRepositionFingerprint : Fingerprint(
-    classFingerprint = MiniplayerRectDragFieldsNameFingerprint,
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "V",
     parameters = listOf("Landroid/graphics/Rect;"),
@@ -144,8 +153,13 @@ internal object MiniplayerHorizontalRepositionFingerprint : Fingerprint(
             name = "left"
         )
     )
-)
+) {
+    init {
+        legacyClassFinder = miniplayerRectDragClass
+    }
+}
 
+@StrictQuery
 internal object MiniplayerOffscreenRectValidatorFingerprint : Fingerprint(
     // Private in 21.44+.
     parameters = listOf("I", "I", "I"),
@@ -171,7 +185,6 @@ internal object MiniplayerOffscreenRectValidatorFingerprint : Fingerprint(
 )
 
 internal object MiniplayerOffscreenHandlerFingerprint : Fingerprint(
-    classFingerprint = MiniplayerRectDragFieldsNameFingerprint,
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "V",
     parameters = listOf("I", "I", "I", "I"),
@@ -179,7 +192,11 @@ internal object MiniplayerOffscreenHandlerFingerprint : Fingerprint(
         fieldAccess(opcode = Opcode.IGET_OBJECT, type = "Landroid/graphics/Rect;"),
         methodCall(opcode = Opcode.INVOKE_VIRTUAL, smali = "Landroid/graphics/Rect;->set(IIII)V")
     )
-)
+) {
+    init {
+        legacyClassFinder = miniplayerRectDragClass
+    }
+}
 
 internal object NextGenWatchLayoutOnInterceptTouchEventFingerprint : Fingerprint(
     definingClass = "Lcom/google/android/apps/youtube/app/watch/nextgenwatch/ui/NextGenWatchLayout;",

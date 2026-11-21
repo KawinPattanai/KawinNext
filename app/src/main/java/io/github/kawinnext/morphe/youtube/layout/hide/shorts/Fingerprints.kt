@@ -5,14 +5,13 @@ import io.github.kawinnext.morphe.Fingerprint
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterImmediately
 import io.github.kawinnext.morphe.InstructionLocation.MatchAfterWithin
 import io.github.kawinnext.morphe.Opcode
-import io.github.kawinnext.morphe.ResourceType
 import io.github.kawinnext.morphe.StrictQuery
 import io.github.kawinnext.morphe.fieldAccess
 import io.github.kawinnext.morphe.findFieldDirect
 import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
 import io.github.kawinnext.morphe.opcode
-import io.github.kawinnext.morphe.resourceLiteral
+import io.github.kawinnext.morphe.string
 import org.luckypray.dexkit.result.FieldData
 
 /**
@@ -22,9 +21,11 @@ import org.luckypray.dexkit.result.FieldData
  */
 @StrictQuery
 internal object ShortsNavigationBarModeFingerprint : Fingerprint(
+    // The Shorts watch fragment. 21.47+ no longer uses the layout reel_watch_fragment.
     classFingerprint = Fingerprint(
+        name = "<clinit>",
         filters = listOf(
-            resourceLiteral(ResourceType.LAYOUT, "reel_watch_fragment")
+            string("\$ReelSequenceControllerStateKey")
         )
     ),
     filters = listOf(

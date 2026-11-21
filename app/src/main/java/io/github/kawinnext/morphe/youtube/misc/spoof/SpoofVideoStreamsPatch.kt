@@ -57,7 +57,7 @@ private const val NO_SPOOFED_CLIENT = "Unknown"
  */
 private fun areStreamsSpoofed(): Boolean = try {
     SpoofVideoStreams.isSpoofingEnabled() &&
-        StreamingDataRequest.getLastSpoofedClientName() != NO_SPOOFED_CLIENT &&
+        StreamingDataRequest.getPlayerClientName() != NO_SPOOFED_CLIENT &&
         spoofedStreamsApplied
 } catch (ex: Exception) {
     false

@@ -149,6 +149,8 @@ dependencies {
     // https://github.com/KawinNext/DexKit/commit/59d5d332a1ac1bc543d1588b9c9f0377ea3c6ea5
     implementation(":dexkit-android@aar")
     implementation("com.google.flatbuffers:flatbuffers-java:23.5.26") // dexkit dependency
+    // The glass menus extension reads hidden platform methods; upstream compiles the extensions with it.
+    implementation("org.lsposed.hiddenapibypass:hiddenapibypass:6.1")
     implementation(libs.annotation)
     implementation(libs.gson)
     implementation(libs.kotlinx.coroutines.android)

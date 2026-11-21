@@ -12,6 +12,7 @@ import io.github.kawinnext.morphe.findMethodDirect
 import io.github.kawinnext.morphe.findMethodListDirect
 import io.github.kawinnext.morphe.literal
 import io.github.kawinnext.morphe.methodCall
+import io.github.kawinnext.morphe.opcode
 import io.github.kawinnext.morphe.parameters
 import io.github.kawinnext.morphe.resourceLiteral
 import io.github.kawinnext.morphe.resourceMappings
@@ -103,11 +104,33 @@ val backgroundPlaybackSettingsLegacySubFingerprint = findMethodDirect {
     BackgroundPlaybackSettingsLegacyFingerprint.instructionMatches[1].instruction.methodRef!!
 }
 
+/**
+ * 21.46+
+ */
+@RequireAppVersion(minVersion = "21.46.000")
 object KidsBackgroundPlaybackPolicyControllerFingerprint : Fingerprint(
+    returnType = "V",
+    parameters = listOf("I", "Z", "Z", "Z", "L"),
+    filters = listOf(
+        opcode(Opcode.IGET),
+        literal(5, location = MatchAfterWithin(8)),
+        literal(2, location = MatchAfterWithin(5)),
+        literal(3, location = MatchAfterWithin(8)),
+        literal(0x13, location = MatchAfterWithin(12)),
+    )
+)
+
+/**
+ * 21.45 and older.
+ */
+@RequireAppVersion(maxVersion = "21.45.9999")
+object KidsBackgroundPlaybackPolicyControllerLegacyFingerprint : Fingerprint(
     accessFlags = listOf(AccessFlags.PUBLIC, AccessFlags.FINAL),
     returnType = "V",
     parameters = listOf("I", "L", "L"),
-    filters = OpcodesFilter.opcodesToFilters(
+    filters = listOf(
+        literal(5),
+    ) + OpcodesFilter.opcodesToFilters(
         Opcode.CONST_4,
         Opcode.IF_NE,
         Opcode.SGET_OBJECT,

@@ -1,10 +1,10 @@
-﻿package io.github.kawinnext.morphe.youtube.interaction.downloads
+package io.github.kawinnext.morphe.youtube.interaction.downloads
 
 import app.morphe.extension.shared.Logger
 import app.morphe.extension.shared.patches.BaseInAppDownloadsPatch.FormatStreamInterface
 import app.morphe.extension.shared.patches.BaseInAppDownloadsPatch.StreamingDataInterface
 import app.morphe.extension.youtube.patches.InAppDownloadsPatch
-import app.morphe.extension.youtube.patches.VideoFormat
+import app.morphe.extension.shared.patches.VideoFormat
 import java.lang.reflect.Field
 import java.lang.reflect.Method
 

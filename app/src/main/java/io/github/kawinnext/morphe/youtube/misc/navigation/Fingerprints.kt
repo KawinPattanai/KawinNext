@@ -1,5 +1,6 @@
 package io.github.kawinnext.morphe.youtube.misc.navigation
 
+import io.github.kawinnext.RequireAppVersion
 import io.github.kawinnext.morphe.AccessFlags
 import io.github.kawinnext.morphe.Fingerprint
 import io.github.kawinnext.morphe.ResourceType
@@ -72,6 +73,10 @@ internal object NavigationEnumFingerprint : Fingerprint(
 
 val navigationEnumClass = findClassDirect { NavigationEnumFingerprint().declaredClass!! }
 
+/**
+ * 21.42 and earlier. The drawable based creation method is gone in 21.43+.
+ */
+@get:RequireAppVersion(maxVersion = "21.42.9999")
 val pivotBarButtonsCreateDrawableViewFingerprint = findMethodDirect {
     findMethod {
         matcher {
