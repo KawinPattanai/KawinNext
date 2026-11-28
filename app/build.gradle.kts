@@ -168,7 +168,9 @@ dependencies {
     compileOnly(project(":stub"))
     implementation(libs.androidx.javascriptengine)
     // The extension runs player JavaScript through this engine; upstream builds the extensions with it.
-    implementation("app.morphe:quackjs-java:0.1.4")
+    // Vendored from app.morphe:quackjs-java:0.1.4 (GPLv3) because its GitHub Packages repository
+    // wants a token CI does not have.
+    implementation(":quackjs-java-0.1.4@aar")
     implementation(libs.protobuf.javalite)
     implementation(libs.collections4)
     implementation(libs.lang3)
