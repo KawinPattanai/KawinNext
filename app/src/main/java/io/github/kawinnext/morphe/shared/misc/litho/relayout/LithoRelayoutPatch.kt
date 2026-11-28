@@ -24,6 +24,12 @@ val lithoRelayoutPatch = patch(
         else adapters.getOrPut(view) {
             view.createProxy { reference ->
                 object : LithoViewInterface {
+                    // A patched app hands the extension the component tree of the view, which the
+                    // patcher injects. The module has no handle on that obfuscated class, and the
+                    // extension treats a null tree as "relayout on the main thread" instead of the
+                    // layout thread (see LithoRelayoutPatch.java), so this stays null.
+                    override fun patch_getComponentTree(): LithoRelayoutPatch.ComponentTreeInterface? = null
+
                     override fun patch_forceRelayout() {
                         val host = reference.get() ?: return
                         forceLayoutField.setBoolean(host, true)

@@ -72,7 +72,7 @@ val RememberVideoQuality = patch {
     ::getVideoQualityConstraintMethod.hookMethod {
         val fixedConstraint = ::fixedVideoQualityConstraintMethod.method
         after {
-            val quality = RememberVideoQualityPatch.getLastSelectedVideoQuality()
+            val quality = RememberVideoQualityPatch.getLastSelectedVideoQuality(null)
             if (quality >= 0 && it.result != null) {
                 it.result = fixedConstraint(it.result, quality)
             }

@@ -21,6 +21,15 @@ dependencyResolutionManagement {
         google()
         mavenCentral()
         maven(url = "https://api.xposed.info")
+        // The extension libraries of upstream (patcher, quackjs-java) are published there.
+        maven {
+            name = "MorpheGitHubPackages"
+            url = uri("https://maven.pkg.github.com/MorpheApp/morphe-patches-library")
+            credentials {
+                username = providers.gradleProperty("gpr.user").orNull
+                password = providers.gradleProperty("gpr.key").orNull
+            }
+        }
     }
 }
 

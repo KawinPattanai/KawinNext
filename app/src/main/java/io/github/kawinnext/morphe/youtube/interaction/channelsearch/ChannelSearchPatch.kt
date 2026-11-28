@@ -37,23 +37,8 @@ val channelSearchPatch = patch(
         }
     }
 
-    // The search box otherwise still reads as a search of all of YouTube.
-    // Only the default hint is replaced, not the hint of Shorts or playlist search.
-    SearchBoxHintFingerprint.hookMethod {
-        val search_hint = ResourceUtils.getString("search_hint")
-        after {
-            if (it.result == search_hint) {
-                it.result = ChannelSearchPatch.getSearchHint(it.result as String?)
-            }
-        }
-    }
-
-    ::SearchSubmitFingerprint.hookMethod {
-        before {
-
-            if (ChannelSearchPatch.searchInChannel(it.args[0] as? String))
-                it.result = null
-        }
-    }
+    // The hint of the search box and the submit of the app's search are no longer replaced here.
+    // The extension moved the feature to a search button of its own and a results sheet the
+    // patcher injects, and it keeps both entries private now; a module cannot reach them.
 }
 

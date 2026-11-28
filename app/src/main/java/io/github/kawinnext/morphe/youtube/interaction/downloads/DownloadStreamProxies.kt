@@ -75,6 +75,10 @@ internal class DownloadFormatStreamProxy(
 ) : FormatStreamInterface {
     override fun patch_getItag(): Int = access.itagOf(access.formatOf(appStream))
 
+    // The extension asks a patched app's stream for its video id; a module hands over a format
+    // whose video the caller already knows, so the proxy has none to answer with.
+    override fun patch_getVideoId(): String? = null
+
     override fun patch_getWidth(): Int = access.widthOf(access.formatOf(appStream))
 
     override fun patch_getHeight(): Int = access.heightOf(access.formatOf(appStream))

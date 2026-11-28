@@ -26,8 +26,8 @@ android {
 
     defaultConfig {
         applicationId = "io.github.kawinnext"
-        versionCode = 20404
-        versionName = "2.4.4"
+        versionCode = 20500
+        versionName = "2.5.0"
         val patchVersion = Properties().apply {
             rootProject.file("morphe-patches/gradle.properties").inputStream().use { load(it) }
         }["version"]
@@ -167,6 +167,8 @@ dependencies {
 //    implementation(project(":extensions"))
     compileOnly(project(":stub"))
     implementation(libs.androidx.javascriptengine)
+    // The extension runs player JavaScript through this engine; upstream builds the extensions with it.
+    implementation("app.morphe:quackjs-java:0.1.4")
     implementation(libs.protobuf.javalite)
     implementation(libs.collections4)
     implementation(libs.lang3)

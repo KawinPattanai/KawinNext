@@ -7,25 +7,20 @@
 
 package io.github.kawinnext.morphe.youtube.misc.loadvideo
 
-import android.content.Intent
-import android.os.Parcelable
 import app.morphe.extension.youtube.patches.LoadVideoPatch
-import app.morphe.extension.youtube.patches.LoadVideoPatch.PlayerInterface
 import app.morphe.extension.youtube.patches.LoadVideoPatch.InlinePlaybackInterface
-import app.morphe.extension.youtube.patches.LoadVideoPatch.MainActivityInterface
+import app.morphe.extension.youtube.patches.LoadVideoPatch.PlayerInterface
 import io.github.kawinnext.createProxy
-import io.github.kawinnext.morphe.youtube.shared.YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE
 import io.github.kawinnext.patch
-import org.luckypray.dexkit.wrap.DexMethod
 
 internal val loadVideoHookPatch = patch(
     description = "Hooks the player so the extension can dismiss it and open videos."
 ) {
     val dismissPlayer = ::dismissPlayerMethod.method
-    val openNewVideoParcelable = OpenNewVideoIntentParcelableFingerprint.method
 
-    // Add interface and helper methods to allow extension code to call obfuscated methods.
-    // Add methods to access obfuscated player methods.
+    // The extension keeps only the dismiss on the player now: it opens a video with the app's own
+    // intent (LoadVideoPatch.openUrl), so the player no longer hands an intent parcelable back and
+    // the main activity adapter is gone with it.
     ::playerControllerConstructor.hookMethod {
         after {
             LoadVideoPatch.initialize(it.thisObject.createProxy { reference ->
@@ -33,9 +28,6 @@ internal val loadVideoHookPatch = patch(
                     override fun patch_dismissPlayer() {
                         reference.get()?.let { player -> dismissPlayer(player) }
                     }
-
-                    override fun patch_getIntentParcelable(intent: Intent): Parcelable? =
-                        openNewVideoParcelable(null, intent) as Parcelable?
                 }
             })
         }
@@ -59,13 +51,6 @@ internal val loadVideoHookPatch = patch(
                 }
             })
         }
-    }
-
-    // Activity.onNewIntent() is protected, so the extension calls it through a public method.
-    val onNewIntent = DexMethod("$YOUTUBE_MAIN_ACTIVITY_CLASS_TYPE->onNewIntent(Landroid/content/Intent;)V")
-        .toMethod()
-    LoadVideoPatch.setMainActivityAdapter { activity ->
-        MainActivityInterface { intent -> onNewIntent(activity, intent) }
     }
 
     BackButtonFinishActivityOnNewVideoIntentFingerprint.hookMethod {
