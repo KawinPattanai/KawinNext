@@ -18,6 +18,7 @@ import io.github.kawinnext.morphe.youtube.interaction.channelsearch.channelSearc
 import io.github.kawinnext.morphe.youtube.interaction.copytext.copyTextPatch
 import io.github.kawinnext.morphe.youtube.interaction.copyvideolink.CopyVideoLinkButtonPatch
 import io.github.kawinnext.morphe.youtube.interaction.autoplay.autoplayControlPatch
+import io.github.kawinnext.morphe.youtube.interaction.cast.restoreOldCastPatch
 import io.github.kawinnext.morphe.youtube.interaction.downloads.Downloads
 import io.github.kawinnext.morphe.youtube.interaction.nativeplaylistqueue.nativePlaylistQueuePatch
 import io.github.kawinnext.morphe.youtube.interaction.onthego.onTheGoPatch
@@ -28,6 +29,7 @@ import io.github.kawinnext.morphe.youtube.interaction.seekbar.seekbarPatch
 import io.github.kawinnext.morphe.youtube.interaction.swipecontrols.SwipeControls
 import io.github.kawinnext.morphe.youtube.layout.buttons.action.HideVideoActionButtons
 import io.github.kawinnext.morphe.youtube.layout.miniplayer.miniplayerPatch
+import io.github.kawinnext.morphe.youtube.layout.miniplayer.playbackSessionPatch
 import io.github.kawinnext.morphe.youtube.layout.player.playlistpanel.fullscreenPlaylistPanelPatch
 import io.github.kawinnext.morphe.youtube.layout.buttons.navigation.NavigationBar
 import io.github.kawinnext.morphe.youtube.layout.captions.AutoCaptions
@@ -143,6 +145,8 @@ val YouTubePatches = arrayOf(
     fullscreenPlaylistPanelPatch,
     fixMediaSessionStopPatch,
     patchesUpdateNoticePatch,
+    restoreOldCastPatch,
+    playbackSessionPatch,
     // make sure settingsHook at end to build preferences
     SettingsHook,
     FeatureOverride
